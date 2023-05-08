@@ -1,8 +1,9 @@
+using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementAdvanced : MonoBehaviour
+public class MovementAdvanced : NetworkBehaviour
 {
     [Header("Movement")]
     [SerializeField] float moveSpeed;
@@ -23,13 +24,22 @@ public class MovementAdvanced : MonoBehaviour
 
     Rigidbody rb;
     // Start is called before the first frame update
+    private void GetOwner()
+    {
+        if (!IsOwner)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
     void Start()
     {
-        rb= GetComponent<Rigidbody>();
+        GetOwner();
+        rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
     private void Update()
     {
+        
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
