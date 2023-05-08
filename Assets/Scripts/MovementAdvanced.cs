@@ -26,9 +26,10 @@ public class MovementAdvanced : NetworkBehaviour
     // Start is called before the first frame update
     private void GetOwner()
     {
-        if (!IsClient)
+        print(Owner);
+        if (!IsOwner)
         {
-            this.gameObject.SetActive(false);
+            this.enabled = false;
         }
     }
     void Start()
