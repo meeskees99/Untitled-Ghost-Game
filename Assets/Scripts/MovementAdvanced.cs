@@ -10,10 +10,18 @@ public class MovementAdvanced : NetworkBehaviour
 
     [SerializeField] float groundDrag;
 
+    [SerializeField] float jumpForce;
+    [SerializeField] float jumpCooldown;
+    [SerializeField] float airMultiplier;
+    bool readyToJump;
+
+    [Header("Keybinds")]
+    [SerializeField] KeyCode jumpKey = KeyCode.Space;
+
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
     [SerializeField] LayerMask whatIsGround;
-    bool grounded;
+    public bool grounded;
 
     [SerializeField] Transform orientation;
 
@@ -24,6 +32,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     Rigidbody rb;
     // Start is called before the first frame update
+<<<<<<< Updated upstream
     private void GetOwner()
     {
         print(Owner);
@@ -32,14 +41,19 @@ public class MovementAdvanced : NetworkBehaviour
             this.enabled = false;
         }
     }
+=======
+    
+>>>>>>> Stashed changes
     void Start()
     {
-        GetOwner();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        readyToJump = true;
     }
     private void Update()
     {
+        //if(!base.IsOwner)
+        //    return;
         
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
@@ -66,13 +80,27 @@ public class MovementAdvanced : NetworkBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        //When To Jump
+        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
+            readyToJump = false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
     }
 
     void MovePlayer()
     {
         moveDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        rb.AddForce (moveDir.normalized * moveSpeed * 10, ForceMode.Force);
+        //On ground
+        if(grounded)
+            rb.AddForce (moveDir.normalized * moveSpeed * 10, ForceMode.Force);
+        else if(!grounded)
+        {
+            rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
+        }
     }
 
     void SpeedControl()
@@ -85,5 +113,17 @@ public class MovementAdvanced : NetworkBehaviour
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
+    }
+
+    void Jump()
+    {
+        // Reset y velocity
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+    void ResetJump()
+    {
+        readyToJump = true;
     }
 }
