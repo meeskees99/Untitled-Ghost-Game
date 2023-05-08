@@ -4348,7 +4348,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!1 &169817347
+=======
+--- !u!1 &331077269
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4356,6 +4360,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 169817348}
   - component: {fileID: 169817351}
   - component: {fileID: 169817350}
@@ -4363,20 +4368,40 @@ GameObject:
   m_Layer: 6
   m_Name: Floor (12)
   m_TagString: Floor
+=======
+  - component: {fileID: 331077270}
+  - component: {fileID: 331077273}
+  - component: {fileID: 331077272}
+  - component: {fileID: 331077271}
+  m_Layer: 0
+  m_Name: Wall (5)
+  m_TagString: Untagged
+>>>>>>> Stashed changes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream
 --- !u!4 &169817348
+=======
+--- !u!4 &331077270
+>>>>>>> Stashed changes
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 169817347}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 20, y: 0, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
+=======
+  m_GameObject: {fileID: 331077269}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 4.7, y: 1.5, z: 2.93}
+  m_LocalScale: {x: 3, y: 3, z: 0.3}
+>>>>>>> Stashed changes
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1393999440}
@@ -4444,6 +4469,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 169817347}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &177342560
@@ -4809,6 +4835,11 @@ Rigidbody:
   m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &530797548
+=======
+  m_GameObject: {fileID: 331077269}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &489083437
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5295,6 +5326,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1212525890}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1224557591
@@ -5396,6 +5428,12 @@ MeshFilter:
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!43 &1231051299
 Mesh:
+=======
+  m_GameObject: {fileID: 1138832474}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1289530594
+GameObject:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5767,6 +5805,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1466515795}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1466785463
@@ -5949,6 +5988,11 @@ MonoBehaviour:
   mouseSensitivity: 1000
   playerBody: {fileID: 439911475}
 --- !u!1 &1614318021
+=======
+  m_GameObject: {fileID: 1491579994}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1732291997
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6142,6 +6186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff7d77240159b540975cd6a43905834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: -207845496947708608, guid: f4a20dcfaee0f8e48a5af902184dfaef, type: 3}
   _networkObjectCache: {fileID: -207845496947708608, guid: f4a20dcfaee0f8e48a5af902184dfaef, type: 3}
@@ -6791,3 +6836,62 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+=======
+--- !u!1001 &1866909402257162003
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.1277514
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860128, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866909402693860156, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b0b1b60871707644ea368a6eef7b1071, type: 3}
+>>>>>>> Stashed changes
