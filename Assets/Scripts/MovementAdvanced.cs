@@ -32,7 +32,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     Rigidbody rb;
     // Start is called before the first frame update
-<<<<<<< Updated upstream
+
     private void GetOwner()
     {
         print(Owner);
@@ -41,9 +41,7 @@ public class MovementAdvanced : NetworkBehaviour
             this.enabled = false;
         }
     }
-=======
-    
->>>>>>> Stashed changes
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
