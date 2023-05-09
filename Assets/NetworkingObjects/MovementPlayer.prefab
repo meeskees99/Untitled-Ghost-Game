@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3347301661350208853}
+  - component: {fileID: -44154567530034262}
   m_Layer: 0
   m_Name: MovementPlayer
   m_TagString: Untagged
@@ -33,6 +34,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-44154567530034262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766674196204601058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsNested>k__BackingField: 0
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  _networkBehaviours:
+  - {fileID: 2330012771322674140}
+  <ParentNetworkObject>k__BackingField: {fileID: 0}
+  <ChildNetworkObjects>k__BackingField: []
+  _isNetworked: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _defaultDespawnType: 0
+  NetworkObserver: {fileID: 0}
+  <PrefabId>k__BackingField: 1
+  <SpawnableCollectionId>k__BackingField: 0
+  _scenePathHash: 0
+  <SceneId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 2279367710151233220
+  _sceneNetworkObjects: []
 --- !u!1 &2330012770643831810
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,8 +424,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 0
-  _addedNetworkObject: {fileID: -207845496947708608, guid: f4a20dcfaee0f8e48a5af902184dfaef, type: 3}
-  _networkObjectCache: {fileID: -207845496947708608, guid: f4a20dcfaee0f8e48a5af902184dfaef, type: 3}
+  _addedNetworkObject: {fileID: -44154567530034262}
+  _networkObjectCache: {fileID: -44154567530034262}
   moveSpeed: 3
   groundDrag: 5
   jumpForce: 6
