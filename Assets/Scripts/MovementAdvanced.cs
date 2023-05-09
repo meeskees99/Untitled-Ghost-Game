@@ -31,7 +31,11 @@ public class MovementAdvanced : NetworkBehaviour
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
     [SerializeField] LayerMask whatIsGround;
-    public bool grounded;
+    [SerializeField] bool grounded;
+
+    [Header("Slope Check")]
+    [SerializeField] float maxSlopeAngle;
+    RaycastHit slopeHit;
 
     [SerializeField] Transform orientation;
 
@@ -70,13 +74,9 @@ public class MovementAdvanced : NetworkBehaviour
 
         // Handle drag
         if(grounded)
-        {
             rb.drag = groundDrag;
-        }
         else
-        {
             rb.drag = 0f;
-        }
     }
 
     private void FixedUpdate()
@@ -137,27 +137,51 @@ public class MovementAdvanced : NetworkBehaviour
     }
     void MovePlayer()
     {
+        // Calculalte move direction
         moveDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        //On ground
-        if(grounded)
-            rb.AddForce (moveDir.normalized * moveSpeed * 10, ForceMode.Force);
-        else if(!grounded)
+        // On slope
+        if (OnSlope())
         {
-            rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f , ForceMode.Force);
+
+            if (rb.velocity.y > 0)
+                rb.AddForce(Vector3.down * 40f, ForceMode.Force);
         }
+
+        //On ground
+        else if(grounded)
+            rb.AddForce (moveDir.normalized * moveSpeed * 10, ForceMode.Force);
+        //In air
+        else if(!grounded) 
+            rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
+        
+        // Turn off gravity while on slope
+        rb.useGravity = !OnSlope();
     }
 
     void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        // Limit the velocity if needed
-        if(flatVel.magnitude > moveSpeed)
+        //Limit speed on slope
+        if (OnSlope())
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            if(rb.velocity.magnitude > moveSpeed)
+                rb.velocity = rb.velocity.normalized * moveSpeed;
         }
+
+        //Limit speed on ground or in air
+        else
+        {
+            Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            // Limit the velocity if needed
+            if (flatVel.magnitude > moveSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            }
+        }
+        
     }
 
     void Jump()
@@ -170,5 +194,21 @@ public class MovementAdvanced : NetworkBehaviour
     void ResetJump()
     {
         readyToJump = true;
+    }
+
+    bool OnSlope()
+    {
+        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle < maxSlopeAngle && angle != 0; 
+        }
+
+        return false;
+    }
+
+    Vector3 GetSlopeMoveDirection()
+    {
+        return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
     }
 }
