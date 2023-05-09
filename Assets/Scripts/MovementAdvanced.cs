@@ -2,21 +2,31 @@ using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementAdvanced : NetworkBehaviour
 {
     [Header("Movement")]
     [SerializeField] float moveSpeed;
-
+    [SerializeField] float walkSpeed;
+    [SerializeField] float sprintSpeed;
+    [SerializeField] float crouchSpeed;
     [SerializeField] float groundDrag;
 
+    [Header("Jumping")]
     [SerializeField] float jumpForce;
     [SerializeField] float jumpCooldown;
     [SerializeField] float airMultiplier;
     bool readyToJump;
 
+    [Header("Crouching")]
+    [SerializeField] float crouchYScale;
+    float startCrouchYScale;
+
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
@@ -31,15 +41,11 @@ public class MovementAdvanced : NetworkBehaviour
     Vector3 moveDir;
 
     Rigidbody rb;
-    // Start is called before the first frame update
 
-    private void GetOwner()
+    public MovementState state;
+    public enum MovementState
     {
-        print(Owner);
-        if (!IsOwner)
-        {
-            this.enabled = false;
-        }
+        walk, run, crouch, air
     }
 
     void Start()
@@ -47,6 +53,8 @@ public class MovementAdvanced : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
+
+        startCrouchYScale = transform.localScale.y;
     }
     private void Update()
     {
@@ -58,6 +66,7 @@ public class MovementAdvanced : NetworkBehaviour
 
         MyInput();
         SpeedControl();
+        StateHandler();
 
         // Handle drag
         if(grounded)
@@ -86,8 +95,46 @@ public class MovementAdvanced : NetworkBehaviour
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
+        //When To Crouch
+        if (Input.GetKeyDown(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        }
+
+        if (Input.GetKeyUp(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, startCrouchYScale, transform.localScale.z);
+        }
     }
 
+    void StateHandler()
+    {
+        //Mode Crouching
+        if (Input.GetKey(crouchKey))
+        {
+            state = MovementState.crouch;
+            moveSpeed = crouchSpeed;
+        }
+        //Mode - Running
+        if(grounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.run;
+            moveSpeed = sprintSpeed;
+        }
+        //Mode - Walking
+        else if (grounded)
+        {
+            state = MovementState.walk;
+            moveSpeed = walkSpeed;
+        }
+        // Mode - Air
+        else
+        {
+            state = MovementState.air;
+        }
+    }
     void MovePlayer()
     {
         moveDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
