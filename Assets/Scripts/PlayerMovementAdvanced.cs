@@ -38,6 +38,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
+    public TMP_Text speedTxt;
 
     public Transform orientation;
 
@@ -69,6 +70,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void Update()
     {
+        speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
+
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
