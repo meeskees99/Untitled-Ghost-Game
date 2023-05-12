@@ -52,10 +52,10 @@ public class SceneStack : MonoBehaviour
     }
 
     public bool sceneStack = false;
-
+    SceneUnloadData sud;
     private void Start()
     {
-        InstanceFinder.SceneManager.OnLoadEnd += SceneManager_OnloadEnd;
+        InstanceFinder.SceneManager.OnLoadEnd += SceneManager_OnloadEnd; 
     }
     private void OnDestroy()
     {
@@ -82,5 +82,7 @@ public class SceneStack : MonoBehaviour
         {
             _stackedSceneHandle = obj.LoadedScenes[0].handle;
         }
+
+        sud.Options.Mode = UnloadOptions.ServerUnloadMode.UnloadUnused;
     }
 }

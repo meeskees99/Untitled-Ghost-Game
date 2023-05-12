@@ -24,7 +24,7 @@ public class MouseLookAdvanced : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (base.IsOwner)
+        if (!base.IsOwner)
         {
             print("print");
             this.gameObject.SetActive(false);
