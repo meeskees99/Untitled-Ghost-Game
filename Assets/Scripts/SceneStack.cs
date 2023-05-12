@@ -5,6 +5,7 @@ using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneStack : MonoBehaviour
 {
@@ -30,18 +31,20 @@ public class SceneStack : MonoBehaviour
         }
         
         SceneLookupData lookup;
-        //Debug.Log("loading by handle ? " + (_stackedSceneHandle != 0));
-        //if (_stackedSceneHandle != 0)
-        //{
-        //    lookup = new SceneLookupData(_stackedSceneHandle);
-        //}
-        //else
-        //{
-        //    lookup = new SceneLookupData(scene_name);
-        //}
+        Debug.Log("loading by handle ? " + (_stackedSceneHandle != 0));
+        if (_stackedSceneHandle != 0)
+        {
+            lookup = new SceneLookupData(_stackedSceneHandle);
+        }
+        else
+        {
+            lookup = new SceneLookupData(scene_name);
+        }
         lookup = new SceneLookupData(scene_name);
         SceneLoadData sld = new SceneLoadData(lookup);
-        //sld.Options.AllowStacking = true;
+        sld.Options.AllowStacking = true;
+
+        sld.Options.LocalPhysics = LocalPhysicsMode.Physics3D;
 
         sld.MovedNetworkObjects = new NetworkObject[] { nob };
         sld.ReplaceScenes = ReplaceOption.All;
