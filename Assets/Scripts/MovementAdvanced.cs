@@ -62,9 +62,9 @@ public class MovementAdvanced : NetworkBehaviour
     }
     private void Update()
     {
-        //if(!base.IsOwner)
-        //    return;
-        
+        if (!base.IsOwner)
+            return;
+
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
