@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FishNet.Object;
 
-public class MouseLookAdvanced : MonoBehaviour
+public class MouseLookAdvanced : NetworkBehaviour
 {
     [SerializeField] float sensX;
     [SerializeField] float sensY;
@@ -23,6 +24,12 @@ public class MouseLookAdvanced : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (base.IsOwner)
+        {
+            print("print");
+            this.gameObject.SetActive(false);
+        }
+
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime* sensY;
 
