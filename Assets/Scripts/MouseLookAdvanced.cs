@@ -24,11 +24,11 @@ public class MouseLookAdvanced : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!base.IsOwner)
-        {
-            print("print");
-            this.gameObject.SetActive(false);
-        }
+        //if (!base.IsOwner)
+        //{
+        //    print("print");
+        //    this.gameObject.SetActive(false);
+        //}
 
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime* sensY;

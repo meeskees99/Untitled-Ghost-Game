@@ -1,6 +1,7 @@
 using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -38,6 +39,7 @@ public class MovementAdvanced : NetworkBehaviour
     RaycastHit slopeHit;
 
     [SerializeField] Transform orientation;
+    [SerializeField] TMP_Text speedTxt; 
 
     float horizontalInput;
     float verticalInput;
@@ -62,8 +64,9 @@ public class MovementAdvanced : NetworkBehaviour
     }
     private void Update()
     {
-        if (!base.IsOwner)
-            return;
+        //if (!base.IsOwner)
+        //    return;
+        speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
