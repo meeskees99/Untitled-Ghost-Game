@@ -52,12 +52,13 @@ public class TeamManager : NetworkBehaviour
         {
             
             AddPlayersToTeamSpectator();
-            allClients = InstanceFinder.ServerManager.Clients.Count;
+            
         }
     }
     [ServerRpc(RequireOwnership = false)]
     public void AddPlayersToTeamSpectator()
     {
+        allClients = InstanceFinder.ServerManager.Clients.Count;
         print("babaBOO");
         Teams[0].tData.Clear();
         print(FindObjectOfType<PlayerData>());

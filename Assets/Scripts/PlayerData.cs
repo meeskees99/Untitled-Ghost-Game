@@ -12,13 +12,16 @@ public class PlayerData : NetworkBehaviour
     [SyncVar]
     public int playerId = -2;
 
-    
 
-    
+
+    private void Start()
+    {
+        playerId = -2;
+    }
     private void Update()
     {
         print("owner" + IsOwner);
-        if (!base.IsOwner)
+        if (IsOwner)
         {
             return;
         }
