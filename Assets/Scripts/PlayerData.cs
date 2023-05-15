@@ -24,6 +24,7 @@ public class PlayerData : NetworkBehaviour
         }
         if (playerId == -2)
         {
+            print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
         }
         
