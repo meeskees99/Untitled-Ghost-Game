@@ -17,14 +17,15 @@ public class PlayerData : NetworkBehaviour
     
     private void Update()
     {
+        if (!this.IsOwner)
+        {
+            return;
+        }
         if (playerId == -2)
         {
             SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
         }
-        //if (!this.IsOwner)
-        //{
-        //    this.enabled = false;
-        //}
+        
     }
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerID(int id)
