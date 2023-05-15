@@ -51,6 +51,7 @@ public class TeamManager : NetworkBehaviour
             allClients = InstanceFinder.ServerManager.Clients.Count;
         }
     }
+    [ServerRpc]
     public void AddPlayersToTeamSpectator()
     {
         print("babaBOO");
