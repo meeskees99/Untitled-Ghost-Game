@@ -12,6 +12,7 @@ public class PlayerData : NetworkBehaviour
     [SyncVar]
     public int playerId;
 
+    [ServerRpc]
     private void Start()
     {
         playerId = InstanceFinder.ClientManager.Connection.ClientId;
