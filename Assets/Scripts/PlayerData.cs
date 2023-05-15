@@ -9,6 +9,7 @@ using FishNet.Managing.Client;
 
 public class PlayerData : NetworkBehaviour
 {
+    [SyncVar]
     public int playerId;
 
     private void Start()
