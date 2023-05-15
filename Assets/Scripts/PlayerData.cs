@@ -12,16 +12,23 @@ public class PlayerData : NetworkBehaviour
     [SyncVar]
     public int playerId = -2;
 
-    [ServerRpc(RequireOwnership = false)]
+    
+
+    
     private void Update()
     {
         if (playerId == -2)
         {
-            playerId = InstanceFinder.ClientManager.Connection.ClientId;
+            SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
         }
         //if (!this.IsOwner)
         //{
         //    this.enabled = false;
         //}
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void SetPlayerID(int id)
+    {
+        playerId = id;
     }
 }
