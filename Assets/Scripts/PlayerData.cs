@@ -17,7 +17,8 @@ public class PlayerData : NetworkBehaviour
     
     private void Update()
     {
-        if (!this.IsOwner)
+        print("owner" + IsOwner);
+        if (!base.IsOwner)
         {
             return;
         }
