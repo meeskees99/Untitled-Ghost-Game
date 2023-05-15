@@ -8,5 +8,4 @@ public class TeamData : NetworkBehaviour
 {
     [SyncVar]
     public List<PlayerData> tData = new List<PlayerData>();
-    public int teamIndex;
 }

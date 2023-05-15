@@ -7,10 +7,13 @@ using TMPro;
 using FishNet;
 using FishNet.Component.Spawning;
 using System.Linq;
+using FishNet.Object.Synchronizing;
 
 public class TeamManager : NetworkBehaviour
 {
     public TeamData[] Teams;
+
+    [SyncVar]
     public int allClients;
     public void JoinTeam(int teamInt)
     {
@@ -47,11 +50,12 @@ public class TeamManager : NetworkBehaviour
     {
         if (InstanceFinder.ServerManager.Clients.Count != allClients || Input.GetKeyDown(KeyCode.U))
         {
+            
             AddPlayersToTeamSpectator();
             allClients = InstanceFinder.ServerManager.Clients.Count;
         }
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void AddPlayersToTeamSpectator()
     {
         print("babaBOO");
