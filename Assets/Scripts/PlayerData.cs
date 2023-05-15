@@ -17,9 +17,9 @@ public class PlayerData : NetworkBehaviour
     }
     private void Update()
     {
-        if (!this.IsOwner)
-        {
-            this.enabled = false;
-        }
+        //if (!this.IsOwner)
+        //{
+        //    this.enabled = false;
+        //}
     }
 }

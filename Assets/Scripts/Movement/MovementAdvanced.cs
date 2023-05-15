@@ -68,7 +68,7 @@ public class MovementAdvanced : NetworkBehaviour
         //if (!base.IsOwner)
         //    return;
 
-        speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
+        //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
