@@ -10,15 +10,15 @@ using FishNet.Managing.Client;
 public class PlayerData : NetworkBehaviour
 {
     [SyncVar]
-    public int playerId;
+    public int playerId = -2;
 
-    [ServerRpc]
-    private void Start()
-    {
-        playerId = InstanceFinder.ClientManager.Connection.ClientId;
-    }
+    [ServerRpc(RequireOwnership = false)]
     private void Update()
     {
+        if (playerId == -2)
+        {
+            playerId = InstanceFinder.ClientManager.Connection.ClientId;
+        }
         //if (!this.IsOwner)
         //{
         //    this.enabled = false;
