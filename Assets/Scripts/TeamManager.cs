@@ -62,6 +62,24 @@ public class TeamManager : NetworkBehaviour
         print("babaBOO");
         Teams[0].tData.Clear();
         print(FindObjectOfType<PlayerData>());
-        Teams[0].tData.Add(FindObjectOfType<PlayerData>());
+        for (int i = 0; i < allClients; i++)
+        {
+            if (Teams[0].tData.Count <= i)
+            {
+                Teams[0].tData.Add(FindObjectOfType<PlayerData>());
+            }
+            else
+            {
+                if (Teams[0].tData[i] == FindObjectOfType<PlayerData>())
+                {
+                    return;
+                }
+                else
+                {
+                    Teams[0].tData.Add(FindObjectOfType<PlayerData>());
+                }
+            }
+        }
+        
     }
 }
