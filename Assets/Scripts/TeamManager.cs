@@ -15,6 +15,14 @@ public class TeamManager : NetworkBehaviour
 
     [SyncVar]
     public int allClients;
+
+
+    public void JointTeamBtn(int teamInt)
+    {
+        JoinTeam(teamInt);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt)
     {
         print("1");
