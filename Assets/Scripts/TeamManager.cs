@@ -21,6 +21,7 @@ public class TeamManager : NetworkBehaviour
         for (int i = 0; i < InstanceFinder.ClientManager.Clients.Count; i++)
         {
             print("2");
+            print("i" + i);
             if (Teams[0].tData[i].playerId == InstanceFinder.ClientManager.Connection.ClientId)
             {
                 print("3");
