@@ -21,10 +21,11 @@ public class PlayerData : NetworkBehaviour
     private void Update()
     {
         print("owner" + IsOwner);
-        if (IsOwner)
+        if (!IsOwner)
         {
             return;
         }
+
         if (playerId == -2)
         {
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
