@@ -1200,10 +1200,10 @@ MonoBehaviour:
   <SceneId>k__BackingField: 10077746248074565913
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
-  - {fileID: 1593952306}
-  - {fileID: 1497828834}
   - {fileID: 488990073}
   - {fileID: 637851225}
+  - {fileID: 1497828834}
+  - {fileID: 1593952306}
 --- !u!1 &497042172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,10 +1728,10 @@ MonoBehaviour:
   <SceneId>k__BackingField: 10077746246238213117
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
-  - {fileID: 1593952306}
-  - {fileID: 1497828834}
   - {fileID: 488990073}
   - {fileID: 637851225}
+  - {fileID: 1497828834}
+  - {fileID: 1593952306}
 --- !u!114 &637851227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1869,7 +1869,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 637851227}
         m_TargetAssemblyTypeName: TeamManager, Assembly-CSharp
-        m_MethodName: JoinTeam
+        m_MethodName: JointTeamBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2429,7 +2429,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 637851227}
         m_TargetAssemblyTypeName: TeamManager, Assembly-CSharp
-        m_MethodName: JoinTeam
+        m_MethodName: JointTeamBtn
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3045,10 +3045,10 @@ MonoBehaviour:
   <SceneId>k__BackingField: 10077746248303345939
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
-  - {fileID: 1593952306}
-  - {fileID: 1497828834}
   - {fileID: 488990073}
   - {fileID: 637851225}
+  - {fileID: 1497828834}
+  - {fileID: 1593952306}
 --- !u!1 &1563680056
 GameObject:
   m_ObjectHideFlags: 0
@@ -3263,10 +3263,10 @@ MonoBehaviour:
   <SceneId>k__BackingField: 10077746247155910424
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
-  - {fileID: 1593952306}
-  - {fileID: 1497828834}
   - {fileID: 488990073}
   - {fileID: 637851225}
+  - {fileID: 1497828834}
+  - {fileID: 1593952306}
 --- !u!1 &1816283170
 GameObject:
   m_ObjectHideFlags: 0

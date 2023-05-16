@@ -19,18 +19,19 @@ public class TeamManager : NetworkBehaviour
 
     public void JointTeamBtn(int teamInt)
     {
-        JoinTeam(teamInt);
+        int id = InstanceFinder.ClientManager.Connection.ClientId;
+        JoinTeam(teamInt, id);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void JoinTeam(int teamInt)
+    public void JoinTeam(int teamInt, int localPlayerId)
     {
         print("1");
         for (int i = 0; i < InstanceFinder.ClientManager.Clients.Count; i++)
         {
             print("2");
             print("i" + i);
-            if (Teams[0].tData[i].playerId == InstanceFinder.ClientManager.Connection.ClientId)
+            if (Teams[0].tData[i].playerId == localPlayerId)
             {
                 print("3");
                 // only if tdata.count is 0
