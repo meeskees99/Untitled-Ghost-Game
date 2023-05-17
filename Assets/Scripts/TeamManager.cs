@@ -59,6 +59,7 @@ public class TeamManager : NetworkBehaviour
 
     private void Update()
     {
+        print(InstanceFinder.ClientManager.Clients.Count);
         if (InstanceFinder.ClientManager.Clients.Count != allClients)
         {
             UpdateAllPlayerDatas("pussy");
@@ -73,5 +74,6 @@ public class TeamManager : NetworkBehaviour
             Teams[0].tData.Clear();
             Teams[0].tData[i].SetPlayerData();
         }
+        allClients = InstanceFinder.ClientManager.Clients.Count;
     }
 }
