@@ -55,50 +55,23 @@ public class TeamManager : NetworkBehaviour
                 }
             }
         }
-        
     }
 
-    //private void Update()
-    //{
-    //    UpdateCurrentClients();
-    //    if (currentClients != allClients || Input.GetKeyDown(KeyCode.U))
-    //    {
-    //        AddPlayersToTeamSpectator();
-    //    }
-    //}
+    private void Update()
+    {
+        if (InstanceFinder.ClientManager.Clients.Count != allClients)
+        {
+            UpdateAllPlayerDatas("pussy");
+        }
+    }
 
-    //[ServerRpc(RequireOwnership = false)]
-    //public void UpdateCurrentClients()
-    //{
-    //    currentClients = InstanceFinder.ServerManager.Clients.Count;
-    //}
-
-    //[ServerRpc(RequireOwnership = false)]
-    //public void AddPlayersToTeamSpectator()
-    //{
-    //    print("babaBOO");
-    //    print(FindObjectOfType<PlayerData>());
-    //    for (int i = 0; i < allClients; i++)
-    //    {
-    //        if (Teams[0].tData.Count == 0)
-    //        {
-    //            Teams[0].tData.Add(FindObjectOfType<PlayerData>());
-    //        }
-    //        else
-    //        {
-    //            if (Teams[0].tData[i] == FindObjectOfType<PlayerData>())
-    //            {
-    //                allClients = InstanceFinder.ServerManager.Clients.Count;
-    //                return;
-    //            }
-    //            else
-    //            {
-    //                print("onderste");
-
-    //                //Teams[0].tData.Add(pd);
-    //            }
-    //        }
-    //    }
-    //    allClients = InstanceFinder.ServerManager.Clients.Count;
-    //}
+    public void UpdateAllPlayerDatas(string pussy)
+    {
+        for (int i = 0; i < Teams[0].tData.Count; i++)
+        {
+            print(pussy);
+            Teams[0].tData.Clear();
+            Teams[0].tData[i].SetPlayerData();
+        }
+    }
 }

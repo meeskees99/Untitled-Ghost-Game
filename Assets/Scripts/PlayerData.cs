@@ -19,6 +19,11 @@ public class PlayerData : NetworkBehaviour
     {
         playerId = -2;
         manager = FindObjectOfType<TeamManager>();
+        SetPlayerData();
+    }
+
+    public void SetPlayerData()
+    {
         manager.Teams[0].tData.Add(this);
     }
     private void Update()
