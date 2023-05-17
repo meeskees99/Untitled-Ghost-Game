@@ -16,7 +16,8 @@ public class TeamManager : NetworkBehaviour
 
     [SyncVar]
     public int allClients;
-
+    [SyncVar]
+    public int currentClients;
 
     public void JointTeamBtn(int teamInt)
     {
@@ -60,7 +61,8 @@ public class TeamManager : NetworkBehaviour
     private void Update()
     {
         print(InstanceFinder.ServerManager.Clients.Count);
-        if (InstanceFinder.ServerManager.Clients.Count != allClients || Input.GetKeyDown(KeyCode.U))
+        currentClients = InstanceFinder.ServerManager.Clients.Count;
+        if (currentClients != allClients || Input.GetKeyDown(KeyCode.U))
         {
             print("ha");
             AddPlayersToTeamSpectator();
