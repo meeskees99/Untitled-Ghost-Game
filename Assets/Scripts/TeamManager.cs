@@ -57,14 +57,21 @@ public class TeamManager : NetworkBehaviour
         }
     }
 
-    private void Update()
+    private void Update(int i)
     {
-        print(InstanceFinder.ClientManager.Clients.Count);
+        print(i);
         if (InstanceFinder.ClientManager.Clients.Count != allClients)
         {
             UpdateAllPlayerDatas("pussy");
         }
     }
+
+    [ObserversRpc]
+    public void ClientCount()
+    {
+        Update(InstanceFinder.ClientManager.Clients.Count);
+    }
+
     [ServerRpc(RequireOwnership = true)]
     public void UpdateAllPlayerDatas(string pussy)
     {
