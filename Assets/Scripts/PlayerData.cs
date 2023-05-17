@@ -25,6 +25,15 @@ public class PlayerData : NetworkBehaviour
     public void SetPlayerData()
     {
         manager.Teams[0].tData.Add(this);
+        manager.currentClients++;
+    }
+    //private void OnDisable()
+    //{
+    //    manager.allClients--;
+    //}
+    private void OnDestroy()
+    {
+        manager.currentClients--;
     }
     private void Update()
     {
@@ -38,6 +47,7 @@ public class PlayerData : NetworkBehaviour
         {
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
+
             
         }
         
