@@ -62,22 +62,22 @@ public class TeamManager : NetworkBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (currentClients != allClients)
-        {
-            UpdateAllPlayerDatas();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (currentClients != allClients)
+    //    {
+    //        UpdateAllPlayerDatas();
+    //    }
+    //}
 
-    [ServerRpc(RequireOwnership = false)]
-    public void UpdateAllPlayerDatas()
-    {
-        for (int i = 0; i < Teams[0].tData.Count; i++)
-        {
-            Teams[0].tData.Clear();
-            Teams[0].tData[i].SetPlayerData();
-        }
-        allClients = currentClients;
-    }
+    //[ServerRpc(RequireOwnership = false)]
+    //public void UpdateAllPlayerDatas()
+    //{
+    //    for (int i = 0; i < Teams[0].tData.Count; i++)
+    //    {
+    //        Teams[0].tData.Clear();
+    //        Teams[0].tData[i].SetPlayerData();
+    //    }
+    //    allClients = currentClients;
+    //}
 }
