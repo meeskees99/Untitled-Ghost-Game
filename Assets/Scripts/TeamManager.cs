@@ -66,16 +66,15 @@ public class TeamManager : NetworkBehaviour
     {
         if (currentClients != allClients)
         {
-            UpdateAllPlayerDatas("pussy");
+            UpdateAllPlayerDatas();
         }
     }
 
-    [ServerRpc(RequireOwnership = true)]
-    public void UpdateAllPlayerDatas(string pussy)
+    [ServerRpc(RequireOwnership = false)]
+    public void UpdateAllPlayerDatas()
     {
         for (int i = 0; i < Teams[0].tData.Count; i++)
         {
-            print(pussy);
             Teams[0].tData.Clear();
             Teams[0].tData[i].SetPlayerData();
         }
