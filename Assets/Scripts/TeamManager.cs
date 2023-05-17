@@ -95,7 +95,11 @@ public class TeamManager : NetworkBehaviour
                 else
                 {
                     print("onderste");
-                    Teams[0].tData.Add(FindObjectOfType<PlayerData>());
+
+                    foreach (PlayerData pd in Resources.FindObjectsOfTypeAll(typeof(PlayerData)) as PlayerData[])
+                    {
+                        Teams[0].tData.Add(pd);
+                    }
                 }
             }
         }

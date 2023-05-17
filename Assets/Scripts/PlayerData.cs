@@ -7,12 +7,11 @@ using UnityEngine;
 using FishNet;
 using FishNet.Managing.Client;
 
+
 public class PlayerData : NetworkBehaviour
 {
     [SyncVar]
     public int playerId = -2;
-
-
 
     private void Start()
     {
@@ -30,6 +29,7 @@ public class PlayerData : NetworkBehaviour
         {
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
+            
         }
         
     }
