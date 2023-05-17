@@ -8,6 +8,7 @@ using FishNet;
 using FishNet.Component.Spawning;
 using System.Linq;
 using FishNet.Object.Synchronizing;
+using FishNet.Connection;
 
 public class TeamManager : NetworkBehaviour
 {
@@ -58,6 +59,7 @@ public class TeamManager : NetworkBehaviour
 
     private void Update()
     {
+        print(InstanceFinder.ServerManager.Clients.Count);
         if (InstanceFinder.ServerManager.Clients.Count != allClients || Input.GetKeyDown(KeyCode.U))
         {
             AddPlayersToTeamSpectator();
@@ -65,7 +67,7 @@ public class TeamManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void AddPlayersToTeamSpectator()
+    public void AddPlayersToTeamSpectator(NetworkConnection conn = null)
     {
         print("babaBOO");
         Teams[0].tData.Clear();
