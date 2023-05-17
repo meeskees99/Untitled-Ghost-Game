@@ -60,8 +60,7 @@ public class TeamManager : NetworkBehaviour
 
     private void Update()
     {
-        print(InstanceFinder.ServerManager.Clients.Count);
-        currentClients = InstanceFinder.ServerManager.Clients.Count;
+        UpdateCurrentClients();
         if (currentClients != allClients || Input.GetKeyDown(KeyCode.U))
         {
             print("ha");
@@ -70,7 +69,13 @@ public class TeamManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void AddPlayersToTeamSpectator(NetworkConnection conn = null)
+    public void UpdateCurrentClients()
+    {
+        currentClients = InstanceFinder.ServerManager.Clients.Count;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void AddPlayersToTeamSpectator()
     {
         print("babaBOO");
         Teams[0].tData.Clear();
