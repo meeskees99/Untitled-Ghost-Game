@@ -63,7 +63,6 @@ public class TeamManager : NetworkBehaviour
         UpdateCurrentClients();
         if (currentClients != allClients || Input.GetKeyDown(KeyCode.U))
         {
-            print("ha");
             AddPlayersToTeamSpectator();
         }
     }
@@ -84,6 +83,7 @@ public class TeamManager : NetworkBehaviour
         {
             if (Teams[0].tData.Count <= i)
             {
+                print("bovenste");
                 Teams[0].tData.Add(FindObjectOfType<PlayerData>());
             }
             else
@@ -95,6 +95,7 @@ public class TeamManager : NetworkBehaviour
                 }
                 else
                 {
+                    print("onderste");
                     Teams[0].tData.Add(FindObjectOfType<PlayerData>());
                 }
             }
