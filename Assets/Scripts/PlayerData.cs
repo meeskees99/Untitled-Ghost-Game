@@ -34,6 +34,7 @@ public class PlayerData : NetworkBehaviour
     //}
     private void OnDestroy()
     {
+        manager.Teams[0].tData.Remove(this);
         manager.currentClients--;
     }
     private void Update()
