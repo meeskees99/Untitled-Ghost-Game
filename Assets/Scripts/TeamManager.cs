@@ -87,7 +87,7 @@ public class TeamManager : NetworkBehaviour
             }
             else
             {
-                if (Teams[0].tData[i] == FindObjectOfType<PlayerData>())
+                if (Teams[0].tData[i - 1] == FindObjectOfType<PlayerData>())
                 {
                     allClients = InstanceFinder.ServerManager.Clients.Count;
                     return;
