@@ -77,7 +77,6 @@ public class TeamManager : NetworkBehaviour
     public void AddPlayersToTeamSpectator()
     {
         print("babaBOO");
-        Teams[0].tData.Clear();
         print(FindObjectOfType<PlayerData>());
         for (int i = 0; i < allClients; i++)
         {
