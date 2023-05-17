@@ -64,7 +64,7 @@ public class TeamManager : NetworkBehaviour
             UpdateAllPlayerDatas("pussy");
         }
     }
-
+    [ServerRpc(RequireOwnership = true)]
     public void UpdateAllPlayerDatas(string pussy)
     {
         for (int i = 0; i < Teams[0].tData.Count; i++)
