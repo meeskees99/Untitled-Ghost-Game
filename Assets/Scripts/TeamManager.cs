@@ -27,7 +27,7 @@ public class TeamManager : NetworkBehaviour
     public void JoinTeam(int teamInt, int localPlayerId)
     {
         print("1");
-        for (int i = 0; i < InstanceFinder.ClientManager.Clients.Count; i++)
+        for (int i = 0; i < allClients; i++)
         {
             print("2");
             print("i" + i);
@@ -60,15 +60,13 @@ public class TeamManager : NetworkBehaviour
     {
         if (InstanceFinder.ServerManager.Clients.Count != allClients || Input.GetKeyDown(KeyCode.U))
         {
-            
             AddPlayersToTeamSpectator();
-            
         }
     }
+
     [ServerRpc(RequireOwnership = false)]
     public void AddPlayersToTeamSpectator()
     {
-        allClients = InstanceFinder.ServerManager.Clients.Count;
         print("babaBOO");
         Teams[0].tData.Clear();
         print(FindObjectOfType<PlayerData>());
@@ -82,6 +80,7 @@ public class TeamManager : NetworkBehaviour
             {
                 if (Teams[0].tData[i] == FindObjectOfType<PlayerData>())
                 {
+                    allClients = InstanceFinder.ServerManager.Clients.Count;
                     return;
                 }
                 else
@@ -90,6 +89,6 @@ public class TeamManager : NetworkBehaviour
                 }
             }
         }
-        
+        allClients = InstanceFinder.ServerManager.Clients.Count;
     }
 }
