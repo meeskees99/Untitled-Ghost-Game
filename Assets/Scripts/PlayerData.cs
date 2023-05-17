@@ -13,9 +13,13 @@ public class PlayerData : NetworkBehaviour
     [SyncVar]
     public int playerId = -2;
 
+    public TeamManager manager;
+
     private void Start()
     {
         playerId = -2;
+        manager = FindObjectOfType<TeamManager>();
+        manager.Teams[0].tData.Add(this);
     }
     private void Update()
     {
