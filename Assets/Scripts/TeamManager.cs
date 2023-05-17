@@ -62,6 +62,7 @@ public class TeamManager : NetworkBehaviour
         print(InstanceFinder.ServerManager.Clients.Count);
         if (InstanceFinder.ServerManager.Clients.Count != allClients || Input.GetKeyDown(KeyCode.U))
         {
+            print("ha");
             AddPlayersToTeamSpectator();
         }
     }
