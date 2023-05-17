@@ -22,6 +22,7 @@ public class PlayerData : NetworkBehaviour
         SetPlayerData();
     }
 
+    [ServerRpc(RequireOwnership = true)]
     public void SetPlayerData()
     {
         manager.Teams[0].tData.Add(this);
