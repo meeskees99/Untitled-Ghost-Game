@@ -19,6 +19,7 @@ public class TeamManager : NetworkBehaviour
     [SyncVar]
     public int currentClients;
 
+    public int ha = 0;
     public void JointTeamBtn(int teamInt)
     {
         int id = InstanceFinder.ClientManager.Connection.ClientId;
@@ -57,9 +58,9 @@ public class TeamManager : NetworkBehaviour
         }
     }
 
-    private void Update(int i)
+    private void Update()
     {
-        print(i);
+        print(ha);
         if (InstanceFinder.ClientManager.Clients.Count != allClients)
         {
             UpdateAllPlayerDatas("pussy");
@@ -69,7 +70,7 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc]
     public void ClientCount()
     {
-        Update(InstanceFinder.ClientManager.Clients.Count);
+        ha = InstanceFinder.ClientManager.Clients.Count;
     }
 
     [ServerRpc(RequireOwnership = true)]
