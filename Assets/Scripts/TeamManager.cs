@@ -84,7 +84,10 @@ public class TeamManager : NetworkBehaviour
             if (Teams[0].tData.Count <= i)
             {
                 print("bovenste");
-                Teams[0].tData.Add(FindObjectOfType<PlayerData>());
+                if (Teams[0].tData[i] != FindObjectOfType<PlayerData>())
+                {
+                    Teams[0].tData.Add(FindObjectOfType<PlayerData>());
+                }
             }
             else
             {
