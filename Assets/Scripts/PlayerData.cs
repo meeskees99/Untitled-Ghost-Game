@@ -28,14 +28,10 @@ public class PlayerData : NetworkBehaviour
     public void SetPlayerData()
     {
         manager.teams[0].tData.Add(this);
-        manager.SpawnSpectator();
+        
         teamID = 0;
         manager.currentClients++;
     }
-    //private void OnDisable()
-    //{
-    //    manager.allClients--;
-    //}
     private void OnDestroy()
     {
         manager.teams[0].tData.Remove(this);
@@ -53,8 +49,7 @@ public class PlayerData : NetworkBehaviour
         {
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
-
-            
+            manager.SpawnSpectator();
         }
         
     }
