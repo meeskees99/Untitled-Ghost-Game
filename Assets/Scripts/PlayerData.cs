@@ -28,6 +28,7 @@ public class PlayerData : NetworkBehaviour
     public void SetPlayerData()
     {
         manager.teams[0].tData.Add(this);
+        manager.SpawnSpectator();
         teamID = 0;
         manager.currentClients++;
     }
