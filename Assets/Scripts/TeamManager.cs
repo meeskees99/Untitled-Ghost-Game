@@ -59,7 +59,7 @@ public class TeamManager : NetworkBehaviour
                         
                         InstanceFinder.ServerManager.Spawn(go);
 
-                        go.transform.SetParent(rects[teamInt].transform);
+                        SetParent(go, teamInt);
 
                         teams[teamInt].tData[i].teamID = teamInt;
                         return;
@@ -79,5 +79,12 @@ public class TeamManager : NetworkBehaviour
                 }
             }
         }
+    }
+
+
+    [ObserversRpc]
+    public void SetParent(GameObject go, int teamInt)
+    {
+        go.transform.SetParent(rects[teamInt].transform);
     }
 }
