@@ -60,7 +60,7 @@ public class TeamManager : NetworkBehaviour
                         
                         InstanceFinder.ServerManager.Spawn(go);
 
-                        go.GetComponent<TextMeshPro>().text = "player: " + localPlayerId.ToString();
+                        go.GetComponentInChildren<TextMeshPro>().text = "player: " + localPlayerId.ToString();
                         go.transform.SetParent(rects[teamInt].transform);
                         SetParent(go, teamInt);
 
