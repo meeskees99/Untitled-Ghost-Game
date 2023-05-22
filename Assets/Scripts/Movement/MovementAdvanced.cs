@@ -13,6 +13,7 @@ public class MovementAdvanced : NetworkBehaviour
     [SerializeField] float sprintSpeed;
     [SerializeField] float crouchSpeed;
     [SerializeField] float groundDrag;
+    [SerializeField] Animator animator;
 
     [Header("Jumping")]
     [SerializeField] float jumpForce;
@@ -22,6 +23,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     [Header("Crouching")]
     [SerializeField] float crouchYScale;
+    
     float startCrouchYScale;
 
     [Header("Keybinds")]
@@ -104,8 +106,10 @@ public class MovementAdvanced : NetworkBehaviour
         //When To Crouch
         if (Input.GetKeyDown(crouchKey))
         {
+            //Placeholder
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+            //animator.SetTrigger("Crouch");
+            //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
         }
 
         if (Input.GetKeyUp(crouchKey))
