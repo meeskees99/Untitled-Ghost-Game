@@ -50,11 +50,11 @@ public class PlayerData : NetworkBehaviour
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
         }
-        bool ya = true;
-        if (ya)
+        bool ya;
+        if (!ya)
         {
             manager.SpawnSpectator();
-            ya = false;
+            ya = true;
         }
         
     }
