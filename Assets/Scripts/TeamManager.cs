@@ -52,6 +52,7 @@ public class TeamManager : NetworkBehaviour
 
                     if (teams[teamInt].tData.Count <= i)
                     {
+
                         teams[teamInt].tData.Add(teams[y].tData[i]);
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
@@ -59,6 +60,7 @@ public class TeamManager : NetworkBehaviour
                         
                         InstanceFinder.ServerManager.Spawn(go);
 
+                        go.GetComponent<TextMeshPro>().text = "player: " + localPlayerId.ToString();
                         go.transform.SetParent(rects[teamInt].transform);
                         SetParent(go, teamInt);
 
