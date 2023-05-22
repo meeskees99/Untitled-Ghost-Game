@@ -1641,7 +1641,7 @@ PrefabInstance:
     - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _playerPrefab
       value: 
-      objectReference: {fileID: 1718954057773777580, guid: 3c17daa0990b23c4aaf4c6ff959a7b08, type: 3}
+      objectReference: {fileID: 3135311272305560589, guid: aac782869d6f66146b8f8c98d2f5396e, type: 3}
     - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: Spawns.Array.size
       value: 4
@@ -4478,7 +4478,7 @@ MonoBehaviour:
   - {fileID: 652447949}
   - {fileID: 1731697425}
   - {fileID: 1188974374}
-  player: {fileID: 669918464943604470, guid: aac782869d6f66146b8f8c98d2f5396e, type: 3}
+  player: {fileID: 0}
 --- !u!114 &2103708088
 MonoBehaviour:
   m_ObjectHideFlags: 0

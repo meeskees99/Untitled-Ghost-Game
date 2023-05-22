@@ -53,7 +53,7 @@ public class PlayerData : NetworkBehaviour
         
         if (ya == false)
         {
-            manager.SpawnSpectator();
+            manager.SpawnSpectator(this.gameObject);
             ya = true;  
         }
         

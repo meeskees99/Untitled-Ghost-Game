@@ -24,6 +24,8 @@ public class TeamManager : NetworkBehaviour
 
     public GameObject player;
 
+    public List<GameObject> uiplayers = new();
+
     public void JointTeamBtn(int teamInt)
     {
         int id = InstanceFinder.ClientManager.Connection.ClientId;
@@ -56,13 +58,17 @@ public class TeamManager : NetworkBehaviour
                         teams[teamInt].tData.Add(teams[y].tData[i]);
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
-                        GameObject go = Instantiate(player);
-                        
-                        InstanceFinder.ServerManager.Spawn(go);
+                        for (int ji = 0; ji < uiplayers.Count; ji++)
+                        {
+                            if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                            {
+                                uiplayers[ji].transform.SetParent(rects[teamInt].transform);
+                                SetParent(uiplayers[ji], teamInt);
+                            }
+                        }
 
-                        go.transform.GetChild(0).GetComponent<TextMeshPro>().text = "player: " + localPlayerId.ToString();
-                        go.transform.SetParent(rects[teamInt].transform);
-                        SetParent(go, teamInt);
+                        
+                        
 
                         teams[teamInt].tData[i].teamID = teamInt;
                         return;
@@ -85,14 +91,11 @@ public class TeamManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnSpectator()
+    public void SpawnSpectator(GameObject ui)
     {
-        GameObject go = Instantiate(player);
-
-        InstanceFinder.ServerManager.Spawn(go);
-
-        go.transform.SetParent(rects[0].transform);
-        SetParent(go, 0);
+        uiplayers.Add(ui);
+        ui.transform.SetParent(rects[0].transform);
+        SetParent(ui, 0);
     }
 
     [ObserversRpc]
