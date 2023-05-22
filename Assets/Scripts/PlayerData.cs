@@ -16,7 +16,7 @@ public class PlayerData : NetworkBehaviour
     public int teamID;
 
     public TeamManager manager;
-
+    bool ya;
     private void Start()
     {
         playerId = -2;
@@ -50,11 +50,11 @@ public class PlayerData : NetworkBehaviour
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
         }
-        bool ya;
-        if (!ya)
+        
+        if (ya == false)
         {
             manager.SpawnSpectator();
-            ya = true;
+            ya = true;  
         }
         
     }
