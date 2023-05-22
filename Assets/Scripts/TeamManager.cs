@@ -56,8 +56,10 @@ public class TeamManager : NetworkBehaviour
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
                         GameObject go = Instantiate(player);
-                        go.transform.SetParent(rects[teamInt].transform);
+                        
                         InstanceFinder.ServerManager.Spawn(go);
+
+                        go.transform.SetParent(rects[teamInt].transform);
 
                         teams[teamInt].tData[i].teamID = teamInt;
                         return;
