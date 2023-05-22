@@ -31,6 +31,7 @@ public class MouseLookAdvanced : NetworkBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 mouseLocked = !mouseLocked;
+                Cursor.visible = true;
             }
         }
         else
@@ -39,6 +40,7 @@ public class MouseLookAdvanced : NetworkBehaviour
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 mouseLocked = !mouseLocked;
+                Cursor.visible = false;
             }
 
         }

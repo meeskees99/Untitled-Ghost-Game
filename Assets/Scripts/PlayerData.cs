@@ -13,6 +13,8 @@ public class PlayerData : NetworkBehaviour
     [SyncVar]
     public int playerId = -2;
 
+    public int TeamId;
+
     public TeamManager manager;
 
     private void Start()
@@ -26,6 +28,7 @@ public class PlayerData : NetworkBehaviour
     public void SetPlayerData()
     {
         manager.Teams[0].tData.Add(this);
+        TeamId = 0;
         manager.currentClients++;
     }
     //private void OnDisable()

@@ -34,50 +34,44 @@ public class TeamManager : NetworkBehaviour
     public void JoinTeam(int teamInt, int localPlayerId)
     {
         print("1");
-        for (int i = 0; i < allClients; i++)
+        for (int i = 0; i < currentClients; i++)
         {
             print("2");
-            print("i" + i);
-            if (Teams[0].tData[i].playerId == localPlayerId)
+
+
+            for (int y = 0; y < Teams.Length; y++)
             {
-                print("3");
-                // only if tdata.count is 0
-                if (Teams[teamInt].tData.Count <= i)
+                print(y + " y");
+                print(i + " i");
+                if (Teams[y].tData.Count == 0)
                 {
-                    Teams[teamInt].tData.Add(Teams[0].tData[i]);
+                    print("teams == null" + y + " y");
                 }
-                else
+                else if (Teams[y].tData[i].playerId == localPlayerId)
                 {
-                    for (int j = 0; j < Teams[teamInt].tData.Count; i++)
+                    print("3");
+
+                    if (Teams[teamInt].tData.Count <= i)
                     {
-                        if (Teams[teamInt].tData[i] == Teams[teamInt].tData[j])
-                        {
-                            print("same");
-                            return;
-                        }
+                        Teams[teamInt].tData.Add(Teams[y].tData[i]);
+                        Teams[Teams[y].tData[i].TeamId].tData.Remove(Teams[y].tData[i]);
+                        Teams[teamInt].tData[i].TeamId = teamInt;
+                        return;
                     }
-                    Teams[teamInt].tData.Add(Teams[0].tData[i]);
+                    else
+                    {
+                        for (int j = 0; j < Teams[teamInt].tData.Count; i++)
+                        {
+                            if (Teams[teamInt].tData[i] == Teams[teamInt].tData[j])
+                            {
+                                print("same");
+                                return;
+                            }
+                        }
+                        Teams[teamInt].tData.Add(Teams[0].tData[i]);
+                    }
                 }
             }
         }
     }
-
-    //private void Update()
-    //{
-    //    if (currentClients != allClients)
-    //    {
-    //        UpdateAllPlayerDatas();
-    //    }
-    //}
-
-    //[ServerRpc(RequireOwnership = false)]
-    //public void UpdateAllPlayerDatas()
-    //{
-    //    for (int i = 0; i < Teams[0].tData.Count; i++)
-    //    {
-    //        Teams[0].tData.Clear();
-    //        Teams[0].tData[i].SetPlayerData();
-    //    }
-    //    allClients = currentClients;
-    //}
 }
