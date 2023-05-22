@@ -13,7 +13,7 @@ public class PlayerData : NetworkBehaviour
     [SyncVar]
     public int playerId = -2;
 
-    public int TeamId;
+    public int teamID;
 
     public TeamManager manager;
 
@@ -27,8 +27,8 @@ public class PlayerData : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void SetPlayerData()
     {
-        manager.Teams[0].tData.Add(this);
-        TeamId = 0;
+        manager.teams[0].tData.Add(this);
+        teamID = 0;
         manager.currentClients++;
     }
     //private void OnDisable()
@@ -37,7 +37,7 @@ public class PlayerData : NetworkBehaviour
     //}
     private void OnDestroy()
     {
-        manager.Teams[0].tData.Remove(this);
+        manager.teams[0].tData.Remove(this);
         manager.currentClients--;
     }
     private void Update()

@@ -12,24 +12,23 @@ using FishNet.Connection;
 
 public class TeamManager : NetworkBehaviour
 {
-    public TeamData[] Teams;
+    public TeamData[] teams;
 
     [SyncVar]
     public int allClients;
 
     [SyncVar]
     public int currentClients;
+
+    public GameObject[] rects;
+
+    public GameObject player;
+
     public void JointTeamBtn(int teamInt)
     {
         int id = InstanceFinder.ClientManager.Connection.ClientId;
         JoinTeam(teamInt, id);
     }
-
-    private void Start()
-    {
-        
-    }
-
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)
     {
@@ -39,36 +38,40 @@ public class TeamManager : NetworkBehaviour
             print("2");
 
 
-            for (int y = 0; y < Teams.Length; y++)
+            for (int y = 0; y < teams.Length; y++)
             {
                 print(y + " y");
                 print(i + " i");
-                if (Teams[y].tData.Count == 0)
+                if (teams[y].tData.Count == 0)
                 {
                     print("teams == null" + y + " y");
                 }
-                else if (Teams[y].tData[i].playerId == localPlayerId)
+                else if (teams[y].tData[i].playerId == localPlayerId)
                 {
                     print("3");
 
-                    if (Teams[teamInt].tData.Count <= i)
+                    if (teams[teamInt].tData.Count <= i)
                     {
-                        Teams[teamInt].tData.Add(Teams[y].tData[i]);
-                        Teams[Teams[y].tData[i].TeamId].tData.Remove(Teams[y].tData[i]);
-                        Teams[teamInt].tData[i].TeamId = teamInt;
+                        teams[teamInt].tData.Add(teams[y].tData[i]);
+                        teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
+
+                        GameObject go = Instantiate(player, rects[teamInt].transform);
+                        InstanceFinder.ServerManager.Spawn(go);
+
+                        teams[teamInt].tData[i].teamID = teamInt;
                         return;
                     }
                     else
                     {
-                        for (int j = 0; j < Teams[teamInt].tData.Count; i++)
+                        for (int j = 0; j < teams[teamInt].tData.Count; i++)
                         {
-                            if (Teams[teamInt].tData[i] == Teams[teamInt].tData[j])
+                            if (teams[teamInt].tData[i] == teams[teamInt].tData[j])
                             {
                                 print("same");
                                 return;
                             }
                         }
-                        Teams[teamInt].tData.Add(Teams[0].tData[i]);
+                        teams[teamInt].tData.Add(teams[0].tData[i]);
                     }
                 }
             }
