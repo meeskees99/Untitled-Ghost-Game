@@ -84,7 +84,7 @@ public class TeamManager : NetworkBehaviour
                     {
                         if (teams[teamInt].tData[i].playerId == localPlayerId)
                         {
-                            for (int j = 0; j < teams[teamInt].tData.Count; i++)
+                            for (int j = 0; j < teams[teamInt].tData.Count; j++)
                             {
                                 if (teams[teamInt].tData[i] == teams[teamInt].tData[j])
                                 {
