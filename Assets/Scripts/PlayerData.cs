@@ -21,6 +21,7 @@ public class PlayerData : NetworkBehaviour
     {
         playerId = -2;
         manager = FindObjectOfType<TeamManager>();
+        
         SetPlayerData();
     }
 
@@ -48,7 +49,7 @@ public class PlayerData : NetworkBehaviour
         if (playerId == -2)
         {
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
-            SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
+            SetPlayerIDServer(InstanceFinder.ClientManager.Connection.ClientId);
         }
         
         if (ya == false)
@@ -59,8 +60,15 @@ public class PlayerData : NetworkBehaviour
         
     }
     [ServerRpc(RequireOwnership = false)]
-    public void SetPlayerID(int id)
+    public void SetPlayerIDServer(int id)
     {
+        playerId = id;
+        SetPlayerIDClients(id);
+    }
+    [ObserversRpc(BufferLast = true)]
+    public void SetPlayerIDClients(int id)
+    {
+        manager.playernumber.text = playerId.ToString();
         playerId = id;
     }
 }
