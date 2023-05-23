@@ -8,14 +8,34 @@ public class MouseLook : MonoBehaviour
 
     [SerializeField] Transform playerBody;
     float xRotation = 0f;
-    
+    bool mouseLocked;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        mouseLocked = true;
     }
 
     void Update()
     {
+        if (mouseLocked)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Cursor.lockState = CursorLockMode.None;
+                mouseLocked = !mouseLocked;
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                mouseLocked = !mouseLocked;
+            }
+           
+        }
+        
         float mouseX = Input.GetAxisRaw("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSensitivity * Time.deltaTime;
 

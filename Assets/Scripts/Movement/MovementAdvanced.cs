@@ -13,6 +13,7 @@ public class MovementAdvanced : NetworkBehaviour
     [SerializeField] float sprintSpeed;
     [SerializeField] float crouchSpeed;
     [SerializeField] float groundDrag;
+    [SerializeField] Animator animator;
 
     [Header("Jumping")]
     [SerializeField] float jumpForce;
@@ -22,6 +23,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     [Header("Crouching")]
     [SerializeField] float crouchYScale;
+    
     float startCrouchYScale;
 
     [Header("Keybinds")]
@@ -48,6 +50,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     Rigidbody rb;
 
+
     public MovementState state;
     public enum MovementState
     {
@@ -66,10 +69,11 @@ public class MovementAdvanced : NetworkBehaviour
     {
         //if (!base.IsOwner)
         //    return;
-        speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
+
+        //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 
         // Ground Check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
 
         MyInput();
         SpeedControl();
@@ -102,8 +106,10 @@ public class MovementAdvanced : NetworkBehaviour
         //When To Crouch
         if (Input.GetKeyDown(crouchKey))
         {
+            //Placeholder
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+            //animator.SetTrigger("Crouch");
+            //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
         }
 
         if (Input.GetKeyUp(crouchKey))

@@ -13,6 +13,7 @@ public class MouseLookAdvanced : NetworkBehaviour
     float xRotation;
     float yRotation;
 
+    bool mouseLocked = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,25 @@ public class MouseLookAdvanced : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (mouseLocked)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Cursor.lockState = CursorLockMode.None;
+                mouseLocked = !mouseLocked;
+                Cursor.visible = true;
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                mouseLocked = !mouseLocked;
+                Cursor.visible = false;
+            }
+
+        }
         //if (!base.IsOwner)
         //{
         //    print("print");
