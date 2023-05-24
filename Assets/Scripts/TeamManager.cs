@@ -139,9 +139,10 @@ public class TeamManager : NetworkBehaviour
         uiplayers.Add(ui);
     }
 
-    [ObserversRpc]
+    [ObserversRpc(BufferLast = true)]
     public void SetTeamID(int teamInt, int dataInt)
     {
+        print("teamIDSet");
         teams[teamInt].tData[dataInt].teamID = teamInt;
     }
 
