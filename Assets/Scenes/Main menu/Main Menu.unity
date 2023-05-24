@@ -6333,6 +6333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349434367}
   - component: {fileID: 349434369}
+  - component: {fileID: 349434370}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -6372,6 +6373,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349434366}
   m_CullTransparentMesh: 1
+--- !u!114 &349434370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349434366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5959572bade18a243902c3d719d3b9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resDropDown: {fileID: 1558454280}
+  fullScreenDrowdown: {fileID: 1619899844}
 --- !u!1 &367199637
 GameObject:
   m_ObjectHideFlags: 0
@@ -23781,9 +23796,8 @@ GameObject:
   - component: {fileID: 1558454282}
   - component: {fileID: 1558454281}
   - component: {fileID: 1558454280}
-  - component: {fileID: 1558454283}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: ResDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23864,7 +23878,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1558454283}
+      - m_Target: {fileID: 349434370}
         m_TargetAssemblyTypeName: Resolutions, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
@@ -23915,19 +23929,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558454278}
   m_CullTransparentMesh: 1
---- !u!114 &1558454283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558454278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5959572bade18a243902c3d719d3b9a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropDown: {fileID: 1558454280}
 --- !u!1 &1567944760
 GameObject:
   m_ObjectHideFlags: 0
@@ -24872,7 +24873,7 @@ GameObject:
   - component: {fileID: 1619899845}
   - component: {fileID: 1619899844}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: WindowDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24958,7 +24959,19 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: 0800cc9d4da0323489f4d25c65194aa5, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 22408910}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1619899845
 MonoBehaviour:
