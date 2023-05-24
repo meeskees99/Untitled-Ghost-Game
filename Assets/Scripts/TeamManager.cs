@@ -138,7 +138,7 @@ public class TeamManager : NetworkBehaviour
         SetUiPlayers(ui);
         SetParents();
     }
-    [ObserversRpc(BufferLast = true)]
+    [ServerRpc]
     public void SetTeam(int Teamint, int previousteam, int dataint)
     {
         print("teamSet");
