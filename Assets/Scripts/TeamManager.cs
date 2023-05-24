@@ -61,7 +61,7 @@ public class TeamManager : NetworkBehaviour
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
                         {
-                            //print(teamInt + " teamInt");
+                            print(teamInt + " teamInt");
                             if (teams[teamInt].tData[yi].playerId == localPlayerId)
                             {
                                 //print("yi " + yi);
