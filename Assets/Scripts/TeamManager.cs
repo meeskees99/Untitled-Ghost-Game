@@ -23,8 +23,6 @@ public class TeamManager : NetworkBehaviour
 
     public GameObject[] rects;
 
-    public GameObject player;
-
     public List<GameObject> uiplayers = new();
 
     public TMP_Text playernumber;
@@ -74,7 +72,7 @@ public class TeamManager : NetworkBehaviour
                             if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                             {
                                 uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                SetParent(uiplayers[ji], teamInt);
+                                SetParents();
                             }
                         }
                         
@@ -116,7 +114,7 @@ public class TeamManager : NetworkBehaviour
                             if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                             {
                                 uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                SetParent(uiplayers[ji], teamInt);
+                                SetParents();
                             }
                         }
                     }
@@ -131,15 +129,19 @@ public class TeamManager : NetworkBehaviour
         // set in ui manager
         uiplayers.Add(ui);
         ui.transform.SetParent(rects[0].transform);
-        SetParent(ui, 0);
+        SetParents();
     }
 
     [ObserversRpc(BufferLast = true)]
-    public void SetParent(GameObject go, int teamInt)
+    public void SetParents()
     {
         // set in ui manager
-        go.transform.SetParent(rects[teamInt].transform);
 
-        go.transform.GetChild(0).GetComponent<TMP_Text>().text = go.GetComponent<PlayerData>().playerId.ToString();
+        for (int x = 0; x < uiplayers.Count; x++)
+        {
+            uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
+
+            uiplayers[x].transform.GetChild(0).GetComponent<TMP_Text>().text = uiplayers[x].GetComponent<PlayerData>().playerId.ToString();
+        }
     }
 }
