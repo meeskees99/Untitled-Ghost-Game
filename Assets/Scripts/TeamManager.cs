@@ -138,6 +138,7 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc(BufferLast = true)]
     public void SetTeam(int Teamint, int previousteam, int dataint)
     {
+        print("teamSet");
         teams[Teamint].tData.Add(teams[previousteam].tData[dataint]);
         teams[teams[Teamint].tData[dataint].teamID].tData.Remove(teams[previousteam].tData[dataint]);
     }
