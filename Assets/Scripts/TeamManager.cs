@@ -43,9 +43,6 @@ public class TeamManager : NetworkBehaviour
         {
             for (int y = 0; y < teams.Length; y++)
             {
-                //print(y + " y");
-                //print(i + " i");
-
                 if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
                 {
                     print("teams == null" + y + " y");
@@ -55,8 +52,11 @@ public class TeamManager : NetworkBehaviour
                     if (teams[teamInt].tData.Count <= i)
                     {
                         // set this in ui manager
+
+                        print(teamInt);
+                        print(y);
+                        print(i);
                         teams[teamInt].tData.Add(teams[y].tData[i]);
-                        //StartCoroutine(WaitYouDipshiter(teamInt, y, i));
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
 
@@ -64,9 +64,7 @@ public class TeamManager : NetworkBehaviour
                         {
                             if (teams[teamInt].tData[yi].playerId == localPlayerId)
                             {
-                                //print("yi " + yi);
                                 teams[teamInt].tData[yi].teamID = teamInt;
-                                print(teamInt + " teamInt");
                             }
                         }
 
@@ -89,18 +87,16 @@ public class TeamManager : NetworkBehaviour
                             {
                                 if (teams[teamInt].tData[i] == teams[teamInt].tData[j])
                                 {
-                                    print(teams[teamInt].tData[i] + " i");
-                                    print(teams[teamInt].tData[i].playerId);
-
-                                    print(teams[teamInt].tData[j] + " j");
-                                    print(teams[teamInt].tData[j].playerId);
                                     print("same");
                                     return;
                                 }
                             }
                         }
+
+                        print(teamInt);
+                        print(y);
+                        print(i);
                         teams[teamInt].tData.Add(teams[y].tData[i]);
-                        //StartCoroutine(WaitYouDipshiter(teamInt, y, i));
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
@@ -108,9 +104,7 @@ public class TeamManager : NetworkBehaviour
                             
                             if (teams[teamInt].tData[yi].playerId == localPlayerId)
                             {
-                                print("yi " + yi);
                                 teams[teamInt].tData[yi].teamID = teamInt;
-                                print(teamInt + " teamInt");
                             }
                         }
 
@@ -138,16 +132,6 @@ public class TeamManager : NetworkBehaviour
         SetUiPlayers(ui);
         SetParents();
     }
-    //[ObserversRpc]
-    //public void SetTeam(int Teamint, int previousteam, int dataint)
-    //{
-    //    print("teamSet");
-    //    print("Team Int = " + Teamint);
-    //    print("Previous team = " + previousteam);
-    //    print("data int = " + dataint);
-    //    teams[Teamint].tData.Add(teams[previousteam].tData[dataint]);
-    //    teams[teams[Teamint].tData[dataint].teamID].tData.Remove(teams[previousteam].tData[dataint]);
-    //}
     [ObserversRpc]
     public void SetTeamStart(GameObject data)
     {
