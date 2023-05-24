@@ -154,7 +154,6 @@ public class TeamManager : NetworkBehaviour
     {
         uiplayers.Add(ui);
     }
-    [ServerRpc(RequireOwnership = false)]
     public IEnumerator WaitYouDipshit()
     {
         yield return new WaitForSeconds(5);
