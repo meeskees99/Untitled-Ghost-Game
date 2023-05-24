@@ -141,6 +141,9 @@ public class TeamManager : NetworkBehaviour
     public void SetTeam(int Teamint, int previousteam, int dataint)
     {
         print("teamSet");
+        print("Team Int = " + Teamint);
+        print("Previous team = " + previousteam);
+        print("data int = " + dataint);
         teams[Teamint].tData.Add(teams[previousteam].tData[dataint]);
         teams[teams[Teamint].tData[dataint].teamID].tData.Remove(teams[previousteam].tData[dataint]);
     }
