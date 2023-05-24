@@ -158,13 +158,11 @@ public class TeamManager : NetworkBehaviour
     public void SetParents()
     {
         // set in ui manager
-        
-
         for (int x = 0; x < uiplayers.Count; x++)
         {
             print(uiplayers[x].GetComponent<PlayerData>().teamID);
             uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
-
+            print(uiplayers[x].GetComponent<PlayerData>().teamID +  " after");
             uiplayers[x].transform.GetChild(0).GetComponent<TMP_Text>().text = uiplayers[x].GetComponent<PlayerData>().playerId.ToString();
         }
     }
