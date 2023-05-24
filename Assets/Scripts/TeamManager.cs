@@ -56,7 +56,7 @@ public class TeamManager : NetworkBehaviour
                     {
                         // set this in ui manager
                         teams[teamInt].tData.Add(teams[y].tData[i]);
-                        StartCoroutine(WaitYouDipshiter(teamInt, y, i));
+                        //StartCoroutine(WaitYouDipshiter(teamInt, y, i));
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
 
@@ -100,7 +100,7 @@ public class TeamManager : NetworkBehaviour
                             }
                         }
                         teams[teamInt].tData.Add(teams[y].tData[i]);
-                        StartCoroutine(WaitYouDipshiter(teamInt, y, i));
+                        //StartCoroutine(WaitYouDipshiter(teamInt, y, i));
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
@@ -138,16 +138,16 @@ public class TeamManager : NetworkBehaviour
         SetUiPlayers(ui);
         SetParents();
     }
-    [ObserversRpc]
-    public void SetTeam(int Teamint, int previousteam, int dataint)
-    {
-        print("teamSet");
-        print("Team Int = " + Teamint);
-        print("Previous team = " + previousteam);
-        print("data int = " + dataint);
-        teams[Teamint].tData.Add(teams[previousteam].tData[dataint]);
-        teams[teams[Teamint].tData[dataint].teamID].tData.Remove(teams[previousteam].tData[dataint]);
-    }
+    //[ObserversRpc]
+    //public void SetTeam(int Teamint, int previousteam, int dataint)
+    //{
+    //    print("teamSet");
+    //    print("Team Int = " + Teamint);
+    //    print("Previous team = " + previousteam);
+    //    print("data int = " + dataint);
+    //    teams[Teamint].tData.Add(teams[previousteam].tData[dataint]);
+    //    teams[teams[Teamint].tData[dataint].teamID].tData.Remove(teams[previousteam].tData[dataint]);
+    //}
     [ObserversRpc]
     public void SetTeamStart(GameObject data)
     {
@@ -163,12 +163,6 @@ public class TeamManager : NetworkBehaviour
         yield return new WaitForSeconds(0.1f);
         print("do");
         SetParents();
-    }
-    public IEnumerator WaitYouDipshiter(int Teamint, int previousteam, int dataint)
-    {
-        yield return new WaitForSeconds(0.1f);
-        print("do");
-        SetTeam(Teamint, previousteam, dataint);
     }
 
     [ObserversRpc(BufferLast = true)]
