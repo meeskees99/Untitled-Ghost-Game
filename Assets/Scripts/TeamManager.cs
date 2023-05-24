@@ -161,7 +161,7 @@ public class TeamManager : NetworkBehaviour
         SetParents();
     }
 
-    [ObserversRpc(BufferLast = true)]
+    [ObserversRpc]
     public void SetParents()
     {
         // set in ui manager
