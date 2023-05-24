@@ -158,8 +158,9 @@ public class TeamManager : NetworkBehaviour
     public void SetTeamID(int teamInt, int dataInt)
     {
         print("teamIDSet");
-        print(teamInt);
+        print(teams[teamInt].tData[dataInt].teamID);
         teams[teams[teamInt].tData[dataInt].teamID].tData[dataInt].teamID = teamInt;
+        print(teams[teamInt].tData[dataInt].teamID);
     }
 
     [ObserversRpc(BufferLast = true)]
