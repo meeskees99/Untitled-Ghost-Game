@@ -23,6 +23,7 @@ public class TeamManager : NetworkBehaviour
 
     public GameObject[] rects;
 
+    [SyncVar]
     public List<GameObject> uiplayers = new();
 
     public TMP_Text playernumber;
@@ -136,7 +137,6 @@ public class TeamManager : NetworkBehaviour
     public void SetParents(GameObject ui)
     {
         // set in ui manager
-        uiplayers.Add(ui);
         for (int x = 0; x < uiplayers.Count; x++)
         {
             uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
