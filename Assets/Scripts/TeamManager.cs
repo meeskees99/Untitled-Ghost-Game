@@ -131,6 +131,7 @@ public class TeamManager : NetworkBehaviour
     {
         // set in ui manager
         uiplayers.Add(ui);
+        SetTeamStart(ui);
         ui.transform.SetParent(rects[0].transform);
         SetUiPlayers(ui);
         SetParents();
@@ -142,7 +143,11 @@ public class TeamManager : NetworkBehaviour
         teams[Teamint].tData.Add(teams[previousteam].tData[dataint]);
         teams[teams[Teamint].tData[dataint].teamID].tData.Remove(teams[previousteam].tData[dataint]);
     }
-
+    [ObserversRpc]
+    public void SetTeamStart(GameObject data)
+    {
+        teams[0].tData.Add(data.GetComponent<PlayerData>());
+    }
     [ObserversRpc(BufferLast = true)]
     public void SetUiPlayers(GameObject ui)
     {
