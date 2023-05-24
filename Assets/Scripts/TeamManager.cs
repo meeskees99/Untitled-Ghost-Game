@@ -161,6 +161,7 @@ public class TeamManager : NetworkBehaviour
         for (int x = 0; x < uiplayers.Count; x++)
         {
             print(uiplayers[x].GetComponent<PlayerData>().teamID);
+            print(rects[uiplayers[x].GetComponent<PlayerData>().teamID]);
             uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
             print(uiplayers[x].GetComponent<PlayerData>().teamID +  " after");
             uiplayers[x].transform.GetChild(0).GetComponent<TMP_Text>().text = uiplayers[x].GetComponent<PlayerData>().playerId.ToString();
