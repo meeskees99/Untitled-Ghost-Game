@@ -100,8 +100,8 @@ public class TeamManager : NetworkBehaviour
                             }
                         }
                         teams[teamInt].tData.Add(teams[y].tData[i]);
-                        SetTeam(teamInt, y, i);
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
+                        SetTeam(teamInt, y, i);
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
                         {
