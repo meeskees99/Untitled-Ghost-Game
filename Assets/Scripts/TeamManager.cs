@@ -66,17 +66,17 @@ public class TeamManager : NetworkBehaviour
                             {
                                 //print("yi " + yi);
                                 teams[teamInt].tData[yi].teamID = teamInt;
-                                for (int ji = 0; ji < uiplayers.Count; ji++)
-                                {
-                                    if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
-                                    {
-                                        uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                        SetParents();
-                                    }
-                                }
                             }
                         }
 
+                        for (int ji = 0; ji < uiplayers.Count; ji++)
+                        {
+                            if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                            {
+                                uiplayers[ji].transform.SetParent(rects[teamInt].transform);
+                                SetParents();
+                            }
+                        }
                         
                         return;
                     }
