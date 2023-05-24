@@ -144,7 +144,7 @@ public class TeamManager : NetworkBehaviour
     {
         print("teamIDSet");
         print(teamInt);
-        teams[teamInt].tData[dataInt].teamID = teamInt;
+        teams[teams[teamInt].tData[dataInt].teamID].tData[dataInt].teamID = teamInt;
     }
 
     [ObserversRpc(BufferLast = true)]
