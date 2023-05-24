@@ -56,6 +56,7 @@ public class TeamManager : NetworkBehaviour
                     {
                         // set this in ui manager
                         teams[teamInt].tData.Add(teams[y].tData[i]);
+                        SetTeam(teamInt, y, i);
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
@@ -98,6 +99,7 @@ public class TeamManager : NetworkBehaviour
                             }
                         }
                         teams[teamInt].tData.Add(teams[y].tData[i]);
+                        SetTeam(teamInt, y, i);
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
@@ -133,6 +135,13 @@ public class TeamManager : NetworkBehaviour
         SetUiPlayers(ui);
         SetParents();
     }
+    [ObserversRpc(BufferLast = true)]
+    public void SetTeam(int Teamint, int previousteam, int dataint)
+    {
+        teams[Teamint].tData.Add(teams[previousteam].tData[dataint]);
+        teams[teams[Teamint].tData[dataint].teamID].tData.Remove(teams[previousteam].tData[dataint]);
+    }
+
     [ObserversRpc(BufferLast = true)]
     public void SetUiPlayers(GameObject ui)
     {
