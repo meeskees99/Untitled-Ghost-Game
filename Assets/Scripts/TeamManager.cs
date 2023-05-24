@@ -138,7 +138,7 @@ public class TeamManager : NetworkBehaviour
         SetUiPlayers(ui);
         SetParents();
     }
-    [ServerRpc(RequireOwnership = false)]
+    [ObserversRpc]
     public void SetTeam(int Teamint, int previousteam, int dataint)
     {
         print("teamSet");
@@ -156,7 +156,7 @@ public class TeamManager : NetworkBehaviour
         uiplayers.Add(ui);
     }
 
-    [ObserversRpc(BufferLast = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void SetTeamID(int teamInt, int dataInt)
     {
         print("teamIDSet");
