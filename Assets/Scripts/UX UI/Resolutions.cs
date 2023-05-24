@@ -14,7 +14,10 @@ public class Resolutions : MonoBehaviour
     void Start()
     {
         GetAndSetResolution();
-        //SetScreenOptions(0);
+        if (!PlayerPrefs.HasKey("FullscreenIndex"))
+        {
+            SetScreenOptions(0);
+        }      
     }
     #region Resolution 
     void GetAndSetResolution()
@@ -76,7 +79,7 @@ public class Resolutions : MonoBehaviour
     #endregion
 
     #region FullScreen
-    void SetScreenOptions(int index)
+    public void SetScreenOptions(int index)
     {
         int currentFullscreenIndex = 0;
         if (PlayerPrefs.HasKey("FullscreenIndex"))
@@ -84,16 +87,38 @@ public class Resolutions : MonoBehaviour
             currentFullscreenIndex = PlayerPrefs.GetInt("FullscreenIndex");
         }
         else { currentFullscreenIndex = 0; }
+
+        currentFullscreenIndex = index;
+        switch (currentFullscreenIndex)
+        {
+            case 0:
+                {
+                    FullScreen();
+                }
+                break;
+                case 1:
+                {
+                    Borderless();
+                }
+                break;
+                case 2:
+                {
+                    Windowed();
+                }
+                break;
+        }
+        fullScreenDrowdown.value = index;
+        fullScreenDrowdown.RefreshShownValue();
     }
-    public void FullScreen()
+    void FullScreen()
     {
         Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
     }
-    public void Borderless()
+    void Borderless()
     {
         Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
     }
-    public void WIndowed()
+    void Windowed()
     {
         Screen.fullScreenMode = FullScreenMode.Windowed;
     }
