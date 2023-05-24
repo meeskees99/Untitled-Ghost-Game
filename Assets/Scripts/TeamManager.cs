@@ -156,7 +156,7 @@ public class TeamManager : NetworkBehaviour
     }
     public IEnumerator WaitYouDipshit()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(0.1f);
         print("do");
         SetParents();
     }
