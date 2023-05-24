@@ -74,7 +74,7 @@ public class TeamManager : NetworkBehaviour
                             if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                             {
                                 uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                WaitYouDipshit();
+                                StartCoroutine(WaitYouDipshit());
                             }
                         }
                         
@@ -118,7 +118,7 @@ public class TeamManager : NetworkBehaviour
                             if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                             {
                                 uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                WaitYouDipshit();
+                                StartCoroutine(WaitYouDipshit());
                             }
                         }
                     }
