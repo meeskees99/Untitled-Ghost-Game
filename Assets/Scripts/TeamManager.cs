@@ -65,6 +65,7 @@ public class TeamManager : NetworkBehaviour
                             if (teams[teamInt].tData[yi].playerId == localPlayerId)
                             {
                                 //print("yi " + yi);
+                                teams[teams[teamInt].tData[yi].teamID].tData[yi].teamID = teamInt;
                                 SetTeamID(teamInt, yi);
                             }
                         }
