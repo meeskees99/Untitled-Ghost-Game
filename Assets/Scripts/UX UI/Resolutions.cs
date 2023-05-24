@@ -6,16 +6,18 @@ using UnityEngine;
 
 public class Resolutions : MonoBehaviour
 {
-    [SerializeField]List <Resolution> resolutions = new();
-    [SerializeField]TMP_Dropdown dropDown;
+    List <Resolution> resolutions = new();
+    [SerializeField] TMP_Dropdown resDropDown;
+
+    [SerializeField] TMP_Dropdown fullScreenDrowdown;
     // Start is called before the first frame update
     void Start()
     {
         GetAndSetResolution();
-        dropDown = GetComponent<TMP_Dropdown>();
+        //SetScreenOptions(0);
     }
     #region Resolution 
-    public void GetAndSetResolution()
+    void GetAndSetResolution()
     {
         int currentResolutionIndex = 0;
         if (PlayerPrefs.HasKey("ResolutionIndex"))
@@ -24,28 +26,28 @@ public class Resolutions : MonoBehaviour
         }
         else
         {
-            currentResolutionIndex = 2;
+            currentResolutionIndex = 0;
         }
 
-        Resolution[] tempRes = Screen.resolutions;
+        Resolution[] tempRes = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height}).Distinct().ToArray();
 
         for (int i = tempRes.Length -1; i > 0; i--)
         {
             resolutions.Add(tempRes[i]);
         }      
-        dropDown.ClearOptions();
+        resDropDown.ClearOptions();
 
         List<string> options = new();
 
         for (int i = 0; i < resolutions.Count; i++)
         {
-            string Option = resolutions[i].width + "x" + resolutions[i].height + "@" + resolutions[i].refreshRate + "hz";
+            string Option = resolutions[i].width + "x" + resolutions[i].height;
             options.Add(Option);
         }
         //options.Reverse();
-        dropDown.AddOptions(options);
-        dropDown.value = currentResolutionIndex;
-        dropDown.RefreshShownValue();
+        resDropDown.AddOptions(options);
+        resDropDown.value = currentResolutionIndex;
+        resDropDown.RefreshShownValue();
        
         Screen.SetResolution(resolutions[currentResolutionIndex].width, resolutions[currentResolutionIndex].height, true);
 
@@ -55,7 +57,7 @@ public class Resolutions : MonoBehaviour
     {
         PlayerPrefs.SetInt("ResolutionIndex", index);
         Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
-        dropDown.value = index;
+        resDropDown.value = index;
         //dropDown.RefreshShownValue();
     }
 
@@ -71,5 +73,29 @@ public class Resolutions : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region FullScreen
+    void SetScreenOptions(int index)
+    {
+        int currentFullscreenIndex = 0;
+        if (PlayerPrefs.HasKey("FullscreenIndex"))
+        {
+            currentFullscreenIndex = PlayerPrefs.GetInt("FullscreenIndex");
+        }
+        else { currentFullscreenIndex = 0; }
+    }
+    public void FullScreen()
+    {
+        Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+    }
+    public void Borderless()
+    {
+        Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+    }
+    public void WIndowed()
+    {
+        Screen.fullScreenMode = FullScreenMode.Windowed;
+    }
     #endregion
 }
