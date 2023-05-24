@@ -39,7 +39,7 @@ public class Resolutions : MonoBehaviour
 
         for (int i = 0; i < resolutions.Count; i++)
         {
-            string Option = resolutions[i].width + "x" + resolutions[i].height;
+            string Option = resolutions[i].width + "x" + resolutions[i].height + "@" + resolutions[i].refreshRate + "hz";
             options.Add(Option);
         }
         //options.Reverse();
