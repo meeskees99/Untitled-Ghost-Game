@@ -66,7 +66,6 @@ public class TeamManager : NetworkBehaviour
                             {
                                 //print("yi " + yi);
                                 teams[teamInt].tData[yi].teamID = teamInt;
-                                SetTeamID(teamInt, yi);
                             }
                         }
 
@@ -110,7 +109,6 @@ public class TeamManager : NetworkBehaviour
                             {
                                 print("yi " + yi);
                                 teams[teamInt].tData[yi].teamID = teamInt;
-                                SetTeamID(teamInt, yi);
                             }
                         }
 
@@ -154,15 +152,6 @@ public class TeamManager : NetworkBehaviour
     public void SetUiPlayers(GameObject ui)
     {
         uiplayers.Add(ui);
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void SetTeamID(int teamInt, int dataInt)
-    {
-        print("teamIDSet");
-        print(teams[teamInt].tData[dataInt].teamID);
-        teams[teams[teamInt].tData[dataInt].teamID].tData[dataInt].teamID = teamInt;
-        print(teams[teamInt].tData[dataInt].teamID);
     }
 
     [ObserversRpc(BufferLast = true)]
