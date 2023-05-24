@@ -64,7 +64,7 @@ public class TeamManager : NetworkBehaviour
                             if (teams[teamInt].tData[yi].playerId == localPlayerId)
                             {
                                 //print("yi " + yi);
-                                teams[teamInt].tData[yi].teamID = teamInt;
+                                SetTeamID(teamInt, yi);
                             }
                         }
 
@@ -106,7 +106,7 @@ public class TeamManager : NetworkBehaviour
                             if (teams[teamInt].tData[yi].playerId == localPlayerId)
                             {
                                 //print("yi " + yi);
-                                teams[teamInt].tData[yi].teamID = teamInt;
+                                SetTeamID(teamInt, yi);
                             }
                         }
 
@@ -137,6 +137,12 @@ public class TeamManager : NetworkBehaviour
     public void SetUiPlayers(GameObject ui)
     {
         uiplayers.Add(ui);
+    }
+
+    [ObserversRpc]
+    public void SetTeamID(int teamInt, int dataInt)
+    {
+        teams[teamInt].tData[dataInt].teamID = teamInt;
     }
 
     [ObserversRpc(BufferLast = true)]
