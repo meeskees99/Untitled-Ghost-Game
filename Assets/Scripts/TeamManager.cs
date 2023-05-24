@@ -61,11 +61,11 @@ public class TeamManager : NetworkBehaviour
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
                         {
-                            print(teamInt + " teamInt");
                             if (teams[teamInt].tData[yi].playerId == localPlayerId)
                             {
                                 //print("yi " + yi);
                                 teams[teamInt].tData[yi].teamID = teamInt;
+                                print(teamInt + " teamInt");
                             }
                         }
 
@@ -104,11 +104,12 @@ public class TeamManager : NetworkBehaviour
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
                         {
-                            print(teamInt + " teamInt");
+                            
                             if (teams[teamInt].tData[yi].playerId == localPlayerId)
                             {
                                 print("yi " + yi);
                                 teams[teamInt].tData[yi].teamID = teamInt;
+                                print(teamInt + " teamInt");
                             }
                         }
 
