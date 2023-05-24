@@ -143,6 +143,7 @@ public class TeamManager : NetworkBehaviour
     public void SetTeamID(int teamInt, int dataInt)
     {
         print("teamIDSet");
+        print(teamInt);
         teams[teamInt].tData[dataInt].teamID = teamInt;
     }
 
