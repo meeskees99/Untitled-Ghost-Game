@@ -41,7 +41,7 @@ public class PlayerData : NetworkBehaviour
     }
     private void Update()
     {
-        print("owner" + IsOwner);
+        //print("owner" + IsOwner);
         if (!IsOwner)
         {
             return;
