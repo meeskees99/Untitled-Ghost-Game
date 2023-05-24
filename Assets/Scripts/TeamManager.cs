@@ -72,7 +72,7 @@ public class TeamManager : NetworkBehaviour
                             if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                             {
                                 uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                SetParents();
+                                SetParents(uiplayers[ji]);
                             }
                         }
                         
@@ -114,7 +114,7 @@ public class TeamManager : NetworkBehaviour
                             if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                             {
                                 uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                SetParents();
+                                SetParents(uiplayers[ji]);
                             }
                         }
                     }
@@ -129,14 +129,14 @@ public class TeamManager : NetworkBehaviour
         // set in ui manager
         uiplayers.Add(ui);
         ui.transform.SetParent(rects[0].transform);
-        SetParents();
+        SetParents(ui);
     }
 
     [ObserversRpc(BufferLast = true)]
-    public void SetParents()
+    public void SetParents(GameObject ui)
     {
         // set in ui manager
-
+        uiplayers.Add(ui);
         for (int x = 0; x < uiplayers.Count; x++)
         {
             uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
