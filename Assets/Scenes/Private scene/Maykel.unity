@@ -1886,7 +1886,7 @@ GameObject:
   - component: {fileID: 652447952}
   - component: {fileID: 652447951}
   m_Layer: 5
-  m_Name: Viewport
+  m_Name: ViewportSpec
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2722,7 +2722,7 @@ GameObject:
   - component: {fileID: 1188974377}
   - component: {fileID: 1188974376}
   m_Layer: 5
-  m_Name: Viewport
+  m_Name: ViewportTeam2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3688,7 +3688,7 @@ GameObject:
   - component: {fileID: 1731697428}
   - component: {fileID: 1731697427}
   m_Layer: 5
-  m_Name: Viewport
+  m_Name: ViewportTeam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4614,7 +4614,6 @@ MonoBehaviour:
   - {fileID: 652447949}
   - {fileID: 1731697425}
   - {fileID: 1188974374}
-  player: {fileID: 0}
   uiplayers: []
   playernumber: {fileID: 203998383}
 --- !u!114 &2103708088
