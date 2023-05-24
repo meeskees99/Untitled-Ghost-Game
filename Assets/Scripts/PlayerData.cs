@@ -13,6 +13,7 @@ public class PlayerData : NetworkBehaviour
     [SyncVar]
     public int playerId = -2;
 
+    [SyncVar]
     public int teamID;
 
     public TeamManager manager;
