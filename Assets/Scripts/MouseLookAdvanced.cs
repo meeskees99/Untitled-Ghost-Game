@@ -5,8 +5,7 @@ using FishNet.Object;
 
 public class MouseLookAdvanced : NetworkBehaviour
 {
-    [SerializeField] float sensX;
-    [SerializeField] float sensY;
+    [SerializeField] float sens;
 
     [SerializeField] Transform orientation;
 
@@ -25,6 +24,7 @@ public class MouseLookAdvanced : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
         if (mouseLocked)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -50,8 +50,8 @@ public class MouseLookAdvanced : NetworkBehaviour
         //    this.gameObject.SetActive(false);
         //}
 
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime* sensY;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime* sens;
 
         yRotation += mouseX;
 
