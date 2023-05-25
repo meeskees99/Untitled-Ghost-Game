@@ -24,7 +24,7 @@ public class GameOptions : MonoBehaviour
         selectedCharacter.GetComponent<Image>().sprite = characters[characterIndex];
         if (!PlayerPrefs.HasKey("username"))
         {
-            username.text = selectedCharacter.name;
+            username.text = selectedCharacter.GetComponent<Image>().sprite.name;
         }
         else
         {
