@@ -525,8 +525,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -783.6949}
-  m_SizeDelta: {x: 1003.7011, y: 239.08682}
+  m_AnchoredPosition: {x: 0, y: -784.1515}
+  m_SizeDelta: {x: 1003.7011, y: 239.21729}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &8606358
 MonoBehaviour:
@@ -11972,7 +11972,7 @@ GameObject:
   - component: {fileID: 662801797}
   - component: {fileID: 662801796}
   m_Layer: 5
-  m_Name: Audio txt
+  m_Name: Game txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14601,8 +14601,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -305.52124}
-  m_SizeDelta: {x: 1003.7011, y: 239.08682}
+  m_AnchoredPosition: {x: 0, y: -305.71692}
+  m_SizeDelta: {x: 1003.7011, y: 239.21729}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &804878187
 MonoBehaviour:
@@ -16199,8 +16199,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1602627742}
-  - {fileID: 1511694371}
   - {fileID: 1847990205}
+  - {fileID: 1511694371}
   - {fileID: 1283869849}
   - {fileID: 1107670174}
   - {fileID: 962859486}
@@ -17970,13 +17970,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 2135256050}
   m_HandleRect: {fileID: 818968435}
   m_Direction: 0
-  m_MinValue: 0.0001
-  m_MaxValue: 1
+  m_MinValue: 0.001
+  m_MaxValue: 2
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1847990208}
+        m_TargetAssemblyTypeName: GameOptions, Assembly-CSharp
+        m_MethodName: ChangeMouseSens
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1033403750
 GameObject:
   m_ObjectHideFlags: 0
@@ -25252,7 +25264,7 @@ GameObject:
   - component: {fileID: 1511694371}
   - component: {fileID: 1511694373}
   m_Layer: 5
-  m_Name: AudioContainer
+  m_Name: GameContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25272,7 +25284,7 @@ RectTransform:
   m_Children:
   - {fileID: 662801795}
   m_Father: {fileID: 912191171}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.88953257}
   m_AnchorMax: {x: 1, y: 1}
@@ -31176,12 +31188,12 @@ RectTransform:
   - {fileID: 441760503}
   - {fileID: 516907334}
   m_Father: {fileID: 912191171}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.88953257}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0.000061035156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1847990206
 MonoBehaviour:
@@ -31235,6 +31247,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 908143f6f156e4343ba44d1c607b11d0, type: 3}
   - {fileID: 21300000, guid: 84844223c2e6b464ea7f37fe70710c28, type: 3}
   selectedCharacter: {fileID: 1929376442}
+  sensSlider: {fileID: 1027097018}
+  sensTxt: {fileID: 2136884563}
+  sensMultiplier: 600
 --- !u!1 &1852745609
 GameObject:
   m_ObjectHideFlags: 0
@@ -32930,8 +32945,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -544.60803}
-  m_SizeDelta: {x: 1003.7011, y: 239.08682}
+  m_AnchoredPosition: {x: 0, y: -544.9342}
+  m_SizeDelta: {x: 1003.7011, y: 239.21729}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1961167249
 MonoBehaviour:
@@ -34141,8 +34156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 501.85056, y: -92.98891}
-  m_SizeDelta: {x: 1003.7011, y: 185.97781}
+  m_AnchoredPosition: {x: 501.85056, y: -93.05414}
+  m_SizeDelta: {x: 1003.7011, y: 186.10828}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2024708468
 GameObject:
@@ -35404,7 +35419,7 @@ GameObject:
   - component: {fileID: 2100467540}
   - component: {fileID: 2100467541}
   m_Layer: 5
-  m_Name: Master
+  m_Name: Sens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36324,7 +36339,7 @@ GameObject:
   - component: {fileID: 2136884564}
   - component: {fileID: 2136884563}
   m_Layer: 5
-  m_Name: sens txt
+  m_Name: sensPerc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
