@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class GameOptions : MonoBehaviour
 {
@@ -14,13 +15,14 @@ public class GameOptions : MonoBehaviour
     int characterIndex;
     [Header("Mouse Settings")]
     [SerializeField] Slider sensSlider;
-    [SerializeField] TMP_Text sensTxt;
+    [SerializeField] TMP_InputField sensInput;
     [Tooltip("Multiplies Slider Value By this")]
     [SerializeField] float sensMultiplier;
 
     #region Player Settings
     private void Start()
     {
+        #region Get and Set PlayerPrefs
         if (!PlayerPrefs.HasKey("Character"))
         {
             PlayerPrefs.SetInt("Character", characterIndex);
@@ -49,13 +51,14 @@ public class GameOptions : MonoBehaviour
             print("First Time Sens Set");
             ChangeMouseSens(sensSlider.maxValue + sensSlider.minValue / 2);
         }
+        #endregion
         float z = PlayerPrefs.GetFloat("Mouse Sensitivity");
         print("float Z: " + z);
-        sensSlider.value = z / 100;
+        sensSlider.value = z / sensMultiplier;
         print("SliderValue: " + sensSlider.value);
         float f = PlayerPrefs.GetFloat("Mouse Sensitivity");
         float v = (f / sensMultiplier * 1000);
-        sensTxt.text = v.ToString("0,###");
+        sensInput.text = v.ToString("0,###");
     }
     public void SetUsername()
     {
@@ -109,6 +112,18 @@ public class GameOptions : MonoBehaviour
     {
         PlayerPrefs.SetFloat("Mouse Sensitivity", f * sensMultiplier);
         float s = sensSlider.value * 1000;
-        sensTxt.text = s.ToString("0,###");
+        sensInput.text = s.ToString("0,###");
+    }
+
+    public void ChangeMouseSensInputField()
+    {
+        float f;
+        float.TryParse(sensInput.text, out f);
+        if (f < sensSlider.minValue)
+            f = sensSlider.minValue; 
+        if (f > sensSlider.maxValue)
+            f = sensSlider.maxValue;
+        sensSlider.value = f;
+        ChangeMouseSens(f);
     }
 }
