@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 17208897}
   - component: {fileID: 17208896}
   m_Layer: 5
-  m_Name: Persentage
+  m_Name: FovAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5198,10 +5198,12 @@ MonoBehaviour:
   fpsSlider: {fileID: 1083173562}
   fpsText: {fileID: 1257343483}
   fpsInput: {fileID: 0}
-  limitFPSYes: {fileID: 515765753}
-  limitFPSNo: {fileID: 1802417620}
-  doVsyncYes: {fileID: 340900277}
-  doVsyncNo: {fileID: 1109810723}
+  limitFPSYes: {fileID: 238776581}
+  limitFPSNo: {fileID: 787535792}
+  doVsyncYes: {fileID: 0}
+  doVsyncNo: {fileID: 0}
+  fovSlider: {fileID: 0}
+  fovInput: {fileID: 0}
 --- !u!1 &364343500
 GameObject:
   m_ObjectHideFlags: 0
@@ -9464,9 +9466,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 1213900606157884049, guid: 5dea87ee29ed9dd42b05c0dd7523cdf4, type: 2}
   m_audioClip: {fileID: 8300000, guid: 8628db1c6e251a0498821c637732a0e2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.424
+  m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -20813,7 +20815,7 @@ GameObject:
   - component: {fileID: 1877683885}
   - component: {fileID: 1877683886}
   m_Layer: 5
-  m_Name: MusicSlider
+  m_Name: FOVSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20892,19 +20894,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 22408915}
-        m_TargetAssemblyTypeName: Mixer, Assembly-CSharp
-        m_MethodName: SetMasterVol
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1886592873
 GameObject:
   m_ObjectHideFlags: 0
@@ -22896,7 +22886,7 @@ GameObject:
   - component: {fileID: 2054879270}
   - component: {fileID: 2054879269}
   m_Layer: 5
-  m_Name: Audio txt
+  m_Name: Video txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

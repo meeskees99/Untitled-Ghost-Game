@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Resolutions : MonoBehaviour
+public class VideoSettings : MonoBehaviour
 {
     List <Resolution> resolutions = new();
     [SerializeField] TMP_Dropdown resDropDown;
@@ -30,6 +30,10 @@ public class Resolutions : MonoBehaviour
     bool doVSync;
     int vSyncIndex;
 
+    [Header("FOV")]
+    [SerializeField] Slider fovSlider;
+    [SerializeField] InputField fovInput;
+
     bool appliedSettings;
     
 
@@ -44,6 +48,26 @@ public class Resolutions : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("FullscreenIndex", PlayerPrefs.GetInt("FullscreenIndex"));
+            switch (PlayerPrefs.GetInt("FullscreenIndex"))
+            {
+                case 0:
+                    {
+                        FullScreen();
+                    }
+                    break;
+                case 1:
+                    {
+                        Borderless();
+                    }
+                    break;
+                case 2:
+                    {
+                        Windowed();
+                    }
+                    break;
+            }
+            fullScreenDrowdown.value = PlayerPrefs.GetInt("FullscreenIndex");
+            fullScreenDrowdown.RefreshShownValue();
         }
         if (PlayerPrefs.HasKey("vSync"))
         {
@@ -64,6 +88,17 @@ public class Resolutions : MonoBehaviour
             doVsyncNo.SetActive(false);
             doVsyncYes.SetActive(true);
             doVSync = true;
+        }
+        if (PlayerPrefs.HasKey("fov"))
+        {
+            fovSlider.value = PlayerPrefs.GetInt("fov");
+            fovInput.text = PlayerPrefs.GetInt("fov").ToString("0");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("fov", 60);
+            fovSlider.value = PlayerPrefs.GetInt("fov");
+            fovInput.text = PlayerPrefs.GetInt("fov").ToString("0");
         }
         #endregion
         #region FPS prefs
@@ -97,25 +132,20 @@ public class Resolutions : MonoBehaviour
             PlayerPrefs.SetFloat("targetFPS", fpsSlider.maxValue);
         }
         #endregion
+        #region StartFunctions
         QualitySettings.vSyncCount = PlayerPrefs.GetInt("vSync");
         Application.targetFrameRate = (int)PlayerPrefs.GetFloat("targetFPS");
         fpsSlider.GetComponent<Slider>().enabled = (limitFPS && !doVSync);
         fpsText.text = PlayerPrefs.GetFloat("targetFPS").ToString("0");
         //fpsInput.text = PlayerPrefs.GetFloat("targetFPS").ToString("0");
         bool doFpsSlider = (limitFPS && !doVSync);
-        print("doFpsSlider = " + doFpsSlider);
-        print("doVsync = " + doVSync);
-        print("vSync playerprefs = " + PlayerPrefs.GetInt("vSync"));
-        if (doFpsSlider)
-            fpsSlider.GetComponent<Slider>().enabled = true;
-        else
-        {
-            fpsSlider.GetComponent<Slider>().enabled = false;
-        }
+        fpsSlider.GetComponent<Slider>().enabled = doFpsSlider;
+       
         fpsSlider.value = PlayerPrefs.GetFloat("targetFPS");
-        if (!doVSync)
+        if (!doVSync && !limitFPS)
             Application.targetFrameRate = 0;
         GetAndSetResolution();
+        #endregion
     }
     #region Resolution 
     void GetAndSetResolution()
@@ -163,6 +193,7 @@ public class Resolutions : MonoBehaviour
     public void SetResolution(int index)
     {
         PlayerPrefs.SetInt("ResolutionIndex", index);
+        int i = PlayerPrefs.GetInt("FullscreenMode");
         Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
         resDropDown.value = index;
         //dropDown.RefreshShownValue();
@@ -184,16 +215,9 @@ public class Resolutions : MonoBehaviour
 
     #region FullScreen
     public void SetScreenOptions(int index)
-    {
-        int currentFullscreenIndex = 0;
-        if (PlayerPrefs.HasKey("FullscreenIndex"))
-        {
-            currentFullscreenIndex = PlayerPrefs.GetInt("FullscreenIndex");
-        }
-        else { currentFullscreenIndex = 0; }
-
-        currentFullscreenIndex = index;
-        switch (currentFullscreenIndex)
+    { 
+        PlayerPrefs.SetInt("FullscreenIndex", index);
+        switch (index)
         {
             case 0:
                 {
@@ -313,6 +337,25 @@ public class Resolutions : MonoBehaviour
         doVsyncYes.SetActive(toggle);
         print("doVsync = " + doVSync);
         print("vSync playerprefs = " + PlayerPrefs.GetInt("vSync"));
+    }
+    #endregion
+    #region fov
+    public void ChangeFov(float value)
+    {
+        PlayerPrefs.SetInt("fov", (int)value);
+        fovInput.text = PlayerPrefs.GetInt("fov").ToString("0");
+    }
+
+    public void FovInput()
+    {
+        int fov = fovInput.text.ConvertTo<int>();
+        if (fov > fovSlider.maxValue)
+              fov = (int)fovSlider.maxValue;
+        else if (fov < fovSlider.minValue)
+            fov = (int)fovSlider.minValue;
+        PlayerPrefs.SetInt("fov", fovInput.text.ConvertTo<int>());
+        fovSlider.value = PlayerPrefs.GetInt("fov");
+        fovInput.text = PlayerPrefs.GetInt("fov").ToString("0");
     }
     #endregion
     public void ApplySettings()
