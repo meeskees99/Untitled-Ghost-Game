@@ -69,7 +69,7 @@ public class PlayerData : NetworkBehaviour
     [ObserversRpc(BufferLast = true)]
     public void SetPlayerIDClients(int id)
     {
-        manager.playernumber.text = playerId.ToString();
         playerId = id;
+        manager.playernumber.text = playerId.ToString();
     }
 }
