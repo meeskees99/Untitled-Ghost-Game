@@ -60,6 +60,7 @@ public class TeamManager : NetworkBehaviour
                         print(y);
                         print(i);
                         teams[teamInt].tData.Add(teams[y].tData[i]);
+                        SetTeam(teams[y].tData[i].gameObject, teamInt);
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
 
@@ -101,7 +102,7 @@ public class TeamManager : NetworkBehaviour
                         print(i);
                         
                         teams[teamInt].tData.Add(teams[y].tData[i]);
-                        
+                        SetTeam(teams[y].tData[i].gameObject, teamInt);
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
@@ -140,10 +141,17 @@ public class TeamManager : NetworkBehaviour
         }
         SetParents();
     }
-    [ServerRpc(RequireOwnership = false)]
+    [ObserversRpc]
     public void SetTeamStart(GameObject data)
     {
         teams[data.GetComponent<PlayerData>().teamID].tData.Add(data.GetComponent<PlayerData>());
+    }
+    [ObserversRpc]
+    public void SetTeam(GameObject data, int TeamInt)
+    {
+        teams[TeamInt].tData.Add(data.GetComponent<PlayerData>());
+        teams[data.GetComponent<PlayerData>().teamID].tData.Remove(data.GetComponent<PlayerData>());
+
     }
     [ObserversRpc]
     public void SetUiPlayers(GameObject ui)
