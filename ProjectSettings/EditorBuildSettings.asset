@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Private scene/Maykel.unity
     guid: 09ab648c4ac51404794ab1b60a6f7ed6
   - enabled: 0
     path: Assets/Scenes/Private scene/Gerlof test.unity
     guid: 57791155850f50d46a0944571063d4ae
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Main menu/Main Menu.unity
     guid: 08ff00bc1df195942afdcf0c54f37f77
   m_configObjects: {}
