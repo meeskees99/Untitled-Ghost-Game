@@ -43,6 +43,9 @@ public class TeamManager : NetworkBehaviour
         {
             for (int y = 0; y < teams.Length; y++)
             {
+
+                print(y + " y");
+                print(i + " i");
                 if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
                 {
                     print("teams == null" + y + " y");
