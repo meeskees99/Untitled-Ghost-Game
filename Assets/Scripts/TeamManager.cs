@@ -132,10 +132,10 @@ public class TeamManager : NetworkBehaviour
     {
         // set in ui manager
         uiplayers.Add(ui);
-        SetTeamStart(ui);
         ui.transform.SetParent(rects[0].transform);
         for (int z = 0; z < currentClients; z++)
         {
+            SetTeamStart(uiplayers[z]);
             SetUiPlayers(uiplayers[z]);
         }
         SetParents();
