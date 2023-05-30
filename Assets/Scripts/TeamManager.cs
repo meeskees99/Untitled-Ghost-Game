@@ -43,7 +43,7 @@ public class TeamManager : NetworkBehaviour
         {
             for (int i = 0; i < currentClients; i++)
             {
-                if (teams[y].tData.Count < i)
+                if (teams[y].tData.Count - 1 < i)
                 {
                     print("NO");
                 }
