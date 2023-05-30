@@ -135,6 +135,7 @@ public class TeamManager : NetworkBehaviour
         uiplayers.Add(ui);
         ui.transform.SetParent(rects[0].transform);
         ClearUiPlayers();
+        ClearTeamStart();
         for (int z = 0; z < currentClients; z++)
         {
             SetTeamStart(uiplayers[z]);
@@ -146,6 +147,13 @@ public class TeamManager : NetworkBehaviour
     public void SetTeamStart(GameObject data)
     {
         teams[data.GetComponent<PlayerData>().teamID].tData.Add(data.GetComponent<PlayerData>());
+    }
+    [ObserversRpc]
+    public void ClearTeamStart()
+    {
+        teams[0].tData.Clear();
+        teams[1].tData.Clear();
+        teams[2].tData.Clear();
     }
     [ObserversRpc]
     public void SetTeam(GameObject data, int TeamInt)
