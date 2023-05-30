@@ -140,7 +140,7 @@ public class TeamManager : NetworkBehaviour
         }
         SetParents();
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void SetTeamStart(GameObject data)
     {
         teams[data.GetComponent<PlayerData>().teamID].tData.Add(data.GetComponent<PlayerData>());
