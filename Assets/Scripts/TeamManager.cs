@@ -44,8 +44,8 @@ public class TeamManager : NetworkBehaviour
             for (int y = 0; y < teams.Length; y++)
             {
 
-                print(y + " y");
-                print(i + " i");
+                print(y + " team");
+                print(i + " player");
                 if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
                 {
                     print("teams == null" + y + " y");
@@ -156,6 +156,7 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc]
     public void SetUiPlayers(GameObject ui)
     {
+        uiplayers.Clear();
         uiplayers.Add(ui);
     }
     public IEnumerator WaitYouDipshit()
