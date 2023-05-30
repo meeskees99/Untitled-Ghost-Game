@@ -96,7 +96,9 @@ public class TeamManager : NetworkBehaviour
                         print(teamInt);
                         print(y);
                         print(i);
+                        
                         teams[teamInt].tData.Add(teams[y].tData[i]);
+                        
                         teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
                         for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
@@ -155,10 +157,9 @@ public class TeamManager : NetworkBehaviour
         // set in ui manager
         for (int x = 0; x < uiplayers.Count; x++)
         {
-            print(uiplayers[x].GetComponent<PlayerData>().teamID);
-            print(rects[uiplayers[x].GetComponent<PlayerData>().teamID].name);
+            print(uiplayers[x].GetComponent<PlayerData>().teamID + " team id || " + x + " uiPlayers X");
             uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
-            print(uiplayers[x].GetComponent<PlayerData>().teamID +  " after");
+
             uiplayers[x].transform.GetChild(0).GetComponent<TMP_Text>().text = uiplayers[x].GetComponent<PlayerData>().playerId.ToString();
         }
     }
