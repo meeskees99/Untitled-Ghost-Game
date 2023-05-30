@@ -134,6 +134,7 @@ public class TeamManager : NetworkBehaviour
         // set in ui manager
         uiplayers.Add(ui);
         ui.transform.SetParent(rects[0].transform);
+        ClearUiPlayers();
         for (int z = 0; z < currentClients; z++)
         {
             SetTeamStart(uiplayers[z]);
@@ -156,8 +157,12 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc]
     public void SetUiPlayers(GameObject ui)
     {
-        uiplayers.Clear();
         uiplayers.Add(ui);
+    }
+    [ObserversRpc]
+    public void ClearUiPlayers()
+    {
+        uiplayers.Clear();
     }
     public IEnumerator WaitYouDipshit()
     {
