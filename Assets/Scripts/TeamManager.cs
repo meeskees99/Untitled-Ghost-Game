@@ -39,9 +39,9 @@ public class TeamManager : NetworkBehaviour
     {
         print(localPlayerId);
 
-        for (int i = 0; i < currentClients; i++)
+        for (int y = 0; y < teams.Length; y++)
         {
-            for (int y = 0; y < teams.Length; y++)
+            for (int i = 0; i < currentClients; i++)
             {
 
                 print(y + " team");
