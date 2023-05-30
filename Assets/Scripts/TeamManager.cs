@@ -43,84 +43,90 @@ public class TeamManager : NetworkBehaviour
         {
             for (int i = 0; i < currentClients; i++)
             {
-
-                print(y + " team");
-                print(i + " player");
-                print(teams[y].tData[i].playerId);
-                if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
+                if (teams[y].tData.Count < i)
                 {
-                    print("teams == null" + y + " y");
+                    print("NO");
                 }
-                else if (teams[y].tData[i].playerId == localPlayerId)
+                else
                 {
-                    if (teams[teamInt].tData.Count <= i)
+                    print(y + " team");
+                    print(i + " player");
+                    print(teams[y].tData[i].playerId);
+                    if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
                     {
-                        // set this in ui manager
-
-                        print(teamInt);
-                        print(y);
-                        print(i);
-                        teams[teamInt].tData.Add(teams[y].tData[i]);
-                        SetTeam(teams[y].tData[i].gameObject, teamInt);
-                        teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
-
-
-                        for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
-                        {
-                            if (teams[teamInt].tData[yi].playerId == localPlayerId)
-                            {
-                                teams[teamInt].tData[yi].teamID = teamInt;
-                            }
-                        }
-
-                        for (int ji = 0; ji < uiplayers.Count; ji++)
-                        {
-                            if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
-                            {
-                                uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                StartCoroutine(WaitYouDipshit());
-                            }
-                        }
-                        
-                        return;
+                        print("teams == null" + y + " y");
                     }
-                    else
+                    else if (teams[y].tData[i].playerId == localPlayerId)
                     {
-                        if (teams[teamInt].tData[i].playerId == localPlayerId)
+                        if (teams[teamInt].tData.Count <= i)
                         {
-                            for (int j = 0; j < teams[teamInt].tData.Count; j++)
+                            // set this in ui manager
+
+                            print(teamInt);
+                            print(y);
+                            print(i);
+                            teams[teamInt].tData.Add(teams[y].tData[i]);
+                            SetTeam(teams[y].tData[i].gameObject, teamInt);
+                            teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
+
+
+                            for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
                             {
-                                if (teams[teamInt].tData[i] == teams[teamInt].tData[j])
+                                if (teams[teamInt].tData[yi].playerId == localPlayerId)
                                 {
-                                    print("same");
-                                    return;
+                                    teams[teamInt].tData[yi].teamID = teamInt;
                                 }
                             }
-                        }
 
-                        print(teamInt);
-                        print(y);
-                        print(i);
-                        
-                        teams[teamInt].tData.Add(teams[y].tData[i]);
-                        SetTeam(teams[y].tData[i].gameObject, teamInt);
-                        teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
-
-                        for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
-                        {
-                            
-                            if (teams[teamInt].tData[yi].playerId == localPlayerId)
+                            for (int ji = 0; ji < uiplayers.Count; ji++)
                             {
-                                teams[teamInt].tData[yi].teamID = teamInt;
+                                if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                                {
+                                    uiplayers[ji].transform.SetParent(rects[teamInt].transform);
+                                    StartCoroutine(WaitYouDipshit());
+                                }
                             }
-                        }
 
-                        for (int ji = 0; ji < uiplayers.Count; ji++)
+                            return;
+                        }
+                        else
                         {
-                            if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                            if (teams[teamInt].tData[i].playerId == localPlayerId)
                             {
-                                uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                StartCoroutine(WaitYouDipshit());
+                                for (int j = 0; j < teams[teamInt].tData.Count; j++)
+                                {
+                                    if (teams[teamInt].tData[i] == teams[teamInt].tData[j])
+                                    {
+                                        print("same");
+                                        return;
+                                    }
+                                }
+                            }
+
+                            print(teamInt);
+                            print(y);
+                            print(i);
+
+                            teams[teamInt].tData.Add(teams[y].tData[i]);
+                            SetTeam(teams[y].tData[i].gameObject, teamInt);
+                            teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
+
+                            for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
+                            {
+
+                                if (teams[teamInt].tData[yi].playerId == localPlayerId)
+                                {
+                                    teams[teamInt].tData[yi].teamID = teamInt;
+                                }
+                            }
+
+                            for (int ji = 0; ji < uiplayers.Count; ji++)
+                            {
+                                if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                                {
+                                    uiplayers[ji].transform.SetParent(rects[teamInt].transform);
+                                    StartCoroutine(WaitYouDipshit());
+                                }
                             }
                         }
                     }
