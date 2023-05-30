@@ -6,5 +6,5 @@ using UnityEngine;
 
 public class TeamData : NetworkBehaviour
 {
-    public List<PlayerData> tData = new List<PlayerData>();
+    [SyncVar] public List<PlayerData> tData = new List<PlayerData>();
 }
