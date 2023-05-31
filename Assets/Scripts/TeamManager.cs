@@ -198,4 +198,15 @@ public class TeamManager : NetworkBehaviour
             uiplayers[x].transform.GetChild(0).GetComponent<TMP_Text>().text = uiplayers[x].GetComponent<PlayerData>().playerId.ToString();
         }
     }
+    bool can;
+    public void HostThing(PlayerData data)
+    {
+        if (!can)
+        {
+            can = true;
+            teams[0].tData.Add(data.GetComponent<PlayerData>());
+            currentClients++;
+        }
+
+    }
 }

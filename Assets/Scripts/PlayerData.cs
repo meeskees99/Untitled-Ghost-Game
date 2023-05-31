@@ -48,13 +48,7 @@ public class PlayerData : NetworkBehaviour
     {
         if (IsHost)
         {
-            if (!can)
-            {
-                can = true;
-                print("host");
-                manager.teams[0].tData.Add(this);
-                manager.currentClients++;
-            }
+            manager.HostThing(this);
         }
     }
     private void OnDestroy()
