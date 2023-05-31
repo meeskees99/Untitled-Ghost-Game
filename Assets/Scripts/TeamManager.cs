@@ -193,7 +193,7 @@ public class TeamManager : NetworkBehaviour
         for (int x = 0; x < players.Count; x++)
         {
             //print(uiplayers[x].GetComponent<PlayerData>().teamID + " team id || " + x + " uiPlayers X");
-            players[x].transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
+            players[x].transform.GetComponent<PlayerData>().UI.transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
     public bool can;
