@@ -27,16 +27,16 @@ public class PlayerData : NetworkBehaviour
     {
         playerId = -2;
         manager = FindObjectOfType<TeamManager>();
-        print("joint");
+        //print("joint");
 
         if (IsHost)
         {
-            print("host");
+            //print("host");
             SetPlayerDataHost();
         }
         else
         {
-            print("not host");
+            //print("not host");
             SetPlayerData();
         }
     }
@@ -45,7 +45,7 @@ public class PlayerData : NetworkBehaviour
     public void SetPlayerData()
     {
         manager.teams[0].tData.Add(this);
-        print("server");
+        //print("server");
         teamID = 0;
         manager.currentClients++;
         manager.Username();
@@ -69,7 +69,7 @@ public class PlayerData : NetworkBehaviour
         //print("owner" + IsOwner);
         if (!IsOwner)
         {
-            print(" nah");
+            //print(" nah");
             return;
         }
 
@@ -81,7 +81,7 @@ public class PlayerData : NetworkBehaviour
 
         if (playerId == -2)
         {
-            print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
+            //print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerIDServer(InstanceFinder.ClientManager.Connection.ClientId);
         }
 
@@ -103,13 +103,13 @@ public class PlayerData : NetworkBehaviour
         if (PlayerPrefs.HasKey("username"))
         {
             string name = PlayerPrefs.GetString("username");
-            print(name);
+            //print(name);
             GetUsernameServer(name);
             manager.Username();
         }
         else
         {
-            print(playerId);
+            //print(playerId);
             username = "player " + playerId;
             manager.Username();
         }
@@ -118,7 +118,7 @@ public class PlayerData : NetworkBehaviour
     [ServerRpc]
     public void GetUsernameServer(string user)
     {
-        print(user);
+        //print(user);
         username = user;
     }
 }

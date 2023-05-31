@@ -37,7 +37,7 @@ public class TeamManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)
     {
-        print(localPlayerId);
+        //print(localPlayerId);
 
         for (int y = 0; y < teams.Length; y++)
         {
@@ -45,16 +45,16 @@ public class TeamManager : NetworkBehaviour
             {
                 if (teams[y].tData.Count - 1 < i)
                 {
-                    print("NO");
+                    //print("NO");
                 }
                 else
                 {
-                    print(y + " team");
-                    print(i + " player");
-                    print(teams[y].tData[i].playerId);
+                    //print(y + " team");
+                    //print(i + " player");
+                    //print(teams[y].tData[i].playerId);
                     if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
                     {
-                        print("teams == null" + y + " y");
+                        //print("teams == null" + y + " y");
                     }
                     else if (teams[y].tData[i].playerId == localPlayerId)
                     {
@@ -62,9 +62,9 @@ public class TeamManager : NetworkBehaviour
                         {
                             // set this in ui manager
 
-                            print(teamInt);
-                            print(y);
-                            print(i);
+                            //print(teamInt);
+                            //print(y);
+                            //print(i);
                             teams[teamInt].tData.Add(teams[y].tData[i]);
                             SetTeam(teams[y].tData[i].gameObject, teamInt);
                             teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
@@ -97,15 +97,15 @@ public class TeamManager : NetworkBehaviour
                                 {
                                     if (teams[teamInt].tData[i] == teams[teamInt].tData[j])
                                     {
-                                        print("same");
+                                        //print("same");
                                         return;
                                     }
                                 }
                             }
 
-                            print(teamInt);
-                            print(y);
-                            print(i);
+                            //print(teamInt);
+                            //print(y);
+                            //print(i);
 
                             teams[teamInt].tData.Add(teams[y].tData[i]);
                             SetTeam(teams[y].tData[i].gameObject, teamInt);
@@ -182,7 +182,7 @@ public class TeamManager : NetworkBehaviour
     public IEnumerator WaitYouDipshit()
     {
         yield return new WaitForSeconds(0.1f);
-        print("do");
+        //print("do");
         SetParents();
     }
 
@@ -192,7 +192,7 @@ public class TeamManager : NetworkBehaviour
         // set in ui manager
         for (int x = 0; x < uiplayers.Count; x++)
         {
-            print(uiplayers[x].GetComponent<PlayerData>().teamID + " team id || " + x + " uiPlayers X");
+            //print(uiplayers[x].GetComponent<PlayerData>().teamID + " team id || " + x + " uiPlayers X");
             uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
@@ -222,11 +222,11 @@ public class TeamManager : NetworkBehaviour
         {
             if (currentClients -1 >= uiplayers.Count)
                 return;
-            print(i + " I");
+            //print(i + " I");
             
             uiplayers[i].GetComponentInChildren<TMP_Text>().text = uiplayers[i].GetComponent<PlayerData>().username;
 
-            print(uiplayers[i].GetComponent<PlayerData>().username);
+            //print(uiplayers[i].GetComponent<PlayerData>().username);
             UsernameClient(i, uiplayers[i].GetComponent<PlayerData>().username);
         }
     }
