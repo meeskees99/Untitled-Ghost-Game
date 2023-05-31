@@ -66,7 +66,14 @@ public class PlayerData : NetworkBehaviour
         //print("owner" + IsOwner);
         if (!IsOwner)
         {
+            print(" nah");
             return;
+        }
+
+        if (ya == false)
+        {
+            manager.SpawnSpectator(this.gameObject);
+            ya = true;
         }
 
         if (playerId == -2)
@@ -75,26 +82,24 @@ public class PlayerData : NetworkBehaviour
             SetPlayerIDServer(InstanceFinder.ClientManager.Connection.ClientId);
         }
         
-        if (ya == false)
-        {
-            manager.SpawnSpectator(this.gameObject);
-            ya = true;  
-        }
     }
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerIDServer(int id)
     {
         playerId = id;
 
-        if (PlayerPrefs.HasKey("username"))
+        if (playerId != -2)
         {
-            username = PlayerPrefs.GetString("username");
-        }
-        else
-        {
-            print(playerId);
-            username = "player " + playerId;
-            manager.Username();
+            if (PlayerPrefs.HasKey("username"))
+            {
+                username = PlayerPrefs.GetString("username");
+            }
+            else
+            {
+                print(playerId);
+                username = "player " + playerId;
+                manager.Username();
+            }
         }
     }
 }

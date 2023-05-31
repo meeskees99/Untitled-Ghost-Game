@@ -220,6 +220,9 @@ public class TeamManager : NetworkBehaviour
     {
         for (int i = 0; i <= currentClients -1; i++)
         {
+            if (currentClients -1 >= uiplayers.Count)
+                return;
+            print(i + " I");
             uiplayers[i].GetComponentInChildren<TMP_Text>().text = uiplayers[i].GetComponent<PlayerData>().username;
         }
     }
