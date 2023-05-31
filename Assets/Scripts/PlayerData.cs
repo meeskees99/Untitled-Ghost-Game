@@ -19,6 +19,8 @@ public class PlayerData : NetworkBehaviour
     public TeamManager manager;
     bool ya;
 
+    public string username;
+
     bool can;
     private void Start()
     {
@@ -32,6 +34,14 @@ public class PlayerData : NetworkBehaviour
         }
         else
         {
+            if (PlayerPrefs.HasKey("username"))
+            {
+                username = PlayerPrefs.GetString("username");
+            }
+            else
+            {
+                username = "player " + playerId;
+            }
             SetPlayerData();
         }
     }
@@ -43,6 +53,7 @@ public class PlayerData : NetworkBehaviour
         print("server");
         teamID = 0;
         manager.currentClients++;
+        manager.Username();
     }
     public void SetPlayerDataHost()
     {

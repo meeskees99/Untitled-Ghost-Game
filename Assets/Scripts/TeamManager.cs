@@ -203,10 +203,26 @@ public class TeamManager : NetworkBehaviour
     {
         if (!can)
         {
+            if (PlayerPrefs.HasKey("username"))
+            {
+                data.username = PlayerPrefs.GetString("username");
+            }
+            else
+            {
+                data.username = "player " + data.playerId;
+            }
             can = true;
             teams[0].tData.Add(data.GetComponent<PlayerData>());
             currentClients++;
+            Username();
         }
-
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void Username()
+    {
+        for (int i = 0; i < currentClients; i++)
+        {
+            uiplayers[i].GetComponentInChildren<TMP_Text>().text = uiplayers[i].GetComponent<PlayerData>().username;
+        }
     }
 }
