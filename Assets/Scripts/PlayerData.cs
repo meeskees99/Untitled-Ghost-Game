@@ -36,7 +36,7 @@ public class PlayerData : NetworkBehaviour
     }
     private void OnDestroy()
     {
-        manager.teams[teamID].tData.Remove(this);
+        manager.teams[0].tData.Remove(this);
         manager.currentClients--;
     }
     private void Update()
