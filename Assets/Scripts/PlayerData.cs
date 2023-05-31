@@ -105,7 +105,7 @@ public class PlayerData : NetworkBehaviour
             GetUsernameServer(name);
             manager.Username();
         }
-        else if (!IsHost)
+        else
         {
             print(playerId);
             username = "player " + playerId;
