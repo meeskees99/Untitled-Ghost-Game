@@ -100,7 +100,8 @@ public class PlayerData : NetworkBehaviour
     {
         if (PlayerPrefs.HasKey("username"))
         {
-            username = PlayerPrefs.GetString("username");
+            string name = PlayerPrefs.GetString("username");
+            GetUsernameServer(name);
         }
         else
         {
