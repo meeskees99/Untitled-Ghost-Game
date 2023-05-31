@@ -5200,9 +5200,9 @@ MonoBehaviour:
   fpsInput: {fileID: 0}
   limitFPSYes: {fileID: 238776581}
   limitFPSNo: {fileID: 787535792}
-  doVsyncYes: {fileID: 0}
-  doVsyncNo: {fileID: 0}
-  fovSlider: {fileID: 0}
+  doVsyncYes: {fileID: 882583650}
+  doVsyncNo: {fileID: 635475124}
+  fovSlider: {fileID: 1877683886}
   fovInput: {fileID: 0}
 --- !u!1 &364343500
 GameObject:
@@ -7573,7 +7573,7 @@ GameObject:
   - component: {fileID: 536386776}
   - component: {fileID: 536386777}
   m_Layer: 5
-  m_Name: Buttons
+  m_Name: Confirm/Cancel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -18,25 +18,50 @@ public class PlayerData : NetworkBehaviour
 
     public TeamManager manager;
     bool ya;
+
+    [SyncVar]
+    public string username;
+
+    bool can;
     private void Start()
     {
         playerId = -2;
         manager = FindObjectOfType<TeamManager>();
-        
-        SetPlayerData();
+        //print("joint");
+
+        if (IsHost)
+        {
+            //print("host");
+            SetPlayerDataHost();
+        }
+        else
+        {
+            //print("not host");
+            SetPlayerData();
+        }
     }
 
     [ServerRpc(RequireOwnership = true)]
     public void SetPlayerData()
     {
         manager.teams[0].tData.Add(this);
-        
+        //print("server");
         teamID = 0;
         manager.currentClients++;
+        manager.Username();
+    }
+    public void SetPlayerDataHost()
+    {
+        if (IsHost)
+        {
+            manager.HostThing(this);
+        }
     }
     private void OnDestroy()
     {
-        manager.teams[0].tData.Remove(this);
+        manager.teams[teamID].tData.Remove(this);
+        manager.uiplayers.Remove(this.gameObject);
+        manager.can = false; 
         manager.currentClients--;
     }
     private void Update()
@@ -44,32 +69,56 @@ public class PlayerData : NetworkBehaviour
         //print("owner" + IsOwner);
         if (!IsOwner)
         {
+            //print(" nah");
             return;
+        }
+
+        if (ya == false)
+        {
+            manager.SpawnSpectator(this.gameObject);
+            ya = true;
         }
 
         if (playerId == -2)
         {
-            print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
+            //print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerIDServer(InstanceFinder.ClientManager.Connection.ClientId);
         }
-        
-        if (ya == false)
-        {
-            manager.SpawnSpectator(this.gameObject);
-            ya = true;  
-        }
-        
+
     }
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerIDServer(int id)
     {
         playerId = id;
-        SetPlayerIDClients(id);
+
+        if (playerId != -2)
+        {
+            GetUsername();
+        }
     }
-    [ObserversRpc(BufferLast = true)]
-    public void SetPlayerIDClients(int id)
+
+    [ObserversRpc]
+    public void GetUsername()
     {
-        playerId = id;
-        manager.playernumber.text = playerId.ToString();
+        if (PlayerPrefs.HasKey("username"))
+        {
+            string name = PlayerPrefs.GetString("username");
+            //print(name);
+            GetUsernameServer(name);
+            manager.Username();
+        }
+        else
+        {
+            //print(playerId);
+            username = "player " + playerId;
+            manager.Username();
+        }
+    }
+
+    [ServerRpc]
+    public void GetUsernameServer(string user)
+    {
+        //print(user);
+        username = user;
     }
 }

@@ -37,83 +37,96 @@ public class TeamManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)
     {
-        print(localPlayerId);
+        //print(localPlayerId);
 
-        for (int i = 0; i < currentClients; i++)
+        for (int y = 0; y < teams.Length; y++)
         {
-            for (int y = 0; y < teams.Length; y++)
+            for (int i = 0; i < currentClients; i++)
             {
-                if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
+                if (teams[y].tData.Count - 1 < i)
                 {
-                    print("teams == null" + y + " y");
+                    //print("NO");
                 }
-                else if (teams[y].tData[i].playerId == localPlayerId)
+                else
                 {
-                    if (teams[teamInt].tData.Count <= i)
+                    //print(y + " team");
+                    //print(i + " player");
+                    //print(teams[y].tData[i].playerId);
+                    if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
                     {
-                        // set this in ui manager
-
-                        print(teamInt);
-                        print(y);
-                        print(i);
-                        teams[teamInt].tData.Add(teams[y].tData[i]);
-                        teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
-
-
-                        for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
-                        {
-                            if (teams[teamInt].tData[yi].playerId == localPlayerId)
-                            {
-                                teams[teamInt].tData[yi].teamID = teamInt;
-                            }
-                        }
-
-                        for (int ji = 0; ji < uiplayers.Count; ji++)
-                        {
-                            if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
-                            {
-                                uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                StartCoroutine(WaitYouDipshit());
-                            }
-                        }
-                        
-                        return;
+                        //print("teams == null" + y + " y");
                     }
-                    else
+                    else if (teams[y].tData[i].playerId == localPlayerId)
                     {
-                        if (teams[teamInt].tData[i].playerId == localPlayerId)
+                        if (teams[teamInt].tData.Count <= i)
                         {
-                            for (int j = 0; j < teams[teamInt].tData.Count; j++)
+                            // set this in ui manager
+
+                            //print(teamInt);
+                            //print(y);
+                            //print(i);
+                            teams[teamInt].tData.Add(teams[y].tData[i]);
+                            SetTeam(teams[y].tData[i].gameObject, teamInt);
+                            teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
+
+
+                            for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
                             {
-                                if (teams[teamInt].tData[i] == teams[teamInt].tData[j])
+                                if (teams[teamInt].tData[yi].playerId == localPlayerId)
                                 {
-                                    print("same");
-                                    return;
+                                    teams[teamInt].tData[yi].teamID = teamInt;
                                 }
                             }
-                        }
 
-                        print(teamInt);
-                        print(y);
-                        print(i);
-                        teams[teamInt].tData.Add(teams[y].tData[i]);
-                        teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
-
-                        for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
-                        {
-                            
-                            if (teams[teamInt].tData[yi].playerId == localPlayerId)
+                            for (int ji = 0; ji < uiplayers.Count; ji++)
                             {
-                                teams[teamInt].tData[yi].teamID = teamInt;
+                                if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                                {
+                                    uiplayers[ji].transform.SetParent(rects[teamInt].transform);
+                                    StartCoroutine(WaitYouDipshit());
+                                }
                             }
-                        }
 
-                        for (int ji = 0; ji < uiplayers.Count; ji++)
+                            return;
+                        }
+                        else
                         {
-                            if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                            if (teams[teamInt].tData[i].playerId == localPlayerId)
                             {
-                                uiplayers[ji].transform.SetParent(rects[teamInt].transform);
-                                StartCoroutine(WaitYouDipshit());
+                                for (int j = 0; j < teams[teamInt].tData.Count; j++)
+                                {
+                                    if (teams[teamInt].tData[i] == teams[teamInt].tData[j])
+                                    {
+                                        //print("same");
+                                        return;
+                                    }
+                                }
+                            }
+
+                            //print(teamInt);
+                            //print(y);
+                            //print(i);
+
+                            teams[teamInt].tData.Add(teams[y].tData[i]);
+                            SetTeam(teams[y].tData[i].gameObject, teamInt);
+                            teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
+
+                            for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
+                            {
+
+                                if (teams[teamInt].tData[yi].playerId == localPlayerId)
+                                {
+                                    teams[teamInt].tData[yi].teamID = teamInt;
+                                }
+                            }
+
+                            for (int ji = 0; ji < uiplayers.Count; ji++)
+                            {
+                                if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                                {
+                                    uiplayers[ji].transform.SetParent(rects[teamInt].transform);
+                                    StartCoroutine(WaitYouDipshit());
+                                }
                             }
                         }
                     }
@@ -127,25 +140,49 @@ public class TeamManager : NetworkBehaviour
     {
         // set in ui manager
         uiplayers.Add(ui);
-        SetTeamStart(ui);
         ui.transform.SetParent(rects[0].transform);
-        SetUiPlayers(ui);
+        ClearUiPlayers();
+        ClearTeamStart();
+        for (int z = 0; z < currentClients; z++)
+        {
+            SetTeamStart(uiplayers[z]);
+            SetUiPlayers(uiplayers[z]);
+        }
         SetParents();
     }
     [ObserversRpc]
     public void SetTeamStart(GameObject data)
     {
-        teams[0].tData.Add(data.GetComponent<PlayerData>());
+        teams[data.GetComponent<PlayerData>().teamID].tData.Add(data.GetComponent<PlayerData>());
     }
-    [ObserversRpc(BufferLast = true)]
+    [ObserversRpc]
+    public void ClearTeamStart()
+    {
+        teams[0].tData.Clear();
+        teams[1].tData.Clear();
+        teams[2].tData.Clear();
+    }
+    [ObserversRpc]
+    public void SetTeam(GameObject data, int TeamInt)
+    {
+        teams[TeamInt].tData.Add(data.GetComponent<PlayerData>());
+        teams[data.GetComponent<PlayerData>().teamID].tData.Remove(data.GetComponent<PlayerData>());
+
+    }
+    [ObserversRpc]
     public void SetUiPlayers(GameObject ui)
     {
         uiplayers.Add(ui);
     }
+    [ObserversRpc]
+    public void ClearUiPlayers()
+    {
+        uiplayers.Clear();
+    }
     public IEnumerator WaitYouDipshit()
     {
         yield return new WaitForSeconds(0.1f);
-        print("do");
+        //print("do");
         SetParents();
     }
 
@@ -155,11 +192,47 @@ public class TeamManager : NetworkBehaviour
         // set in ui manager
         for (int x = 0; x < uiplayers.Count; x++)
         {
-            print(uiplayers[x].GetComponent<PlayerData>().teamID);
-            print(rects[uiplayers[x].GetComponent<PlayerData>().teamID].name);
+            //print(uiplayers[x].GetComponent<PlayerData>().teamID + " team id || " + x + " uiPlayers X");
             uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
-            print(uiplayers[x].GetComponent<PlayerData>().teamID +  " after");
-            uiplayers[x].transform.GetChild(0).GetComponent<TMP_Text>().text = uiplayers[x].GetComponent<PlayerData>().playerId.ToString();
         }
+    }
+    public bool can;
+    public void HostThing(PlayerData data)
+    {
+        if (!can)
+        {
+            if (PlayerPrefs.HasKey("username"))
+            {
+                data.username = PlayerPrefs.GetString("username");
+            }
+            else
+            {
+                data.username = "player " + data.playerId;
+            }
+            can = true;
+            teams[0].tData.Add(data.GetComponent<PlayerData>());
+            currentClients++;
+            Username();
+        }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void Username()
+    {
+        for (int i = 0; i <= currentClients -1; i++)
+        {
+            if (currentClients -1 >= uiplayers.Count)
+                return;
+            //print(i + " I");
+            
+            uiplayers[i].GetComponentInChildren<TMP_Text>().text = uiplayers[i].GetComponent<PlayerData>().username;
+
+            //print(uiplayers[i].GetComponent<PlayerData>().username);
+            UsernameClient(i, uiplayers[i].GetComponent<PlayerData>().username);
+        }
+    }
+    [ObserversRpc]
+    public void UsernameClient(int i, string name)
+    {
+        uiplayers[i].GetComponentInChildren<TMP_Text>().text = name;
     }
 }
