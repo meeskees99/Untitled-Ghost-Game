@@ -22,6 +22,9 @@ public class PlayerData : NetworkBehaviour
     [SyncVar]
     public string username;
 
+    [SerializeField] GameObject UIPrefab;
+    [HideInInspector]public GameObject UI;
+
     bool can;
     private void Start()
     {
@@ -39,6 +42,9 @@ public class PlayerData : NetworkBehaviour
             //print("not host");
             SetPlayerData();
         }
+
+        UI = Instantiate(UIPrefab);
+        InstanceFinder.ServerManager.Spawn(UI);
     }
 
     [ServerRpc(RequireOwnership = true)]
@@ -60,7 +66,7 @@ public class PlayerData : NetworkBehaviour
     private void OnDestroy()
     {
         manager.teams[teamID].tData.Remove(this);
-        manager.uiplayers.Remove(this.gameObject);
+        manager.players.Remove(this.gameObject);
         manager.can = false; 
         manager.currentClients--;
     }
