@@ -38,7 +38,7 @@ public class PlayerData : NetworkBehaviour
     public void SetPlayerData()
     {
         manager.teams[0].tData.Add(this);
-        
+        print("server");
         teamID = 0;
         manager.currentClients++;
     }
@@ -46,6 +46,7 @@ public class PlayerData : NetworkBehaviour
     {
         if (IsHost)
         {
+            print("host");
             manager.teams[0].tData.Add(this);
             manager.currentClients++;
         }
