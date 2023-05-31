@@ -103,6 +103,7 @@ public class PlayerData : NetworkBehaviour
             string name = PlayerPrefs.GetString("username");
             print(name);
             GetUsernameServer(name);
+            manager.Username();
         }
         else if (!IsHost)
         {
@@ -115,6 +116,7 @@ public class PlayerData : NetworkBehaviour
     [ServerRpc]
     public void GetUsernameServer(string user)
     {
+        print(user);
         username = user;
     }
 }
