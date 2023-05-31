@@ -220,7 +220,7 @@ public class TeamManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void Username()
     {
-        for (int i = 0; i < currentClients; i++)
+        for (int i = 0; i < currentClients -1; i++)
         {
             uiplayers[i].GetComponentInChildren<TMP_Text>().text = uiplayers[i].GetComponent<PlayerData>().username;
         }
