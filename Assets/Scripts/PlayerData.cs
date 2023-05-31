@@ -22,7 +22,7 @@ public class PlayerData : NetworkBehaviour
     {
         playerId = -2;
         manager = FindObjectOfType<TeamManager>();
-        
+        print("joint");
 
         if (IsHost)
         {
