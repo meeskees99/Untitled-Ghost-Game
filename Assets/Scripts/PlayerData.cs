@@ -19,6 +19,7 @@ public class PlayerData : NetworkBehaviour
     public TeamManager manager;
     bool ya;
 
+    [SyncVar]
     public string username;
 
     bool can;
@@ -107,5 +108,11 @@ public class PlayerData : NetworkBehaviour
             username = "player " + playerId;
             manager.Username();
         }
+    }
+
+    [ServerRpc]
+    public void GetUsernameServer(string user)
+    {
+        username = user;
     }
 }
