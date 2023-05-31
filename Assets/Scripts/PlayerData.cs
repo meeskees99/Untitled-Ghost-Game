@@ -18,6 +18,8 @@ public class PlayerData : NetworkBehaviour
 
     public TeamManager manager;
     bool ya;
+
+    bool can;
     private void Start()
     {
         playerId = -2;
@@ -42,14 +44,17 @@ public class PlayerData : NetworkBehaviour
         teamID = 0;
         manager.currentClients++;
     }
-    [ServerRpc(RequireOwnership = false)]
     public void SetPlayerDataHost()
     {
         if (IsHost)
         {
-            print("host");
-            manager.teams[0].tData.Add(this);
-            manager.currentClients++;
+            if (!can)
+            {
+                can = true;
+                print("host");
+                manager.teams[0].tData.Add(this);
+                manager.currentClients++;
+            }
         }
     }
     private void OnDestroy()
