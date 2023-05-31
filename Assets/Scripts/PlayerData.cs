@@ -74,14 +74,7 @@ public class PlayerData : NetworkBehaviour
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerIDServer(InstanceFinder.ClientManager.Connection.ClientId);
 
-            if (PlayerPrefs.HasKey("username"))
-            {
-                username = PlayerPrefs.GetString("username");
-            }
-            else
-            {
-                username = "player " + playerId;
-            }
+            
         }
         
         if (ya == false)
@@ -94,12 +87,15 @@ public class PlayerData : NetworkBehaviour
     public void SetPlayerIDServer(int id)
     {
         playerId = id;
-        SetPlayerIDClients(id);
-    }
-    [ObserversRpc(BufferLast = true)]
-    public void SetPlayerIDClients(int id)
-    {
-        playerId = id;
-        manager.playernumber.text = playerId.ToString();
+
+        if (PlayerPrefs.HasKey("username"))
+        {
+            username = PlayerPrefs.GetString("username");
+        }
+        else
+        {
+            print(playerId);
+            username = "player " + playerId;
+        }
     }
 }
