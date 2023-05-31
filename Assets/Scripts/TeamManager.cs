@@ -225,6 +225,12 @@ public class TeamManager : NetworkBehaviour
             print(i + " I");
             
             uiplayers[i].GetComponentInChildren<TMP_Text>().text = uiplayers[i].GetComponent<PlayerData>().username;
+            UsernameClient(i);
         }
+    }
+    [ObserversRpc]
+    public void UsernameClient(int i)
+    {
+        uiplayers[i].GetComponentInChildren<TMP_Text>().text = uiplayers[i].GetComponent<PlayerData>().username;
     }
 }
