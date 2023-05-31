@@ -23,7 +23,15 @@ public class PlayerData : NetworkBehaviour
         playerId = -2;
         manager = FindObjectOfType<TeamManager>();
         
-        SetPlayerData();
+
+        if (IsHost)
+        {
+            SetPlayerDataHost();
+        }
+        else
+        {
+            SetPlayerData();
+        }
     }
 
     [ServerRpc(RequireOwnership = true)]
@@ -32,6 +40,11 @@ public class PlayerData : NetworkBehaviour
         manager.teams[0].tData.Add(this);
         
         teamID = 0;
+        manager.currentClients++;
+    }
+    public void SetPlayerDataHost()
+    {
+        manager.teams[0].tData.Add(this);
         manager.currentClients++;
     }
     private void OnDestroy()
