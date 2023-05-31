@@ -223,6 +223,7 @@ public class TeamManager : NetworkBehaviour
             if (currentClients -1 >= uiplayers.Count)
                 return;
             print(i + " I");
+            
             uiplayers[i].GetComponentInChildren<TMP_Text>().text = uiplayers[i].GetComponent<PlayerData>().username;
         }
     }
