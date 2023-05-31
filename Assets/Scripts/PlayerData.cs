@@ -44,8 +44,11 @@ public class PlayerData : NetworkBehaviour
     }
     public void SetPlayerDataHost()
     {
-        manager.teams[0].tData.Add(this);
-        manager.currentClients++;
+        if (IsHost)
+        {
+            manager.teams[0].tData.Add(this);
+            manager.currentClients++;
+        }
     }
     private void OnDestroy()
     {
@@ -72,7 +75,6 @@ public class PlayerData : NetworkBehaviour
             manager.SpawnSpectator(this.gameObject);
             ya = true;  
         }
-        
     }
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerIDServer(int id)
