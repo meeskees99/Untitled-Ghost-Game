@@ -42,6 +42,7 @@ public class PlayerData : NetworkBehaviour
         teamID = 0;
         manager.currentClients++;
     }
+    [ServerRpc(RequireOwnership = false)]
     public void SetPlayerDataHost()
     {
         if (IsHost)
