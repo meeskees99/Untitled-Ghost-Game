@@ -194,8 +194,6 @@ public class TeamManager : NetworkBehaviour
         {
             print(uiplayers[x].GetComponent<PlayerData>().teamID + " team id || " + x + " uiPlayers X");
             uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
-
-            uiplayers[x].transform.GetChild(0).GetComponent<TMP_Text>().text = uiplayers[x].GetComponent<PlayerData>().playerId.ToString();
         }
     }
     bool can;
