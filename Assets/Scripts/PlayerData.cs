@@ -95,7 +95,7 @@ public class PlayerData : NetworkBehaviour
         }
     }
 
-    [ObserversRpc(ExcludeServer = true)]
+    [ObserversRpc]
     public void GetUsername()
     {
         if (PlayerPrefs.HasKey("username"))
@@ -104,7 +104,7 @@ public class PlayerData : NetworkBehaviour
             print(name);
             GetUsernameServer(name);
         }
-        else
+        else if (!IsHost)
         {
             print(playerId);
             username = "player " + playerId;
