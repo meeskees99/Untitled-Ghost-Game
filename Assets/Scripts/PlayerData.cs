@@ -73,8 +73,6 @@ public class PlayerData : NetworkBehaviour
         {
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerIDServer(InstanceFinder.ClientManager.Connection.ClientId);
-
-            
         }
         
         if (ya == false)
@@ -96,6 +94,7 @@ public class PlayerData : NetworkBehaviour
         {
             print(playerId);
             username = "player " + playerId;
+            manager.Username();
         }
     }
 }
