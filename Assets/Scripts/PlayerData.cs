@@ -31,11 +31,12 @@ public class PlayerData : NetworkBehaviour
 
         if (IsHost)
         {
+            print("host");
             SetPlayerDataHost();
         }
         else
         {
-            
+            print("not host");
             SetPlayerData();
         }
     }
@@ -60,6 +61,7 @@ public class PlayerData : NetworkBehaviour
     {
         manager.teams[teamID].tData.Remove(this);
         manager.uiplayers.Remove(this.gameObject);
+        manager.can = false; 
         manager.currentClients--;
     }
     private void Update()

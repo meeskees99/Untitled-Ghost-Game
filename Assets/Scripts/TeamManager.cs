@@ -196,7 +196,7 @@ public class TeamManager : NetworkBehaviour
             uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
-    bool can;
+    public bool can;
     public void HostThing(PlayerData data)
     {
         if (!can)
