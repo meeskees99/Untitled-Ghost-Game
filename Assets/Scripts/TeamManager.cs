@@ -192,7 +192,7 @@ public class TeamManager : NetworkBehaviour
         // set in ui manager
         for (int x = 0; x < players.Count; x++)
         {
-            //print(uiplayers[x].GetComponent<PlayerData>().teamID + " team id || " + x + " uiPlayers X");
+            print(players[x].GetComponent<PlayerData>().UI + " team id || " + x + " uiPlayers X");
             players[x].transform.GetComponent<PlayerData>().UI.transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
@@ -224,7 +224,7 @@ public class TeamManager : NetworkBehaviour
                 return;
             //print(i + " I");
             
-            players[i].GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
+            players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
 
             //print(uiplayers[i].GetComponent<PlayerData>().username);
             UsernameClient(i, players[i].GetComponent<PlayerData>().username);
@@ -233,6 +233,6 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc]
     public void UsernameClient(int i, string name)
     {
-        players[i].GetComponentInChildren<TMP_Text>().text = name;
+        players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = name;
     }
 }

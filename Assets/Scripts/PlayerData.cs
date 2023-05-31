@@ -30,7 +30,6 @@ public class PlayerData : NetworkBehaviour
         playerId = -2;
         manager = FindObjectOfType<TeamManager>();
         //print("joint");
-
         if (IsHost)
         {
             //print("host");
@@ -77,7 +76,7 @@ public class PlayerData : NetworkBehaviour
 
         if (ya == false)
         {
-            manager.SpawnSpectator(UI);
+            manager.SpawnSpectator(this.gameObject);
             ya = true;
         }
 
