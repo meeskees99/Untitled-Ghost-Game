@@ -34,14 +34,7 @@ public class PlayerData : NetworkBehaviour
         }
         else
         {
-            if (PlayerPrefs.HasKey("username"))
-            {
-                username = PlayerPrefs.GetString("username");
-            }
-            else
-            {
-                username = "player " + playerId;
-            }
+            
             SetPlayerData();
         }
     }
@@ -80,6 +73,15 @@ public class PlayerData : NetworkBehaviour
         {
             print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerIDServer(InstanceFinder.ClientManager.Connection.ClientId);
+
+            if (PlayerPrefs.HasKey("username"))
+            {
+                username = PlayerPrefs.GetString("username");
+            }
+            else
+            {
+                username = "player " + playerId;
+            }
         }
         
         if (ya == false)
