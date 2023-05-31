@@ -95,7 +95,7 @@ public class PlayerData : NetworkBehaviour
         }
     }
 
-    [ObserversRpc]
+    [ObserversRpc(ExcludeServer = true)]
     public void GetUsername()
     {
         if (PlayerPrefs.HasKey("username"))
