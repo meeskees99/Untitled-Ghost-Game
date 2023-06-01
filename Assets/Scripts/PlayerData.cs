@@ -60,6 +60,9 @@ public class PlayerData : NetworkBehaviour
     }
     private void OnDestroy()
     {
+        if(manager == null)
+            return;
+        
         manager.teams[teamID].tData.Remove(this);
         manager.players.Remove(this.gameObject);
         manager.can = false; 

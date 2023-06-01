@@ -250,6 +250,7 @@ public class TeamManager : NetworkBehaviour
     {
         
         SceneLoadData sld = new SceneLoadData("Game");
+        SceneUnloadData lastScene = new SceneUnloadData("Maykel");
         //List<NetworkConnection> con = new();
         
         //for (int i = 0; i <= players.Count - 1; i++)
@@ -260,6 +261,7 @@ public class TeamManager : NetworkBehaviour
         //}
         //base.SceneManager.LoadConnectionScenes(conns, sld);
         base.SceneManager.LoadGlobalScenes(sld);
+        base.SceneManager.UnloadGlobalScenes(lastScene);
 
     }  
 }
