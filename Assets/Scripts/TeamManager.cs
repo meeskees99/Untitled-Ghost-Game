@@ -140,6 +140,7 @@ public class TeamManager : NetworkBehaviour
     {
         // set in ui manager
         players.Add(player);
+        print("add players" + player);
         player.GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
         ClearUiPlayers();
         ClearTeamStart();

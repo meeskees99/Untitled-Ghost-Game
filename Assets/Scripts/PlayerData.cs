@@ -100,6 +100,7 @@ public class PlayerData : NetworkBehaviour
         if (ya == false)
         {
             manager.SpawnSpectator(this.gameObject, team);
+            print("Spawn Spectatior");
             ya = true;
         }
 
