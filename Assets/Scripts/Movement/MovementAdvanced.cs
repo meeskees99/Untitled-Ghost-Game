@@ -69,7 +69,7 @@ public class MovementAdvanced : NetworkBehaviour
     {
         if (IsHost)
         {
-            if (!base.IsOwner)
+            if (this.gameObject.GetComponent<PlayerData>().playerId != 0)
             {
                 this.enabled = false;
             }
