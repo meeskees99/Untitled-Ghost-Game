@@ -241,6 +241,11 @@ public class TeamManager : NetworkBehaviour
         players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = name;
     }
 
+    public void DoStartGame()
+    {
+        StartGame();
+    }
+    [ServerRpc]
     public void StartGame()
     {
         
@@ -255,10 +260,5 @@ public class TeamManager : NetworkBehaviour
         }
         base.SceneManager.LoadConnectionScenes(conns, sld);
 
-    }
-            
-                    
-        
-        
-    
+    }  
 }
