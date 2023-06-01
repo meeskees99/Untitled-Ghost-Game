@@ -55,7 +55,8 @@ public class PlayerData : NetworkBehaviour
         {
             manager.teams[1].tData.Add(this);
         }
-        
+        print("Team 1 count: " + manager.teams[0].tData.Count);
+        print("Team 2 count: " + manager.teams[1].tData.Count);
         //print("server");
         teamID = 0;
         manager.currentClients++;
