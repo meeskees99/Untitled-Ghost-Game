@@ -10,6 +10,8 @@ using System.Linq;
 using FishNet.Object.Synchronizing;
 using FishNet.Connection;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
+using FishNet.Managing.Scened;
 
 public class TeamManager : NetworkBehaviour
 {
@@ -25,6 +27,9 @@ public class TeamManager : NetworkBehaviour
 
     [SyncVar]
     public List<GameObject> players = new();
+
+    public NetworkConnection[] conns;
+
 
     public TMP_Text playernumber;
     public void JointTeamBtn(int teamInt)
@@ -235,4 +240,24 @@ public class TeamManager : NetworkBehaviour
     {
         players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = name;
     }
+
+    public void StartGame()
+    {
+        
+        SceneLoadData sld = new SceneLoadData("Game");
+        List<NetworkConnection> con = new();
+        
+        for (int i = 0; i <= players.Count - 1; i++)
+        {
+            con.Add(players[i].GetComponent<NetworkObject>().Owner);
+            conns[i] = con[i];
+        }
+        base.SceneManager.LoadConnectionScenes(conns, sld);
+
+    }
+            
+                    
+        
+        
+    
 }
