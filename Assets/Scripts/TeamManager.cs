@@ -250,15 +250,16 @@ public class TeamManager : NetworkBehaviour
     {
         
         SceneLoadData sld = new SceneLoadData("Game");
-        List<NetworkConnection> con = new();
+        //List<NetworkConnection> con = new();
         
-        for (int i = 0; i <= players.Count - 1; i++)
-        {
-            con.Add(players[i].GetComponent<NetworkObject>().Owner);
-            print(con[i]);
-            conns[i] = con[i];
-        }
-        base.SceneManager.LoadConnectionScenes(conns, sld);
+        //for (int i = 0; i <= players.Count - 1; i++)
+        //{
+        //    con.Add(players[i].GetComponent<NetworkObject>().Owner);
+        //    print(con[i]);
+        //    conns[i] = con[i];
+        //}
+        //base.SceneManager.LoadConnectionScenes(conns, sld);
+        base.SceneManager.LoadGlobalScenes(sld);
 
     }  
 }

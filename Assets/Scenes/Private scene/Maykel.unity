@@ -4511,7 +4511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stackedSceneHandle: 0
-  sceneStack: 0
+  sceneStack: 1
 --- !u!65 &1946500080
 BoxCollider:
   m_ObjectHideFlags: 0

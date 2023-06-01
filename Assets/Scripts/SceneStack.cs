@@ -23,6 +23,12 @@ public class SceneStack : MonoBehaviour
             LoadScene(nob);
         }
     }
+
+    public void OnStartGame()
+    {
+        print("Starting Game");
+        
+    }
     private void LoadScene(NetworkObject nob)
     {
         if (!nob.Owner.IsActive)
