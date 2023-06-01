@@ -136,6 +136,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   username: 
   UI: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!114 &1901669069825021907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,6 +832,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   username: 
   UI: {fileID: 1493123017737301182}
+  cam: {fileID: 1718954057773777424}
 --- !u!1 &3375426294539903268
 GameObject:
   m_ObjectHideFlags: 0
