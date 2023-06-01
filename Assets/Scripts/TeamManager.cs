@@ -28,7 +28,7 @@ public class TeamManager : NetworkBehaviour
     [SyncVar]
     public List<GameObject> players = new();
 
-    public NetworkConnection[] conns;
+    public NetworkConnection[] conns = new NetworkConnection[10];
 
 
     public TMP_Text playernumber;
