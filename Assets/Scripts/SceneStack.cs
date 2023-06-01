@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneStack : MonoBehaviour
 {
-    public const string scene_name = "Gerlof test";
+    public const string scene_name = "Game";
     [SerializeField] private int _stackedSceneHandle = 0;
 
     [Server(Logging = LoggingType.Off)]
