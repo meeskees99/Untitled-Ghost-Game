@@ -245,7 +245,7 @@ public class TeamManager : NetworkBehaviour
     {
         StartGame();
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void StartGame()
     {
         
