@@ -250,6 +250,7 @@ public class TeamManager : NetworkBehaviour
         for (int i = 0; i <= players.Count - 1; i++)
         {
             con.Add(players[i].GetComponent<NetworkObject>().Owner);
+            print(con[i]);
             conns[i] = con[i];
         }
         base.SceneManager.LoadConnectionScenes(conns, sld);
