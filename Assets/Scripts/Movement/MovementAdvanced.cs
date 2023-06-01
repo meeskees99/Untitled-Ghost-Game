@@ -67,7 +67,14 @@ public class MovementAdvanced : NetworkBehaviour
     }
     private void Update()
     {
-        if (!IsHost && !base.IsOwner)
+        if (IsHost)
+        {
+            if (!base.IsOwner)
+            {
+                this.enabled = false;
+            }
+        }
+        else if (!base.IsOwner)
         {
             this.enabled = false;
         }
