@@ -47,7 +47,15 @@ public class PlayerData : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void SetPlayerData()
     {
-        manager.teams[0].tData.Add(this);
+        if (manager.teams[0].tData.Count <= manager.teams[1].tData.Count)
+        {
+            manager.teams[0].tData.Add(this);
+        }
+        else
+        {
+            manager.teams[1].tData.Add(this);
+        }
+        
         //print("server");
         teamID = 0;
         manager.currentClients++;

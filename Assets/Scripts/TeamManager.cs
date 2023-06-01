@@ -165,7 +165,6 @@ public class TeamManager : NetworkBehaviour
     {
         teams[0].tData.Clear();
         teams[1].tData.Clear();
-        teams[2].tData.Clear();
     }
     [ObserversRpc]
     public void SetTeam(GameObject data, int TeamInt)
