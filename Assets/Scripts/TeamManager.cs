@@ -10,6 +10,8 @@ using System.Linq;
 using FishNet.Object.Synchronizing;
 using FishNet.Connection;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
+using FishNet.Managing.Scened;
 
 public class TeamManager : NetworkBehaviour
 {
@@ -24,7 +26,10 @@ public class TeamManager : NetworkBehaviour
     public GameObject[] rects;
 
     [SyncVar]
-    public List<GameObject> uiplayers = new();
+    public List<GameObject> players = new();
+
+    public NetworkConnection[] conns = new NetworkConnection[10];
+
 
     public TMP_Text playernumber;
     public void JointTeamBtn(int teamInt)
@@ -78,11 +83,11 @@ public class TeamManager : NetworkBehaviour
                                 }
                             }
 
-                            for (int ji = 0; ji < uiplayers.Count; ji++)
+                            for (int ji = 0; ji < players.Count; ji++)
                             {
-                                if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                                if (players[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                                 {
-                                    uiplayers[ji].transform.SetParent(rects[teamInt].transform);
+                                    players[ji].GetComponent<PlayerData>().UI.transform.SetParent(rects[teamInt].transform);
                                     StartCoroutine(WaitYouDipshit());
                                 }
                             }
@@ -120,11 +125,11 @@ public class TeamManager : NetworkBehaviour
                                 }
                             }
 
-                            for (int ji = 0; ji < uiplayers.Count; ji++)
+                            for (int ji = 0; ji < players.Count; ji++)
                             {
-                                if (uiplayers[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                                if (players[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                                 {
-                                    uiplayers[ji].transform.SetParent(rects[teamInt].transform);
+                                    players[ji].GetComponent<PlayerData>().UI.transform.SetParent(rects[teamInt].transform);
                                     StartCoroutine(WaitYouDipshit());
                                 }
                             }
@@ -136,17 +141,17 @@ public class TeamManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnSpectator(GameObject ui)
+    public void SpawnSpectator(GameObject player)
     {
         // set in ui manager
-        uiplayers.Add(ui);
-        ui.transform.SetParent(rects[0].transform);
+        players.Add(player);
+        player.GetComponent<PlayerData>().UI.transform.SetParent(rects[0].transform);
         ClearUiPlayers();
         ClearTeamStart();
         for (int z = 0; z < currentClients; z++)
         {
-            SetTeamStart(uiplayers[z]);
-            SetUiPlayers(uiplayers[z]);
+            SetTeamStart(players[z]);
+            SetPlayers(players[z]);
         }
         SetParents();
     }
@@ -170,14 +175,14 @@ public class TeamManager : NetworkBehaviour
 
     }
     [ObserversRpc]
-    public void SetUiPlayers(GameObject ui)
+    public void SetPlayers(GameObject player)
     {
-        uiplayers.Add(ui);
+        players.Add(player);
     }
     [ObserversRpc]
     public void ClearUiPlayers()
     {
-        uiplayers.Clear();
+        players.Clear();
     }
     public IEnumerator WaitYouDipshit()
     {
@@ -190,10 +195,10 @@ public class TeamManager : NetworkBehaviour
     public void SetParents()
     {
         // set in ui manager
-        for (int x = 0; x < uiplayers.Count; x++)
+        for (int x = 0; x < players.Count; x++)
         {
-            //print(uiplayers[x].GetComponent<PlayerData>().teamID + " team id || " + x + " uiPlayers X");
-            uiplayers[x].transform.SetParent(rects[uiplayers[x].GetComponent<PlayerData>().teamID].transform);
+            print(players[x].GetComponent<PlayerData>().UI + " team id || " + x + " uiPlayers X");
+            players[x].transform.GetComponent<PlayerData>().UI.transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
     public bool can;
@@ -220,19 +225,34 @@ public class TeamManager : NetworkBehaviour
     {
         for (int i = 0; i <= currentClients -1; i++)
         {
-            if (currentClients -1 >= uiplayers.Count)
+            if (currentClients -1 >= players.Count)
                 return;
             //print(i + " I");
             
-            uiplayers[i].GetComponentInChildren<TMP_Text>().text = uiplayers[i].GetComponent<PlayerData>().username;
+            players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
 
             //print(uiplayers[i].GetComponent<PlayerData>().username);
-            UsernameClient(i, uiplayers[i].GetComponent<PlayerData>().username);
+            UsernameClient(i, players[i].GetComponent<PlayerData>().username);
         }
     }
     [ObserversRpc]
     public void UsernameClient(int i, string name)
     {
-        uiplayers[i].GetComponentInChildren<TMP_Text>().text = name;
+        players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = name;
     }
+
+    public void DoStartGame()
+    {
+        StartGame();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void StartGame()
+    {
+        
+        SceneLoadData sld = new SceneLoadData("Game");
+        SceneUnloadData lastScene = new SceneUnloadData("Maykel");
+        base.SceneManager.LoadGlobalScenes(sld);
+        base.SceneManager.UnloadGlobalScenes(lastScene);
+
+    }  
 }

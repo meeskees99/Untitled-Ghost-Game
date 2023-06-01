@@ -21,6 +21,10 @@ public class PlayerData : NetworkBehaviour
 
     [SyncVar]
     public string username;
+    
+    public GameObject UI;
+
+    [SerializeField] GameObject cam;
 
     bool can;
     private void Start()
@@ -28,7 +32,6 @@ public class PlayerData : NetworkBehaviour
         playerId = -2;
         manager = FindObjectOfType<TeamManager>();
         //print("joint");
-
         if (IsHost)
         {
             //print("host");
@@ -59,13 +62,34 @@ public class PlayerData : NetworkBehaviour
     }
     private void OnDestroy()
     {
+        if(manager == null)
+            return;
+        
         manager.teams[teamID].tData.Remove(this);
-        manager.uiplayers.Remove(this.gameObject);
+        manager.players.Remove(this.gameObject);
         manager.can = false; 
         manager.currentClients--;
     }
     private void Update()
     {
+        if (IsHost)
+        {
+            if (playerId != 0)
+            {
+                this.transform.GetComponent<MovementAdvanced>().enabled = false;
+                cam.SetActive(false);
+            }
+            else
+            {
+                this.transform.GetComponent<MovementAdvanced>().enabled = true;
+                cam.SetActive(true);
+            }
+        }
+        else if (!base.IsOwner)
+        {
+            this.transform.GetComponent<MovementAdvanced>().enabled = false;
+            cam.SetActive(false);
+        }
         //print("owner" + IsOwner);
         if (!IsOwner)
         {

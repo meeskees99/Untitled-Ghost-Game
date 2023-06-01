@@ -67,9 +67,6 @@ public class MovementAdvanced : NetworkBehaviour
     }
     private void Update()
     {
-        //if (!base.IsOwner)
-        //    return;
-
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 
         // Ground Check
