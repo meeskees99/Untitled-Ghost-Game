@@ -232,7 +232,8 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc]
     public void UsernameClient(int i, string name)
     {
-        players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = name;
+        if(!IsHost)
+            players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = name;
     }
 
     public void DoStartGame()

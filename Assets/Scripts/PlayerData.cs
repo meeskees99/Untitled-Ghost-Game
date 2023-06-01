@@ -28,19 +28,14 @@ public class PlayerData : NetworkBehaviour
 
     int team;
     bool can;
+    bool kaas = false;
     private void Start()
     {
         playerId = -2;
         manager = FindObjectOfType<TeamManager>();
         //print("joint");
-        if (IsHost)
+        if (!IsHost)
         {
-            //print("host");
-            SetPlayerDataHost();
-        }
-        else
-        {
-            //print("not host");
             SetPlayerData();
         }
     }
@@ -64,13 +59,6 @@ public class PlayerData : NetworkBehaviour
         teamID = 0;
         manager.currentClients++;
         manager.Username();
-    }
-    public void SetPlayerDataHost()
-    {
-        if (IsHost && playerId == 0)
-        {
-            manager.HostThing(this);
-        }
     }
     private void OnDestroy()
     {
@@ -119,6 +107,12 @@ public class PlayerData : NetworkBehaviour
         {
             //print("ID " + InstanceFinder.ClientManager.Connection.ClientId);
             SetPlayerIDServer(InstanceFinder.ClientManager.Connection.ClientId);
+        }
+        
+        if(playerId == 0 && !kaas && IsHost)
+        {
+            manager.HostThing(this);
+            kaas = true;
         }
 
     }
