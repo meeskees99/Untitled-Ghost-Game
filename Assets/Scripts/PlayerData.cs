@@ -67,7 +67,7 @@ public class PlayerData : NetworkBehaviour
     }
     public void SetPlayerDataHost()
     {
-        if (IsHost)
+        if (IsHost && playerId == 0)
         {
             manager.HostThing(this);
         }
