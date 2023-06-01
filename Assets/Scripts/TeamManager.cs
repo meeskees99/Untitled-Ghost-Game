@@ -143,7 +143,7 @@ public class TeamManager : NetworkBehaviour
         player.GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
         ClearUiPlayers();
         ClearTeamStart();
-        for (int z = 0; z < currentClients; z++)
+        for (int z = 0; z < currentClients -1; z++)
         {
             SetTeamStart(players[z]);
             SetPlayers(players[z]);
