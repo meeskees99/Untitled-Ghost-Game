@@ -22275,7 +22275,7 @@ MonoBehaviour:
   _useGlobalScenes: 1
   _startInOffline: 1
   _offlineScene: Assets/Scenes/Main menu/Main Menu Test.unity
-  _onlineScene: Assets/Scenes/Lobby/Lobby.unity
+  _onlineScene: Assets/Scenes/Lobby/Lobby Test.unity
   _replaceScenes: 0
 --- !u!114 &1969013677
 MonoBehaviour:
