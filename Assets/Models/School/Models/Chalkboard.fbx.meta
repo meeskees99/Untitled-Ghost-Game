@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: fc4188b30715b6a4bbeff713d0ffa5a5
+guid: 4efc1b46badc0d142bdfde6bd8ea902d
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Fence
-    second: {fileID: 2100000, guid: 8c4276e74afbc954b90956e87544f3ff, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Pole
-    second: {fileID: 2100000, guid: fc0b5ecb310344147b1d6961b2bc7fc0, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
