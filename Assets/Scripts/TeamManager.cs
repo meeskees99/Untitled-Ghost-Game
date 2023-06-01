@@ -27,11 +27,6 @@ public class TeamManager : NetworkBehaviour
 
     [SyncVar]
     public List<GameObject> players = new();
-
-    public NetworkConnection[] conns = new NetworkConnection[10];
-
-
-    public TMP_Text playernumber;
     public void JointTeamBtn(int teamInt)
     {
         int id = InstanceFinder.ClientManager.Connection.ClientId;

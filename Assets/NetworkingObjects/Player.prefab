@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1493123017737301181}
   - component: {fileID: 1493123017737301180}
   - component: {fileID: 3924456958761738821}
-  - component: {fileID: 7962517702738673236}
   - component: {fileID: 1901669069825021907}
   m_Layer: 5
   m_Name: PlayerUI
@@ -40,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 460, y: 125.04346}
+  m_SizeDelta: {x: 482.547, y: 119.6523}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1493123017737301181
 CanvasRenderer:
@@ -96,7 +95,7 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 1
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
-  - {fileID: 7962517702738673236}
+  - {fileID: 0}
   - {fileID: 1901669069825021907}
   <ParentNetworkObject>k__BackingField: {fileID: 1718954057773777580}
   <ChildNetworkObjects>k__BackingField: []
@@ -116,27 +115,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &7962517702738673236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493123017737301182}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 596ef839cead4f845982d1517bca8e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 3924456958761738821}
-  _networkObjectCache: {fileID: 3924456958761738821}
-  playerId: -2
-  teamID: 0
-  manager: {fileID: 0}
-  username: 
-  UI: {fileID: 0}
-  cam: {fileID: 0}
 --- !u!114 &1901669069825021907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,15 +224,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Player:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 006f7b082705aa0479712f3dd8138bd5, type: 2}
+  m_sharedMaterial: {fileID: 5445618783570395016, guid: 006f7b082705aa0479712f3dd8138bd5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -274,12 +252,12 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 1
+  m_fontSizeMax: 50
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
