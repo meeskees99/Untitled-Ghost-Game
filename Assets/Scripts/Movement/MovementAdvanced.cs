@@ -67,8 +67,14 @@ public class MovementAdvanced : NetworkBehaviour
     }
     private void Update()
     {
-        if (!base.IsOwner)
-            return;
+        if (IsHost)
+        {
+            
+        }
+        if (IsHost && !base.IsOwner)
+        {
+            this.enabled = false;
+        }
 
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 

@@ -28,7 +28,7 @@ public class MouseLookAdvanced : NetworkBehaviour
         {
 
         }
-        else if (!base.IsOwner)
+        else if (IsHost && !base.IsOwner)
         {
             this.gameObject.SetActive(false);
         }
