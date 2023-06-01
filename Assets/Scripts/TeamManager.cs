@@ -87,7 +87,7 @@ public class TeamManager : NetworkBehaviour
                             {
                                 if (players[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                                 {
-                                    players[ji].transform.SetParent(rects[teamInt].transform);
+                                    players[ji].GetComponent<PlayerData>().UI.transform.SetParent(rects[teamInt].transform);
                                     StartCoroutine(WaitYouDipshit());
                                 }
                             }
@@ -129,7 +129,7 @@ public class TeamManager : NetworkBehaviour
                             {
                                 if (players[ji].GetComponent<PlayerData>().playerId == localPlayerId)
                                 {
-                                    players[ji].transform.SetParent(rects[teamInt].transform);
+                                    players[ji].GetComponent<PlayerData>().UI.transform.SetParent(rects[teamInt].transform);
                                     StartCoroutine(WaitYouDipshit());
                                 }
                             }
@@ -251,15 +251,6 @@ public class TeamManager : NetworkBehaviour
         
         SceneLoadData sld = new SceneLoadData("Game");
         SceneUnloadData lastScene = new SceneUnloadData("Maykel");
-        //List<NetworkConnection> con = new();
-        
-        //for (int i = 0; i <= players.Count - 1; i++)
-        //{
-        //    con.Add(players[i].GetComponent<NetworkObject>().Owner);
-        //    print(con[i]);
-        //    conns[i] = con[i];
-        //}
-        //base.SceneManager.LoadConnectionScenes(conns, sld);
         base.SceneManager.LoadGlobalScenes(sld);
         base.SceneManager.UnloadGlobalScenes(lastScene);
 
