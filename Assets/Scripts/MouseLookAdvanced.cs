@@ -24,18 +24,6 @@ public class MouseLookAdvanced : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsHost)
-        {
-            if (this.gameObject.GetComponent<PlayerData>().playerId != 0)
-            {
-                this.gameObject.SetActive(false);
-            }
-        }
-        else if(!base.IsOwner)
-        {
-            this.gameObject.SetActive(false);
-        }
-       
         sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
         if (mouseLocked)
         {

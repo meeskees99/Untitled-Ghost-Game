@@ -24,6 +24,8 @@ public class PlayerData : NetworkBehaviour
     
     public GameObject UI;
 
+    [SerializeField] GameObject cam;
+
     bool can;
     private void Start()
     {
@@ -70,6 +72,24 @@ public class PlayerData : NetworkBehaviour
     }
     private void Update()
     {
+        if (IsHost)
+        {
+            if (playerId != 0)
+            {
+                this.transform.GetComponent<MovementAdvanced>().enabled = false;
+                cam.SetActive(false);
+            }
+            else
+            {
+                this.transform.GetComponent<MovementAdvanced>().enabled = true;
+                cam.SetActive(true);
+            }
+        }
+        else if (!base.IsOwner)
+        {
+            this.transform.GetComponent<MovementAdvanced>().enabled = false;
+            cam.SetActive(false);
+        }
         //print("owner" + IsOwner);
         if (!IsOwner)
         {

@@ -67,18 +67,6 @@ public class MovementAdvanced : NetworkBehaviour
     }
     private void Update()
     {
-        if (IsHost)
-        {
-            if (this.gameObject.GetComponent<PlayerData>().playerId != 0)
-            {
-                this.enabled = false;
-            }
-        }
-        else if (!base.IsOwner)
-        {
-            this.enabled = false;
-        }
-
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 
         // Ground Check
