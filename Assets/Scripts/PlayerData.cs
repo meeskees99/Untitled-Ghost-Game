@@ -52,15 +52,12 @@ public class PlayerData : NetworkBehaviour
         {
             manager.teams[0].tData.Add(this);
             team = 0;
-            manager.SpawnSpectator(this.gameObject, team);
         }
         else
         {
             manager.teams[1].tData.Add(this);
             team = 1;
-            manager.SpawnSpectator(this.gameObject, team);
         }
-
         print("Team 1 count: " + manager.teams[0].tData.Count);
         print("Team 2 count: " + manager.teams[1].tData.Count);
         //print("server");
@@ -70,7 +67,7 @@ public class PlayerData : NetworkBehaviour
     }
     public void SetPlayerDataHost()
     {
-        if (IsHost && playerId == 0)
+        if (IsHost)
         {
             manager.HostThing(this);
         }
@@ -112,7 +109,11 @@ public class PlayerData : NetworkBehaviour
             return;
         }
 
-        
+        if (ya == false)
+        {
+            manager.SpawnSpectator(this.gameObject, team);
+            ya = true;
+        }
 
         if (playerId == -2)
         {
