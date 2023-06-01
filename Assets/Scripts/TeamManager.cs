@@ -136,11 +136,11 @@ public class TeamManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnSpectator(GameObject player)
+    public void SpawnSpectator(GameObject player, int team)
     {
         // set in ui manager
         players.Add(player);
-        player.GetComponent<PlayerData>().UI.transform.SetParent(rects[0].transform);
+        player.GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
         ClearUiPlayers();
         ClearTeamStart();
         for (int z = 0; z < currentClients; z++)
