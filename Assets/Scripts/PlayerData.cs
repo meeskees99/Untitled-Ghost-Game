@@ -76,7 +76,7 @@ public class PlayerData : NetworkBehaviour
     {
         if(manager == null)
             return;
-        
+        print("Manager aanwezig");
         manager.teams[teamID].tData.Remove(this);
         manager.players.Remove(this.gameObject);
         manager.can = false; 
