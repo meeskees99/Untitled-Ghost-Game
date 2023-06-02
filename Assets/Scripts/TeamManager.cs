@@ -143,7 +143,7 @@ public class TeamManager : NetworkBehaviour
         players.Add(player);
         player.GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
         ClearTeamStart();
-        for (int z = 0; z < currentClients; z++)
+        for (int z = 0; z < currentClients -1; z++)
         {
             SetTeamStart(players[z]);
             SetPlayers(players[z]);
@@ -153,13 +153,17 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc]
     public void SetTeamStart(GameObject data)
     {
+        print("stt");
         teams[data.GetComponent<PlayerData>().teamID].tData.Add(data.GetComponent<PlayerData>());
     }
     [ObserversRpc]
     public void ClearTeamStart()
     {
-        teams[0].tData.Clear();
-        teams[1].tData.Clear();
+        if (!IsHost)
+        {
+            teams[0].tData.Clear();
+            teams[1].tData.Clear(); 
+        }
     }
     [ObserversRpc]
     public void SetTeam(GameObject data, int TeamInt)
@@ -215,7 +219,6 @@ public class TeamManager : NetworkBehaviour
                 data.username = "player " + data.playerId;
             }
             can = true;
-            teams[0].tData.Add(data.GetComponent<PlayerData>());
             currentClients++;
             Username();
         }

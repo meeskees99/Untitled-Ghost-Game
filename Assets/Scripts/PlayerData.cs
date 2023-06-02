@@ -38,6 +38,11 @@ public class PlayerData : NetworkBehaviour
         {
             SetPlayerData();
         }
+        else
+        {
+            manager.teams[0].tData.Add(this);
+            ya = true;
+        }
     }
 
     [ServerRpc(RequireOwnership = true)]
@@ -47,11 +52,13 @@ public class PlayerData : NetworkBehaviour
         {
             manager.teams[0].tData.Add(this);
             team = 0;
+            ya = true;
         }
         else
         {
             manager.teams[1].tData.Add(this);
             team = 1;
+            ya = true;
         }
         print("Team 1 count: " + manager.teams[0].tData.Count);
         print("Team 2 count: " + manager.teams[1].tData.Count);
@@ -96,12 +103,12 @@ public class PlayerData : NetworkBehaviour
             //print(" nah");
             return;
         }
-
-        if (ya == false)
+        print(ya);
+        if (ya)
         {
             manager.SpawnSpectator(this.gameObject, team);
             print("Spawn Spectatior");
-            ya = true;
+            ya = false;
         }
 
         if (playerId == -2)
