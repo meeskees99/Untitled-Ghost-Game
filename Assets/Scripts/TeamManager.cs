@@ -181,13 +181,4 @@ public class TeamManager : NetworkBehaviour
     {
         print(teams[team].tData + " " + team);
     }
-
-
-    public void LeaveLobby()
-    {
-        NetworkHudCanvases netCanvas = FindObjectOfType<NetworkHudCanvases>();
-        netCanvas.OnClick_Client();
-    }
-
-
 }

@@ -9,6 +9,7 @@ public class Mixer : MonoBehaviour
     [SerializeField] TMP_Text musicPerc;
     [SerializeField] TMP_Text sfxPerc;
 
+    
     public void SetMasterVol(float masterLvl)
     {
         masterMixer.SetFloat("MasterVol", Mathf.Log10(masterLvl) * 20);
