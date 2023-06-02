@@ -16,6 +16,8 @@ public class MouseLookAdvanced : NetworkBehaviour
 
     Camera cam;
 
+    Transform startRot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,7 @@ public class MouseLookAdvanced : NetworkBehaviour
         {
             cam = FindObjectOfType<Camera>();
             cam.transform.position = this.transform.position;
+            cam.transform.rotation = new Quaternion();
             cam.transform.SetParent(transform);
         }
     }
