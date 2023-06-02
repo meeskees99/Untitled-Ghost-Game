@@ -28,7 +28,7 @@ public class PlayerData : NetworkBehaviour
 
     private void Start()
     {
-        manager = GetComponent<TeamManager>();
+        manager = FindObjectOfType<TeamManager>();
 
         manager.players.Add(this.gameObject);
     }
