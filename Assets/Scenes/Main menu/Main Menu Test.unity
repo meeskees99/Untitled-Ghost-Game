@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22306,11 +22306,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unreliableMTU: 1023
-  _ipv4BindAddress: 192.168.0.126
+  _ipv4BindAddress: 10.151.15.48
   _ipv6BindAddress: 
   _port: 7770
   _maximumClients: 6
-  _clientAddress: 82.170.101.24
+  _clientAddress: 10.151.15.48
   _timeout: 15
 --- !u!1 &1979003485
 GameObject:
