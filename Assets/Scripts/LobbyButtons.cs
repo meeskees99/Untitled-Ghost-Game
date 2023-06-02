@@ -11,6 +11,8 @@ public class LobbyButtons : MonoBehaviour
     void Start()
     {
         networkHudCanvases = FindObjectOfType<NetworkHudCanvases>();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void ClickClient()
