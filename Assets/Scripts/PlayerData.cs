@@ -38,7 +38,7 @@ public class PlayerData : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        SetPlayerID();
+        SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
     }
     private void OnDestroy()
     {
@@ -56,8 +56,8 @@ public class PlayerData : NetworkBehaviour
 
     }
     [ServerRpc(RequireOwnership = true)]
-    public void SetPlayerID()
+    public void SetPlayerID(int id)
     {
-        playerId = InstanceFinder.ClientManager.Connection.ClientId;
+        playerId = id;
     }
 }
