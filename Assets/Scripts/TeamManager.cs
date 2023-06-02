@@ -15,7 +15,7 @@ using FishNet.Managing.Scened;
 
 public class TeamManager : NetworkBehaviour
 {
-    [SyncVar] public TeamData[] teams;
+    [SyncObject] public TeamData[] teams;
 
     [SyncVar] public int allClients;
 
