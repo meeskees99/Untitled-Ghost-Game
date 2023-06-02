@@ -43,12 +43,18 @@ public class PlayerData : NetworkBehaviour
     }
     private void OnDestroy()
     {
-        if(manager == null)
+        if (manager == null)
             return;
 
+        OnDestroyServer();
+    }
+
+    public void OnDestroyServer()
+    {
         print("Manager aanwezig");
         manager.teams[teamID].tData.Remove(this);
-        print(manager.teams[teamID].tData);
+
+        print(manager.teams[teamID].tData + " " + teamID);
 
         Despawn(UI);
 
