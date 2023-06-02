@@ -14,11 +14,16 @@ public class MouseLookAdvanced : NetworkBehaviour
 
     bool mouseLocked = true;
 
+    Camera cam;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        cam = FindObjectOfType<Camera>();
+        cam.transform.position = this.transform.position;
+        cam.transform.SetParent(transform);
     }
 
     // Update is called once per frame
