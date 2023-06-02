@@ -32,6 +32,17 @@ public class PlayerData : NetworkBehaviour
 
         manager.players.Add(this.gameObject);
         manager.currentClients++;
+
+        if (manager.teams[0].tData.Count <= manager.teams[1].tData.Count)
+        {
+            manager.AddTeam(this, 0);
+        }
+        else
+        {
+            manager.AddTeam(this, 1);
+        }
+        
+
     }
     private void OnDestroy()
     {

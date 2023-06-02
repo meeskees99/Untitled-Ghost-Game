@@ -141,7 +141,6 @@ public class TeamManager : NetworkBehaviour
         yield return new WaitForSeconds(0.1f);
         SetParents();
     }
-
     [ObserversRpc]
     public void SetParents()
     {
@@ -151,4 +150,12 @@ public class TeamManager : NetworkBehaviour
             players[x].transform.GetComponent<PlayerData>().UI.transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void AddTeam(PlayerData player, int Team)
+    {
+        teams[Team].tData.Add(player);
+    }
+
 }
