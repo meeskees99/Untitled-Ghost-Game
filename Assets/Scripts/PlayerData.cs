@@ -31,6 +31,7 @@ public class PlayerData : NetworkBehaviour
         manager = FindObjectOfType<TeamManager>();
 
         manager.players.Add(this.gameObject);
+        manager.currentClients++;
     }
     private void OnDestroy()
     {
