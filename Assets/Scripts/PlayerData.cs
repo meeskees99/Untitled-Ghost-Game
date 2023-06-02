@@ -33,6 +33,13 @@ public class PlayerData : NetworkBehaviour
         manager.players.Add(this.gameObject);
         manager.currentClients++;
     }
+
+    [ObserversRpc]
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        SetPlayerID();
+    }
     private void OnDestroy()
     {
         if(manager == null)
@@ -46,11 +53,7 @@ public class PlayerData : NetworkBehaviour
     public bool canSet;
     private void Update()
     {
-        if (!canSet)
-        {
-            canSet= true;
-            SetPlayerID();
-        }
+
     }
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerID()
