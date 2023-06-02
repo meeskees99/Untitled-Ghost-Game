@@ -159,6 +159,7 @@ public class TeamManager : NetworkBehaviour
 
     [ServerRpc(RequireOwnership = false)] public void ParentPlayerUIServer(int team)
     {
+        print("setparentserver");
         for (int i = 0; i < players.Count; i++)
         {
             players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
@@ -167,6 +168,7 @@ public class TeamManager : NetworkBehaviour
     }
     [ObserversRpc] public void ParentPlayerUIObserver(int team)
     {
+        print("setparentobserver");
         for (int i = 0; i < players.Count; i++)
         {
             players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
