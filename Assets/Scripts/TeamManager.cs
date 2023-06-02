@@ -97,15 +97,10 @@ public class TeamManager : NetworkBehaviour
                                 {
                                     if (teams[teamInt].tData[i] == teams[teamInt].tData[j])
                                     {
-                                        //print("same");
                                         return;
                                     }
                                 }
                             }
-
-                            //print(teamInt);
-                            //print(y);
-                            //print(i);
 
                             teams[teamInt].tData.Add(teams[y].tData[i]);
                             SetTeam(teams[y].tData[i].gameObject, teamInt);
@@ -134,37 +129,6 @@ public class TeamManager : NetworkBehaviour
             }
         }
     }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void SpawnSpectator(GameObject player, int team)
-    {
-        // set in ui manager
-        ClearUiPlayers();
-        players.Add(player);
-        player.GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
-        ClearTeamStart();
-        for (int z = 0; z < currentClients -1; z++)
-        {
-            SetTeamStart(players[z]);
-            SetPlayers(players[z]);
-        }
-        SetParents();
-    }
-    [ObserversRpc]
-    public void SetTeamStart(GameObject data)
-    {
-        print("stt");
-        teams[data.GetComponent<PlayerData>().teamID].tData.Add(data.GetComponent<PlayerData>());
-    }
-    [ObserversRpc]
-    public void ClearTeamStart()
-    {
-        if (!IsHost)
-        {
-            teams[0].tData.Clear();
-            teams[1].tData.Clear(); 
-        }
-    }
     [ObserversRpc]
     public void SetTeam(GameObject data, int TeamInt)
     {
@@ -172,91 +136,19 @@ public class TeamManager : NetworkBehaviour
         teams[data.GetComponent<PlayerData>().teamID].tData.Remove(data.GetComponent<PlayerData>());
 
     }
-    [ObserversRpc]
-    public void SetPlayers(GameObject player)
-    {
-        if (!IsHost)
-        {
-            players.Add(player);
-        }
-    }
-    [ObserversRpc]
-    public void ClearUiPlayers()
-    {
-        if (!IsHost)
-        {
-            players.Clear();
-        }
-    }
     public IEnumerator WaitYouDipshit()
     {
         yield return new WaitForSeconds(0.1f);
-        //print("do");
         SetParents();
     }
 
     [ObserversRpc]
     public void SetParents()
     {
-        // set in ui manager
         for (int x = 0; x < players.Count; x++)
         {
             print(players[x].GetComponent<PlayerData>().UI + " team id || " + x + " uiPlayers X");
             players[x].transform.GetComponent<PlayerData>().UI.transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
-    public bool can;
-    public void HostThing(PlayerData data)
-    {
-        if (!can)
-        {
-            if (PlayerPrefs.HasKey("username"))
-            {
-                data.username = PlayerPrefs.GetString("username");
-            }
-            else
-            {
-                data.username = "player " + data.playerId;
-            }
-            can = true;
-            currentClients++;
-            Username();
-        }
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void Username()
-    {
-        for (int i = 0; i <= currentClients-1; i++)
-        {
-            if (currentClients -1 >= players.Count)
-                return;
-            //print(i + " I");
-            
-            players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
-
-            //print(uiplayers[i].GetComponent<PlayerData>().username);
-            UsernameClient(i, players[i].GetComponent<PlayerData>().username);
-        }
-    }
-    [ObserversRpc]
-    public void UsernameClient(int i, string name)
-    {
-        if(!IsHost)
-            players[i].GetComponent<PlayerData>().UI.GetComponentInChildren<TMP_Text>().text = name;
-    }
-
-    public void DoStartGame()
-    {
-        StartGame();
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void StartGame()
-    {
-        
-        SceneLoadData sld = new SceneLoadData("Game");
-        SceneUnloadData lastScene = new SceneUnloadData("Maykel");
-        base.SceneManager.LoadGlobalScenes(sld);
-        base.SceneManager.UnloadGlobalScenes(lastScene);
-
-    }  
 }
