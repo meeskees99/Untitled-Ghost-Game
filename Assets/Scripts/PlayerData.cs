@@ -51,15 +51,15 @@ public class PlayerData : NetworkBehaviour
     {
         if (manager.teams[0].tData.Count <= manager.teams[1].tData.Count)
         {
+            ya = true;
             manager.teams[0].tData.Add(this);
             team = 0;
-            ya = true;
         }
         else
         {
+            ya = true;
             manager.teams[1].tData.Add(this);
             team = 1;
-            ya = true;
         }
         print("Team 1 count: " + manager.teams[0].tData.Count);
         print("Team 2 count: " + manager.teams[1].tData.Count);
