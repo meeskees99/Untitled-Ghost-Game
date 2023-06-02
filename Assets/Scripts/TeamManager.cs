@@ -162,7 +162,7 @@ public class TeamManager : NetworkBehaviour
         print("setparentserver");
         for (int i = 0; i < players.Count; i++)
         {
-            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
+            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
         }
         ParentPlayerUIObserver(team);
     }
@@ -171,7 +171,7 @@ public class TeamManager : NetworkBehaviour
         print("setparentobserver");
         for (int i = 0; i < players.Count; i++)
         {
-            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
+            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
         }
     }
 
