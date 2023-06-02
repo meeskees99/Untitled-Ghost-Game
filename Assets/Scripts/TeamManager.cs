@@ -177,6 +177,7 @@ public class TeamManager : NetworkBehaviour
         }
         
     }
+
     [ObserversRpc] public void SetTeamSwitchButtons(int team)
     {
         for (int x = 0; x < teams.Count; x++)
@@ -210,5 +211,18 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc] public void printer(int team)
     {
         print(teams[team].tData + " " + team);
+    }
+
+    public void StartGameButton()
+    {
+        StartGame();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void StartGame()
+    {
+        SceneLoadData sld = new SceneLoadData("Game");
+        SceneUnloadData lastScene = new SceneUnloadData("Lobby Test");
+        base.SceneManager.LoadGlobalScenes(sld);
+        base.SceneManager.UnloadGlobalScenes(lastScene);
     }
 }
