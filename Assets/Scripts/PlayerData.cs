@@ -46,37 +46,15 @@ public class PlayerData : NetworkBehaviour
     public bool canSet;
     private void Update()
     {
-        if (!IsHost && playerId != 0)
-        {
-            this.enabled = false;
-        } 
-        else if (!IsOwner && !IsHost)
-        {
-            this.enabled = false;
-        }
-
         if (!canSet)
         {
-            canSet = true;
+            canSet= true;
             SetPlayerID();
-            SetAlternateTeam();
         }
     }
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerID()
     {
-        playerId = InstanceFinder.ClientManager.GetInstanceID();
-    }
-
-    public void SetAlternateTeam()
-    {
-        if (manager.teams[0].tData.Count <= manager.teams[1].tData.Count)
-        {
-            manager.AddTeam(this, 0);
-        }
-        else
-        {
-            manager.AddTeam(this, 1);
-        }
+        playerId = InstanceFinder.ClientManager.Connection.ClientId;
     }
 }
