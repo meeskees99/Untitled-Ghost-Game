@@ -4053,6 +4053,9 @@ MonoBehaviour:
   rects:
   - {fileID: 1970693097}
   - {fileID: 695555947}
+  switchTeamButtons:
+  - {fileID: 1026604575}
+  - {fileID: 635624584}
   players: []
 --- !u!1 &909199585
 GameObject:
