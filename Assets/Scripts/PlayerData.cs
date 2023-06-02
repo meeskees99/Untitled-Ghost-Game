@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FishNet;
 using FishNet.Managing.Client;
-
+using FishNet.Connection;
 
 public class PlayerData : NetworkBehaviour
 {
@@ -41,11 +41,10 @@ public class PlayerData : NetworkBehaviour
         SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
         SetPlayerTeam();
     }
-    private void OnDestroy()
-    {
-        if (manager == null)
-            return;
 
+    public override void OnDespawnServer(NetworkConnection connection)
+    {
+        base.OnDespawnServer(connection);
         OnDestroyServer();
     }
     [ServerRpc(RequireOwnership = false)] public void OnDestroyServer()
