@@ -36,6 +36,7 @@ public class PlayerData : NetworkBehaviour
         //print("joint");
         if (!IsHost)
         {
+            print("not host");
             SetPlayerData();
         }
         else
@@ -156,7 +157,6 @@ public class PlayerData : NetworkBehaviour
     [ServerRpc]
     public void GetUsernameServer(string user)
     {
-        //print(user);
         username = user;
     }
 }
