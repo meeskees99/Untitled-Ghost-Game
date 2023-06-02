@@ -47,7 +47,7 @@ public class PlayerData : NetworkBehaviour
         base.OnDespawnServer(connection);
         OnDestroyServer();
     }
-    [ServerRpc(RequireOwnership = false)] public void OnDestroyServer()
+    [ServerRpc(RequireOwnership = true)] public void OnDestroyServer()
     {
         print("Manager aanwezig");
         manager.teams[teamID].tData.Remove(this);
