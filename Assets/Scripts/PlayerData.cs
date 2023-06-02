@@ -55,7 +55,7 @@ public class PlayerData : NetworkBehaviour
     {
 
     }
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc(RequireOwnership = true)]
     public void SetPlayerID()
     {
         playerId = InstanceFinder.ClientManager.Connection.ClientId;
