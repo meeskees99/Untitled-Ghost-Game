@@ -10,17 +10,13 @@ using FishNet.Connection;
 
 public class PlayerData : NetworkBehaviour
 {
-    [SyncVar]
-    public int playerId = -2;
+    [SyncVar] public int playerId = -2;
 
-    [SyncVar]
-    public int teamID;
+    [SyncVar] public int teamID;
 
     public TeamManager manager;
-    bool ya;
 
-    [SyncVar]
-    public string username;
+    [SyncVar] public string username;
     
     public GameObject UI;
 
@@ -41,25 +37,12 @@ public class PlayerData : NetworkBehaviour
         SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
         SetPlayerTeam();
     }
-
-    public override void OnDespawnServer(NetworkConnection connection)
+    private void OnDestroy()
     {
-        base.OnDespawnServer(connection);
-        OnDestroyServer();
-    }
-    [ServerRpc(RequireOwnership = true)] public void OnDestroyServer()
-    {
-        print("Manager aanwezig");
-        manager.teams[teamID].tData.Remove(this);
-
-        print(manager.teams[teamID].tData + " " + teamID);
-
-        Despawn(UI);
-
         manager.players.Remove(this.gameObject);
+        Destroy(UI);
         manager.currentClients--;
     }
-
     [ServerRpc(RequireOwnership = true)] public void SetPlayerID(int id)
     {
         playerId = id;
