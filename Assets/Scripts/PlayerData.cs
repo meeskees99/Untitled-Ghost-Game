@@ -36,6 +36,7 @@ public class PlayerData : NetworkBehaviour
         base.OnStartClient();
         SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
         SetPlayerTeam();
+        manager.SetTeamSwitchButtons(teamID);
     }
     private void OnDestroy()
     {

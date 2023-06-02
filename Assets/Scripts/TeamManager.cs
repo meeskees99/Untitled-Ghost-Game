@@ -175,9 +175,14 @@ public class TeamManager : NetworkBehaviour
         {
             players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
         }
-        for (int x = 0; x< teams.Count; x++)
+        
+    }
+
+    public void SetTeamSwitchButtons(int team)
+    {
+        for (int x = 0; x < teams.Count; x++)
         {
-            if(x == team)
+            if (x == team)
             {
                 switchTeamButtons[x].SetActive(false);
             }
