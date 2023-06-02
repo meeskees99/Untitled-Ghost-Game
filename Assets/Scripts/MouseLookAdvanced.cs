@@ -25,6 +25,14 @@ public class MouseLookAdvanced : NetworkBehaviour
         cam.transform.position = this.transform.position;
         cam.transform.SetParent(transform);
     }
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        if (!base.IsOwner)
+        {
+            this.enabled = false;
+        }
+    }
 
     // Update is called once per frame
     void Update()
