@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4efc1b46badc0d142bdfde6bd8ea902d
+guid: ecaf2e7f16577c542b41edbca228d75b
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: d97b573a0dd94c748b5b6be3a96c7306, type: 2}
+      name: Frame
+    second: {fileID: 2100000, guid: 3d2467f655902db4ab8ddc5b740436f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen plastic
+    second: {fileID: 2100000, guid: 056008f14739ab04b87bf7d96fa9454d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

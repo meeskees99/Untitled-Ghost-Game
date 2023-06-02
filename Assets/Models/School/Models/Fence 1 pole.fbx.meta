@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4efc1b46badc0d142bdfde6bd8ea902d
+guid: 452612a634cc3b24785a2781258f6c0e
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: d97b573a0dd94c748b5b6be3a96c7306, type: 2}
+      name: Fence
+    second: {fileID: 2100000, guid: 8c4276e74afbc954b90956e87544f3ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pole
+    second: {fileID: 2100000, guid: fc0b5ecb310344147b1d6961b2bc7fc0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
