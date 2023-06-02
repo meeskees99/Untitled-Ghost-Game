@@ -157,9 +157,29 @@ public class TeamManager : NetworkBehaviour
         printer(Team);
     }
 
+    [ServerRpc(RequireOwnership = false)] public void ParentPlayerUIServer(int team)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
+        }
+        ParentPlayerUIObserver(team);
+    }
+    [ObserversRpc] public void ParentPlayerUIObserver(int team)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
+        }
+    }
+
+
+
     [ObserversRpc] public void printer(int team)
     {
         print(teams[team].tData + " " + team);
     }
+
+
 
 }

@@ -62,10 +62,19 @@ public class PlayerData : NetworkBehaviour
         if (manager.teams[0].tData.Count -1 <= manager.teams[1].tData.Count -1)
         {
             manager.AddTeam(this, 0);
+            SetParentTeam(0);
+            teamID = 0;
         }
         else
         {
             manager.AddTeam(this, 1);
+            SetParentTeam(1);
+            teamID = 1;
         }
+    }
+
+    [ServerRpc(RequireOwnership = true)] public void SetParentTeam(int TeamID)
+    {
+        manager.ParentPlayerUIServer(TeamID);
     }
 }
