@@ -177,8 +177,7 @@ public class TeamManager : NetworkBehaviour
         }
         
     }
-
-    public void SetTeamSwitchButtons(int team)
+    [ObserversRpc] public void SetTeamSwitchButtons(int team)
     {
         for (int x = 0; x < teams.Count; x++)
         {
