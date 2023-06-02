@@ -21,9 +21,7 @@ public class MouseLookAdvanced : NetworkBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        cam = FindObjectOfType<Camera>();
-        cam.transform.position = this.transform.position;
-        cam.transform.SetParent(transform);
+        
     }
     public override void OnStartClient()
     {
@@ -31,6 +29,9 @@ public class MouseLookAdvanced : NetworkBehaviour
         if (!base.IsOwner)
         {
             this.enabled = false;
+            cam = FindObjectOfType<Camera>();
+            cam.transform.position = this.transform.position;
+            cam.transform.SetParent(transform);
         }
     }
 
