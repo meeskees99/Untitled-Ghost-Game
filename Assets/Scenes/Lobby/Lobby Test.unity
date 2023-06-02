@@ -731,7 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9dcce4f9919e14ea834a2d3a89a70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 1418297102}
   _networkObjectCache: {fileID: 1418297102}
 --- !u!1 &166245380
@@ -3669,7 +3669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9dcce4f9919e14ea834a2d3a89a70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 1418297102}
   _networkObjectCache: {fileID: 1418297102}
 --- !u!1 &827337366
@@ -4042,7 +4042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945357bf3dbf32944bdb7748905c1b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 1418297102}
   _networkObjectCache: {fileID: 1418297102}
   teams:
@@ -6635,6 +6635,7 @@ GameObject:
   - component: {fileID: 1418297097}
   - component: {fileID: 1418297096}
   - component: {fileID: 1418297102}
+  - component: {fileID: 1418297103}
   m_Layer: 5
   m_Name: Lobby
   m_TagString: Untagged
@@ -6783,6 +6784,7 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
+  - {fileID: 1418297103}
   - {fileID: 890997582}
   - {fileID: 815112368}
   - {fileID: 158215988}
@@ -6800,6 +6802,21 @@ MonoBehaviour:
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
   - {fileID: 1418297102}
+--- !u!114 &1418297103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418297095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7781807d0e5b0f44f91cda9953c5676b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 1418297102}
+  _networkObjectCache: {fileID: 1418297102}
 --- !u!1 &1450250173
 GameObject:
   m_ObjectHideFlags: 0
@@ -7638,9 +7655,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 890997582}
-        m_TargetAssemblyTypeName: TeamManager, Assembly-CSharp
-        m_MethodName: LeaveLobby
+      - m_Target: {fileID: 1418297103}
+        m_TargetAssemblyTypeName: LobbyButtons, Assembly-CSharp
+        m_MethodName: ClickClient
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
