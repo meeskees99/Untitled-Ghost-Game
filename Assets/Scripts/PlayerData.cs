@@ -48,6 +48,10 @@ public class PlayerData : NetworkBehaviour
 
         print("Manager aanwezig");
         manager.teams[teamID].tData.Remove(this);
+        print(manager.teams[teamID].tData);
+
+        Despawn(UI);
+
         manager.players.Remove(this.gameObject);
         manager.currentClients--;
     }
