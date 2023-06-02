@@ -1,9 +1,10 @@
+using FishNet;
 using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyButtons : NetworkBehaviour
+public class LobbyButtons : MonoBehaviour
 {
     NetworkHudCanvases networkHudCanvases;
     // Start is called before the first frame update
@@ -14,7 +15,7 @@ public class LobbyButtons : NetworkBehaviour
 
     public void ClickClient()
     {
-        if (IsHost)
+        if (InstanceFinder.ClientManager.Connection.ClientId == 0)
         {
             ClickHost();
         }
