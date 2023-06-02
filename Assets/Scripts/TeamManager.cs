@@ -15,7 +15,7 @@ using FishNet.Managing.Scened;
 
 public class TeamManager : NetworkBehaviour
 {
-    [SyncObject] public TeamData[] teams;
+    public List<TeamData> teams = new List<TeamData>();
 
     [SyncVar] public int allClients;
 
@@ -37,7 +37,7 @@ public class TeamManager : NetworkBehaviour
     {
         //print(localPlayerId);
 
-        for (int y = 0; y < teams.Length; y++)
+        for (int y = 0; y < teams.Count; y++)
         {
             for (int i = 0; i < currentClients; i++)
             {
@@ -127,8 +127,9 @@ public class TeamManager : NetworkBehaviour
             }
         }
     }
-    [ObserversRpc]
-    public void SetTeam(GameObject data, int TeamInt)
+
+
+    [ObserversRpc] public void SetTeam(GameObject data, int TeamInt)
     {
         teams[TeamInt].tData.Add(data.GetComponent<PlayerData>());
         teams[data.GetComponent<PlayerData>().teamID].tData.Remove(data.GetComponent<PlayerData>());
@@ -139,8 +140,7 @@ public class TeamManager : NetworkBehaviour
         yield return new WaitForSeconds(0.1f);
         SetParents();
     }
-    [ObserversRpc]
-    public void SetParents()
+    [ObserversRpc] public void SetParents()
     {
         for (int x = 0; x < players.Count; x++)
         {
@@ -150,10 +150,10 @@ public class TeamManager : NetworkBehaviour
     }
 
 
-    [ServerRpc(RequireOwnership = false)]
-    public void AddTeam(PlayerData player, int Team)
+    [ServerRpc(RequireOwnership = false)] public void AddTeam(PlayerData player, int Team)
     {
         teams[Team].tData.Add(player);
+        print(teams[Team].tData + " " + Team);
     }
 
 }

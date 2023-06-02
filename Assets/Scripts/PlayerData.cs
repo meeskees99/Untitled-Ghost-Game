@@ -59,7 +59,7 @@ public class PlayerData : NetworkBehaviour
 
     [ServerRpc(RequireOwnership = true)] public void SetPlayerTeam()
     {
-        if (manager.teams[0].tData.Count <= manager.teams[1].tData.Count)
+        if (manager.teams[0].tData.Count -1 <= manager.teams[1].tData.Count -1)
         {
             manager.AddTeam(this, 0);
         }
