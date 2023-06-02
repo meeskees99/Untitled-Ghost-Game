@@ -88,5 +88,6 @@ public class PlayerData : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)] public void GetUsernameServer(string name)
     {
         username = name;
+        manager.SetPlayerNameServer();
     }
 }
