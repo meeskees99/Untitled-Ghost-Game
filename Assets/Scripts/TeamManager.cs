@@ -171,7 +171,10 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc]
     public void SetPlayers(GameObject player)
     {
-        players.Add(player);
+        if (!IsHost)
+        {
+            players.Add(player);
+        }
     }
     [ObserversRpc]
     public void ClearUiPlayers()
