@@ -175,8 +175,21 @@ public class TeamManager : NetworkBehaviour
         }
     }
 
-    
-
+    [ServerRpc(RequireOwnership = false)] public void SetPlayerNameServer()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].GetComponent<PlayerData>().UI.transform.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
+        }
+        SetPlayerNameObserver();
+    }
+    [ObserversRpc] public void SetPlayerNameObserver()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].GetComponent<PlayerData>().UI.transform.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
+        }
+    }
     [ObserversRpc] public void printer(int team)
     {
         print(teams[team].tData + " " + team);
