@@ -154,6 +154,12 @@ public class TeamManager : NetworkBehaviour
     {
         teams[Team].tData.Add(player);
         print(teams[Team].tData + " " + Team);
+        printer(Team);
+    }
+
+    [ObserversRpc] public void printer(int team)
+    {
+        print(teams[team].tData + " " + team);
     }
 
 }
