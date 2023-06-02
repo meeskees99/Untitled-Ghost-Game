@@ -73,7 +73,7 @@ public class PlayerData : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = true)] public void SetParentTeam(int TeamID)
+    [ServerRpc(RequireOwnership = false)] public void SetParentTeam(int TeamID)
     {
         manager.ParentPlayerUIServer(TeamID);
     }
