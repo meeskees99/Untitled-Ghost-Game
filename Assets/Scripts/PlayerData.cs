@@ -36,7 +36,6 @@ public class PlayerData : NetworkBehaviour
         base.OnStartClient();
         SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
         SetPlayerTeam();
-        manager.SetTeamSwitchButtons(teamID);
     }
     private void OnDestroy()
     {
@@ -66,6 +65,7 @@ public class PlayerData : NetworkBehaviour
             SetParentTeam();
             GetUsernameObserver();
         }
+        manager.SetTeamSwitchButtons(teamID);
     }
 
     [ServerRpc(RequireOwnership = false)] public void SetParentTeam()
