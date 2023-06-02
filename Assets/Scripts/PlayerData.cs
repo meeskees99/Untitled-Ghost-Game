@@ -39,6 +39,7 @@ public class PlayerData : NetworkBehaviour
     {
         base.OnStartClient();
         SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
+        SetPlayerTeam();
     }
     private void OnDestroy()
     {
@@ -50,14 +51,21 @@ public class PlayerData : NetworkBehaviour
         manager.players.Remove(this.gameObject);
         manager.currentClients--;
     }
-    public bool canSet;
-    private void Update()
-    {
 
-    }
-    [ServerRpc(RequireOwnership = true)]
-    public void SetPlayerID(int id)
+    [ServerRpc(RequireOwnership = true)] public void SetPlayerID(int id)
     {
         playerId = id;
+    }
+
+    [ServerRpc(RequireOwnership = true)] public void SetPlayerTeam()
+    {
+        if (manager.teams[0].tData.Count <= manager.teams[1].tData.Count)
+        {
+            manager.AddTeam(this, 0);
+        }
+        else
+        {
+            manager.AddTeam(this, 1);
+        }
     }
 }
