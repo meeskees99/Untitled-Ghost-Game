@@ -32,17 +32,6 @@ public class PlayerData : NetworkBehaviour
 
         manager.players.Add(this.gameObject);
         manager.currentClients++;
-
-        if (manager.teams[0].tData.Count <= manager.teams[1].tData.Count)
-        {
-            manager.AddTeam(this, 0);
-        }
-        else
-        {
-            manager.AddTeam(this, 1);
-        }
-        
-
     }
     private void OnDestroy()
     {
@@ -54,8 +43,30 @@ public class PlayerData : NetworkBehaviour
         manager.players.Remove(this.gameObject);
         manager.currentClients--;
     }
+    public bool canSet;
     private void Update()
     {
-        
+        if (!IsOwner)
+        {
+            this.enabled = false;
+        }
+
+        if (!canSet)
+        {
+            SetAlternateTeam();
+        }
+    }
+
+    public void SetAlternateTeam()
+    {
+        canSet = true;
+        if (manager.teams[0].tData.Count <= manager.teams[1].tData.Count)
+        {
+            manager.AddTeam(this, 0);
+        }
+        else
+        {
+            manager.AddTeam(this, 1);
+        }
     }
 }
