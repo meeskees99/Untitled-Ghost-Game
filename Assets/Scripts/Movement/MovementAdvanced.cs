@@ -65,6 +65,19 @@ public class MovementAdvanced : NetworkBehaviour
 
         startCrouchYScale = transform.localScale.y;
     }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        if (IsHost && gameObject.GetComponent<PlayerData>().playerId != 0)
+        {
+            this.enabled = false;
+        }
+        else if (!IsOwner)
+        {
+            this.enabled = false;
+        }
+    }
     private void Update()
     {
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
