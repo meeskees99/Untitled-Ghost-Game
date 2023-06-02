@@ -28,7 +28,9 @@ public class PlayerData : NetworkBehaviour
 
     private void Start()
     {
+        manager = GetComponent<TeamManager>();
 
+        manager.players.Add(this.gameObject);
     }
     private void OnDestroy()
     {
