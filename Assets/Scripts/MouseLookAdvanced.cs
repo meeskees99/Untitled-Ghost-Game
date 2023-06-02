@@ -34,12 +34,10 @@ public class MouseLookAdvanced : NetworkBehaviour
         }
         else
         {
-            if(FindObjectOfType<Camera>().tag == "PlayerCam") {
-                cam = FindObjectOfType<Camera>();
-                cam.transform.SetParent(transform);
-                cam.transform.position = this.transform.position;
-                cam.transform.rotation = new Quaternion();
-            }
+            cam = FindObjectOfType<Camera>();
+            cam.transform.SetParent(transform);
+            cam.transform.position = this.transform.position;
+            cam.transform.rotation = new Quaternion();
         }
     }
 
