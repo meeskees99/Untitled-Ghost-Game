@@ -29,6 +29,9 @@ public class MouseLookAdvanced : NetworkBehaviour
         if (!base.IsOwner)
         {
             this.enabled = false;
+        }
+        else
+        {
             cam = FindObjectOfType<Camera>();
             cam.transform.position = this.transform.position;
             cam.transform.SetParent(transform);
