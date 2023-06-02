@@ -183,5 +183,11 @@ public class TeamManager : NetworkBehaviour
     }
 
 
+    public void LeaveLobby()
+    {
+        NetworkHudCanvases netCanvas = FindObjectOfType<NetworkHudCanvases>();
+        netCanvas.OnClick_Client();
+    }
+
 
 }
