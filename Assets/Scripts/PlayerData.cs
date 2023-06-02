@@ -53,20 +53,40 @@ public class PlayerData : NetworkBehaviour
     {
         if (manager.teams[0].tData.Count -1 <= manager.teams[1].tData.Count -1)
         {
-            manager.AddTeam(this, 0);
-            SetParentTeam(0);
             teamID = 0;
+            manager.AddTeam(this, teamID);
+            SetParentTeam();
+            GetUsernameObserver();
         }
         else
         {
-            manager.AddTeam(this, 1);
-            SetParentTeam(1);
             teamID = 1;
+            manager.AddTeam(this, teamID);
+            SetParentTeam();
+            GetUsernameObserver();
         }
     }
 
-    [ServerRpc(RequireOwnership = false)] public void SetParentTeam(int TeamID)
+    [ServerRpc(RequireOwnership = false)] public void SetParentTeam()
     {
-        manager.ParentPlayerUIServer(TeamID);
+        manager.ParentPlayerUIServer(teamID);
+    }
+
+
+    [ObserversRpc] public void GetUsernameObserver()
+    {
+        if (PlayerPrefs.HasKey("username"))
+        {
+            GetUsernameServer(PlayerPrefs.GetString("username").ToString());
+            print("Player: " + LocalConnection.ClientId);
+        }
+        else
+        {
+            GetUsernameServer("Player: " + LocalConnection.ClientId);
+        }
+    }
+    [ServerRpc(RequireOwnership = true)] public void GetUsernameServer(string name)
+    {
+        username = name;
     }
 }

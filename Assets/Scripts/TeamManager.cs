@@ -175,7 +175,7 @@ public class TeamManager : NetworkBehaviour
         }
     }
 
-
+    
 
     [ObserversRpc] public void printer(int team)
     {
