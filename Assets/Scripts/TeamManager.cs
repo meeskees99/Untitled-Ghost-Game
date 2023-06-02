@@ -15,13 +15,11 @@ using FishNet.Managing.Scened;
 
 public class TeamManager : NetworkBehaviour
 {
-    public TeamData[] teams;
+    [SyncVar] public TeamData[] teams;
 
-    [SyncVar]
-    public int allClients;
+    [SyncVar] public int allClients;
 
-    [SyncVar]
-    public int currentClients;
+    [SyncVar] public int currentClients;
 
     public GameObject[] rects;
 
