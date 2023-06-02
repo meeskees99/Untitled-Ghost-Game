@@ -139,8 +139,8 @@ public class TeamManager : NetworkBehaviour
     public void SpawnSpectator(GameObject player, int team)
     {
         // set in ui manager
+        ClearUiPlayers();
         players.Add(player);
-        print("add players" + player);
         player.GetComponent<PlayerData>().UI.transform.SetParent(rects[team].transform);
         ClearTeamStart();
         for (int z = 0; z < currentClients; z++)
@@ -176,7 +176,10 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc]
     public void ClearUiPlayers()
     {
-        players.Clear();
+        if (!IsHost)
+        {
+            players.Clear();
+        }
     }
     public IEnumerator WaitYouDipshit()
     {
