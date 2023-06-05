@@ -32,31 +32,32 @@ public class GhostMovement : NetworkBehaviour
 
     // Update is called once per frame
     void Update()
-    {      
-        if(!agent.pathPending && agent.remainingDistance < 0.5f)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                print("Going to next point");
-                PatrolToNextPoint();
-            }
-        }
+    {
+        PatrolToNextPoint();
     }
+
 
     
     [ServerRpc(RequireOwnership = false)]
     void PatrolToNextPoint()
     {
-        timer = waitTime;
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                print("Going to next point");
+                timer = waitTime;
 
-        Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
+                Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
 
-        randomDirection += transform.position;
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
-        Vector3 finalPosition = hit.position;
+                randomDirection += transform.position;
+                NavMeshHit hit;
+                NavMesh.SamplePosition(randomDirection, out hit, walkRadius, 1);
+                Vector3 finalPosition = hit.position;
 
-        agent.destination = finalPosition;
+                agent.destination = finalPosition;
+            }
+        }
     }
 }
