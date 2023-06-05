@@ -137,7 +137,7 @@ public class MovementAdvanced : NetworkBehaviour
             moveSpeed = crouchSpeed;
         }
         //Mode - Running
-        if(grounded && Input.GetKey(sprintKey))
+        else if(grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.run;
             moveSpeed = sprintSpeed;
