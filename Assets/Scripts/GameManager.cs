@@ -1,4 +1,5 @@
 using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] Transform[] team1points;
     [SerializeField] Transform[] team2points;
 
-    GameObject ghost;
+    [SyncVar] GameObject ghost;
 
     int team1Index;
     int team2Index;
@@ -27,12 +28,13 @@ public class GameManager : NetworkBehaviour
         {
             SpawnAgent();
             players = FindObjectsOfType<PlayerData>();
+            SetTeamPoints();
         }
         team1Index= 0;
         team2Index = 0;
     }
 
-    void SetTeamPoints()
+    [ServerRpc(RequireOwnership = false)] void SetTeamPoints()
     {
         for (int i = 0; i < players.Length; i++)
         {
@@ -49,8 +51,7 @@ public class GameManager : NetworkBehaviour
         }
     }
     
-    [ServerRpc(RequireOwnership = false)]
-    void SpawnAgent()
+    [ServerRpc(RequireOwnership = false)] void SpawnAgent()
     {
         ghost = Instantiate(ghosts[GhostIndex], spawnLocation.position, spawnLocation.rotation);
         Spawn(ghost);
