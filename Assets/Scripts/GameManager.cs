@@ -41,16 +41,31 @@ public class GameManager : NetworkBehaviour
             if(players[i].teamID == 0)
             {
                 players[i].transform.position = team1points[team1Index].transform.position;
+                SetTeamPointsObserver(i, players[i].teamID);
                 team1Index++;
             }
             else if (players[i].teamID == 1)
             {
                 players[i].transform.position = team1points[team2Index].transform.position;
+                SetTeamPointsObserver(i, players[i].teamID);
                 team2Index++;
             }
         }
     }
+    [ObserversRpc] void SetTeamPointsObserver(int playerint,  int teamint)
+    {
+        if (teamint== 0)
+        {
+            players[playerint].transform.position = team1points[team1Index].transform.position;
+        }
+        else if (teamint== 1)
+        {
+            players[playerint].transform.position = team2points[team2Index].transform.position;
+        }
+
+    }    
     
+
     [ServerRpc(RequireOwnership = false)] void SpawnAgent()
     {
         ghost = Instantiate(ghosts[GhostIndex], spawnLocation.position, spawnLocation.rotation);
