@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1493123017737301183}
   - component: {fileID: 1493123017737301181}
   - component: {fileID: 1493123017737301180}
+  - component: {fileID: 4081528834516354979}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -77,6 +78,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4081528834516354979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493123017737301182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c0e24b2434b514b9f7c722d17dd8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1493123018677505296
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,8 +580,7 @@ MonoBehaviour:
   - {fileID: 4853220401340673276}
   - {fileID: 3169769077060667233}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
-  <ChildNetworkObjects>k__BackingField:
-  - {fileID: 0}
+  <ChildNetworkObjects>k__BackingField: []
   _isNetworked: 1
   _isGlobal: 1
   _initializeOrder: 0
