@@ -5,10 +5,14 @@ using FishNet.Object;
 
 public class MouseLookAdvanced : NetworkBehaviour
 {
+    [Header("Settings")]
+    [Tooltip("Range you can suck up ghosts from")]
+    [SerializeField] float suckRange;
+
     [SerializeField] float sens;
+    PlayerData playerData;
 
     [SerializeField] Transform orientation;
-
     float xRotation;
     float yRotation;
 
@@ -70,5 +74,17 @@ public class MouseLookAdvanced : NetworkBehaviour
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        RaycastHit hit;
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (Physics.Raycast(transform.position, transform.forward, out hit, suckRange))
+            {
+                if (hit.transform.tag == "Ghost")
+                {
+                    playerData.pointsGathered++;
+                }
+            }
+        }
+        
     }
 }

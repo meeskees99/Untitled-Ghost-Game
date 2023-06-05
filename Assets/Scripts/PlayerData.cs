@@ -20,6 +20,8 @@ public class PlayerData : NetworkBehaviour
     
     public GameObject UI;
 
+    public int pointsGathered;
+
     [SerializeField] GameObject cam;
 
     private void Start()
