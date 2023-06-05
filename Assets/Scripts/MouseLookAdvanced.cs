@@ -16,8 +16,6 @@ public class MouseLookAdvanced : NetworkBehaviour
 
     Camera cam;
 
-    Transform startRot;
-
     // Start is called before the first frame update
     void Start()
     {

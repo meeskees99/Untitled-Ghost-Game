@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: edfe5746fd1279741b1693ba55882539, type: 2}
 --- !u!1 &16715402
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,8 +215,8 @@ GameObject:
   m_Name: Kaas (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &32355989
 BoxCollider:
@@ -378,8 +378,8 @@ GameObject:
   m_Name: Kaas (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &100151317
 BoxCollider:
@@ -475,8 +475,8 @@ GameObject:
   m_Name: Kaas (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &138981232
 BoxCollider:
@@ -648,8 +648,8 @@ GameObject:
   m_Name: Kaas (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &167674772
 BoxCollider:
@@ -821,8 +821,8 @@ GameObject:
   m_Name: Kaas (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &351285139
 BoxCollider:
@@ -918,8 +918,8 @@ GameObject:
   m_Name: Kaas (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &437815076
 BoxCollider:
@@ -1015,8 +1015,8 @@ GameObject:
   m_Name: Kaas (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &453103931
 BoxCollider:
@@ -1279,8 +1279,8 @@ GameObject:
   m_Name: Kaas (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &612908526
 BoxCollider:
@@ -1415,8 +1415,8 @@ GameObject:
   m_Name: Kaas (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &638729613
 BoxCollider:
@@ -1512,8 +1512,8 @@ GameObject:
   m_Name: Kaas (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &652650371
 BoxCollider:
@@ -1610,7 +1610,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &671167311
 MeshCollider:
@@ -1689,7 +1689,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &689339187
 GameObject:
@@ -1785,7 +1785,7 @@ RectTransform:
   m_Children:
   - {fileID: 613040957}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2009,8 +2009,8 @@ GameObject:
   m_Name: Kaas (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &838264857
 BoxCollider:
@@ -2106,8 +2106,8 @@ GameObject:
   m_Name: Kaas (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &856361153
 BoxCollider:
@@ -2470,8 +2470,8 @@ GameObject:
   m_Name: Kaas (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1064434498
 BoxCollider:
@@ -2551,6 +2551,63 @@ Transform:
   m_Father: {fileID: 1853753277}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1197038584
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9087618149018236688, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_Name
+      value: Agent
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.077793
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.074062
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087618149018236702, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
 --- !u!1 &1212225149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2616,7 +2673,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1294798952
 GameObject:
@@ -2789,8 +2846,8 @@ GameObject:
   m_Name: Kaas (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1336831157
 BoxCollider:
@@ -2923,8 +2980,8 @@ GameObject:
   m_Name: Kaas (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1478465901
 BoxCollider:
@@ -3020,8 +3077,8 @@ GameObject:
   m_Name: Kaas (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1502529973
 BoxCollider:
@@ -3117,8 +3174,8 @@ GameObject:
   m_Name: Kaas (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1533190154
 BoxCollider:
@@ -3214,8 +3271,8 @@ GameObject:
   m_Name: Kaas (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1544362341
 BoxCollider:
@@ -3311,8 +3368,8 @@ GameObject:
   m_Name: Kaas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1579445477
 BoxCollider:
@@ -3560,8 +3617,8 @@ GameObject:
   m_Name: Kaas (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1606311094
 BoxCollider:
@@ -3657,8 +3714,8 @@ GameObject:
   m_Name: Kaas (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1618612756
 BoxCollider:
@@ -3754,8 +3811,8 @@ GameObject:
   m_Name: Kaas (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1735787349
 BoxCollider:
@@ -3851,8 +3908,8 @@ GameObject:
   m_Name: Kaas (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1749694912
 BoxCollider:
@@ -3948,8 +4005,8 @@ GameObject:
   m_Name: Kaas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1853753274
 BoxCollider:
@@ -4051,7 +4108,7 @@ Transform:
   - {fileID: 1735787352}
   - {fileID: 1533190157}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1988555642
 GameObject:
@@ -4106,8 +4163,8 @@ GameObject:
   m_Name: Kaas (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &2020071057
 BoxCollider:
