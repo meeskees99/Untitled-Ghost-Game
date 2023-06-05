@@ -6,7 +6,7 @@ public class sETsCALE : MonoBehaviour
 {
     void Update()
     {
-        if (this.GetComponentInParent<GameObject>().name == "Players") 
+        if (this.GetComponentInParent<RectTransform>().gameObject.name == "Players") 
         {
             transform.localScale = Vector3.one;
         }
