@@ -358,10 +358,10 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 1718954057773777580}
   _synchronizeParent: 0
   _packing:
-    Position: 1
+    Position: 0
     Rotation: 1
     Scale: 0
-  _interpolation: 250
+  _interpolation: 20
   _extrapolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
