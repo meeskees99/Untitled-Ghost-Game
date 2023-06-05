@@ -85,11 +85,14 @@ public class MouseLookAdvanced : NetworkBehaviour
             {
                 if (hit.transform.tag == "Ghost")
                 {
-                    playerData.pointsGathered++;
-                    print("points");
+                    GibeOints();
                 }
             }
         }
-        
+    }
+
+    [ServerRpc(RequireOwnership = true)] public void GibeOints()
+    {
+        playerData.pointsGathered++;
     }
 }
