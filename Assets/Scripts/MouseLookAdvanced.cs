@@ -15,14 +15,6 @@ public class MouseLookAdvanced : NetworkBehaviour
     bool mouseLocked = true;
 
     Camera cam;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        
-    }
     public override void OnStartClient()
     {
         base.OnStartClient();
