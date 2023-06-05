@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
+using FishNet.Object;
 
-public class GhostMovement : MonoBehaviour
+public class GhostMovement : NetworkBehaviour
 {
     NavMeshAgent agent;
 
@@ -26,7 +27,6 @@ public class GhostMovement : MonoBehaviour
 
         agent.autoBraking = false;
         
-        timer = waitTime;
         PatrolToNextPoint();
     }
 
@@ -45,6 +45,7 @@ public class GhostMovement : MonoBehaviour
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
     void PatrolToNextPoint()
     {
         timer = waitTime;
