@@ -1872,7 +1872,8 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 689339192}
   _networkObjectCache: {fileID: 689339192}
-  ghosts: []
+  ghosts:
+  - {fileID: 9087618149018236688, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
   spawnLocation: {fileID: 1163794739}
 --- !u!1 &790225988
 GameObject:
