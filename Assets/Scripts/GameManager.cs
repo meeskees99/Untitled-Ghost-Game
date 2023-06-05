@@ -20,8 +20,8 @@ public class GameManager : NetworkBehaviour
 
     [SyncVar] GameObject ghost;
 
-    int team1Index;
-    int team2Index;
+    [SyncVar] int team1Index;
+    [SyncVar] int team2Index;
     // Start is called before the first frame update
     void Start()
     {
