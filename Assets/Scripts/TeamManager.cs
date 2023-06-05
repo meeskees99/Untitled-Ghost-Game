@@ -217,6 +217,9 @@ public class TeamManager : NetworkBehaviour
     {
         StartGame();
     }
+
+    public Material sky;
+
     [ServerRpc(RequireOwnership = false)]
     void StartGame()
     {

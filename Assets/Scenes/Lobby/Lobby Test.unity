@@ -4057,6 +4057,7 @@ MonoBehaviour:
   - {fileID: 1026604575}
   - {fileID: 635624584}
   players: []
+  sky: {fileID: 2100000, guid: b80e7d0ff5fb0b1469d50493cbfe6354, type: 2}
 --- !u!1 &909199585
 GameObject:
   m_ObjectHideFlags: 0
