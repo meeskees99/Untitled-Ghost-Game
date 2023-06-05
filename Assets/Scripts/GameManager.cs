@@ -41,13 +41,17 @@ public class GameManager : NetworkBehaviour
             if(players[i].teamID == 0)
             {
                 players[i].transform.position = team1points[team1Index].transform.position;
+                print(players[i].teamID);
                 SetTeamPointsObserver(i, players[i].teamID);
+                print(players[i].teamID);
                 team1Index++;
             }
             else if (players[i].teamID == 1)
             {
                 players[i].transform.position = team1points[team2Index].transform.position;
+                print(players[i].teamID);
                 SetTeamPointsObserver(i, players[i].teamID);
+                print(players[i].teamID);
                 team2Index++;
             }
         }
