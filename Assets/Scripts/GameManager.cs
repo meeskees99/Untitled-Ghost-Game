@@ -3,6 +3,7 @@ using FishNet.Object.Synchronizing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameManager : NetworkBehaviour
@@ -41,31 +42,29 @@ public class GameManager : NetworkBehaviour
             if(players[i].teamID == 0)
             {
                 players[i].transform.position = team1points[team1Index].transform.position;
-                print(players[i].teamID);
-                SetTeamPointsObserver(i, players[i].teamID);
-                print(players[i].teamID);
                 team1Index++;
             }
             else if (players[i].teamID == 1)
             {
                 players[i].transform.position = team1points[team2Index].transform.position;
-                print(players[i].teamID);
-                SetTeamPointsObserver(i, players[i].teamID);
-                print(players[i].teamID);
                 team2Index++;
             }
         }
+        SetTeamPointsObserver();
     }
-    [ObserversRpc] void SetTeamPointsObserver(int playerint,  int teamint)
+    [ObserversRpc] void SetTeamPointsObserver()
     {
         print("a");
-        if (teamint== 0)
+        for (int i = 0; i < players.Length; i++)
         {
-            players[playerint].transform.position = team1points[team1Index].transform.position;
-        }
-        else if (teamint== 1)
-        {
-            players[playerint].transform.position = team2points[team2Index].transform.position;
+            if (players[i].teamID == 0)
+            {
+                players[i].transform.position = team1points[team1Index].transform.position;
+            }
+            else if (players[i].teamID == 1)
+            {
+                players[i].transform.position = team2points[team2Index].transform.position;
+            }
         }
     }    
     
