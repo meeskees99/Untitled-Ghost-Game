@@ -54,6 +54,7 @@ public class GameManager : NetworkBehaviour
     }
     [ObserversRpc] void SetTeamPointsObserver(int playerint,  int teamint)
     {
+        print("a");
         if (teamint== 0)
         {
             players[playerint].transform.position = team1points[team1Index].transform.position;
@@ -62,7 +63,6 @@ public class GameManager : NetworkBehaviour
         {
             players[playerint].transform.position = team2points[team2Index].transform.position;
         }
-
     }    
     
 
