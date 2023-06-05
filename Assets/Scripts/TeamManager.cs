@@ -25,6 +25,8 @@ public class TeamManager : NetworkBehaviour
 
     [SerializeField] GameObject[] switchTeamButtons;
 
+    bool done;
+
     [SyncVar]
     public List<GameObject> players = new();
     public void JointTeamBtn(int teamInt)
@@ -34,6 +36,7 @@ public class TeamManager : NetworkBehaviour
         JoinTeam(teamInt, id);
     }
 
+    
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)
     {
@@ -180,15 +183,20 @@ public class TeamManager : NetworkBehaviour
 
     public void SetTeamSwitchButtons(int team)
     {
+        if(done) return;
         for (int x = 0; x < teams.Count; x++)
         {
             if (x == team)
             {
                 switchTeamButtons[x].SetActive(false);
+                switchTeamButtons[x].SetActive(true);
+                done = true;
             }
             else
             {
                 switchTeamButtons[x].SetActive(true);
+                switchTeamButtons[x].SetActive(false);
+                done = true;
             }
         }
     }
