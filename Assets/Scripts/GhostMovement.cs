@@ -41,10 +41,10 @@ public class GhostMovement : NetworkBehaviour
                 print("Going to next point");
                 PatrolToNextPoint();
             }
-            
         }
     }
 
+    
     [ServerRpc(RequireOwnership = false)]
     void PatrolToNextPoint()
     {
