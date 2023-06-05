@@ -10,7 +10,7 @@ public class MouseLookAdvanced : NetworkBehaviour
     [SerializeField] float suckRange;
 
     [SerializeField] float sens;
-    PlayerData playerData;
+    [SerializeField] PlayerData playerData;
 
     [SerializeField] Transform orientation;
     float xRotation;
@@ -19,6 +19,8 @@ public class MouseLookAdvanced : NetworkBehaviour
     bool mouseLocked = true;
 
     Camera cam;
+
+    [SerializeField] LayerMask mask;
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -75,13 +77,16 @@ public class MouseLookAdvanced : NetworkBehaviour
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
         RaycastHit hit;
+
+        Debug.DrawLine(transform.position, transform.forward, Color.red);
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (Physics.Raycast(transform.position, transform.forward, out hit, suckRange))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, suckRange, mask))
             {
                 if (hit.transform.tag == "Ghost")
                 {
                     playerData.pointsGathered++;
+                    print("points");
                 }
             }
         }

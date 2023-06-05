@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9087618149018236691}
   - component: {fileID: -7598521523517749195}
   - component: {fileID: -5421627816488725634}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Agent
   m_TagString: Ghost
   m_Icon: {fileID: 0}
@@ -142,8 +142,8 @@ MonoBehaviour:
   walkableLayer:
     serializedVersion: 2
     m_Bits: 64
-  walkRadius: 30
-  waitTime: 7
+  walkRadius: 0
+  waitTime: 0
 --- !u!114 &-7598521523517749195
 MonoBehaviour:
   m_ObjectHideFlags: 0

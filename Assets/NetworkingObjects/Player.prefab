@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c0e24b2434b514b9f7c722d17dd8e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
 --- !u!1 &1493123018677505296
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,8 +275,13 @@ MonoBehaviour:
   _componentIndexCache: 3
   _addedNetworkObject: {fileID: 1718954057773777580}
   _networkObjectCache: {fileID: 1718954057773777580}
+  suckRange: 88
   sens: 0
+  playerData: {fileID: 2548425321851108391}
   orientation: {fileID: 1718954057773777527}
+  mask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &3169769077060667233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,6 +674,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   username: 
   UI: {fileID: 1493123017737301182}
+  pointsGathered: 0
   cam: {fileID: 0}
 --- !u!1 &3375426294539903268
 GameObject:
