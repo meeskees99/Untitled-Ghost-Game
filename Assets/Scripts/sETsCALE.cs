@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class sETsCALE : MonoBehaviour
 {
+    RectTransform parent;
+    RectTransform me;
     void Update()
     {
-        if (this.GetComponentInParent<RectTransform>().gameObject.name == "Players") 
+        parent = GetComponentInParent<RectTransform>();
+        if (parent.gameObject.name == "Players") 
         {
-            this.transform.localScale = Vector3.one;
+            me = GetComponent<RectTransform>();
+            me.sizeDelta = Vector2.one;
             print("AAS");
         }
     }
