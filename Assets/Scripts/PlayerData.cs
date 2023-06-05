@@ -69,7 +69,7 @@ public class PlayerData : NetworkBehaviour
             SetParentTeam();
             GetUsernameObserver();
         }
-        manager.SetTeamSwitchButtons(teamID);
+        manager.SetTeamSwitchButtons();
     }
 
     [ServerRpc(RequireOwnership = false)] public void SetParentTeam()

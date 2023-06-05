@@ -181,24 +181,27 @@ public class TeamManager : NetworkBehaviour
         
     }
 
-    public void SetTeamSwitchButtons(int team)
+    public void SetTeamSwitchButtons()
     {
-        if(done) return;
-        for (int x = 0; x < teams.Count; x++)
+
+        for (int i = 0; i < players.Count -1; i++)
         {
-            if (x == team)
+            if (LocalConnection.ClientId == players[i].GetComponent<PlayerData>().playerId)
             {
-                switchTeamButtons[x].SetActive(false);
-                switchTeamButtons[x].SetActive(true);
-                done = true;
-            }
-            else
-            {
-                switchTeamButtons[x].SetActive(true);
-                switchTeamButtons[x].SetActive(false);
-                done = true;
+                for (int x = 0; x < switchTeamButtons.Length; x++)
+                {
+                    if (x == players[i].GetComponent<PlayerData>().teamID)
+                    {
+                        switchTeamButtons[x].SetActive(false);
+                    }
+                    else
+                    {
+                        switchTeamButtons[x].SetActive(true);
+                    }
+                }
             }
         }
+        
     }
 
     [ServerRpc(RequireOwnership = false)] public void SetPlayerNameServer()
