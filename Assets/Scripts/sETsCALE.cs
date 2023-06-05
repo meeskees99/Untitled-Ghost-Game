@@ -8,7 +8,8 @@ public class sETsCALE : MonoBehaviour
     {
         if (this.GetComponentInParent<RectTransform>().gameObject.name == "Players") 
         {
-            transform.localScale = Vector3.one;
+            this.transform.localScale = Vector3.one;
+            print("AAS");
         }
     }
 }
