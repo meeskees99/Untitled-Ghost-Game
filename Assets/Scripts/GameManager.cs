@@ -3,8 +3,6 @@ using FishNet.Object.Synchronizing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameManager : NetworkBehaviour
 {
@@ -31,8 +29,6 @@ public class GameManager : NetworkBehaviour
             players = FindObjectsOfType<PlayerData>();
             SetTeamPoints();
         }
-        team1Index= 0;
-        team2Index = 0;
     }
 
     [ServerRpc(RequireOwnership = false)] void SetTeamPoints()
@@ -52,7 +48,7 @@ public class GameManager : NetworkBehaviour
         }
         SetTeamPointsObserver();
     }
-    [ObserversRpc] void SetTeamPointsObserver()
+    [ObserversRpc(BufferLast = true)] void SetTeamPointsObserver()
     {
         print("a");
         for (int i = 0; i < players.Length; i++)
