@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour
     int GhostIndex;
     [SerializeField] Transform spawnLocation;
 
-    [SerializeField] PlayerData[] players;
+    [SyncVar] [SerializeField] PlayerData[] players;
 
     [SerializeField] Transform[] team1points;
     [SerializeField] Transform[] team2points;
@@ -26,13 +26,13 @@ public class GameManager : NetworkBehaviour
         if (IsHost && ghost == null)
         {
             SpawnAgent();
-            players = FindObjectsOfType<PlayerData>();
             SetTeamPoints();
         }
     }
 
     [ServerRpc(RequireOwnership = false)] void SetTeamPoints()
     {
+        players = FindObjectsOfType<PlayerData>();
         for (int i = 0; i < players.Length; i++)
         {
             if(players[i].teamID == 0)
