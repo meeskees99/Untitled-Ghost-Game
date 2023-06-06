@@ -192,10 +192,12 @@ public class TeamManager : NetworkBehaviour
                 {
                     if (x == players[i].GetComponent<PlayerData>().teamID)
                     {
+                        print("false");
                         switchTeamButtons[x].SetActive(false);
                     }
                     else
                     {
+                        print("true");
                         switchTeamButtons[x].SetActive(true);
                     }
                 }
