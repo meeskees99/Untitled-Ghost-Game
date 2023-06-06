@@ -187,6 +187,7 @@ public class TeamManager : NetworkBehaviour
         for (int i = 0; i < players.Count; i++)
         {
             print("For I loop");
+            print(players[i].GetComponent<PlayerData>().playerId);
             if (LocalConnection.ClientId == players[i].GetComponent<PlayerData>().playerId)
             {
                 print("If clientId == playerId");
