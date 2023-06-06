@@ -183,8 +183,8 @@ public class TeamManager : NetworkBehaviour
 
     public void SetTeamSwitchButtons()
     {
-
-        for (int i = 0; i < players.Count -1; i++)
+        print(LocalConnection.ClientId);
+        for (int i = 0; i < players.Count; i++)
         {
             if (LocalConnection.ClientId == players[i].GetComponent<PlayerData>().playerId)
             {
