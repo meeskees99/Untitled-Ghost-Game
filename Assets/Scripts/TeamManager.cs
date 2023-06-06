@@ -186,10 +186,13 @@ public class TeamManager : NetworkBehaviour
         print(LocalConnection.ClientId);
         for (int i = 0; i < players.Count; i++)
         {
+            print("For I loop");
             if (LocalConnection.ClientId == players[i].GetComponent<PlayerData>().playerId)
             {
+                print("If clientId == playerId");
                 for (int x = 0; x < switchTeamButtons.Length; x++)
                 {
+                    print("For x loop");
                     if (x == players[i].GetComponent<PlayerData>().teamID)
                     {
                         print("false");
