@@ -184,7 +184,6 @@ public class TeamManager : NetworkBehaviour
         {
             players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
         }
-        
     }
 
     [ObserversRpc] public void SetTeamSwitchButtons()

@@ -58,13 +58,7 @@ public class MouseLookAdvanced : NetworkBehaviour
                 mouseLocked = !mouseLocked;
                 Cursor.visible = false;
             }
-
         }
-        //if (!base.IsOwner)
-        //{
-        //    print("print");
-        //    this.gameObject.SetActive(false);
-        //}
 
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime* sens;

@@ -139,11 +139,15 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: -5421627816488725634}
   _networkObjectCache: {fileID: -5421627816488725634}
+  ghostData: {fileID: 11400000, guid: 23b856b78941bf7489b8de2b55db19fd, type: 2}
   walkableLayer:
     serializedVersion: 2
     m_Bits: 64
   walkRadius: 0
   waitTime: 0
+  timeToSuck: 0
+  rechargeRate: 0
+  points: 0
 --- !u!114 &-7598521523517749195
 MonoBehaviour:
   m_ObjectHideFlags: 0
