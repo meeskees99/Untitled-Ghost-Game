@@ -145,6 +145,12 @@ public class TeamManager : NetworkBehaviour
         yield return new WaitForSeconds(0.1f);
         SetParents();
     }
+
+    public IEnumerator WaitSomeMoreDickHead()
+    {
+        yield return new WaitForSeconds(0.1f);
+        SetTeamSwitchButtons();
+    }
     [ObserversRpc] public void SetParents()
     {
         for (int x = 0; x < players.Count; x++)

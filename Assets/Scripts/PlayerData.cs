@@ -69,7 +69,7 @@ public class PlayerData : NetworkBehaviour
             SetParentTeam();
             GetUsernameObserver();
         }
-        manager.SetTeamSwitchButtons();
+        StartCoroutine(manager.WaitSomeMoreDickHead());
     }
 
     [ServerRpc(RequireOwnership = false)] public void SetParentTeam()
@@ -94,5 +94,10 @@ public class PlayerData : NetworkBehaviour
     {
         username = name;
         manager.SetPlayerNameServer();
+    }
+
+    private void Update()
+    {
+        print(playerId);
     }
 }
