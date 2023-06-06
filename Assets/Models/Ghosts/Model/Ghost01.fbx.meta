@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 406b629afb7d9774c9084815f69376ac
+guid: f002c182d1fa1024dacd883d00bbb4d1
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
@@ -7,28 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BackPack
-    second: {fileID: 2100000, guid: dca9ae56cca8fd34eb69ba7e787e2d9e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CharacterMat1
-    second: {fileID: 2100000, guid: 57b0abb987c64e1468e66dd266d4b2b6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CharacterMat2
-    second: {fileID: 2100000, guid: fcdbbb839fb6de74bab0bad55e1a02cb, type: 2}
+      name: Body
+    second: {fileID: 2100000, guid: 980c67a50a3c02d4991ae6c1ba283ad8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Eyes
-    second: {fileID: 2100000, guid: 577a94e10f4838743b526f193682ad7c, type: 2}
+    second: {fileID: 2100000, guid: 12de9a729db3e6645899d8b48e2e740d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: GlowingMaterial
-    second: {fileID: 2100000, guid: f754a14109fb754469f694949d84b31e, type: 2}
+      name: Internals
+    second: {fileID: 2100000, guid: 12de9a729db3e6645899d8b48e2e740d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 406b629afb7d9774c9084815f69376ac
+guid: 40cefa55b73e39348b6e85cfd45a84fd
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
@@ -29,6 +29,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: GlowingMaterial
     second: {fileID: 2100000, guid: f754a14109fb754469f694949d84b31e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Weapon
+    second: {fileID: 2100000, guid: 72dbc23a8f63a2649b67a8be3415dcd3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
