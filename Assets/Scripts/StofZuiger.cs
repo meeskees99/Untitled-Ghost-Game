@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StofZuiger : MonoBehaviour
 {
-    [SerializeField] GameObject zuigBox;
-    [SerializeField] float suckRange;
+    //[SerializeField] GameObject zuigBox;
+    //[SerializeField] float suckRange;
     [SerializeField] LayerMask mask;
 
     [SerializeField] Transform shootPos;
@@ -13,7 +13,7 @@ public class StofZuiger : MonoBehaviour
     RaycastHit hit2;
     RaycastHit hit3;
     float time;
-    List<GameObject> target = new();
+    [SerializeField] List<GameObject> target = new();
     string GhostTag = "Ghost";
 
     void Update()
@@ -27,8 +27,10 @@ public class StofZuiger : MonoBehaviour
         {
             if (hit1.transform.tag == GhostTag)
             {
-                if (hit1.transform.GetComponent<GhostMovement>().timeleft() <= 0)
-                    //Killed(hit1.transform.GetComponent<GhostMovement>().points);
+                if(hit1.transform.GetComponent<GhostMovement>().timeleft() <= 0){
+                    print("Ghost Cought");
+                }
+                else if (hit1.transform.GetComponent<GhostMovement>().timeleft() > 0)
                     hit1.transform.GetComponent<GhostMovement>().isHit = true;
             }
             else
@@ -41,7 +43,6 @@ public class StofZuiger : MonoBehaviour
             if (hit2.transform.tag == GhostTag)
             {
                 if (hit2.transform.GetComponent<GhostMovement>().timeleft() <= 0)
-                    //Killed(hit2.transform.GetComponent<GhostMovement>().points);
                     hit2.transform.GetComponent<GhostMovement>().isHit = true;
             }
             else
@@ -54,7 +55,6 @@ public class StofZuiger : MonoBehaviour
             if (hit3.transform.tag == GhostTag)
             {
                 if (hit3.transform.GetComponent<GhostMovement>().timeleft() <= 0)
-                    //Killed(hit3.transform.GetComponent<GhostMovement>().points);
                     hit3.transform.GetComponent<GhostMovement>().isHit = true;
             }
             else
@@ -63,23 +63,21 @@ public class StofZuiger : MonoBehaviour
             }
         }
     }
-
-    void Killed(int ghostpoints)
-    {
-
-    }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(GhostTag))
         {
+            print(other + " exit");
             target.Remove(other.gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag(GhostTag))
         {
+            print(other + " enter");
             target.Add(other.gameObject);
         }
     }

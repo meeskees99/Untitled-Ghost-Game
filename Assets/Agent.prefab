@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9087618149018236691}
   - component: {fileID: -7598521523517749195}
   - component: {fileID: -5421627816488725634}
+  - component: {fileID: 4852985897064686565}
   m_Layer: 3
   m_Name: Agent
   m_TagString: Ghost
@@ -145,9 +146,6 @@ MonoBehaviour:
     m_Bits: 64
   walkRadius: 0
   waitTime: 0
-  timeToSuck: 0
-  rechargeRate: 0
-  points: 0
 --- !u!114 &-7598521523517749195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,3 +218,19 @@ MonoBehaviour:
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 7353038116598169027
   _sceneNetworkObjects: []
+--- !u!54 &4852985897064686565
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087618149018236688}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
