@@ -24,6 +24,7 @@ public class StofZuiger : NetworkBehaviour
         base.OnStartClient();
         if (!base.IsOwner)
         {
+            GetComponent<MeshCollider>().enabled = false;
             this.enabled = false;
         }
     }
