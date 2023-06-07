@@ -99,6 +99,7 @@ public class GhostMovement : NetworkBehaviour
     public void Die()
     {
         print("Ghost Dead");
+        Despawn(gameObject);
         Destroy(gameObject);
     }
 
