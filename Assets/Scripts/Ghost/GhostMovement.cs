@@ -26,6 +26,8 @@ public class GhostMovement : NetworkBehaviour
     int points;
 
     float timer;
+
+    bool isDead;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,9 @@ public class GhostMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+            return;
+
         PatrolToNextPoint();
 
         if (hitness)
@@ -87,7 +92,8 @@ public class GhostMovement : NetworkBehaviour
         hitness = hit;
     }
 
-    public int Points(){
+    public int Points()
+    {
         return points;
     }
 
@@ -95,11 +101,12 @@ public class GhostMovement : NetworkBehaviour
     {
         suckieTimer -= Time.deltaTime;
     }
-
+    [ServerRpc(RequireOwnership = false)]
     public void Die()
     {
+        isDead = true;
         print("Ghost Dead");
-        Despawn(gameObject);
+        this.NetworkObject.Despawn();
     }
 
     void ResetSuckie()
