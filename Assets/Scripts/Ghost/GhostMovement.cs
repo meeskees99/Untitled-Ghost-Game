@@ -100,7 +100,6 @@ public class GhostMovement : NetworkBehaviour
     {
         print("Ghost Dead");
         Despawn(gameObject);
-        Destroy(gameObject);
     }
 
     void ResetSuckie()
