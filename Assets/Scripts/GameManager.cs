@@ -6,36 +6,33 @@ using UnityEngine;
 
 public class GameManager : NetworkBehaviour
 {
-    [Header("Ghosts")]
-    [SerializeField] GameObject[] ghosts;
-    int GhostIndex;
-    [SerializeField] Transform spawnLocation;
-
-    [SyncVar] [SerializeField] PlayerData[] players;
+    [SyncVar][SerializeField] PlayerData[] players;
 
     [SerializeField] Transform[] team1points;
     [SerializeField] Transform[] team2points;
-
-    [SyncVar] GameObject ghost;
 
     [SyncVar] int team1Index;
     [SyncVar] int team2Index;
     // Start is called before the first frame update
     void Start()
     {
-        if (IsHost && ghost == null)
+        if (IsHost)
         {
-            SpawnAgent();
             SetTeamPoints();
         }
     }
+    void Update()
+    {
+        
+    }
 
-    [ServerRpc(RequireOwnership = false)] void SetTeamPoints()
+    [ServerRpc(RequireOwnership = false)]
+    void SetTeamPoints()
     {
         players = FindObjectsOfType<PlayerData>();
         for (int i = 0; i < players.Length; i++)
         {
-            if(players[i].teamID == 0)
+            if (players[i].teamID == 0)
             {
                 players[i].transform.position = team1points[team1Index].transform.position;
                 team1Index++;
@@ -48,7 +45,8 @@ public class GameManager : NetworkBehaviour
         }
         SetTeamPointsObserver();
     }
-    [ObserversRpc(BufferLast = true)] void SetTeamPointsObserver()
+    [ObserversRpc(BufferLast = true)]
+    void SetTeamPointsObserver()
     {
         print("a");
         for (int i = 0; i < players.Length; i++)
@@ -62,12 +60,8 @@ public class GameManager : NetworkBehaviour
                 players[i].transform.position = team2points[team2Index].transform.position;
             }
         }
-    }    
-    
-
-    [ServerRpc(RequireOwnership = false)] void SpawnAgent()
-    {
-        ghost = Instantiate(ghosts[GhostIndex], spawnLocation.position, spawnLocation.rotation);
-        Spawn(ghost);
     }
+
+
+    
 }

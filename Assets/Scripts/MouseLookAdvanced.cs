@@ -70,23 +70,5 @@ public class MouseLookAdvanced : NetworkBehaviour
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-        RaycastHit hit;
-
-        Debug.DrawLine(transform.position, transform.forward, Color.red);
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if (Physics.Raycast(transform.position, transform.forward, out hit, suckRange, mask))
-            {
-                if (hit.transform.tag == "Ghost")
-                {
-                    GibeOints();
-                }
-            }
-        }
-    }
-
-    [ServerRpc(RequireOwnership = true)] public void GibeOints()
-    {
-        playerData.pointsGathered++;
     }
 }

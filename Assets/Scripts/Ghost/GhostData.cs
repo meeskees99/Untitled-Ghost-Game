@@ -14,5 +14,5 @@ public class GhostData : ScriptableObject
     public int suckTime;
     [Tooltip("Rate at which this ghost regains strenght")]
     public int rechargeRate;
-    
+
 }

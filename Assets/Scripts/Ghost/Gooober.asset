@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gooober
   m_EditorClassIdentifier: 
   points: 1
-  speed: 5
-  walkradius: 10
+  speed: 0
+  walkradius: 0
   suckTime: 5
   rechargeRate: 8

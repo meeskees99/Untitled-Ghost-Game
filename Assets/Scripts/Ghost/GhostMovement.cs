@@ -20,9 +20,9 @@ public class GhostMovement : NetworkBehaviour
     [SerializeField] float waitTime;
 
     [Header("Ghost Options")]
-    float timeToSuck;
+    public float timeToSuck;
     float rechargeRate;
-    float suckieTimer;
+    public float suckieTimer;
     int points;
 
     float timer;
@@ -39,6 +39,7 @@ public class GhostMovement : NetworkBehaviour
         agent.autoBraking = false;
         suckieTimer = timeToSuck;
         PatrolToNextPoint();
+        GetComponent<MeshRenderer>().enabled = true;
 
     }
     // Update is called once per frame
@@ -76,40 +77,39 @@ public class GhostMovement : NetworkBehaviour
             }
         }
     }
-    public float timeleft()
+    public float timeLeft()
     {
-        return timeToSuck;
+        return suckieTimer;
     }
-    private bool hitness;
-    public bool isHit
+    public bool hitness;
+    public void isHit(bool hit)
     {
-        get
-        {
-            return hitness;
-        }
-        set
-        {
-            hitness = isHit;
-        }
+        hitness = hit;
+    }
+
+    public int Points(){
+        return points;
     }
 
     void GetSucked()
     {
-        if (suckieTimer >= 0)
-        {
-
-        }
         suckieTimer -= Time.deltaTime;
+    }
+
+    public void Die()
+    {
+        print("Ghost Dead");
+        Destroy(gameObject);
     }
 
     void ResetSuckie()
     {
-        if (!hitness && suckieTimer != timeToSuck)
+        if (!hitness && suckieTimer < timeToSuck)
         {
-            suckieTimer += rechargeRate;
+            suckieTimer += rechargeRate * Time.deltaTime;
 
         }
-        else if (!hitness && suckieTimer < timeToSuck)
+        else if (!hitness && suckieTimer > timeToSuck)
         {
             suckieTimer = timeToSuck;
         }

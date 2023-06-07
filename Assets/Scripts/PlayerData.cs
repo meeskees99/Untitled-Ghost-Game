@@ -17,7 +17,7 @@ public class PlayerData : NetworkBehaviour
     public TeamManager manager;
 
     [SyncVar] public string username;
-    
+
     public GameObject UI;
 
     [SyncVar] public int pointsGathered;
@@ -48,14 +48,16 @@ public class PlayerData : NetworkBehaviour
         Destroy(UI);
         manager.currentClients--;
     }
-    [ServerRpc(RequireOwnership = true)] public void SetPlayerID(int id)
+    [ServerRpc(RequireOwnership = true)]
+    public void SetPlayerID(int id)
     {
         playerId = id;
     }
 
-    [ServerRpc(RequireOwnership = true)] public void SetPlayerTeam()
+    [ServerRpc(RequireOwnership = true)]
+    public void SetPlayerTeam()
     {
-        if (manager.teams[0].tData.Count -1 <= manager.teams[1].tData.Count -1)
+        if (manager.teams[0].tData.Count - 1 <= manager.teams[1].tData.Count - 1)
         {
             teamID = 0;
             manager.AddTeam(this, teamID);
@@ -72,13 +74,15 @@ public class PlayerData : NetworkBehaviour
         StartCoroutine(manager.WaitSomeMoreDickHead());
     }
 
-    [ServerRpc(RequireOwnership = false)] public void SetParentTeam()
+    [ServerRpc(RequireOwnership = false)]
+    public void SetParentTeam()
     {
         manager.ParentPlayerUIServer(teamID);
     }
 
 
-    [ObserversRpc] public void GetUsernameObserver()
+    [ObserversRpc]
+    public void GetUsernameObserver()
     {
         if (PlayerPrefs.HasKey("username"))
         {
@@ -90,10 +94,17 @@ public class PlayerData : NetworkBehaviour
             GetUsernameServer("Player: " + LocalConnection.ClientId);
         }
     }
-    [ServerRpc(RequireOwnership = true)] public void GetUsernameServer(string name)
+    [ServerRpc(RequireOwnership = true)]
+    public void GetUsernameServer(string name)
     {
         username = name;
         manager.SetPlayerNameServer();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void GainPoints(int pointAmount)
+    {
+        pointsGathered += pointAmount;
     }
 
     private void Update()
