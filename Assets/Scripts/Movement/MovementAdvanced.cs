@@ -300,6 +300,8 @@ public class MovementAdvanced : NetworkBehaviour
     {
         if (IsHost)
             return;
+
+        animator.SetBool(s, b);
     }
 
 }
