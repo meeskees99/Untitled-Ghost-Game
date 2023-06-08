@@ -81,13 +81,26 @@ public class MovementAdvanced : NetworkBehaviour
             this.enabled = false;
         }
     }
+
+    bool GroundBool{
+        get{return grounded;}
+        set{
+            if(value == grounded){
+                return;
+            }
+            grounded = value;
+            if(grounded){
+                DoAnimation("HasLanded");
+            }
+        }
+    }
     private void Update()
     {
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
-
+        
         MyInput();
         SpeedControl();
         StateHandler();
@@ -107,6 +120,7 @@ public class MovementAdvanced : NetworkBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+        DoBlendTree();
 
         //When To Jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
@@ -239,5 +253,12 @@ public class MovementAdvanced : NetworkBehaviour
     public void DoAnimation(string Name)
     {
         animator.SetTrigger(Name);
+    }
+
+    [ServerRpc(RequireOwnership = true)]
+    public void DoBlendTree()
+    {
+        animator.SetFloat("X", horizontalInput);
+        animator.SetFloat("Y", verticalInput);
     }
 }
