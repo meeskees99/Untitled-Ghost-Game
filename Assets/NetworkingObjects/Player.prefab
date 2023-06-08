@@ -485,7 +485,6 @@ GameObject:
   - component: {fileID: 1718954057773777581}
   - component: {fileID: 5384800910241278102}
   - component: {fileID: 2548425321851108391}
-  - component: {fileID: 2372307945159953512}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -678,26 +677,6 @@ MonoBehaviour:
   UI: {fileID: 1493123017737301182}
   pointsGathered: 0
   cam: {fileID: 0}
---- !u!95 &2372307945159953512
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1718954057773777429}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3347236749433325221
 GameObject:
   m_ObjectHideFlags: 0
