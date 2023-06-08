@@ -8,23 +8,26 @@ using UnityEngine.InputSystem;
 public class MovementAdvanced : NetworkBehaviour
 {
     [Header("Movement")]
-    [SerializeField] float moveSpeed;
+    float moveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;
-    [SerializeField] float crouchSpeed;
+    //[SerializeField] float crouchSpeed;
     [SerializeField] float groundDrag;
     [SerializeField] Animator animator;
 
     [Header("Jumping")]
+    [Tooltip("How high the player will jump")]
     [SerializeField] float jumpForce;
+    [Tooltip("The time a player has to wait before being able to jump again")]
     [SerializeField] float jumpCooldown;
+    [Tooltip("Speed will multiply by this whilst airborn")]
     [SerializeField] float airMultiplier;
     bool readyToJump;
 
-    [Header("Crouching")]
-    [SerializeField] float crouchYScale;
-    
-    float startCrouchYScale;
+    //[Header("Crouching")]
+    //[SerializeField] float crouchYScale;
+
+    //float startCrouchYScale;
 
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
@@ -41,7 +44,7 @@ public class MovementAdvanced : NetworkBehaviour
     RaycastHit slopeHit;
 
     [SerializeField] Transform orientation;
-    [SerializeField] TMP_Text speedTxt; 
+    [SerializeField] TMP_Text speedTxt;
 
     float horizontalInput;
     float verticalInput;
@@ -54,16 +57,16 @@ public class MovementAdvanced : NetworkBehaviour
     public MovementState state;
     public enum MovementState
     {
-        walk, run, crouch, air
+        walk, run, air
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        //rb.freezeRotation = true;
         readyToJump = true;
-
-        startCrouchYScale = transform.localScale.y;
+        animator = GetComponent<Animator>();
+        //startCrouchYScale = transform.localScale.y;
     }
 
     public override void OnStartClient()
@@ -90,7 +93,7 @@ public class MovementAdvanced : NetworkBehaviour
         StateHandler();
 
         // Handle drag
-        if(grounded)
+        if (grounded)
             rb.drag = groundDrag;
         else
             rb.drag = 0f;
@@ -106,38 +109,38 @@ public class MovementAdvanced : NetworkBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //When To Jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        //When To Crouch
-        if (Input.GetKeyDown(crouchKey))
-        {
-            //Placeholder
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            //animator.SetTrigger("Crouch");
-            //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-        }
+        // //When To Crouch
+        // if (Input.GetKeyDown(crouchKey))
+        // {
+        //     //Placeholder
+        //     transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+        //     //animator.SetTrigger("Crouch");
+        //     //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        // }
 
-        if (Input.GetKeyUp(crouchKey))
-        {
-            transform.localScale = new Vector3(transform.localScale.x, startCrouchYScale, transform.localScale.z);
-        }
+        // if (Input.GetKeyUp(crouchKey))
+        // {
+        //     transform.localScale = new Vector3(transform.localScale.x, startCrouchYScale, transform.localScale.z);
+        // }
     }
 
     void StateHandler()
     {
         //Mode Crouching
-        if (Input.GetKey(crouchKey))
-        {
-            state = MovementState.crouch;
-            moveSpeed = crouchSpeed;
-        }
+        // if (Input.GetKey(crouchKey))
+        // {
+        //     state = MovementState.crouch;
+        //     moveSpeed = crouchSpeed;
+        // }
         //Mode - Running
-        else if(grounded && Input.GetKey(sprintKey))
+        if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.run;
             moveSpeed = sprintSpeed;
@@ -162,19 +165,19 @@ public class MovementAdvanced : NetworkBehaviour
         // On slope
         if (OnSlope())
         {
-            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f , ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
 
             if (rb.velocity.y > 0)
                 rb.AddForce(Vector3.down * 40f, ForceMode.Force);
         }
 
         //On ground
-        else if(grounded)
-            rb.AddForce (moveDir.normalized * moveSpeed * 10, ForceMode.Force);
+        else if (grounded)
+            rb.AddForce(moveDir.normalized * moveSpeed * 10, ForceMode.Force);
         //In air
-        else if(!grounded) 
+        else if (!grounded)
             rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
-        
+
         // Turn off gravity while on slope
         rb.useGravity = !OnSlope();
     }
@@ -184,7 +187,7 @@ public class MovementAdvanced : NetworkBehaviour
         //Limit speed on slope
         if (OnSlope())
         {
-            if(rb.velocity.magnitude > moveSpeed)
+            if (rb.velocity.magnitude > moveSpeed)
                 rb.velocity = rb.velocity.normalized * moveSpeed;
         }
 
@@ -200,7 +203,7 @@ public class MovementAdvanced : NetworkBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
-        
+
     }
 
     void Jump()
@@ -209,6 +212,7 @@ public class MovementAdvanced : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        animator.SetTrigger("Jump");
     }
     void ResetJump()
     {
@@ -217,10 +221,10 @@ public class MovementAdvanced : NetworkBehaviour
 
     bool OnSlope()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0; 
+            return angle < maxSlopeAngle && angle != 0;
         }
 
         return false;
@@ -229,5 +233,11 @@ public class MovementAdvanced : NetworkBehaviour
     Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
+    }
+
+    [ServerRpc(RequireOwnership = true)]
+    public void DoAnimation(string Name)
+    {
+        animator.SetTrigger(Name);
     }
 }
