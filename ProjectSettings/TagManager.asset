@@ -5,15 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Floor
+  - Playerbody
+  - Ghost
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ghost
   - Water
   - UI
   - Ground
-  - 
+  - Environment
   - 
   - 
   - 

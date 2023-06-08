@@ -5,26 +5,42 @@ using FishNet.Object;
 
 public class MouseLookAdvanced : NetworkBehaviour
 {
-    [SerializeField] float sensX;
-    [SerializeField] float sensY;
+    [Header("Settings")]
+    [Tooltip("Range you can suck up ghosts from")]
+    [SerializeField] float suckRange;
+
+    [SerializeField] float sens;
+    [SerializeField] PlayerData playerData;
 
     [SerializeField] Transform orientation;
-
     float xRotation;
     float yRotation;
 
     bool mouseLocked = true;
 
-    // Start is called before the first frame update
-    void Start()
+    Camera cam;
+
+    [SerializeField] LayerMask mask;
+    public override void OnStartClient()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        base.OnStartClient();
+        if (!base.IsOwner)
+        {
+            this.enabled = false;
+        }
+        else
+        {
+            cam = FindObjectOfType<Camera>();
+            cam.transform.SetParent(transform);
+            cam.transform.position = this.transform.position;
+            cam.transform.rotation = new Quaternion();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
         if (mouseLocked)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -42,16 +58,10 @@ public class MouseLookAdvanced : NetworkBehaviour
                 mouseLocked = !mouseLocked;
                 Cursor.visible = false;
             }
-
         }
-        //if (!base.IsOwner)
-        //{
-        //    print("print");
-        //    this.gameObject.SetActive(false);
-        //}
 
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime* sensY;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime* sens;
 
         yRotation += mouseX;
 

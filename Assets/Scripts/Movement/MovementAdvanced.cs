@@ -65,11 +65,21 @@ public class MovementAdvanced : NetworkBehaviour
 
         startCrouchYScale = transform.localScale.y;
     }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        if (IsHost && gameObject.GetComponent<PlayerData>().playerId != 0)
+        {
+            this.enabled = false;
+        }
+        else if (!IsOwner)
+        {
+            this.enabled = false;
+        }
+    }
     private void Update()
     {
-        //if (!base.IsOwner)
-        //    return;
-
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 
         // Ground Check
@@ -127,7 +137,7 @@ public class MovementAdvanced : NetworkBehaviour
             moveSpeed = crouchSpeed;
         }
         //Mode - Running
-        if(grounded && Input.GetKey(sprintKey))
+        else if(grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.run;
             moveSpeed = sprintSpeed;
