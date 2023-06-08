@@ -283,15 +283,11 @@ public class MovementAdvanced : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void DoBlendTree()
     {
-        animator.SetFloat("X", horizontalInput);
-        animator.SetFloat("Y", verticalInput);
         ObserverTree(horizontalInput, verticalInput);
     }
     [ObserversRpc]
     public void ObserverTree(float hor, float ver)
     {
-        if (IsHost)
-            return;
         animator.SetFloat("X", hor);
         animator.SetFloat("Y", ver);
     }
