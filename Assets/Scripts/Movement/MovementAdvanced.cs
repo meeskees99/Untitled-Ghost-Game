@@ -109,12 +109,16 @@ public class MovementAdvanced : NetworkBehaviour
         MyInput();
         SpeedControl();
         StateHandler();
-
+        SetBoolAnim("OnGround", GroundBool);
         // Handle drag
         if (GroundBool)
+        {
             rb.drag = groundDrag;
+        }
         else
+        {
             rb.drag = 0f;
+        }
     }
 
     private void FixedUpdate()
@@ -264,7 +268,7 @@ public class MovementAdvanced : NetworkBehaviour
     [ObserversRpc]
     public void ObserverAnim(string Name)
     {
-        if(IsHost)
+        if (IsHost)
             return;
         animator.SetTrigger(Name);
         print("Ik doe nu trigger " + Name);
@@ -280,10 +284,22 @@ public class MovementAdvanced : NetworkBehaviour
     [ObserversRpc]
     public void ObserverTree()
     {
-        if(IsHost)
+        if (IsHost)
             return;
         animator.SetFloat("X", horizontalInput);
         animator.SetFloat("Y", verticalInput);
+    }
+    [ServerRpc(RequireOwnership = true)]
+    public void SetBoolAnim(string s, bool b)
+    {
+        animator.SetBool(s, b);
+        SetBoolObserver(s, b);
+    }
+    [ObserversRpc]
+    public void SetBoolObserver(string s, bool b)
+    {
+        if (IsHost)
+            return;
     }
 
 }
