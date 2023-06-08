@@ -130,6 +130,12 @@ public class MovementAdvanced : NetworkBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         DoBlendTree();
+        if(horizontalInput != 0 || verticalInput != 0){
+            SetBoolAnim("IsWalking",true);
+        }
+        else{
+             SetBoolAnim("IsWalking",false);
+        }
 
         //When To Jump
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
