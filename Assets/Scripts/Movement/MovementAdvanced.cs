@@ -285,15 +285,15 @@ public class MovementAdvanced : NetworkBehaviour
     {
         animator.SetFloat("X", horizontalInput);
         animator.SetFloat("Y", verticalInput);
-        ObserverTree();
+        ObserverTree(horizontalInput, verticalInput);
     }
     [ObserversRpc]
-    public void ObserverTree()
+    public void ObserverTree(float hor, float ver)
     {
         if (IsHost)
             return;
-        animator.SetFloat("X", horizontalInput);
-        animator.SetFloat("Y", verticalInput);
+        animator.SetFloat("X", hor);
+        animator.SetFloat("Y", ver);
     }
     [ServerRpc(RequireOwnership = true)]
     public void SetBoolAnim(string s, bool b)
