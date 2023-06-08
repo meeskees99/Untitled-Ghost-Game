@@ -65,7 +65,7 @@ public class MovementAdvanced : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         //rb.freezeRotation = true;
         readyToJump = true;
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         //startCrouchYScale = transform.localScale.y;
     }
 
