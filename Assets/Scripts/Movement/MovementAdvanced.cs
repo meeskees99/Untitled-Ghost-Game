@@ -89,7 +89,7 @@ public class MovementAdvanced : NetworkBehaviour
                 return;
             }
             grounded = value;
-            if(grounded){
+            if(!grounded){
                 DoAnimation("HasLanded");
             }
         }
