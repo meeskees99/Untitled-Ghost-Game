@@ -253,6 +253,7 @@ public class MovementAdvanced : NetworkBehaviour
     public void DoAnimation(string Name)
     {
         animator.SetTrigger(Name);
+        print("Ik doe nu trigger " + name);
     }
 
     [ServerRpc(RequireOwnership = true)]
