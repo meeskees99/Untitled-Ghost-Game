@@ -82,14 +82,19 @@ public class MovementAdvanced : NetworkBehaviour
         }
     }
 
-    bool GroundBool{
-        get{return grounded;}
-        set{
-            if(value == grounded){
+    bool GroundBool
+    {
+        get { return grounded; }
+        set
+        {
+            if (value == grounded)
+            {
                 return;
             }
             grounded = value;
-            if(grounded){
+            if (grounded)
+            {
+                print("Ik kom");
                 DoAnimation("HasLanded");
             }
         }
@@ -100,7 +105,7 @@ public class MovementAdvanced : NetworkBehaviour
 
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
-        
+
         MyInput();
         SpeedControl();
         StateHandler();
@@ -226,7 +231,7 @@ public class MovementAdvanced : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        animator.SetTrigger("Jump");
+        DoAnimation("Jump");
     }
     void ResetJump()
     {
@@ -253,7 +258,14 @@ public class MovementAdvanced : NetworkBehaviour
     public void DoAnimation(string Name)
     {
         animator.SetTrigger(Name);
-        print("Ik doe nu trigger " + name);
+        print("Ik doe nu trigger " + Name);
+        ObserverAnim(Name);
+    }
+    [ObserversRpc]
+    public void ObserverAnim(string Name)
+    {
+        animator.SetTrigger(Name);
+        print("Ik doe nu trigger " + Name);
     }
 
     [ServerRpc(RequireOwnership = true)]
@@ -261,5 +273,13 @@ public class MovementAdvanced : NetworkBehaviour
     {
         animator.SetFloat("X", horizontalInput);
         animator.SetFloat("Y", verticalInput);
+        ObserverTree();
     }
+    [ObserversRpc]
+    public void ObserverTree()
+    {
+        animator.SetFloat("X", horizontalInput);
+        animator.SetFloat("Y", verticalInput);
+    }
+
 }
