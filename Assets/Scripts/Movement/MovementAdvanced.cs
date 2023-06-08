@@ -104,14 +104,14 @@ public class MovementAdvanced : NetworkBehaviour
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 
         // Ground Check
-        grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
+        GroundBool = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
 
         MyInput();
         SpeedControl();
         StateHandler();
 
         // Handle drag
-        if (grounded)
+        if (GroundBool)
             rb.drag = groundDrag;
         else
             rb.drag = 0f;
@@ -159,13 +159,13 @@ public class MovementAdvanced : NetworkBehaviour
         //     moveSpeed = crouchSpeed;
         // }
         //Mode - Running
-        if (grounded && Input.GetKey(sprintKey))
+        if (GroundBool && Input.GetKey(sprintKey))
         {
             state = MovementState.run;
             moveSpeed = sprintSpeed;
         }
         //Mode - Walking
-        else if (grounded)
+        else if (GroundBool)
         {
             state = MovementState.walk;
             moveSpeed = walkSpeed;
@@ -191,10 +191,10 @@ public class MovementAdvanced : NetworkBehaviour
         }
 
         //On ground
-        else if (grounded)
+        else if (GroundBool)
             rb.AddForce(moveDir.normalized * moveSpeed * 10, ForceMode.Force);
         //In air
-        else if (!grounded)
+        else if (!GroundBool)
             rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
 
         // Turn off gravity while on slope
@@ -264,6 +264,8 @@ public class MovementAdvanced : NetworkBehaviour
     [ObserversRpc]
     public void ObserverAnim(string Name)
     {
+        if(IsHost)
+            return;
         animator.SetTrigger(Name);
         print("Ik doe nu trigger " + Name);
     }
@@ -278,6 +280,8 @@ public class MovementAdvanced : NetworkBehaviour
     [ObserversRpc]
     public void ObserverTree()
     {
+        if(IsHost)
+            return;
         animator.SetFloat("X", horizontalInput);
         animator.SetFloat("Y", verticalInput);
     }

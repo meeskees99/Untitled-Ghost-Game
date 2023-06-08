@@ -131,7 +131,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   walkRadius: 0
-  waitTime: 0
+  waitTime: 10000
+  timeToSuck: 0
+  suckieTimer: 0
+  hitness: 0
 --- !u!114 &-7598521523517749195
 MonoBehaviour:
   m_ObjectHideFlags: 0
