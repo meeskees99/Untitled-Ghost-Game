@@ -2,23 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FishNet.Object;
-
+using FishNet.Object.Synchronizing;
 public class StofZuiger : NetworkBehaviour
 {
     //[SerializeField] GameObject zuigBox;
     //[SerializeField] float suckRange;
+
+    [SerializeField] KeyCode suck;
+    [SerializeField] KeyCode shoot;
     [SerializeField] LayerMask mask;
     [SerializeField] PlayerData pData;
     [SerializeField] Transform shootPos;
     [SerializeField] float suckRange;
+
+    [SerializeField] GameObject ghost;
     RaycastHit hit1;
     RaycastHit hit2;
     RaycastHit hit3;
     float time;
+
+    GameManager gameManager;
+
+    [SerializeField] int maxGhostPoints = 3;
+    [SyncVar] int ghostPoints;
+    bool maxGhost;
+
     [SerializeField] List<GameObject> target = new();
     GameObject Kaas;
     string GhostTag = "Ghost";
 
+    void Start()
+    {
+
+    }
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -30,94 +46,47 @@ public class StofZuiger : NetworkBehaviour
     }
     void Update()
     {
-        if (target == null)
+        if (gameManager == null)
         {
-            return;
+            gameManager = FindObjectOfType<GameManager>();
         }
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (ghostPoints > maxGhostPoints)
         {
-            #region Ghost 1
-            if (target.Count >= 1)
-            {
-                Debug.DrawRay(shootPos.position, target[0].transform.position - shootPos.transform.position);
-                if (Physics.Raycast(shootPos.position, target[0].transform.position - shootPos.position, out hit1, suckRange, mask))
-                {
-                    print("Nu shiet ik de raycast");
-                    if (hit1.transform.tag == GhostTag)
-                    {
+            int g = ghostPoints - maxGhostPoints;
 
-                        if (hit1.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
-                        {
-                            pData.GainPoints(target[0].transform.GetComponent<GhostMovement>().Points());
-                            target.Remove(target[0]);
-                            hit1.transform.GetComponent<GhostMovement>().Die();
-                            print("Ghost 1 Cought");
-                        }
-                        else if (hit1.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
-                            hit1.transform.GetComponent<GhostMovement>().isHit(true);
-                    }
-                    else
-                    {
-                        target[0].transform.GetComponent<GhostMovement>().isHit(false);
-                    }
-                }
+            for (int x = 0; x < g; x++)
+            {
+                // Shoot excess ghost with shoot function
+                //Shoot();
+                ghostPoints--;
+            }
+            if (ghostPoints == maxGhostPoints)
+            {
+                maxGhost = true;
+            }
 
-
-            }
-            else
-            {
-                print("No Targets In Range!");
-            }
-            #endregion
-            #region Ghost 2
-            if (target.Count >= 2 && Physics.Raycast(shootPos.position, target[1].transform.position - shootPos.position, out hit2, suckRange, mask))
-            {
-                Debug.DrawRay(shootPos.position, target[1].transform.position - shootPos.transform.position);
-                if (hit2.transform.tag == GhostTag)
-                {
-                    if (hit2.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
-                    {
-                        pData.GainPoints(target[1].transform.GetComponent<GhostMovement>().Points());
-                        target.Remove(target[1]);
-                        hit2.transform.GetComponent<GhostMovement>().Die();
-                        print("Ghost 2 Cought");
-                    }
-                    hit2.transform.GetComponent<GhostMovement>().isHit(true);
-                }
-                else
-                {
-                    target[1].transform.GetComponent<GhostMovement>().isHit(false);
-                }
-            }
-            #endregion
-            #region Ghost 3
-            if (target.Count >= 3 && Physics.Raycast(shootPos.position, target[2].transform.position - shootPos.position, out hit3, suckRange, mask))
-            {
-                Debug.DrawRay(shootPos.position, target[2].transform.position - shootPos.transform.position);
-                if (hit3.transform.tag == GhostTag)
-                {
-                    if (hit3.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
-                    {
-                        pData.GainPoints(target[2].transform.GetComponent<GhostMovement>().Points());
-                        target.Remove(target[2]);
-                        hit3.transform.GetComponent<GhostMovement>().Die();
-                        print("Ghost 3 Cought");
-                    }
-                    hit3.transform.GetComponent<GhostMovement>().isHit(true);
-                }
-                else
-                {
-                    target[2].transform.GetComponent<GhostMovement>().isHit(false);
-                }
-            }
-            #endregion
         }
         else
+        {
+            maxGhost = false;
+        }
+
+        if (Input.GetKey(suck))
+        {
+            if (maxGhost || target == null)
+                return;
+            Suck();
+        }
+        else if (Input.GetKeyUp(suck))
         {
             for (int i = 0; i < target.Count; i++)
             {
                 target[i].transform.GetComponent<GhostMovement>().isHit(false);
             }
+        }
+        if (Input.GetKeyDown(shoot))
+        {
+            Shoot();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -145,5 +114,52 @@ public class StofZuiger : NetworkBehaviour
         {
             Gizmos.DrawSphere(shootPos.position, sphereSize);
         }
+    }
+    public void Suck()
+    {
+        for (int i = 0; i < target.Count; i++)
+        {
+            if (target.Count >= 1)
+            {
+                Debug.DrawRay(shootPos.position, target[i].transform.position - shootPos.transform.position);
+                if (Physics.Raycast(shootPos.position, target[i].transform.position - shootPos.position, out hit1, suckRange, mask))
+                {
+                    print("Nu shiet ik de raycast");
+                    if (hit1.transform.tag == GhostTag)
+                    {
+
+                        if (hit1.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
+                        {
+                            ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
+                            pData.GainPoints(target[i].transform.GetComponent<GhostMovement>().Points());
+                            target.Remove(target[i]);
+                            hit1.transform.GetComponent<GhostMovement>().Die();
+                            print("Ghost " + i + " Cought");
+                        }
+                        else if (hit1.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
+                            hit1.transform.GetComponent<GhostMovement>().isHit(true);
+                    }
+                    else
+                    {
+                        target[i].transform.GetComponent<GhostMovement>().isHit(false);
+                    }
+                }
+            }
+            else
+            {
+                print("No Targets In Range!");
+            }
+        }
+    }
+    public void Shoot()
+    {
+        // GameObject spawnGhost = Instantiate(ghost);
+        // Spawn(spawnGhost);
+    }
+
+    public void StorePoints()
+    {
+        gameManager.AddPoints(pData.teamID, ghostPoints);
+        ghostPoints = 0;
     }
 }

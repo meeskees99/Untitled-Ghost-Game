@@ -8,11 +8,14 @@ public class GameManager : NetworkBehaviour
 {
     [SyncVar][SerializeField] PlayerData[] players;
 
-    [SerializeField] Transform[] team1points;
-    [SerializeField] Transform[] team2points;
+    [SerializeField] Transform[] spawn1;
+    [SerializeField] Transform[] spawn2;
 
     [SyncVar] int team1Index;
     [SyncVar] int team2Index;
+
+    [SyncVar] int team1Points;
+    [SyncVar] int team2Points;
 
     [Header("UI")]
     [SerializeField] GameObject settingsUI;
@@ -35,7 +38,7 @@ public class GameManager : NetworkBehaviour
     void Update()
     {
         int id = InstanceFinder.ClientManager.Connection.ClientId;
-        
+
         if (Input.GetKey(scoreboardButton) && !settingsUI.activeSelf)
         {
             for (int i = 0; i < players.Length; i++)
@@ -85,12 +88,12 @@ public class GameManager : NetworkBehaviour
         {
             if (players[i].teamID == 0)
             {
-                players[i].transform.position = team1points[team1Index].transform.position;
+                players[i].transform.position = spawn1[team1Index].transform.position;
                 team1Index++;
             }
             else if (players[i].teamID == 1)
             {
-                players[i].transform.position = team1points[team2Index].transform.position;
+                players[i].transform.position = spawn1[team2Index].transform.position;
                 team2Index++;
             }
         }
@@ -104,15 +107,24 @@ public class GameManager : NetworkBehaviour
         {
             if (players[i].teamID == 0)
             {
-                players[i].transform.position = team1points[team1Index].transform.position;
+                players[i].transform.position = spawn1[team1Index].transform.position;
             }
             else if (players[i].teamID == 1)
             {
-                players[i].transform.position = team2points[team2Index].transform.position;
+                players[i].transform.position = spawn2[team2Index].transform.position;
             }
         }
     }
-
-
-
+    [ServerRpc(RequireOwnership = false)]
+    public void AddPoints(int teamInt, int Points)
+    {
+        if (teamInt == 0)
+        {
+            team1Points += Points;
+        }
+        else if (teamInt == 1)
+        {
+            team1Points += Points;
+        }
+    }
 }

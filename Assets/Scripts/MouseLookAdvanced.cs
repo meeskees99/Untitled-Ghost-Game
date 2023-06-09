@@ -6,21 +6,22 @@ using FishNet.Object;
 public class MouseLookAdvanced : NetworkBehaviour
 {
     [Header("Settings")]
-    [Tooltip("Range you can suck up ghosts from")]
-    [SerializeField] float suckRange;
-
     [SerializeField] float sens;
-    [SerializeField] PlayerData playerData;
 
     [SerializeField] Transform orientation;
     float xRotation;
     float yRotation;
 
-    bool mouseLocked = true;
+    bool mouseLocked;
 
     Camera cam;
 
-    [SerializeField] LayerMask mask;
+    [SerializeField] StofZuiger stofZuiger;
+
+    [SerializeField] KeyCode use;
+
+    RaycastHit hit;
+    [SerializeField] float useRange;
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -40,28 +41,39 @@ public class MouseLookAdvanced : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(use))
+        {
+            if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
+            {
+                if (hit.transform.tag == "Canister")
+                {
+                    stofZuiger.StorePoints();
+                }
+            }
+        }
         sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
         if (mouseLocked)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Cursor.lockState = CursorLockMode.None;
                 mouseLocked = !mouseLocked;
-                Cursor.visible = true;
             }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Cursor.lockState = CursorLockMode.Locked;
                 mouseLocked = !mouseLocked;
-                Cursor.visible = false;
             }
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
+
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime* sens;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sens;
 
         yRotation += mouseX;
 
