@@ -72,14 +72,14 @@ public class MovementAdvanced : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        if (IsHost && gameObject.GetComponent<PlayerData>().playerId != 0)
-        {
-            this.enabled = false;
-        }
-        else if (!IsOwner)
-        {
-            this.enabled = false;
-        }
+        // if (IsHost && gameObject.GetComponent<PlayerData>().playerId != 0)
+        // {
+        //     this.enabled = false;
+        // }
+        // else if (!IsOwner)
+        // {
+        //     this.enabled = false;
+        // }
     }
 
     bool GroundBool
