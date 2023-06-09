@@ -280,7 +280,7 @@ public class MovementAdvanced : NetworkBehaviour
         print("Ik doe nu trigger " + Name);
     }
 
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void DoBlendTree()
     {
         ObserverTree(horizontalInput, verticalInput);
