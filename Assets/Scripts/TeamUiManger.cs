@@ -31,18 +31,20 @@ public class TeamUiManger : NetworkBehaviour
                 }
             }
         }
+        
         SetPlayerNames();
 
     }
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerNames()
     {
-        for (int i = 0; i < team1Players.Count - 1; i++)
+        print("SETPLAYERNAMES");
+        for (int i = 0; i <= team1Players.Count - 1; i++)
         {
             playerTxtTeam1[i].text = team1Players[i].GetComponent<PlayerData>().username;
             SetPlayerNamesObserver(team1Players[i].GetComponent<PlayerData>().username, i, 0);
         }
-        for (int i = 0; i < team2Players.Count - 1; i++)
+        for (int i = 0; i <= team2Players.Count - 1; i++)
         {
             playerTxtTeam2[i].text = team2Players[i].GetComponent<PlayerData>().username;
             SetPlayerNamesObserver(team2Players[i].GetComponent<PlayerData>().username, i, 1);
@@ -66,15 +68,16 @@ public class TeamUiManger : NetworkBehaviour
     {
         SetPoints();
     }
+
     [ServerRpc(RequireOwnership = false)]
     public void SetPoints()
     {
-        for (int i = 0; i < team1Players.Count - 1; i++)
+        for (int i = 0; i <= team1Players.Count - 1; i++)
         {
             playerTxtTeam1[i].text = team1Players[i].GetComponent<PlayerData>().pointsGathered.ToString();
             SetPointsObserver(team1Players[i].GetComponent<PlayerData>().pointsGathered.ToString(), i, 0);
         }
-        for (int i = 0; i < team2Players.Count - 1; i++)
+        for (int i = 0; i <= team2Players.Count - 1; i++)
         {
             playerTxtTeam2[i].text = team2Players[i].GetComponent<PlayerData>().pointsGathered.ToString();
             SetPointsObserver(team2Players[i].GetComponent<PlayerData>().pointsGathered.ToString(), i, 1);
