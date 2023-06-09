@@ -51,6 +51,6 @@ public class TeamUiManger : NetworkBehaviour
     [ObserversRpc]
     public void SetPointsObserver(int points, int i)
     {
-        pointsTxt[i].text = pointsTxt.ToString();
+        pointsTxt[i].text = points.ToString();
     }
 }
