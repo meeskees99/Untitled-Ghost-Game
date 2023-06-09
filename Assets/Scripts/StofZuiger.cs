@@ -21,6 +21,7 @@ public class StofZuiger : NetworkBehaviour
     RaycastHit hit3;
     float time;
 
+    [SerializeField] StofZuiger[] stofZuigers;
     GameManager gameManager;
 
     [SerializeField] int maxGhostPoints = 3;
@@ -43,6 +44,7 @@ public class StofZuiger : NetworkBehaviour
             GetComponent<MeshCollider>().enabled = false;
             this.enabled = false;
         }
+        stofZuigers = FindObjectsOfType<StofZuiger>();
     }
     void Update()
     {
@@ -106,15 +108,6 @@ public class StofZuiger : NetworkBehaviour
             target.Add(other.gameObject);
         }
     }
-    [SerializeField] bool doGizmos;
-    [SerializeField] float sphereSize;
-    private void OnDrawGizmos()
-    {
-        if (doGizmos)
-        {
-            Gizmos.DrawSphere(shootPos.position, sphereSize);
-        }
-    }
     public void Suck()
     {
         for (int i = 0; i < target.Count; i++)
@@ -132,7 +125,11 @@ public class StofZuiger : NetworkBehaviour
                         {
                             ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
                             pData.GainPoints(target[i].transform.GetComponent<GhostMovement>().Points());
-                            target.Remove(target[i]);
+
+                            for (int x = 0; x < stofZuigers.Length; x++)
+                            {
+                                stofZuigers[x].target.Remove(target[i]);
+                            }
                             hit1.transform.GetComponent<GhostMovement>().Die();
                             print("Ghost " + i + " Cought");
                         }
