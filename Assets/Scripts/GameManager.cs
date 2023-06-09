@@ -16,6 +16,7 @@ public class GameManager : NetworkBehaviour
 
     [Header("UI")]
     [SerializeField] GameObject settingsUI;
+    [SerializeField] GameObject tabMenu;
     [SerializeField] GameObject scoreboard1;
     [SerializeField] GameObject scoreboard2;
 
@@ -43,10 +44,14 @@ public class GameManager : NetworkBehaviour
                 {
                     if (players[i].GetComponent<PlayerData>().teamID == 0)
                     {
+                        tabMenu.SetActive(true);
                         scoreboard1.SetActive(true);
+                        scoreboard2.SetActive(false);
                     }
                     else if (players[i].GetComponent<PlayerData>().teamID == 1)
                     {
+                        tabMenu.SetActive(true);
+                        scoreboard1.SetActive(false);
                         scoreboard2.SetActive(true);
                     }
                 }
@@ -60,10 +65,12 @@ public class GameManager : NetworkBehaviour
                 {
                     if (players[i].GetComponent<PlayerData>().teamID == 0)
                     {
+                        tabMenu.SetActive(false);
                         scoreboard1.SetActive(false);
                     }
                     else if (players[i].GetComponent<PlayerData>().teamID == 1)
                     {
+                        tabMenu.SetActive(false);
                         scoreboard2.SetActive(false);
                     }
                 }

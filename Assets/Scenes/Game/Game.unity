@@ -2735,7 +2735,9 @@ MonoBehaviour:
   team1Index: 0
   team2Index: 0
   settingsUI: {fileID: 1654654914855457135}
-  scoreboard: {fileID: 1799241646}
+  tabMenu: {fileID: 1799241646}
+  scoreboard1: {fileID: 4711862714098152292}
+  scoreboard2: {fileID: 1747059242}
   inGameSettingsButton: 27
   scoreboardButton: 9
 --- !u!114 &689339194
