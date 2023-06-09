@@ -26,16 +26,13 @@ public class TeamUiManger : NetworkBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             playerTxt[i].text = players[i].GetComponent<PlayerData>().username;
+            SetPlayerNamesObserver(players[i].GetComponent<PlayerData>().username, i);
         }
-        SetPlayerNamesObserver();
     }
     [ObserversRpc]
-    public void SetPlayerNamesObserver()
+    public void SetPlayerNamesObserver(string usernames, int i)
     {
-        for (int i = 0; i < players.Length; i++)
-        {
-            playerTxt[i].text = players[i].GetComponent<PlayerData>().username;
-        }
+        playerTxt[i].text = usernames;
     }
     // Update is called once per frame
     void Update()
@@ -48,15 +45,12 @@ public class TeamUiManger : NetworkBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             pointsTxt[i].text = players[i].GetComponent<PlayerData>().pointsGathered.ToString();
+            SetPointsObserver(players[i].GetComponent<PlayerData>().pointsGathered, i);
         }
-        SetPointsObserver();
     }
     [ObserversRpc]
-    public void SetPointsObserver()
+    public void SetPointsObserver(int points, int i)
     {
-        for (int i = 0; i < players.Length; i++)
-        {
-            pointsTxt[i].text = players[i].GetComponent<PlayerData>().pointsGathered.ToString();
-        }
+        pointsTxt[i].text = pointsTxt.ToString();
     }
 }
