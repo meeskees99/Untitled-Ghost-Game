@@ -129,9 +129,9 @@ public class MovementAdvanced : NetworkBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        print(horizontalInput);
-        // print(verticalInput);
-        ObserverTree(horizontalInput, verticalInput);
+
+        DoBlendTree(horizontalInput, verticalInput);
+        
         if(horizontalInput != 0 || verticalInput != 0){
             SetBoolAnim("IsWalking",true);
         }
@@ -283,11 +283,11 @@ public class MovementAdvanced : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = true)]
-    public void DoBlendTree()
+    public void DoBlendTree(float hor, float ver)
     {
-        print("Horizontal: " + horizontalInput);
-        print("Vertical: " + verticalInput);
-        ObserverTree(horizontalInput, verticalInput);
+        print("Horizontal: " + hor);
+        print("Vertical: " + ver);
+        ObserverTree(hor, ver);
     }
     [ObserversRpc]
     public void ObserverTree(float hor, float ver)
