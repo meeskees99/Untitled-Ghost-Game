@@ -3,7 +3,7 @@ using FishNet.Object.Synchronizing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FishNet;
 public class GameManager : NetworkBehaviour
 {
     [SyncVar][SerializeField] PlayerData[] players;
@@ -16,7 +16,8 @@ public class GameManager : NetworkBehaviour
 
     [Header("UI")]
     [SerializeField] GameObject settingsUI;
-    [SerializeField] GameObject scoreboard;
+    [SerializeField] GameObject scoreboard1;
+    [SerializeField] GameObject scoreboard2;
 
     [SerializeField] KeyCode inGameSettingsButton;
     [SerializeField] KeyCode scoreboardButton;
@@ -32,21 +33,43 @@ public class GameManager : NetworkBehaviour
     bool uiActive = false;
     void Update()
     {
-        if(Input.GetKeyDown(inGameSettingsButton))
+        int id = InstanceFinder.ClientManager.Connection.ClientId;
+        
+        if (Input.GetKey(scoreboardButton) && !settingsUI.activeSelf)
         {
-            uiActive = !uiActive;
-            settingsUI.SetActive(uiActive);
-        }
-        if(Input.GetKey(scoreboardButton) && !settingsUI.activeSelf)
-        {
-            scoreboard.SetActive(true);
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].GetComponent<PlayerData>().playerId == id)
+                {
+                    if (players[i].GetComponent<PlayerData>().teamID == 0)
+                    {
+                        scoreboard1.SetActive(true);
+                    }
+                    else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                    {
+                        scoreboard2.SetActive(true);
+                    }
+                }
+            }
         }
         else
         {
-            scoreboard.SetActive(false);
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].GetComponent<PlayerData>().playerId == id)
+                {
+                    if (players[i].GetComponent<PlayerData>().teamID == 0)
+                    {
+                        scoreboard1.SetActive(false);
+                    }
+                    else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                    {
+                        scoreboard2.SetActive(false);
+                    }
+                }
+            }
         }
     }
-
     [ServerRpc(RequireOwnership = false)]
     void SetTeamPoints()
     {
@@ -84,5 +107,5 @@ public class GameManager : NetworkBehaviour
     }
 
 
-    
+
 }
