@@ -129,7 +129,9 @@ public class MovementAdvanced : NetworkBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        DoBlendTree();
+        print(horizontalInput);
+        // print(verticalInput);
+        ObserverTree(horizontalInput, verticalInput);
         if(horizontalInput != 0 || verticalInput != 0){
             SetBoolAnim("IsWalking",true);
         }
