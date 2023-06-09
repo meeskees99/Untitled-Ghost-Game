@@ -126,10 +126,9 @@ public class StofZuiger : NetworkBehaviour
                             ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
                             pData.GainPoints(target[i].transform.GetComponent<GhostMovement>().Points());
 
-                            for (int x = 0; x < stofZuigers.Length; x++)
-                            {
-                                stofZuigers[x].target.Remove(target[i]);
-                            }
+                            // error when removing for other players
+                            target.Remove(target[i]);
+                            
                             hit1.transform.GetComponent<GhostMovement>().Die();
                             print("Ghost " + i + " Cought");
                         }
