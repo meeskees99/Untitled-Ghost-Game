@@ -13,6 +13,13 @@ public class GameManager : NetworkBehaviour
 
     [SyncVar] int team1Index;
     [SyncVar] int team2Index;
+
+    [Header("UI")]
+    [SerializeField] GameObject settingsUI;
+    [SerializeField] GameObject scoreboard;
+
+    [SerializeField] KeyCode inGameSettingsButton;
+    [SerializeField] KeyCode scoreboardButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +28,23 @@ public class GameManager : NetworkBehaviour
             SetTeamPoints();
         }
     }
+
+    bool uiActive = false;
     void Update()
     {
-        
+        if(Input.GetKeyDown(inGameSettingsButton))
+        {
+            uiActive = !uiActive;
+            settingsUI.SetActive(uiActive);
+        }
+        if(Input.GetKey(scoreboardButton) && !settingsUI.activeSelf)
+        {
+            scoreboard.SetActive(true);
+        }
+        else
+        {
+            scoreboard.SetActive(false);
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
