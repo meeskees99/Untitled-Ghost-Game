@@ -18,7 +18,7 @@ public class MouseLookAdvanced : NetworkBehaviour
 
     bool mouseLocked = true;
 
-    Camera cam;
+    public Camera cam;
 
     [SerializeField] LayerMask mask;
     public override void OnStartClient()
