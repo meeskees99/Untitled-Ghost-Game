@@ -140,15 +140,16 @@ public class StofZuiger : NetworkBehaviour
                         else if (hit1.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
                             hit1.transform.GetComponent<GhostMovement>().isHit(true);
                     }
-                    else 
+                    else
                     {
                         target[i].transform.GetComponent<GhostMovement>().isHit(false);
-                        if (hit1.transform.GetComponent<GhostMovement>().isDead){
+                        if (hit1.transform.GetComponent<GhostMovement>().isDead)
+                        {
                             target.Remove(hit1.transform.gameObject);
                         }
                     }
                 }
-                
+
             }
             else
             {

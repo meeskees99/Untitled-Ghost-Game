@@ -44,7 +44,7 @@ public class GhostMovement : NetworkBehaviour
         agent.stoppingDistance = ghostStoppingDistance;
         suckieTimer = timeToSuck;
         PatrolToNextPoint();
-        
+
 
     }
     // Update is called once per frame
