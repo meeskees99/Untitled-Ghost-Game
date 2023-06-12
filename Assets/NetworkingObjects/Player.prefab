@@ -462,7 +462,7 @@ MonoBehaviour:
   sprintSpeed: 9
   groundDrag: 5
   animator: {fileID: 4409519993864656286}
-  jumpForce: 3
+  jumpForce: 10
   jumpCooldown: 0.25
   airMultiplier: 0.4
   jumpKey: 32

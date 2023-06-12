@@ -86,7 +86,7 @@ public class StofZuiger : NetworkBehaviour
         else if (Input.GetKeyUp(suck))
         {
             SuckAnimation(false);
-            
+
             for (int i = 0; i < target.Count; i++)
             {
                 target[i].transform.GetComponent<GhostMovement>().isHit(false);
@@ -169,6 +169,8 @@ public class StofZuiger : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void ShootAnimation()
     {
+        if (IsHost)
+            return;
         animator.SetTrigger("IsShooting");
         ShootAnimationObserver();
     }
@@ -180,6 +182,8 @@ public class StofZuiger : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void SuckAnimation(bool suckstate)
     {
+        if (IsHost)
+            return;
         animator.SetBool("IsSucking", suckstate);
         SuckAnimationObserver(suckstate);
     }
