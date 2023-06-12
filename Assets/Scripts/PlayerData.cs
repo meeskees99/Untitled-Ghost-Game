@@ -24,6 +24,8 @@ public class PlayerData : NetworkBehaviour
 
     [SerializeField] GameObject cam;
 
+    [SerializeField] Material tank;
+
     private void Start()
     {
         manager = FindObjectOfType<TeamManager>();
@@ -105,6 +107,21 @@ public class PlayerData : NetworkBehaviour
     public void GainPoints(int pointAmount)
     {
         pointsGathered += pointAmount;
+        switch (pointsGathered)
+        {
+            case 0:
+                tank.SetFloat("_Float", -0.5f);
+                break;
+            case 1:
+                tank.SetFloat("_Float", -0.1f);
+                break;
+            case 2:
+                tank.SetFloat("_Float", 0.1f);
+                break;
+            case 3:
+                tank.SetFloat("_Float", 0.5f);
+                break;
+        }
     }
 
     private void Update()

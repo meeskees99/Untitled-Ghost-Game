@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TankMat
+  m_Name: TankMat 1
   m_Shader: {fileID: -6465566751694194690, guid: 0151f1c888d17f64e998cd469c98594c, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
