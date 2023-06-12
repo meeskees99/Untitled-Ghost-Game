@@ -47,14 +47,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _EmissionStrength: 1.5
-    - _Float: -1.16
-    - _GlassPower: 0.58
-    - _Multiply: 2.78
+    - _EmissionStrength: 4.95
+    - _Float: -0.03
+    - _GlassPower: 0.73
+    - _Multiply: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 6.04
-    - _noiseScale: 47.4
+    - _Speed: 41.05
+    - _noiseScale: 0
     m_Colors:
     - _Color1: {r: 0.81681836, g: 1, b: 0.6933962, a: 1}
     - _Color2: {r: 0.18589056, g: 0.24528295, b: 0.18164822, a: 1}
