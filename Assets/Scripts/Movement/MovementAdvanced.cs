@@ -267,18 +267,18 @@ public class MovementAdvanced : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = true)]
-    public void DoAnimation(string Name)
+    public void DoAnimation(string Name, bool animationstate)
     {
-        animator.SetTrigger(Name);
+        animator.SetTrigger(Name, animationstate);
         print("Ik doe nu trigger " + Name);
-        ObserverAnim(Name);
+        ObserverAnim(Name, animationstate);
     }
     [ObserversRpc]
-    public void ObserverAnim(string Name)
+    public void ObserverAnim(string Name, bool animationstate)
     {
         if (IsHost)
             return;
-        animator.SetTrigger(Name);
+        animator.SetTrigger(Name, animationstate);
         print("Ik doe nu trigger " + Name);
     }
 
