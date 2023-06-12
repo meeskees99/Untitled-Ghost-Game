@@ -132,11 +132,13 @@ public class MovementAdvanced : NetworkBehaviour
 
         DoBlendTree(horizontalInput, verticalInput);
 
-        if(horizontalInput != 0 || verticalInput != 0){
-            SetBoolAnim("IsWalking",true);
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            SetBoolAnim("IsWalking", true);
         }
-        else{
-             SetBoolAnim("IsWalking",false);
+        else
+        {
+            SetBoolAnim("IsWalking", false);
         }
 
         //When To Jump
@@ -145,6 +147,10 @@ public class MovementAdvanced : NetworkBehaviour
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+        else if (Input.GetKeyUp(jumpKey))
+        {
+            SetBoolAnim("Jump", false);
         }
 
         // //When To Crouch
@@ -243,7 +249,7 @@ public class MovementAdvanced : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        DoAnimation("Jump");
+        SetBoolAnim("Jump", true);
     }
     void ResetJump()
     {
@@ -267,18 +273,18 @@ public class MovementAdvanced : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = true)]
-    public void DoAnimation(string Name, bool animationstate)
+    public void DoAnimation(string Name)
     {
-        animator.SetBool(Name, animationstate);
+        animator.SetTrigger(Name);
         print("Ik doe nu trigger " + Name);
-        ObserverAnim(Name, animationstate);
+        ObserverAnim(Name);
     }
     [ObserversRpc]
-    public void ObserverAnim(string Name, bool animationstate)
+    public void ObserverAnim(string Name)
     {
         if (IsHost)
             return;
-        animator.SetBool(Name, animationstate);
+        animator.SetTrigger(Name);
         print("Ik doe nu trigger " + Name);
     }
 
