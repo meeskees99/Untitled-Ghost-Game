@@ -9,6 +9,8 @@ using FishNet.Object;
 public class GhostMovement : NetworkBehaviour
 {
     NavMeshAgent agent;
+
+    [SerializeField] Animator animator;
     [SerializeField] GhostData ghostData;
     [Header("Walk Options")]
     [Tooltip("The layer the agent can walk on")]
@@ -41,7 +43,7 @@ public class GhostMovement : NetworkBehaviour
         agent.autoBraking = false;
         suckieTimer = timeToSuck;
         PatrolToNextPoint();
-        GetComponent<MeshRenderer>().enabled = true;
+        
 
     }
     // Update is called once per frame
@@ -55,6 +57,11 @@ public class GhostMovement : NetworkBehaviour
         if (hitness)
         {
             GetSucked();
+            BoolAnim("IsSucked", true);
+        }
+        else
+        {
+            BoolAnim("IsSucked", false);
         }
 
         ResetSuckie();
@@ -65,9 +72,11 @@ public class GhostMovement : NetworkBehaviour
     {
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
+            BoolAnim("IsMoving", false);
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
+                BoolAnim("IsMoving", true);
                 print("Going to next point");
                 timer = waitTime;
 
@@ -81,6 +90,19 @@ public class GhostMovement : NetworkBehaviour
                 agent.destination = finalPosition;
             }
         }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void BoolAnim(string name, bool b)
+    {
+        animator.SetBool(name, b);
+        AnimationObserver(name, b);
+    }
+    [ObserversRpc]
+    public void AnimationObserver(string name, bool b)
+    {
+        if (IsHost)
+            return;
+        animator.SetBool(name, b);
     }
     public float timeLeft()
     {

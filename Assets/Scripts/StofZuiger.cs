@@ -21,6 +21,8 @@ public class StofZuiger : NetworkBehaviour
     RaycastHit hit3;
     float time;
 
+    [SerializeField] Animator animator;
+
     [SerializeField] StofZuiger[] stofZuigers;
     GameManager gameManager;
 
@@ -78,9 +80,12 @@ public class StofZuiger : NetworkBehaviour
             if (maxGhost || target == null)
                 return;
             Suck();
+            SuckAnimation(true);
         }
-        else if (Input.GetKeyUp(suck))
+        else if (!Input.GetKey(suck))
         {
+            SuckAnimation(false);
+
             for (int i = 0; i < target.Count; i++)
             {
                 target[i].transform.GetComponent<GhostMovement>().isHit(false);
@@ -88,6 +93,8 @@ public class StofZuiger : NetworkBehaviour
         }
         if (Input.GetKeyDown(shoot))
         {
+            ShootAnimation();
+
             Shoot();
         }
     }
@@ -128,7 +135,7 @@ public class StofZuiger : NetworkBehaviour
 
                             // error when removing for other players
                             target.Remove(target[i]);
-                            
+
                             hit1.transform.GetComponent<GhostMovement>().Die();
                             print("Ghost " + i + " Cought");
                         }
@@ -157,5 +164,31 @@ public class StofZuiger : NetworkBehaviour
     {
         gameManager.AddPoints(pData.teamID, ghostPoints);
         ghostPoints = 0;
+    }
+    [ServerRpc(RequireOwnership = true)]
+    public void ShootAnimation()
+    {
+        animator.SetTrigger("IsShooting");
+        ShootAnimationObserver();
+    }
+    [ObserversRpc]
+    public void ShootAnimationObserver()
+    {
+        if (IsHost)
+            return;
+        animator.SetTrigger("IsShooting");
+    }
+    [ServerRpc(RequireOwnership = true)]
+    public void SuckAnimation(bool suckstate)
+    {
+        animator.SetBool("IsSucking", suckstate);
+        SuckAnimationObserver(suckstate);
+    }
+    [ObserversRpc]
+    public void SuckAnimationObserver(bool suckstate)
+    {
+        if (IsHost)
+            return;
+        animator.SetBool("IsSucking", suckstate);
     }
 }

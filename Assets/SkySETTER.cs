@@ -5,31 +5,10 @@ using UnityEngine;
 
 public class SkySETTER : NetworkBehaviour
 {
-    public Material _sky;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Material _sky;
+    public override void OnStartClient()
     {
-        
-    }
-
-
-    [ObserversRpc]
-    public void SetSkybox()
-    {
+        base.OnStartClient();
         RenderSettings.skybox = _sky;
-        if (RenderSettings.skybox = _sky)
-        {
-            can = true;
-        }
-    }
-
-    bool can;
-    // Update is called once per frame
-    void Update()
-    {
-        if (!can)
-        {
-            SetSkybox();
-        }
     }
 }
