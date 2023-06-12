@@ -19763,7 +19763,6 @@ MonoBehaviour:
   resDropDown: {fileID: 1654654915321423814}
   fullScreenDrowdown: {fileID: 1654654914115711708}
   fpsSlider: {fileID: 1654654914774373101}
-  fpsText: {fileID: 1654654914506420368}
   fpsInput: {fileID: 0}
   limitFPSYes: {fileID: 1654654915300474612}
   limitFPSNo: {fileID: 1654654913414975560}
@@ -24166,9 +24165,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterMixer: {fileID: 24100000, guid: 5dea87ee29ed9dd42b05c0dd7523cdf4, type: 2}
-  masterPerc: {fileID: 1654654914154854175}
-  musicPerc: {fileID: 1654654914170852226}
-  sfxPerc: {fileID: 1654654913838683773}
+  masterSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  masterInput: {fileID: 0}
+  musicInput: {fileID: 0}
+  sfxInput: {fileID: 0}
 --- !u!222 &1654654914855457129
 CanvasRenderer:
   m_ObjectHideFlags: 0
