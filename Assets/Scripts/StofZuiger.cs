@@ -21,6 +21,8 @@ public class StofZuiger : NetworkBehaviour
     RaycastHit hit3;
     float time;
 
+    [SerializeField] Animator animator;
+
     [SerializeField] StofZuiger[] stofZuigers;
     GameManager gameManager;
 
@@ -75,19 +77,22 @@ public class StofZuiger : NetworkBehaviour
 
         if (Input.GetKey(suck))
         {
+            animator.SetBool("IsSucking", true);
             if (maxGhost || target == null)
                 return;
             Suck();
         }
         else if (Input.GetKeyUp(suck))
         {
+            animator.SetBool("IsSucking", false);
             for (int i = 0; i < target.Count; i++)
             {
                 target[i].transform.GetComponent<GhostMovement>().isHit(false);
             }
         }
-        if (Input.GetKeyDown(shoot))
+        else if (Input.GetKeyDown(shoot))
         {
+            animator.SetTrigger("IsShooting");
             Shoot();
         }
     }
