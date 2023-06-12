@@ -43,7 +43,7 @@ public class GhostMovement : NetworkBehaviour
         agent.autoBraking = false;
         suckieTimer = timeToSuck;
         PatrolToNextPoint();
-        GetComponent<MeshRenderer>().enabled = true;
+        
 
     }
     // Update is called once per frame

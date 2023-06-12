@@ -81,37 +81,19 @@ public class MovementAdvanced : NetworkBehaviour
             this.enabled = false;
         }
     }
-
-    bool GroundBool
-    {
-        get { return grounded; }
-        set
-        {
-            if (value == grounded)
-            {
-                return;
-            }
-            grounded = value;
-            if (grounded)
-            {
-                print("Ik kom");
-                DoAnimation("HasLanded");
-            }
-        }
-    }
     private void Update()
     {
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
 
         // Ground Check
-        GroundBool = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
 
         MyInput();
         SpeedControl();
         StateHandler();
-        SetBoolAnim("OnGround", GroundBool);
+        SetBoolAnim("OnGround", grounded);
         // Handle drag
-        if (GroundBool)
+        if (grounded)
         {
             rb.drag = groundDrag;
         }
@@ -146,6 +128,7 @@ public class MovementAdvanced : NetworkBehaviour
         {
             readyToJump = false;
             Jump();
+            SetBoolAnim("Jump", true);
             Invoke(nameof(ResetJump), jumpCooldown);
         }
         else if (Input.GetKeyUp(jumpKey))
@@ -177,13 +160,13 @@ public class MovementAdvanced : NetworkBehaviour
         //     moveSpeed = crouchSpeed;
         // }
         //Mode - Running
-        if (GroundBool && Input.GetKey(sprintKey))
+        if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.run;
             moveSpeed = sprintSpeed;
         }
         //Mode - Walking
-        else if (GroundBool)
+        else if (grounded)
         {
             state = MovementState.walk;
             moveSpeed = walkSpeed;
@@ -209,10 +192,10 @@ public class MovementAdvanced : NetworkBehaviour
         }
 
         //On ground
-        else if (GroundBool)
+        else if (grounded)
             rb.AddForce(moveDir.normalized * moveSpeed * 10, ForceMode.Force);
         //In air
-        else if (!GroundBool)
+        else if (!grounded)
             rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
 
         // Turn off gravity while on slope
@@ -249,7 +232,6 @@ public class MovementAdvanced : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        SetBoolAnim("Jump", true);
     }
     void ResetJump()
     {
