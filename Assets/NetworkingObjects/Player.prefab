@@ -2282,15 +2282,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8687520578164919092, guid: b14988e9db4cc944a859dcef99aaebf0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.345704
+      value: 0.175
       objectReference: {fileID: 0}
     - target: {fileID: 8687520578164919092, guid: b14988e9db4cc944a859dcef99aaebf0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41770405
+      value: -0.664
       objectReference: {fileID: 0}
     - target: {fileID: 8687520578164919092, guid: b14988e9db4cc944a859dcef99aaebf0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.68407696
+      value: 0.569
       objectReference: {fileID: 0}
     - target: {fileID: 8687520578164919092, guid: b14988e9db4cc944a859dcef99aaebf0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2357,9 +2357,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 136
   pData: {fileID: 2548425321851108391}
-  shootPos: {fileID: 0}
+  shootPos: {fileID: 7793885864186223221}
   suckRange: 5.5
   ghost: {fileID: 0}
+  animator: {fileID: 4409519993864656286}
   stofZuigers: []
   maxGhostPoints: 3
   ghostPoints: 0
