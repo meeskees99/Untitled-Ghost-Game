@@ -117,6 +117,7 @@ public class VideoSettings : MonoBehaviour
         }
         else
         {
+            defaultFOV = 60;
             PlayerPrefs.SetInt("fov", defaultFOV);
             fovSlider.value = PlayerPrefs.GetInt("fov");
             fovInput.text = PlayerPrefs.GetInt("fov").ToString("0");
