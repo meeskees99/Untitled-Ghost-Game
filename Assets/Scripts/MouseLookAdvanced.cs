@@ -15,8 +15,8 @@ public class MouseLookAdvanced : NetworkBehaviour
 
     bool mouseLocked;
 
-    public Camera cam;
-
+    [SerializeField] Camera cam;
+    [SerializeField] GameManager gameManager;
     [SerializeField] StofZuiger stofZuiger;
 
     [SerializeField] KeyCode use;
@@ -43,11 +43,15 @@ public class MouseLookAdvanced : NetworkBehaviour
         //Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        gameManager = FindObjectOfType<GameManager>();
     }
-
+    bool isLocked = false;
     // Update is called once per frame
     void Update()
     {
+        if (gameManager == null)
+            gameManager = FindObjectOfType<GameManager>();
+
         if (Input.GetKey(use))
         {
             if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
@@ -62,34 +66,52 @@ public class MouseLookAdvanced : NetworkBehaviour
         {
             sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
         }
-        
+
 
         Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
 
         if (currentScene.name == "Game")
         {
-            if (mouseLocked)
+            if (!isLocked)
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    mouseLocked = !mouseLocked;
-                }
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    mouseLocked = !mouseLocked;
-                }
+                isLocked = true;
+                GameManager.MouseLocked = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (!GameManager.MouseLocked)
+                {
+                    print("Toggle Cursor To Lock");
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    GameManager.MouseLocked = true;
+                }
+                else
+                {
+                    print("Toggle Cursor To Confined");
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    GameManager.MouseLocked = false;
+                }
+            }
+            if (GameManager.MouseLocked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                GameManager.MouseLocked = false;
+            }
         }
-        
-
-
+        if (gameManager.settingsUI.activeSelf)
+        {
+            return;
+        }
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sens;
 

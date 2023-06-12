@@ -10,7 +10,7 @@ public class GameManager : NetworkBehaviour
 
     [SerializeField] Transform[] spawn1;
     [SerializeField] Transform[] spawn2;
-
+    public static bool MouseLocked;
     [SyncVar] int team1Index;
     [SyncVar] int team2Index;
 
@@ -18,7 +18,7 @@ public class GameManager : NetworkBehaviour
     [SyncVar] int team2Points;
 
     [Header("UI")]
-    [SerializeField] GameObject settingsUI;
+    public GameObject settingsUI;
     [SerializeField] GameObject tabMenu;
     [SerializeField] GameObject scoreboard1;
     [SerializeField] GameObject scoreboard2;
@@ -32,9 +32,15 @@ public class GameManager : NetworkBehaviour
         {
             SetTeamPoints();
         }
+        MouseLocked = false;
     }
     void Update()
     {
+        if (Input.GetKeyDown(inGameSettingsButton))
+        {
+            settingsUI.SetActive(!settingsUI.activeSelf);
+        }
+
         int id = InstanceFinder.ClientManager.Connection.ClientId;
 
         if (Input.GetKey(scoreboardButton) && !settingsUI.activeSelf)
@@ -124,5 +130,13 @@ public class GameManager : NetworkBehaviour
         {
             team1Points += Points;
         }
+    }
+
+    public void SetLockstate(bool b){
+        MouseLocked = b;
+    }
+
+    public void MainMenu(){
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu Test");
     }
 }

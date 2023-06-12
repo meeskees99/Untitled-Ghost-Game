@@ -32,4 +32,8 @@ public class LobbyButtons : MonoBehaviour
         networkHudCanvases.OnClick_Server();
         networkHudCanvases.OnClick_Client();
     }
+
+    public void Quit(){
+        Application.Quit();
+    }
 }
