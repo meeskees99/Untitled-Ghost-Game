@@ -131,7 +131,7 @@ public class MovementAdvanced : NetworkBehaviour
             SetBoolAnim("Jump", true);
             Invoke(nameof(ResetJump), jumpCooldown);
         }
-        else if (Input.GetKeyUp(jumpKey))
+        else if (!Input.GetKey(jumpKey))
         {
             SetBoolAnim("Jump", false);
         }

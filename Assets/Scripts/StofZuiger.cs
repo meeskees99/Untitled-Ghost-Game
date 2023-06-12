@@ -77,13 +77,12 @@ public class StofZuiger : NetworkBehaviour
 
         if (Input.GetKey(suck))
         {
-            SuckAnimation(true);
-
             if (maxGhost || target == null)
                 return;
             Suck();
+            SuckAnimation(true);
         }
-        else if (Input.GetKeyUp(suck))
+        else if (!Input.GetKey(suck))
         {
             SuckAnimation(false);
 
@@ -92,7 +91,7 @@ public class StofZuiger : NetworkBehaviour
                 target[i].transform.GetComponent<GhostMovement>().isHit(false);
             }
         }
-        else if (Input.GetKeyDown(shoot))
+        if (Input.GetKeyDown(shoot))
         {
             ShootAnimation();
 
