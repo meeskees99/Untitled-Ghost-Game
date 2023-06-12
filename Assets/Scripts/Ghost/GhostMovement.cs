@@ -26,7 +26,7 @@ public class GhostMovement : NetworkBehaviour
     float rechargeRate;
     public float suckieTimer;
     int points;
-
+    [SerializeField] float ghostStoppingDistance;
     float timer;
 
     bool isDead;
@@ -41,6 +41,7 @@ public class GhostMovement : NetworkBehaviour
         rechargeRate = ghostData.rechargeRate;
 
         agent.autoBraking = false;
+        agent.stoppingDistance = ghostStoppingDistance;
         suckieTimer = timeToSuck;
         PatrolToNextPoint();
         
@@ -49,6 +50,7 @@ public class GhostMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(isDead);
         if (isDead)
             return;
 
@@ -70,6 +72,7 @@ public class GhostMovement : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void PatrolToNextPoint()
     {
+        print(agent.remainingDistance);
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             BoolAnim("IsMoving", false);

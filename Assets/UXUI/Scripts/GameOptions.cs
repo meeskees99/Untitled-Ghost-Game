@@ -52,6 +52,10 @@ public class GameOptions : MonoBehaviour
             ChangeMouseSens(sensSlider.maxValue + sensSlider.minValue / 2);
         }
         #endregion
+        if(!PlayerPrefs.HasKey("Mouse Sensitivity"))
+        {
+            PlayerPrefs.SetFloat("Mouse Sensitivity", 1 * sensMultiplier);
+        }
         float z = PlayerPrefs.GetFloat("Mouse Sensitivity");
         print("float Z: " + z);
         sensSlider.value = z / sensMultiplier;
@@ -108,6 +112,7 @@ public class GameOptions : MonoBehaviour
         PlayerPrefs.SetInt("Character", characterIndex);
     }
     #endregion
+
     public void ChangeMouseSens(float f)
     {
         PlayerPrefs.SetFloat("Mouse Sensitivity", f * sensMultiplier);
