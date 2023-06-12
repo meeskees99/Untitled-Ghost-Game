@@ -40,8 +40,8 @@ public class MouseLookAdvanced : NetworkBehaviour
     }
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.None;
-        //Cursor.lockState = CursorLockMode.Confined;
+        //Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
 
@@ -70,7 +70,7 @@ public class MouseLookAdvanced : NetworkBehaviour
                 {
                     mouseLocked = !mouseLocked;
                 }
-                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
             }
             else
