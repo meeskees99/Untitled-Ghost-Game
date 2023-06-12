@@ -33,8 +33,6 @@ public class GameManager : NetworkBehaviour
             SetTeamPoints();
         }
     }
-
-    bool uiActive = false;
     void Update()
     {
         int id = InstanceFinder.ClientManager.Connection.ClientId;

@@ -11,7 +11,6 @@ public class MovementAdvanced : NetworkBehaviour
     float moveSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;
-    //[SerializeField] float crouchSpeed;
     [SerializeField] float groundDrag;
     [SerializeField] Animator animator;
 
@@ -24,15 +23,9 @@ public class MovementAdvanced : NetworkBehaviour
     [SerializeField] float airMultiplier;
     bool readyToJump;
 
-    //[Header("Crouching")]
-    //[SerializeField] float crouchYScale;
-
-    //float startCrouchYScale;
-
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
     [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
-    [SerializeField] KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
@@ -63,10 +56,7 @@ public class MovementAdvanced : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //rb.freezeRotation = true;
         readyToJump = true;
-        //animator = GetComponent<Animator>();
-        //startCrouchYScale = transform.localScale.y;
     }
 
     public override void OnStartClient()
@@ -84,7 +74,6 @@ public class MovementAdvanced : NetworkBehaviour
     private void Update()
     {
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
-
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
 
@@ -135,30 +124,10 @@ public class MovementAdvanced : NetworkBehaviour
         {
             SetBoolAnim("Jump", false);
         }
-
-        // //When To Crouch
-        // if (Input.GetKeyDown(crouchKey))
-        // {
-        //     //Placeholder
-        //     transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-        //     //animator.SetTrigger("Crouch");
-        //     //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-        // }
-
-        // if (Input.GetKeyUp(crouchKey))
-        // {
-        //     transform.localScale = new Vector3(transform.localScale.x, startCrouchYScale, transform.localScale.z);
-        // }
     }
 
     void StateHandler()
     {
-        //Mode Crouching
-        // if (Input.GetKey(crouchKey))
-        // {
-        //     state = MovementState.crouch;
-        //     moveSpeed = crouchSpeed;
-        // }
         //Mode - Running
         if (grounded && Input.GetKey(sprintKey))
         {

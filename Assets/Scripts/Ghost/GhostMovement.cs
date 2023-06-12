@@ -29,7 +29,7 @@ public class GhostMovement : NetworkBehaviour
     [SerializeField] float ghostStoppingDistance;
     float timer;
 
-    bool isDead;
+    public bool isDead;
     // Start is called before the first frame update
     void Start()
     {

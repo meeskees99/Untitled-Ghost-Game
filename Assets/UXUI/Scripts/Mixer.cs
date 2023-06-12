@@ -70,7 +70,7 @@ public class Mixer : MonoBehaviour
     public void InputMasterVol()
     {
         float f;
-        float.TryParse(masterInput.text, out f);
+        float.TryParse(masterInput.text.Remove(masterInput.text.Length - 1), out f);
         print(f);
         f /= 100;
         if (f < masterSlider.minValue)
@@ -79,14 +79,12 @@ public class Mixer : MonoBehaviour
             f = masterSlider.maxValue;
         masterSlider.value = f;
         SetMasterVol(f);
-        print(f + " input");
-        // masterInput.text = f + "%";
     }
 
     public void InputMusicVol()
     {
         float f;
-        float.TryParse(musicInput.text, out f);
+        float.TryParse(musicInput.text.Remove(musicInput.text.Length - 1), out f);
         f /= 100;
         if (f < musicSlider.minValue)
             f = musicSlider.minValue;
@@ -94,14 +92,12 @@ public class Mixer : MonoBehaviour
             f = musicSlider.maxValue;
         musicSlider.value = f;
         SetMusicVol(f);
-        
-        //musicInput.text = f + "%";
     }
 
     public void InputSfxVol()
     {
         float f;
-        float.TryParse(sfxInput.text, out f);
+        float.TryParse(sfxInput.text.Remove(sfxInput.text.Length - 1), out f);
         f /= 100;
         if (f < sfxSlider.minValue)
             f = sfxSlider.minValue;

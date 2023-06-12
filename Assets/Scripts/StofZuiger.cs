@@ -125,28 +125,30 @@ public class StofZuiger : NetworkBehaviour
                 if (Physics.Raycast(shootPos.position, target[i].transform.position - shootPos.position, out hit1, suckRange, mask))
                 {
                     print("Nu shiet ik de raycast");
-                    if (hit1.transform.tag == GhostTag)
+                    if (hit1.transform.tag == GhostTag && !hit1.transform.GetComponent<GhostMovement>().isDead)
                     {
 
                         if (hit1.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
                         {
                             ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
-                            pData.GainPoints(target[i].transform.GetComponent<GhostMovement>().Points());
 
                             // error when removing for other players
-                            target.Remove(target[i]);
-
                             hit1.transform.GetComponent<GhostMovement>().Die();
-                            print("Ghost " + i + " Cought");
+                            pData.GainPoints(target[i].transform.GetComponent<GhostMovement>().Points());
+                            target.Remove(target[i]);
                         }
                         else if (hit1.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
                             hit1.transform.GetComponent<GhostMovement>().isHit(true);
                     }
-                    else
+                    else 
                     {
                         target[i].transform.GetComponent<GhostMovement>().isHit(false);
+                        if (hit1.transform.GetComponent<GhostMovement>().isDead){
+                            target.Remove(hit1.transform.gameObject);
+                        }
                     }
                 }
+                
             }
             else
             {
