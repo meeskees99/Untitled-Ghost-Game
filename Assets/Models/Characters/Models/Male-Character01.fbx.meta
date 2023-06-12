@@ -94,6 +94,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: d8543f8d7e1230b42b9658fa0f027cbd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Weapon
     second: {fileID: 2100000, guid: 72dbc23a8f63a2649b67a8be3415dcd3, type: 2}
   materials:

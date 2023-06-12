@@ -48,7 +48,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _EmissionStrength: 1.5
-    - _Float: 0.3
+    - _Float: 0.77
     - _GlassPower: 0.58
     - _Multiply: 1
     - _QueueControl: 0
