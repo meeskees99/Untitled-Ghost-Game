@@ -58,7 +58,15 @@ public class MouseLookAdvanced : NetworkBehaviour
                 }
             }
         }
-        sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
+        if (PlayerPrefs.HasKey("MouseSensitivity"))
+        {
+            sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
+        }
+        else
+        {
+            sens = 1;
+        }
+        
 
         Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
 
