@@ -77,7 +77,7 @@ public class StofZuiger : NetworkBehaviour
 
         if (Input.GetKey(suck))
         {
-            animator.SetBool("IsSucking", true);
+            SuckAnimation();
             if (maxGhost || target == null)
                 return;
             Suck();
@@ -92,7 +92,8 @@ public class StofZuiger : NetworkBehaviour
         }
         else if (Input.GetKeyDown(shoot))
         {
-            animator.SetTrigger("IsShooting");
+            ShootAnimation();
+
             Shoot();
         }
     }
@@ -133,7 +134,7 @@ public class StofZuiger : NetworkBehaviour
 
                             // error when removing for other players
                             target.Remove(target[i]);
-                            
+
                             hit1.transform.GetComponent<GhostMovement>().Die();
                             print("Ghost " + i + " Cought");
                         }
@@ -162,5 +163,27 @@ public class StofZuiger : NetworkBehaviour
     {
         gameManager.AddPoints(pData.teamID, ghostPoints);
         ghostPoints = 0;
+    }
+    [ServerRpc(RequireOwnership = true)]
+    public void ShootAnimation()
+    {
+        animator.SetTrigger("IsShooting");
+        ShootAnimationObserver();
+    }
+    [ObserversRpc]
+    public void ShootAnimationObserver()
+    {
+        animator.SetTrigger("IsShooting");
+    }
+    [ServerRpc(RequireOwnership = true)]
+    public void SuckAnimation()
+    {
+        animator.SetBool("IsSucking", true);
+        SuckAnimationObserver();
+    }
+    [ObserversRpc]
+    public void SuckAnimationObserver()
+    {
+        animator.SetBool("IsSucking", true);
     }
 }
