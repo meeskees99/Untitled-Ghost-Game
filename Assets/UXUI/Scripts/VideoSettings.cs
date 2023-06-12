@@ -353,6 +353,8 @@ public class VideoSettings : MonoBehaviour
             doVSync = true;
             PlayerPrefs.SetInt("vSync", 1);
             print("PlayerPrefs vSync Set to 1");
+            doVsyncYes.SetActive(true);
+            doVsyncNo.SetActive(false);
         }
         else if (!toggle)
         {
@@ -362,6 +364,8 @@ public class VideoSettings : MonoBehaviour
             doVSync = false;
             PlayerPrefs.SetInt("vSync", 0);
             Application.targetFrameRate = 0;
+            doVsyncYes.SetActive(false);
+            doVsyncNo.SetActive(true);
         }
         if (doVSync)
             Application.targetFrameRate = Screen.resolutions[PlayerPrefs.GetInt("ResolutionIndex")].refreshRate;
