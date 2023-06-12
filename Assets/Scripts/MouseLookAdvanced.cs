@@ -58,13 +58,9 @@ public class MouseLookAdvanced : NetworkBehaviour
                 }
             }
         }
-        if (PlayerPrefs.HasKey("MouseSensitivity"))
+        if (PlayerPrefs.HasKey("Mouse Sensitivity"))
         {
             sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
-        }
-        else
-        {
-            sens = 1;
         }
         
 
