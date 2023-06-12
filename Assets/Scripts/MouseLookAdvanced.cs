@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using FishNet.Object;
 
@@ -37,6 +38,12 @@ public class MouseLookAdvanced : NetworkBehaviour
             cam.transform.rotation = new Quaternion();
         }
     }
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
 
     // Update is called once per frame
     void Update()
@@ -52,24 +59,31 @@ public class MouseLookAdvanced : NetworkBehaviour
             }
         }
         sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
-        if (mouseLocked)
+
+        Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+
+        if (currentScene.name == "Game")
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (mouseLocked)
             {
-                mouseLocked = !mouseLocked;
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    mouseLocked = !mouseLocked;
+                }
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            else
             {
-                mouseLocked = !mouseLocked;
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    mouseLocked = !mouseLocked;
+                }
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
+        
 
 
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
