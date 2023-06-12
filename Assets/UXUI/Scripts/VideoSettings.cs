@@ -326,6 +326,8 @@ public class VideoSettings : MonoBehaviour
             PlayerPrefs.SetInt("LimitFps", 1);
             LimitFPS(PlayerPrefs.GetFloat("targetFPS"));
             FPSIndex = 1;
+            limitFPSYes.SetActive(true);
+            limitFPSNo.SetActive(false);
         }
         else
         {
@@ -334,6 +336,8 @@ public class VideoSettings : MonoBehaviour
             fpsSlider.GetComponent<Slider>().enabled = false;
             PlayerPrefs.SetInt("LimitFps", 0);
             FPSIndex = 0;
+            limitFPSYes.SetActive(false);
+            limitFPSNo.SetActive(true);
         }
     }
     #endregion
