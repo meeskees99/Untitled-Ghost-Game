@@ -169,27 +169,27 @@ public class StofZuiger : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void ShootAnimation()
     {
-        if (IsHost)
-            return;
         animator.SetTrigger("IsShooting");
         ShootAnimationObserver();
     }
     [ObserversRpc]
     public void ShootAnimationObserver()
     {
+        if (IsHost)
+            return;
         animator.SetTrigger("IsShooting");
     }
     [ServerRpc(RequireOwnership = true)]
     public void SuckAnimation(bool suckstate)
     {
-        if (IsHost)
-            return;
         animator.SetBool("IsSucking", suckstate);
         SuckAnimationObserver(suckstate);
     }
     [ObserversRpc]
     public void SuckAnimationObserver(bool suckstate)
     {
+        if (IsHost)
+            return;
         animator.SetBool("IsSucking", suckstate);
     }
 }
