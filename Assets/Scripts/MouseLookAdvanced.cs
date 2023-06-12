@@ -14,7 +14,7 @@ public class MouseLookAdvanced : NetworkBehaviour
 
     bool mouseLocked;
 
-    Camera cam;
+    public Camera cam;
 
     [SerializeField] StofZuiger stofZuiger;
 
