@@ -356,6 +356,8 @@ public class VideoSettings : MonoBehaviour
             print("PlayerPrefs vSync Set to 1");
             doVsyncYes.SetActive(true);
             doVsyncNo.SetActive(false);
+            limitFPSNo.SetActive(true);
+            limitFPSYes.SetActive(false);
         }
         else if (!toggle)
         {

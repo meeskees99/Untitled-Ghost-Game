@@ -55,7 +55,7 @@ public class Mixer : MonoBehaviour
     }
 
     public void SetMusicVol(float musicLvl)
-    { 
+    {
         masterMixer.SetFloat("MusicVol", Mathf.Log10(musicLvl) * 20);
         PlayerPrefs.SetFloat("MusicVol", musicLvl);
         musicInput.text = (musicLvl * 100).ToString("0") + "%";
@@ -71,35 +71,62 @@ public class Mixer : MonoBehaviour
     {
         float f;
         float.TryParse(masterInput.text, out f);
+        print(f);
+        f /= 100;
         if (f < masterSlider.minValue)
             f = masterSlider.minValue;
         if (f > masterSlider.maxValue)
             f = masterSlider.maxValue;
         masterSlider.value = f;
         SetMasterVol(f);
+        print(f + " input");
+        // masterInput.text = f + "%";
     }
 
     public void InputMusicVol()
     {
         float f;
         float.TryParse(musicInput.text, out f);
+        f /= 100;
         if (f < musicSlider.minValue)
             f = musicSlider.minValue;
         if (f > musicSlider.maxValue)
             f = musicSlider.maxValue;
         musicSlider.value = f;
         SetMusicVol(f);
+        
+        //musicInput.text = f + "%";
     }
 
     public void InputSfxVol()
     {
         float f;
         float.TryParse(sfxInput.text, out f);
+        f /= 100;
         if (f < sfxSlider.minValue)
             f = sfxSlider.minValue;
         if (f > sfxSlider.maxValue)
             f = sfxSlider.maxValue;
         sfxSlider.value = f;
         SetSFXVol(f);
+    }
+
+    public void AddPercentMaster()
+    {
+        if (masterInput.text.Contains("%"))
+            return;
+        masterInput.text += "%";
+    }
+    public void AddPercentMusic()
+    {
+        if (musicInput.text.Contains("%"))
+            return;
+        musicInput.text += "%";
+    }
+    public void AddPercentSFX()
+    {
+        if (sfxInput.text.Contains("%"))
+            return;
+        sfxInput.text += "%";
     }
 }

@@ -60,9 +60,11 @@ public class GhostMovement : NetworkBehaviour
         {
             GetSucked();
             BoolAnim("IsSucked", true);
+            speed = 0;
         }
         else
         {
+            speed = ghostData.speed;
             BoolAnim("IsSucked", false);
         }
 
@@ -72,7 +74,7 @@ public class GhostMovement : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void PatrolToNextPoint()
     {
-        print(agent.remainingDistance);
+        agent.speed = speed;
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             BoolAnim("IsMoving", false);
