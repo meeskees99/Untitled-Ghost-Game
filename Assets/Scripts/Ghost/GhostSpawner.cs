@@ -11,7 +11,7 @@ public class GhostSpawner : NetworkBehaviour
     [SerializeField] float[] typeGhostChance;
     [SerializeField] int[] ghostFavor;
 
-    [SyncVar] GameObject currentGhost;
+    [SyncVar] [SerializeField] GameObject currentGhost;
 
     [ServerRpc(RequireOwnership = false)]
     public void PickGhost()
