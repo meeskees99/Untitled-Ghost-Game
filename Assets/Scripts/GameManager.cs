@@ -106,7 +106,7 @@ public class GameManager : NetworkBehaviour
     [ObserversRpc(BufferLast = true)]
     void SetTeamPointsObserver()
     {
-        print("a");
+        //print("a");
         for (int i = 0; i < players.Length; i++)
         {
             if (players[i].teamID == 0)
