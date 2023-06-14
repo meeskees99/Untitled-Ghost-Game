@@ -41,9 +41,9 @@ public class GhostSpawner : NetworkBehaviour
     {
         print(this.gameObject.name);
         currentGhost = Instantiate(ghosts[index], transform.position, transform.rotation);
-        Spawn(currentGhost);
-        currentGhost.transform.position = this.transform.position;
         Settrans();
+        currentGhost.transform.position = this.transform.position;
+        Spawn(currentGhost);
         ghostManager.globalGhostPoints += ghosts[index].GetComponent<GhostMovement>().GetGhostValue();
         ghostManager.ChangeGhostAlive(1);
     }
