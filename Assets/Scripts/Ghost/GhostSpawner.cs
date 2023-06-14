@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FishNet.Object;
+using FishNet.Object.Synchronizing;
 public class GhostSpawner : NetworkBehaviour
 {
     [SerializeField] GhostManager ghostManager;
@@ -10,7 +11,7 @@ public class GhostSpawner : NetworkBehaviour
     [SerializeField] float[] typeGhostChance;
     [SerializeField] int[] ghostFavor;
 
-    GameObject currentGhost;
+    [SyncVar] GameObject currentGhost;
 
     [ServerRpc(RequireOwnership = false)]
     public void PickGhost()
