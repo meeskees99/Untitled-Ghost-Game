@@ -39,6 +39,7 @@ public class GhostSpawner : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void SpawnGhost(int index)
     {
+        print(this.gameObject.name);
         currentGhost = Instantiate(ghosts[index], transform.position, transform.rotation);
         Spawn(currentGhost);
         ghostManager.globalGhostPoints += ghosts[index].GetComponent<GhostMovement>().GetGhostValue();

@@ -242,16 +242,11 @@ public class MovementAdvanced : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void DoBlendTree(float hor, float ver)
     {
-        print("Horizontal: " + hor);
-        print("Vertical: " + ver);
         ObserverTree(hor, ver);
     }
     [ObserversRpc]
     public void ObserverTree(float hor, float ver)
     {
-
-        print(hor);
-        print(ver);
         animator.SetFloat("X", hor);
         animator.SetFloat("Y", ver);
     }
