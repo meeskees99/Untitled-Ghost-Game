@@ -136,6 +136,8 @@ MonoBehaviour:
   waitTime: 1
   timeToSuck: 0
   suckieTimer: 0
+  ghostStoppingDistance: 0
+  isDead: 0
   hitness: 0
 --- !u!114 &-7598521523517749195
 MonoBehaviour:
@@ -154,8 +156,8 @@ MonoBehaviour:
   _networkObjectCache: {fileID: -5421627816488725634}
   _synchronizeParent: 0
   _packing:
-    Position: 1
-    Rotation: 1
+    Position: 0
+    Rotation: 0
     Scale: 0
   _interpolation: 2
   _extrapolation: 2
