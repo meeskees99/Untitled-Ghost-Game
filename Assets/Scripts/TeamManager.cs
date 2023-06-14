@@ -245,7 +245,7 @@ public class TeamManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void StartGame()
     {
-        SceneLoadData sld = new SceneLoadData("Game");
+        SceneLoadData sld = new SceneLoadData("Maykel");
         SceneUnloadData lastScene = new SceneUnloadData("Lobby Test");
         base.SceneManager.LoadGlobalScenes(sld);
         base.SceneManager.UnloadGlobalScenes(lastScene);
