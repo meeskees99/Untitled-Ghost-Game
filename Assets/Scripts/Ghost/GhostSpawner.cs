@@ -4,40 +4,53 @@ using UnityEngine;
 using FishNet.Object;
 public class GhostSpawner : NetworkBehaviour
 {
+    [SerializeField] GhostManager ghostManager;
     [SerializeField] GameObject[] ghosts;
-    public int maxIndex;
-    [SerializeField] GameObject CurrentGhost;
+    [SerializeField] float ghostSpawnChance;
+    [SerializeField] float[] typeGhostChance;
+    [SerializeField] int[] ghostFavor;
 
-    [SerializeField] int ghostOneSpawnThreshold;
-    [SerializeField] int ghostTwoSpawnThreshold;
-    [SerializeField] int ghostThreeSpawnThreshold;
-
-    [SerializeField] int currentAvailablePoints;
-    // Start is called before the first frame update
-    void Start()
-    {
-        SpawnGhost();
-        StartCoroutine("Spawner");
-    }
+    GameObject currentGhost;
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnGhost()
+    public void PickGhost()
     {
-        if (CurrentGhost != null)
-            return;
-        maxIndex = 2;
-        if(currentAvailablePoints > ghostThreeSpawnThreshold)
-            maxIndex = 1;
-        else if(currentAvailablePoints > ghostTwoSpawnThreshold)
-                maxIndex = 0;
-        else if(currentAvailablePoints > ghostOneSpawnThreshold){
-            print("Reached Max Ghost Points Amount Of " + currentAvailablePoints);
-            return; 
+        if (CalculateSpawnChance() < ghostSpawnChance)
+        {
+            if (typeGhostChance[ghostFavor[0]] > CalculateSpawnChance())
+            {
+                SpawnGhost(ghostFavor[0]);
+            }
+            else if (typeGhostChance[ghostFavor[1]] > CalculateSpawnChance())
+            {
+                SpawnGhost(ghostFavor[1]);
+            }
+            else if (typeGhostChance[ghostFavor[2]] > CalculateSpawnChance())
+            {
+                SpawnGhost(ghostFavor[2]);
+            }
+            else
+            {
+                SpawnGhost(0);
+            }
         }
-        
-        int i = Random.Range(0 , maxIndex);
-        currentAvailablePoints += ghosts[i].GetComponent<GhostMovement>().Points();
-        CurrentGhost = Instantiate(ghosts[i]);
-        Spawn(CurrentGhost);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnGhost(int index)
+    {
+        currentGhost = Instantiate(ghosts[index]);
+        Spawn(currentGhost);
+        ghostManager.globalGhostPoints += ghosts[index].GetComponent<GhostMovement>().GetGhostValue();
+        ghostManager.ChangeGhostAlive(1);
+    }
+    float CalculateSpawnChance()
+    {
+        return Random.Range(1, 100);
+    }
+    public GameObject GetCurrentGhost()
+    {
+        if(currentGhost == null)
+            return null;
+        return currentGhost;
     }
 }

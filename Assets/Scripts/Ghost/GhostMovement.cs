@@ -28,12 +28,14 @@ public class GhostMovement : NetworkBehaviour
     int points;
     [SerializeField] float ghostStoppingDistance;
     float timer;
+    GhostManager ghostManager;
 
     public bool isDead;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        ghostManager = FindObjectOfType<GhostManager>();
         points = ghostData.points;
         speed = ghostData.speed;
         walkRadius = ghostData.walkradius;
@@ -44,8 +46,6 @@ public class GhostMovement : NetworkBehaviour
         agent.stoppingDistance = ghostStoppingDistance;
         suckieTimer = timeToSuck;
         PatrolToNextPoint();
-
-
     }
     // Update is called once per frame
     void Update()
@@ -132,6 +132,8 @@ public class GhostMovement : NetworkBehaviour
     public void Die()
     {
         isDead = true;
+        ghostManager.globalGhostPoints -= points;
+        ghostManager.ChangeGhostAlive(-1);
         print("Ghost Dead");
         this.NetworkObject.Despawn();
     }
@@ -147,5 +149,10 @@ public class GhostMovement : NetworkBehaviour
         {
             suckieTimer = timeToSuck;
         }
+    }
+
+    public int GetGhostValue()
+    { 
+        return points;
     }
 }

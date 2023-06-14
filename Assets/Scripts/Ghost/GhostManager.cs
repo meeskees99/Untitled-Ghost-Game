@@ -1,28 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FishNet.Object.Synchronizing;
 using FishNet.Object;
 public class GhostManager : NetworkBehaviour
 {
-    [Header("Ghosts")]
-    [SerializeField] GhostSpawner[] ghostSpawner;
+    [Header("GhostSpawners settings")]
+    [SerializeField] GhostSpawner[] ghostSpawners;
     [SerializeField] int ghostsAlive;
     [SerializeField] int maxGhosts;
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartSpawn();
-    }
+    public int globalGhostPoints;
 
-    [ServerRpc(RequireOwnership = false)]
-    void StartSpawn()
+    List<GhostSpawner> availableSpawners = new();
+
+
+    [SyncVar] [SerializeField] bool isStarted;
+
+    public void Start()
     {
-        for (int i = 0; i < ghostSpawner.Length; i++)
+        if (IsHost && !isStarted)
         {
-            if (ghostsAlive >= maxGhosts)
-                return;
-            ghostSpawner[i].SpawnGhost();
-            ghostsAlive++;
+            StartSpawners();
         }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void CheckAvailable()
+    {
+        availableSpawners.Clear();
+        for (int i = 0; i < ghostSpawners.Length; i++)
+        {
+            if (ghostSpawners[i].GetCurrentGhost() == null)
+            {
+                availableSpawners.Add(ghostSpawners[i]);
+            }
+        }
+        PickSpawner();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void StartSpawners()
+    {
+        isStarted = true;
+        for (int i = 0; i < maxGhosts; i++)
+        {
+            CheckAvailable();
+        }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void PickSpawner()
+    {
+        int i = Random.Range(0, availableSpawners.Count - 1);
+        availableSpawners[i].PickGhost();
+    }
+    public void ChangeGhostAlive(int amount)
+    {
+        ghostsAlive += amount;
     }
 }
