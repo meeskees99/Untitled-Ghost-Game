@@ -107,11 +107,12 @@ public class MouseLookAdvanced : NetworkBehaviour
                 Cursor.visible = true;
                 GameManager.MouseLocked = false;
             }
+            if (gameManager.settingsUI.activeSelf)
+            {
+                return;
+            }
         }
-        if (gameManager.settingsUI.activeSelf)
-        {
-            return;
-        }
+       
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sens;
 
