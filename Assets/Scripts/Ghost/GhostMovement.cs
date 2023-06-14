@@ -50,6 +50,8 @@ public class GhostMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsHost)
+            return;
         //print(isDead);
         if (isDead)
             return;
@@ -152,7 +154,7 @@ public class GhostMovement : NetworkBehaviour
     }
 
     public int GetGhostValue()
-    { 
+    {
         return points;
     }
 }
