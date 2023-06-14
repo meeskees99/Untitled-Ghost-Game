@@ -1497,9 +1497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe13cac578a832844a8503b05ffdec9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 0}
-  _networkObjectCache: {fileID: 0}
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 693984652}
+  _networkObjectCache: {fileID: 693984652}
   ghostManager: {fileID: 1030913623}
   ghosts:
   - {fileID: 9087618149018236688, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
@@ -7923,9 +7923,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe13cac578a832844a8503b05ffdec9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 0}
-  _networkObjectCache: {fileID: 0}
+  _componentIndexCache: 3
+  _addedNetworkObject: {fileID: 693984652}
+  _networkObjectCache: {fileID: 693984652}
   ghostManager: {fileID: 1030913623}
   ghosts:
   - {fileID: 9087618149018236688, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
@@ -9682,6 +9682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 693984651}
+  - component: {fileID: 693984652}
   m_Layer: 0
   m_Name: GhostSpawners
   m_TagString: Untagged
@@ -9708,6 +9709,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &693984652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693984650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsNested>k__BackingField: 0
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  _networkBehaviours:
+  - {fileID: 154621540}
+  - {fileID: 1254486975}
+  - {fileID: 968084172}
+  - {fileID: 537941984}
+  <ParentNetworkObject>k__BackingField: {fileID: 0}
+  <ChildNetworkObjects>k__BackingField: []
+  _isNetworked: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _defaultDespawnType: 0
+  NetworkObserver: {fileID: 0}
+  <PrefabId>k__BackingField: 0
+  <SpawnableCollectionId>k__BackingField: 0
+  _scenePathHash: 2346408145
+  <SceneId>k__BackingField: 10077746246884816169
+  <AssetPathHash>k__BackingField: 0
+  _sceneNetworkObjects:
+  - {fileID: 693984652}
+  - {fileID: 1030913622}
+  - {fileID: 2039755342}
 --- !u!1 &696807832
 GameObject:
   m_ObjectHideFlags: 0
@@ -13514,9 +13551,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe13cac578a832844a8503b05ffdec9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 0}
-  _networkObjectCache: {fileID: 0}
+  _componentIndexCache: 2
+  _addedNetworkObject: {fileID: 693984652}
+  _networkObjectCache: {fileID: 693984652}
   ghostManager: {fileID: 1030913623}
   ghosts:
   - {fileID: 9087618149018236688, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
@@ -14918,6 +14955,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 10077746248247702105
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
+  - {fileID: 693984652}
   - {fileID: 1030913622}
   - {fileID: 2039755342}
 --- !u!114 &1030913623
@@ -16896,9 +16934,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe13cac578a832844a8503b05ffdec9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 0}
-  _networkObjectCache: {fileID: 0}
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 693984652}
+  _networkObjectCache: {fileID: 693984652}
   ghostManager: {fileID: 1030913623}
   ghosts:
   - {fileID: 9087618149018236688, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
@@ -26842,7 +26880,8 @@ MonoBehaviour:
   <SceneId>k__BackingField: 10077746245853216940
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
-  - {fileID: 0}
+  - {fileID: 693984652}
+  - {fileID: 1030913622}
   - {fileID: 2039755342}
 --- !u!114 &2039755343
 MonoBehaviour:
