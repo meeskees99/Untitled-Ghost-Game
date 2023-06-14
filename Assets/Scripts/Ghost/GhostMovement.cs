@@ -36,7 +36,7 @@ public class GhostMovement : NetworkBehaviour
     {
         if (!IsHost)
         {
-            this.enabled = false;
+            GetComponent<NavMeshAgent>().enabled = false;
         }
         agent = GetComponent<NavMeshAgent>();
         ghostManager = FindObjectOfType<GhostManager>();
