@@ -11,7 +11,7 @@ public class GhostSpawner : NetworkBehaviour
     [SerializeField] float[] typeGhostChance;
     [SerializeField] int[] ghostFavor;
 
-    [SyncVar] [SerializeField] GameObject currentGhost;
+    [SyncVar][SerializeField] GameObject currentGhost;
 
     [ServerRpc(RequireOwnership = false)]
     public void PickGhost()
@@ -43,16 +43,23 @@ public class GhostSpawner : NetworkBehaviour
         currentGhost = Instantiate(ghosts[index], transform.position, transform.rotation);
         Spawn(currentGhost);
         currentGhost.transform.position = this.transform.position;
+        Settrans();
         ghostManager.globalGhostPoints += ghosts[index].GetComponent<GhostMovement>().GetGhostValue();
         ghostManager.ChangeGhostAlive(1);
     }
+    [ObserversRpc]
+    public void Settrans()
+    {
+        currentGhost.transform.position = this.transform.position;
+    }
+
     float CalculateSpawnChance()
     {
         return Random.Range(1, 100);
     }
     public GameObject GetCurrentGhost()
     {
-        if(currentGhost == null)
+        if (currentGhost == null)
             return null;
         return currentGhost;
     }
