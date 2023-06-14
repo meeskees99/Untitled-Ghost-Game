@@ -50,7 +50,7 @@ public class GhostMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(isDead);
+        //print(isDead);
         if (isDead)
             return;
 

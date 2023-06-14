@@ -16,7 +16,7 @@ public class GhostSpawner : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void PickGhost()
     {
-        if (CalculateSpawnChance() < ghostSpawnChance)
+        if (CalculateSpawnChance() <= ghostSpawnChance)
         {
             if (typeGhostChance[ghostFavor[0]] > CalculateSpawnChance())
             {

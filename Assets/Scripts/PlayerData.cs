@@ -126,6 +126,6 @@ public class PlayerData : NetworkBehaviour
 
     private void Update()
     {
-        print(playerId);
+        //print(playerId);
     }
 }
