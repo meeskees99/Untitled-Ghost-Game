@@ -34,6 +34,10 @@ public class GhostMovement : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!IsHost)
+        {
+            this.enabled = false;
+        }
         agent = GetComponent<NavMeshAgent>();
         ghostManager = FindObjectOfType<GhostManager>();
         points = ghostData.points;
