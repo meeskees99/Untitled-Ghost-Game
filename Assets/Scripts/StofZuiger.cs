@@ -66,7 +66,7 @@ public class StofZuiger : NetworkBehaviour
             for (int x = 0; x < g; x++)
             {
                 // Shoot excess ghost with shoot function
-                Shoot();
+                Shoot(false);
             }
             if (ghostPoints == maxGhostPoints)
             {
@@ -105,7 +105,7 @@ public class StofZuiger : NetworkBehaviour
             {
                 fireTime = fireRate;
                 ShootAnimation();
-                Shoot();
+                Shoot(true);
 
             }
         }
