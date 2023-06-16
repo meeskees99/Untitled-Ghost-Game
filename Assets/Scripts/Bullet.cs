@@ -11,7 +11,7 @@ public class Bullet : NetworkBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Check(other);
+        Check(other.gameObject);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -27,7 +27,7 @@ public class Bullet : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void Check(Collision other)
+    public void Check(GameObject other)
     {
         print(other.transform.GetComponent<PlayerData>().username);
         if (other.transform.GetComponent<NetworkObject>().IsOwner)
