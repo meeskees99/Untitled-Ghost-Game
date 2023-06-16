@@ -62,11 +62,7 @@ public class GhostMovement : NetworkBehaviour
 
         PatrolToNextPoint();
 
-        if (hitness)
-        {
-            SetHinessess();
-            GetSucked();
-        }
+        SetHinessess();
         if (hitnessess)
         {
             SetSpeed(0);
@@ -74,14 +70,13 @@ public class GhostMovement : NetworkBehaviour
         }
         else
         {
-            SetHinessess();
-
-            if (hitnessess)
-            {
-                SetSpeed(ghostData.speed);
-                BoolAnim("IsSucked", false);
-            }
-
+            SetSpeed(ghostData.speed);
+            BoolAnim("IsSucked", false);
+        }
+        
+        if (hitness)
+        {
+            GetSucked();
         }
 
         ResetSuckie();
