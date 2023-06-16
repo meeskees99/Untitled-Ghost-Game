@@ -122,7 +122,10 @@ public class GhostMovement : NetworkBehaviour
     {
         return suckieTimer;
     }
+    
     [SyncVar] public bool hitness;
+
+    [ServerRpc(RequireOwnership = false)]
     public void isHit(bool hit)
     {
         hitness = hit;
