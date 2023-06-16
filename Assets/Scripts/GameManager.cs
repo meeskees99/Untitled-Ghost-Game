@@ -10,7 +10,7 @@ public class GameManager : NetworkBehaviour
 
     [SerializeField] Transform[] spawn1;
     [SerializeField] Transform[] spawn2;
-    public static bool MouseLocked;
+    public bool MouseLocked;
     [SyncVar] int team1Index;
     [SyncVar] int team2Index;
 

@@ -13,8 +13,6 @@ public class MouseLookAdvanced : NetworkBehaviour
     float xRotation;
     float yRotation;
 
-    bool mouseLocked;
-
     [SerializeField] Camera cam;
     [SerializeField] GameManager gameManager;
     [SerializeField] StofZuiger stofZuiger;
@@ -75,28 +73,28 @@ public class MouseLookAdvanced : NetworkBehaviour
             if (!isLocked)
             {
                 isLocked = true;
-                GameManager.MouseLocked = true;
+                gameManager.MouseLocked = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!GameManager.MouseLocked)
+                if (!gameManager.MouseLocked)
                 {
                     print("Toggle Cursor To Lock");
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
-                    GameManager.MouseLocked = true;
+                    gameManager.MouseLocked = true;
                 }
                 else
                 {
                     print("Toggle Cursor To Confined");
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
-                    GameManager.MouseLocked = false;
+                    gameManager.MouseLocked = false;
                 }
             }
-            if (GameManager.MouseLocked)
+            if (gameManager.MouseLocked)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -105,7 +103,7 @@ public class MouseLookAdvanced : NetworkBehaviour
             {
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
-                GameManager.MouseLocked = false;
+                gameManager.MouseLocked = false;
             }
             if (gameManager.settingsUI.activeSelf)
             {
