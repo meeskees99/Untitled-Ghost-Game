@@ -17,7 +17,7 @@ public class GhostMovement : NetworkBehaviour
     [SerializeField] LayerMask walkableLayer;
     [Tooltip("Max distance the agent can walk")]
     [SerializeField] float walkRadius;
-    float speed;
+    [SyncVar] float speed;
     [Tooltip("The time an agent will wait before going to it's next point")]
     [SerializeField] float waitTime;
 
