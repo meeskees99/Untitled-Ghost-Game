@@ -279,6 +279,7 @@ MonoBehaviour:
   sens: 0
   orientation: {fileID: 1718954057773777527}
   cam: {fileID: 0}
+  gameManager: {fileID: 0}
   stofZuiger: {fileID: 3418064442683254627}
   use: 101
   useRange: 5
@@ -468,7 +469,6 @@ MonoBehaviour:
   airMultiplier: 0.4
   jumpKey: 32
   sprintKey: 304
-  crouchKey: 306
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
@@ -2472,7 +2472,7 @@ MonoBehaviour:
   shoot: 324
   mask:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 200
   pData: {fileID: 2548425321851108391}
   shootPos: {fileID: 7793885864186223221}
   suckRange: 5.5
