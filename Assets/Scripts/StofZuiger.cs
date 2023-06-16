@@ -125,24 +125,16 @@ public class StofZuiger : NetworkBehaviour
 
                             // error when removing for other players
                             hit.transform.GetComponent<GhostMovement>().Die();
-                            target[i].transform.GetComponent<GhostMovement>().KillGhost();
                             target.Remove(target[i]);
                         }
                         else if (hit.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
                             hit.transform.GetComponent<GhostMovement>().isHit(true);
                     }
-                    else
+                    else if (target[i].transform.GetComponent<GhostMovement>().isDead)
                     {
-                        target[i].transform.GetComponent<GhostMovement>().isHit(false);
-                        if (hit.transform.GetComponent<GhostMovement>().isDead)
-                        {
-                            print("isdead");
-                            target[i].transform.GetComponent<GhostMovement>().KillGhost();
-                            target.Remove(hit.transform.gameObject);
-                        }
+                        target.Remove(target[i]);
                     }
                 }
-
             }
             else
             {
