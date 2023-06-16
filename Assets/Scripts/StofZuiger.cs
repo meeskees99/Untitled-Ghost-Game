@@ -129,7 +129,7 @@ public class StofZuiger : NetworkBehaviour
             target.Add(other.gameObject);
         }
     }
-    [ServerRpc(RequireOwnership = false)]
+    
     public void Suck()
     {
         for (int i = 0; i < target.Count; i++)
