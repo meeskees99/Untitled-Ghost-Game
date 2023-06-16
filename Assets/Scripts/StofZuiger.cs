@@ -23,8 +23,6 @@ public class StofZuiger : NetworkBehaviour
     float time;
 
     [SerializeField] Animator animator;
-
-    [SerializeField] StofZuiger[] stofZuigers;
     GameManager gameManager;
 
     [SerializeField] int maxGhostPoints = 3;
@@ -45,13 +43,8 @@ public class StofZuiger : NetworkBehaviour
             GetComponent<MeshCollider>().enabled = false;
             this.enabled = false;
         }
-        stofZuigers = FindObjectsOfType<StofZuiger>();
     }
-
-    void Start()
-    {
-        fireTime = fireRate;
-    }
+    
     void Update()
     {
         for (int z = 0; z < target.Count; z++)
@@ -73,8 +66,7 @@ public class StofZuiger : NetworkBehaviour
             for (int x = 0; x < g; x++)
             {
                 // Shoot excess ghost with shoot function
-                //Shoot();
-                ghostPoints--;
+                Shoot();
             }
             if (ghostPoints == maxGhostPoints)
             {
@@ -107,7 +99,7 @@ public class StofZuiger : NetworkBehaviour
         {
             fireTime -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(shoot))
+        if (Input.GetKeyDown(shoot) && ghostPoints > 0)
         {
             if (fireTime <= 0)
             {
@@ -167,12 +159,15 @@ public class StofZuiger : NetworkBehaviour
         }
     }
     [ServerRpc(RequireOwnership = true)]
-    public void Shoot()
+    public void Shoot(bool isBullet)
     {
+        ghostPoints--;
         print("shoot");
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
-        Spawn(spawnedBullet);
+        Spawn(spawnedBullet, this.LocalConnection);
+        
         spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
+        spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
     }
 
     public void ReleaseGhost()

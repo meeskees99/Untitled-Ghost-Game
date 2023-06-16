@@ -110,9 +110,10 @@ public class MovementAdvanced : NetworkBehaviour
         if (isStunned)
             return;
         isStunned = true;
-        StartCoroutine("ResetStun", 0.1f);
+        print("stun");
+        StartCoroutine(ResetStun());
     }
-    public IEnumerable ResetStun()
+    public IEnumerator ResetStun()
     {
         yield return new WaitForSeconds(stunTime);
         isStunned = false;

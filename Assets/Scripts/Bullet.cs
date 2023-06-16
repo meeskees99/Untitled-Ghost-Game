@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FishNet.Object;
-
+using FishNet.Object.Synchronizing;
 public class Bullet : NetworkBehaviour
 {
     [SerializeField] GameObject ghost;
 
-    [SerializeField] bool isBullet;
-    [SerializeField] bool isGhost;
+    public bool isBullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,27 +22,27 @@ public class Bullet : NetworkBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (other.transform.GetComponent<NetworkObject>().IsOwner)
+        {
+            print("Owner");
+            return;
+        }
         if (isBullet)
         {
-            print(" bullet");
             if (other.transform.tag == "Player")
             {
                 other.transform.GetComponent<MovementAdvanced>().Stun();
+                Despawn(gameObject);
             }
             else
             {
-                Destroy(gameObject);
+                Despawn(gameObject);
             }
         }
-        else if (isGhost)
+        else 
         {
-            GameObject CGhost =Instantiate(ghost);
+            GameObject CGhost = Instantiate(ghost);
             Spawn(CGhost);
         }
-        else
-        {
-            print("Please Set The Bullet To Either 'isBullet' or 'isGhost'.");
-        }
-
     }
 }

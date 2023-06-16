@@ -75,7 +75,6 @@ public class PlayerData : NetworkBehaviour
         }
         StartCoroutine(manager.WaitSomeMoreDickHead());
     }
-
     [ServerRpc(RequireOwnership = false)]
     public void SetParentTeam()
     {
