@@ -122,10 +122,9 @@ public class GhostMovement : NetworkBehaviour
     {
         return suckieTimer;
     }
-    
-    [SyncVar] public bool hitness;
 
-    [ServerRpc(RequireOwnership = false)]
+    public bool hitness;
+
     public void isHit(bool hit)
     {
         hitness = hit;
@@ -139,6 +138,7 @@ public class GhostMovement : NetworkBehaviour
     void GetSucked()
     {
         print("Getting Head");
+        suckieTimer = new();
         suckieTimer -= Time.deltaTime;
     }
     [ServerRpc(RequireOwnership = false)]
