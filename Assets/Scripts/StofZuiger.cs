@@ -25,7 +25,7 @@ public class StofZuiger : NetworkBehaviour
     GameManager gameManager;
 
     [SerializeField] int maxGhostPoints = 3;
-    [SyncVar] [SerializeField] int ghostPoints;
+    [SyncVar][SerializeField] int ghostPoints;
     bool maxGhost;
 
     [SerializeField] List<GameObject> target = new();
@@ -119,7 +119,6 @@ public class StofZuiger : NetworkBehaviour
                     print("Nu shiet ik de raycast");
                     if (hit.transform.tag == GhostTag && !hit.transform.GetComponent<GhostMovement>().isDead)
                     {
-
                         if (hit.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
                         {
                             ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
@@ -136,6 +135,7 @@ public class StofZuiger : NetworkBehaviour
                         target[i].transform.GetComponent<GhostMovement>().isHit(false);
                         if (hit.transform.GetComponent<GhostMovement>().isDead)
                         {
+                            print("isdead");
                             target.Remove(hit.transform.gameObject);
                         }
                     }
