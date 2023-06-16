@@ -32,7 +32,6 @@ public class GhostMovement : NetworkBehaviour
 
     [SyncVar] public bool isDead;
 
-    [SyncVar][SerializeField] public bool hitnessess;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,9 +61,9 @@ public class GhostMovement : NetworkBehaviour
 
         PatrolToNextPoint();
 
-        SetHinessess();
-        if (hitnessess)
+        if (hitness)
         {
+            GetSucked();
             SetSpeed(0);
             BoolAnim("IsSucked", true);
         }
@@ -73,23 +72,12 @@ public class GhostMovement : NetworkBehaviour
             SetSpeed(ghostData.speed);
             BoolAnim("IsSucked", false);
         }
-        
-        if (hitness)
-        {
-            GetSucked();
-        }
 
         ResetSuckie();
     }
     [ServerRpc(RequireOwnership = false)]
-    public void SetHinessess()
-    {
-        hitnessess = hitness;
-    }
-    [ServerRpc(RequireOwnership = false)]
     public void SetSpeed(float speeds)
     {
-
         speed = speeds;
     }
     [ServerRpc(RequireOwnership = false)]
@@ -134,7 +122,7 @@ public class GhostMovement : NetworkBehaviour
     {
         return suckieTimer;
     }
-    public bool hitness;
+    [SyncVar] public bool hitness;
     public void isHit(bool hit)
     {
         hitness = hit;
