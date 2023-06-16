@@ -8,17 +8,6 @@ public class Bullet : NetworkBehaviour
     [SerializeField] GameObject ghost;
 
     public bool isBullet;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnCollisionEnter(Collision other)
     {
@@ -31,18 +20,29 @@ public class Bullet : NetworkBehaviour
         {
             if (other.transform.tag == "Player")
             {
-                other.transform.GetComponent<MovementAdvanced>().Stun();
-                Despawn(gameObject);
+                DoStun(other.gameObject);
             }
             else
             {
-                Despawn(gameObject);
+                DoDespawn();
             }
         }
-        else 
+        else
         {
             GameObject CGhost = Instantiate(ghost);
             Spawn(CGhost);
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DoStun(GameObject other)
+    {
+        other.transform.GetComponent<MovementAdvanced>().Stun();
+        DoDespawn();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void DoDespawn()
+    {
+        Despawn(gameObject);
     }
 }
