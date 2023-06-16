@@ -129,6 +129,7 @@ public class StofZuiger : NetworkBehaviour
             target.Add(other.gameObject);
         }
     }
+    [ServerRpc(RequireOwnership = true)]
     public void Suck()
     {
         for (int i = 0; i < target.Count; i++)
@@ -141,6 +142,7 @@ public class StofZuiger : NetworkBehaviour
                     print("Nu shiet ik de raycast");
                     if (hit.transform.tag == GhostTag && !hit.transform.GetComponent<GhostMovement>().isDead)
                     {
+                        print("Heeft ghosttag en is niet dood");
                         if (hit.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
                         {
                             ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
