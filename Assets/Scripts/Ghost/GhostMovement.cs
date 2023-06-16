@@ -32,7 +32,7 @@ public class GhostMovement : NetworkBehaviour
 
     [SyncVar] public bool isDead;
 
-    [SyncVar] public bool hitnessess;
+    [SyncVar] [SerializeField] public bool hitnessess;
     // Start is called before the first frame update
     void Start()
     {
