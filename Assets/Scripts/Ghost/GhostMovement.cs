@@ -64,18 +64,18 @@ public class GhostMovement : NetworkBehaviour
         {
             GetSucked();
             BoolAnim("IsSucked", true);
-            SetSPeed(0);
+            SetSpeed(0);
         }
         else
         {
-            SetSPeed(ghostData.speed);
+            SetSpeed(ghostData.speed);
             BoolAnim("IsSucked", false);
         }
 
         ResetSuckie();
     }
     [ServerRpc(RequireOwnership = false)]
-    public void SetSPeed(float speeds)
+    public void SetSpeed(float speeds)
     {
         speed = speeds;
     }
