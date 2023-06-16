@@ -69,7 +69,6 @@ public class GhostMovement : NetworkBehaviour
         }
         else
         {
-            kaas = false;
             SetSpeed(ghostData.speed);
             BoolAnim("IsSucked", false);
         }
@@ -135,16 +134,11 @@ public class GhostMovement : NetworkBehaviour
     {
         return points;
     }
-    bool kaas;
+
     void GetSucked()
     {
         print("Getting Head");
-        if (!kaas)
-        {
-            suckieTimer = new();
-            kaas = true;
-        }
-
+        suckieTimer = new();
         suckieTimer -= Time.deltaTime;
     }
     [ServerRpc(RequireOwnership = false)]
