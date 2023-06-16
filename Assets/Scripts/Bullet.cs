@@ -11,6 +11,25 @@ public class Bullet : NetworkBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        Check(other);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DoStun(GameObject other)
+    {
+        other.transform.GetComponent<MovementAdvanced>().Stun();
+        DoDespawn();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void DoDespawn()
+    {
+        Despawn(gameObject);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void Check(Collision other)
+    {
+        print(other.transform.GetComponent<PlayerData>().username);
         if (other.transform.GetComponent<NetworkObject>().IsOwner)
         {
             print("Owner");
@@ -33,17 +52,5 @@ public class Bullet : NetworkBehaviour
             GameObject CGhost = Instantiate(ghost);
             Spawn(CGhost);
         }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void DoStun(GameObject other)
-    {
-        other.transform.GetComponent<MovementAdvanced>().Stun();
-        DoDespawn();
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void DoDespawn()
-    {
-        Despawn(gameObject);
     }
 }
