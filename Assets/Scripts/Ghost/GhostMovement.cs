@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
 using FishNet.Object;
-
+using FishNet.Object.Synchronizing;
 public class GhostMovement : NetworkBehaviour
 {
     NavMeshAgent agent;
@@ -30,7 +30,7 @@ public class GhostMovement : NetworkBehaviour
     float timer;
     GhostManager ghostManager;
 
-    public bool isDead;
+    [SyncVar] public bool isDead;
     // Start is called before the first frame update
     void Start()
     {
