@@ -104,7 +104,7 @@ public class MovementAdvanced : NetworkBehaviour
             return;
         MovePlayer();
     }
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void Stun()
     {
         if (isStunned)
