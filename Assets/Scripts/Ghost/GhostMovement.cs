@@ -132,6 +132,7 @@ public class GhostMovement : NetworkBehaviour
 
     void GetSucked()
     {
+        print("Getting Head");
         suckieTimer -= Time.deltaTime;
     }
     [ServerRpc(RequireOwnership = false)]
