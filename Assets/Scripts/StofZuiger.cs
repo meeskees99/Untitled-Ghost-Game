@@ -168,6 +168,7 @@ public class StofZuiger : NetworkBehaviour
     }
     public void Shoot()
     {
+        print("shoot");
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
         Spawn(spawnedBullet);
         spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;

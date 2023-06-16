@@ -25,6 +25,7 @@ public class Bullet : NetworkBehaviour
     {
         if (isBullet)
         {
+            print(" bullet");
             if (other.transform.tag == "Player")
             {
                 other.transform.GetComponent<MovementAdvanced>().Stun();
