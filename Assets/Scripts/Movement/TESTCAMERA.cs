@@ -4,22 +4,13 @@ using UnityEngine;
 
 public class TESTCAMERA : MonoBehaviour
 {
-   [Header("Settings")]
-    [Tooltip("Range you can suck up ghosts from")]
-    [SerializeField] float suckRange;
-
     [SerializeField] float sens;
-    [SerializeField] PlayerData playerData;
 
     [SerializeField] Transform orientation;
     float xRotation;
     float yRotation;
 
     bool mouseLocked = true;
-
-    Camera cam;
-
-    [SerializeField] LayerMask mask;
 
     // Update is called once per frame
     void Update()
