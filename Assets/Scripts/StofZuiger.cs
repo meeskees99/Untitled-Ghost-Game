@@ -42,6 +42,14 @@ public class StofZuiger : NetworkBehaviour
     }
     void Update()
     {
+        for (int z = 0; z < target.Count; z++)
+        {
+            if (target[z].transform.GetComponent<GhostMovement>().isDead)
+            {
+                target.Remove(target[z]);
+            }
+        }
+
         if (gameManager == null)
         {
             gameManager = FindObjectOfType<GameManager>();
@@ -111,11 +119,6 @@ public class StofZuiger : NetworkBehaviour
     {
         for (int i = 0; i < target.Count; i++)
         {
-            if (target[i].transform.GetComponent<GhostMovement>().isDead)
-            {
-                target.Remove(target[i]);
-            }
-            
             if (target.Count >= 1)
             {
                 Debug.DrawRay(shootPos.position, target[i].transform.position - shootPos.transform.position);
