@@ -477,6 +477,8 @@ MonoBehaviour:
   maxSlopeAngle: 45
   orientation: {fileID: 1718954057773777526}
   speedTxt: {fileID: 0}
+  isStunned: 0
+  stunTime: 5
   state: 0
 --- !u!114 &1718954057773777580
 MonoBehaviour:
@@ -2476,11 +2478,15 @@ MonoBehaviour:
   pData: {fileID: 2548425321851108391}
   shootPos: {fileID: 7793885864186223221}
   suckRange: 5.5
-  ghost: {fileID: 0}
+  fireSpeed: 5
+  ghostToShoot: {fileID: 0}
+  playerBullet: {fileID: 5971678057664422469, guid: fd91be2ed7d136b49aa8820e25c40c3c, type: 3}
   animator: {fileID: 4409519993864656286}
   stofZuigers: []
   maxGhostPoints: 3
   ghostPoints: 0
+  fireRate: 4
+  fireTime: 0
   target: []
 --- !u!1001 &8012778320400712785
 PrefabInstance:

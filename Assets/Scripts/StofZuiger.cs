@@ -7,15 +7,18 @@ public class StofZuiger : NetworkBehaviour
 {
     //[SerializeField] GameObject zuigBox;
     //[SerializeField] float suckRange;
-
+    [Header("Setup")]
     [SerializeField] KeyCode suck;
     [SerializeField] KeyCode shoot;
     [SerializeField] LayerMask mask;
     [SerializeField] PlayerData pData;
+    [Header("Shooting")]
     [SerializeField] Transform shootPos;
     [SerializeField] float suckRange;
+    [SerializeField] float fireSpeed;
+    [SerializeField] GameObject ghostToShoot;
+    [SerializeField] GameObject playerBullet;
 
-    [SerializeField] GameObject ghost;
     RaycastHit hit;
     float time;
 
@@ -28,6 +31,10 @@ public class StofZuiger : NetworkBehaviour
     [SyncVar][SerializeField] int ghostPoints;
     bool maxGhost;
 
+    [Tooltip("Set the fire rate to the amount of seconds you want to wait between shots")]
+    [SerializeField] float fireRate;
+    [SerializeField] float fireTime;
+
     [SerializeField] List<GameObject> target = new();
     string GhostTag = "Ghost";
     public override void OnStartClient()
@@ -39,6 +46,11 @@ public class StofZuiger : NetworkBehaviour
             this.enabled = false;
         }
         stofZuigers = FindObjectsOfType<StofZuiger>();
+    }
+
+    void Start()
+    {
+        fireTime = fireRate;
     }
     void Update()
     {
@@ -91,11 +103,19 @@ public class StofZuiger : NetworkBehaviour
                 target[i].transform.GetComponent<GhostMovement>().isHit(false);
             }
         }
+        if (fireTime > 0)
+        {
+            fireTime -= Time.deltaTime;
+        }
         if (Input.GetKeyDown(shoot))
         {
-            ShootAnimation();
+            if (fireTime <= 0)
+            {
+                fireTime = fireRate;
+                ShootAnimation();
+                Shoot();
 
-            Shoot();
+            }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -148,9 +168,18 @@ public class StofZuiger : NetworkBehaviour
     }
     public void Shoot()
     {
-        // GameObject spawnGhost = Instantiate(ghost);
-        // Spawn(spawnGhost);
+        GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
+        Spawn(spawnedBullet);
+        spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
     }
+
+    public void ReleaseGhost()
+    {
+        GameObject spawnGhost = Instantiate(ghostToShoot);
+        Spawn(spawnGhost);
+    }
+
+
 
     public void StorePoints()
     {

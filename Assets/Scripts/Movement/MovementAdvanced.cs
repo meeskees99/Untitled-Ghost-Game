@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FishNet.Object.Synchronizing;
 
 public class MovementAdvanced : NetworkBehaviour
 {
@@ -46,6 +47,9 @@ public class MovementAdvanced : NetworkBehaviour
 
     Rigidbody rb;
 
+    [SyncVar][SerializeField] bool isStunned;
+    [SerializeField] float stunTime = 5f;
+
 
     public MovementState state;
     public enum MovementState
@@ -73,6 +77,8 @@ public class MovementAdvanced : NetworkBehaviour
     }
     private void Update()
     {
+        if (isStunned)
+            return;
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
@@ -94,7 +100,22 @@ public class MovementAdvanced : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (isStunned)
+            return;
         MovePlayer();
+    }
+    [ServerRpc(RequireOwnership = true)]
+    public void Stun()
+    {
+        if (isStunned)
+            return;
+        isStunned = true;
+        StartCoroutine("ResetStun", 0.1f);
+    }
+    public IEnumerable ResetStun()
+    {
+        yield return new WaitForSeconds(stunTime);
+        isStunned = false;
     }
     private void MyInput()
     {
