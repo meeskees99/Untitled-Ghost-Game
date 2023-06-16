@@ -141,9 +141,12 @@ public class GhostMovement : NetworkBehaviour
         ghostManager.globalGhostPoints -= points;
         ghostManager.ChangeGhostAlive(-1);
         print("Ghost Dead");
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void KillGhost()
+    {
         this.NetworkObject.Despawn();
     }
-
     void ResetSuckie()
     {
         if (!hitness && suckieTimer < timeToSuck)

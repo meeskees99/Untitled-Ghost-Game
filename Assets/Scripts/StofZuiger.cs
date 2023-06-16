@@ -124,8 +124,9 @@ public class StofZuiger : NetworkBehaviour
                             ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
 
                             // error when removing for other players
-                            target.Remove(target[i]);
                             hit.transform.GetComponent<GhostMovement>().Die();
+                            target[i].transform.GetComponent<GhostMovement>().KillGhost();
+                            target.Remove(target[i]);
                         }
                         else if (hit.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
                             hit.transform.GetComponent<GhostMovement>().isHit(true);
@@ -136,6 +137,7 @@ public class StofZuiger : NetworkBehaviour
                         if (hit.transform.GetComponent<GhostMovement>().isDead)
                         {
                             print("isdead");
+                            target[i].transform.GetComponent<GhostMovement>().KillGhost();
                             target.Remove(hit.transform.gameObject);
                         }
                     }
