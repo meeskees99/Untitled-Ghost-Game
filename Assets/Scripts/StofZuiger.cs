@@ -16,9 +16,7 @@ public class StofZuiger : NetworkBehaviour
     [SerializeField] float suckRange;
 
     [SerializeField] GameObject ghost;
-    RaycastHit hit1;
-    RaycastHit hit2;
-    RaycastHit hit3;
+    RaycastHit hit;
     float time;
 
     [SerializeField] Animator animator;
@@ -27,17 +25,11 @@ public class StofZuiger : NetworkBehaviour
     GameManager gameManager;
 
     [SerializeField] int maxGhostPoints = 3;
-    [SyncVar] int ghostPoints;
+    [SyncVar] [SerializeField] int ghostPoints;
     bool maxGhost;
 
     [SerializeField] List<GameObject> target = new();
-    GameObject Kaas;
     string GhostTag = "Ghost";
-
-    void Start()
-    {
-
-    }
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -122,30 +114,29 @@ public class StofZuiger : NetworkBehaviour
             if (target.Count >= 1)
             {
                 Debug.DrawRay(shootPos.position, target[i].transform.position - shootPos.transform.position);
-                if (Physics.Raycast(shootPos.position, target[i].transform.position - shootPos.position, out hit1, suckRange, mask))
+                if (Physics.Raycast(shootPos.position, target[i].transform.position - shootPos.position, out hit, suckRange, mask))
                 {
                     print("Nu shiet ik de raycast");
-                    if (hit1.transform.tag == GhostTag && !hit1.transform.GetComponent<GhostMovement>().isDead)
+                    if (hit.transform.tag == GhostTag && !hit.transform.GetComponent<GhostMovement>().isDead)
                     {
 
-                        if (hit1.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
+                        if (hit.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
                         {
                             ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
 
                             // error when removing for other players
-                            hit1.transform.GetComponent<GhostMovement>().Die();
-                            pData.GainPoints(target[i].transform.GetComponent<GhostMovement>().Points());
+                            hit.transform.GetComponent<GhostMovement>().Die();
                             target.Remove(target[i]);
                         }
-                        else if (hit1.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
-                            hit1.transform.GetComponent<GhostMovement>().isHit(true);
+                        else if (hit.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
+                            hit.transform.GetComponent<GhostMovement>().isHit(true);
                     }
                     else
                     {
                         target[i].transform.GetComponent<GhostMovement>().isHit(false);
-                        if (hit1.transform.GetComponent<GhostMovement>().isDead)
+                        if (hit.transform.GetComponent<GhostMovement>().isDead)
                         {
-                            target.Remove(hit1.transform.gameObject);
+                            target.Remove(hit.transform.gameObject);
                         }
                     }
                 }
