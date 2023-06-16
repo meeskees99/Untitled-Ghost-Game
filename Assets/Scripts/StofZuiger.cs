@@ -166,6 +166,7 @@ public class StofZuiger : NetworkBehaviour
             }
         }
     }
+    [ServerRpc(RequireOwnership = true)]
     public void Shoot()
     {
         print("shoot");
