@@ -166,7 +166,7 @@ public class StofZuiger : NetworkBehaviour
         ghostPoints--;
         print("shoot");
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
-        Spawn(spawnedBullet, this.LocalConnection);
+        Spawn(spawnedBullet, this.Owner);
 
         spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
         spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
