@@ -140,13 +140,14 @@ public class GhostMovement : NetworkBehaviour
         isDead = true;
         ghostManager.globalGhostPoints -= points;
         ghostManager.ChangeGhostAlive(-1);
-        InvokeRepeating("KillGhost", 1, 1);
+        //InvokeRepeating("KillGhost", 0.1f, 0.1f;
         print("Ghost Dead");
+        this.NetworkObject.Despawn();
     }
     [ServerRpc(RequireOwnership = false)]
     public void KillGhost()
     {
-        this.NetworkObject.Despawn();
+        
     }
     void ResetSuckie()
     {
