@@ -44,7 +44,6 @@ public class StofZuiger : NetworkBehaviour
             this.enabled = false;
         }
     }
-    
     void Update()
     {
         for (int z = 0; z < target.Count; z++)
@@ -59,13 +58,14 @@ public class StofZuiger : NetworkBehaviour
         {
             gameManager = FindObjectOfType<GameManager>();
         }
-        if (ghostPoints > maxGhostPoints)
+        if (ghostPoints > maxGhostPoints && !maxGhost)
         {
             int g = ghostPoints - maxGhostPoints;
-
+            print(g + " g");
             for (int x = 0; x < g; x++)
             {
                 // Shoot excess ghost with shoot function
+                print(x + " x");
                 Shoot(false);
             }
             if (ghostPoints == maxGhostPoints)
