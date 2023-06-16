@@ -20,6 +20,7 @@ public class Bullet : NetworkBehaviour
         {
             if (other.transform.tag == "Player")
             {
+                print(other);
                 DoStun(other.gameObject);
             }
             else

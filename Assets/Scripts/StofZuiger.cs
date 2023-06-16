@@ -58,21 +58,23 @@ public class StofZuiger : NetworkBehaviour
         {
             gameManager = FindObjectOfType<GameManager>();
         }
-        if (ghostPoints > maxGhostPoints && !maxGhost)
+        if (ghostPoints > maxGhostPoints)
         {
-            int g = ghostPoints - maxGhostPoints;
-            print(g + " g");
-            for (int x = 0; x < g; x++)
+            if (!maxGhost)
             {
-                // Shoot excess ghost with shoot function
-                print(x + " x");
-                Shoot(false);
+                int g = ghostPoints - maxGhostPoints;
+                print(g + " g");
+                for (int x = 0; x < g; x++)
+                {
+                    // Shoot excess ghost with shoot function
+                    print(x + " x");
+                    Shoot(false);
+                }
+                if (ghostPoints == maxGhostPoints)
+                {
+                    maxGhost = true;
+                }
             }
-            if (ghostPoints == maxGhostPoints)
-            {
-                maxGhost = true;
-            }
-
         }
         else
         {
@@ -165,7 +167,7 @@ public class StofZuiger : NetworkBehaviour
         print("shoot");
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
         Spawn(spawnedBullet, this.LocalConnection);
-        
+
         spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
         spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
     }
