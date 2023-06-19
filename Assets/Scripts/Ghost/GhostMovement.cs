@@ -148,7 +148,7 @@ public class GhostMovement : NetworkBehaviour
     {
         return suckieTimer;
     }
-
+    [ServerRpc(RequireOwnership = false)]
     public void isHit(bool hit)
     {
         hitness = hit;

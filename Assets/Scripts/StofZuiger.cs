@@ -110,7 +110,6 @@ public class StofZuiger : NetworkBehaviour
             }
         }
     }
-
     public void Suck()
     {
         for (int i = 0; i < target.Count; i++)
