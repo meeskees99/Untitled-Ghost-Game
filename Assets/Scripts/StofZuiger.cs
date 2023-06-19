@@ -26,7 +26,7 @@ public class StofZuiger : NetworkBehaviour
     GameManager gameManager;
 
     [SerializeField] int maxGhostPoints = 3;
-    [SyncVar][SerializeField] int ghostPoints;
+    [SyncVar] [SerializeField] int ghostPoints;
     bool maxGhost;
 
     [Tooltip("Set the fire rate to the amount of seconds you want to wait between shots")]
@@ -186,7 +186,7 @@ public class StofZuiger : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void Shoot(bool isBullet)
     {
-        ghostPoints--;
+        ghostPoints -= 1;
         print("shoot");
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
         Spawn(spawnedBullet, this.Owner);
