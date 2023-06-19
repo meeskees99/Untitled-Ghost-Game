@@ -94,7 +94,7 @@ public class StofZuiger : NetworkBehaviour
         {
             fireTime -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(shoot) && ghostPoints > 0)
+        if (Input.GetKeyDown(shoot))
         {
             if (fireTime <= 0)
             {
@@ -187,7 +187,7 @@ public class StofZuiger : NetworkBehaviour
 
         // spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
         // spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
-        ghostPoints -= 1;
+        ghostPoints = 0;
     }
 
     public void ReleaseGhost()
