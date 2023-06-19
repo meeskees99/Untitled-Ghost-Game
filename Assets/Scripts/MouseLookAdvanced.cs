@@ -60,7 +60,7 @@ public class MouseLookAdvanced : NetworkBehaviour
         {
             sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
         }
-        if(GameManager.MouseLocked){
+        if(!GameManager.MouseLocked){
             return;
         }
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
