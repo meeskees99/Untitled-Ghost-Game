@@ -56,33 +56,28 @@ public class StofZuiger : NetworkBehaviour
                 target.Remove(target[z]);
             }
         }
-
-        if (gameManager == null)
-        {
-            gameManager = FindObjectOfType<GameManager>();
-        }
-        if (ghostPoints > maxGhostPoints)
-        {
-            if (!maxGhost)
-            {
-                int g = ghostPoints - maxGhostPoints;
-                print(g + " g");
-                for (int x = 0; x < g; x++)
-                {
-                    // Shoot excess ghost with shoot function
-                    print(x + " x");
-                    Shoot(false);
-                }
-                if (ghostPoints == maxGhostPoints)
-                {
-                    maxGhost = true;
-                }
-            }
-        }
-        else
-        {
-            maxGhost = false;
-        }
+        // if (ghostPoints > maxGhostPoints)
+        // {
+        //     if (!maxGhost)
+        //     {
+        //         int g = (ghostPoints - maxGhostPoints);
+        //         print(g + " g");
+        //         for (int x = 0; x < g; x++)
+        //         {
+        //             // Shoot excess ghost with shoot function
+        //             print(x + " x");
+        //             Shoot(false);
+        //         }
+        //         if (ghostPoints == maxGhostPoints)
+        //         {
+        //             maxGhost = true;
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     maxGhost = false;
+        // }
 
         if (Input.GetKey(suck))
         {
