@@ -40,6 +40,12 @@ public class GameManager : NetworkBehaviour
         {
             settingsUI.SetActive(!settingsUI.activeSelf);
         }
+        if(settingsUI.activeSelf){
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else{
+            Cursor.lockState = CursorLockMode.Locked;
+        }
 
         int id = InstanceFinder.ClientManager.Connection.ClientId;
 
