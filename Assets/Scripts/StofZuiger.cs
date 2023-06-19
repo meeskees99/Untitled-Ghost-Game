@@ -181,13 +181,13 @@ public class StofZuiger : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void Shoot(bool isBullet)
     {
-        //ghostPoints -= 1;
         print("shoot");
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
         Spawn(spawnedBullet, this.Owner);
 
-        spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
-        spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
+        // spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
+        // spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
+        ghostPoints -= 1;
     }
 
     public void ReleaseGhost()
