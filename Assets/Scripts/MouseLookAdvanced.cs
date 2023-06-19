@@ -14,7 +14,6 @@ public class MouseLookAdvanced : NetworkBehaviour
     float yRotation;
 
     [SerializeField] Camera cam;
-    [SerializeField] GameManager gameManager;
     [SerializeField] StofZuiger stofZuiger;
 
     [SerializeField] KeyCode use;
@@ -41,16 +40,12 @@ public class MouseLookAdvanced : NetworkBehaviour
         //Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        gameManager = FindObjectOfType<GameManager>();
     }
     bool isLocked = false;
     bool startLock;
     // Update is called once per frame
     void Update()
     {
-        if (gameManager == null)
-            gameManager = FindObjectOfType<GameManager>();
-
         if (Input.GetKey(use))
         {
             if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
@@ -76,45 +71,38 @@ public class MouseLookAdvanced : NetworkBehaviour
             print("SceneGame");
             if (!startLock)
             {
+<<<<<<< Updated upstream
                 startLock = true;
+=======
+                print("lock glock on my cock");
+>>>>>>> Stashed changes
                 isLocked = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!gameManager.MouseLocked)
+                if (!isLocked)
                 {
                     print("Toggle Cursor To Lock");
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
-                    gameManager.MouseLocked = true;
+                    isLocked = true;
                 }
                 else
                 {
                     print("Toggle Cursor To Confined");
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
-                    gameManager.MouseLocked = false;
+                    isLocked = false;
                 }
             }
-            if (gameManager.MouseLocked)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                gameManager.MouseLocked = false;
-            }
-            if (gameManager.settingsUI.activeSelf)
-            {
-                return;
-            }
         }
-       
+        if (!isLocked)
+        {
+            return;
+        }
+
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sens;
 
