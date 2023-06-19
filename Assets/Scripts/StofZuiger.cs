@@ -172,7 +172,6 @@ public class StofZuiger : NetworkBehaviour
             SetSucking(false);
 
             target.Remove(other.gameObject);
-            //RemoveTarget(other.gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -181,19 +180,7 @@ public class StofZuiger : NetworkBehaviour
         {
             print(other + " enter");
             target.Add(other.gameObject);
-            //AddTarget(other.gameObject);
         }
-    }
-
-    [ServerRpc(RequireOwnership = true)]
-    public void AddTarget(GameObject newTarget)
-    {
-        target.Add(newTarget);
-    }
-    [ServerRpc(RequireOwnership = true)]
-    public void RemoveTarget(GameObject oldTarget)
-    {
-        target.Remove(oldTarget);
     }
 
     [ServerRpc(RequireOwnership = true)]
