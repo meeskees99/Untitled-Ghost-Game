@@ -100,7 +100,7 @@ public class StofZuiger : NetworkBehaviour
             {
                 fireTime = fireRate;
                 ShootAnimation();
-                Shoot(true);
+                Shoot();
 
             }
         }
@@ -179,7 +179,7 @@ public class StofZuiger : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = true)]
-    public void Shoot(bool isBullet)
+    public void Shoot()
     {
         print("shoot");
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
