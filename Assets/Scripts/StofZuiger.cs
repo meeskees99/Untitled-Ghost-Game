@@ -26,7 +26,7 @@ public class StofZuiger : NetworkBehaviour
     GameManager gameManager;
 
     [SerializeField] int maxGhostPoints = 3;
-    [SyncVar] [SerializeField] int ghostPoints;
+    [SyncVar][SerializeField] int ghostPoints;
     bool maxGhost;
 
     [Tooltip("Set the fire rate to the amount of seconds you want to wait between shots")]
@@ -56,28 +56,29 @@ public class StofZuiger : NetworkBehaviour
                 target.Remove(target[z]);
             }
         }
-        // if (ghostPoints > maxGhostPoints)
-        // {
-        //     if (!maxGhost)
-        //     {
-        //         int g = (ghostPoints - maxGhostPoints);
-        //         print(g + " g");
-        //         for (int x = 0; x < g; x++)
-        //         {
-        //             // Shoot excess ghost with shoot function
-        //             print(x + " x");
-        //             Shoot(false);
-        //         }
-        //         if (ghostPoints == maxGhostPoints)
-        //         {
-        //             maxGhost = true;
-        //         }
-        //     }
-        // }
-        // else
-        // {
-        //     maxGhost = false;
-        // }
+        
+        if (ghostPoints > maxGhostPoints)
+        {
+            if (!maxGhost)
+            {
+                int g = (ghostPoints - maxGhostPoints);
+                print(g + " g");
+                for (int x = 0; x < g; x++)
+                {
+                    // Shoot excess ghost with shoot function
+                    print(x + " x");
+                    Shoot(false);
+                }
+                if (ghostPoints == maxGhostPoints)
+                {
+                    maxGhost = true;
+                }
+            }
+        }
+        else
+        {
+            maxGhost = false;
+        }
 
         if (Input.GetKey(suck))
         {
@@ -100,7 +101,7 @@ public class StofZuiger : NetworkBehaviour
             {
                 fireTime = fireRate;
                 ShootAnimation();
-                Shoot();
+                Shoot(true);
 
             }
         }
@@ -120,7 +121,7 @@ public class StofZuiger : NetworkBehaviour
                         print("Heeft ghosttag en is niet dood");
                         if (hit.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
                         {
-                            ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
+                            GhostPointAdd(i);
 
                             hit.transform.GetComponent<GhostMovement>().Die();
                             target.Remove(target[i]);
@@ -140,6 +141,21 @@ public class StofZuiger : NetworkBehaviour
             }
         }
     }
+
+    [ServerRpc(RequireOwnership = true)]
+    public void GhostPointAdd(int index)
+    {
+        ghostPoints += target[index].transform.GetComponent<GhostMovement>().Points();
+    }
+    [ServerRpc(RequireOwnership = true)]
+    public void GhostPointRemove(int amount)
+    {
+        ghostPoints += amount;
+    }
+
+
+
+
     [ServerRpc(RequireOwnership = true)]
     public void SetSucking(bool state)
     {
@@ -179,15 +195,15 @@ public class StofZuiger : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = true)]
-    public void Shoot()
+    public void Shoot(bool isBullet)
     {
         print("shoot");
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
         Spawn(spawnedBullet, this.Owner);
 
-        // spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
-        // spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
-        ghostPoints = 0;
+        spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
+        spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
+        GhostPointRemove(-1);
     }
 
     public void ReleaseGhost()
