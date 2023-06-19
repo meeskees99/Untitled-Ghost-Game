@@ -33,7 +33,7 @@ public class StofZuiger : NetworkBehaviour
     [SerializeField] float fireRate;
     [SerializeField] float fireTime;
 
-    [SerializeField] List<GameObject> target = new();
+    [SyncVar][SerializeField] List<GameObject> target = new();
     string GhostTag = "Ghost";
 
     [SyncVar] public bool sucking;
@@ -53,10 +53,10 @@ public class StofZuiger : NetworkBehaviour
         {
             if (target[z].transform.GetComponent<GhostMovement>().isDead)
             {
-                target.Remove(target[z]);
+                //target.Remove(target[z]);
             }
         }
-        
+
         if (ghostPoints > maxGhostPoints)
         {
             if (!maxGhost)
@@ -121,10 +121,10 @@ public class StofZuiger : NetworkBehaviour
                         print("Heeft ghosttag en is niet dood");
                         if (hit.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
                         {
-                            GhostPointAdd(i);
+                            GhostPointAdd(hit.transform.GetComponent<GhostMovement>().Points());
 
                             hit.transform.GetComponent<GhostMovement>().Die();
-                            target.Remove(target[i]);
+                            RemoveTargets(target[i]);
                         }
                         else if (hit.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
                         {
@@ -143,9 +143,9 @@ public class StofZuiger : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = true)]
-    public void GhostPointAdd(int index)
+    public void GhostPointAdd(int i)
     {
-        ghostPoints += target[index].transform.GetComponent<GhostMovement>().Points();
+        ghostPoints += i;
     }
     [ServerRpc(RequireOwnership = true)]
     public void GhostPointRemove(int amount)
@@ -153,6 +153,17 @@ public class StofZuiger : NetworkBehaviour
         ghostPoints += amount;
     }
 
+    [ServerRpc(RequireOwnership = true)]
+    public void SetTargets(GameObject targets)
+    {
+        target.Add(targets);
+    }
+
+    [ServerRpc(RequireOwnership = true)]
+    public void RemoveTargets(GameObject targets)
+    {
+        target.Remove(targets);
+    }
 
 
 
@@ -182,7 +193,7 @@ public class StofZuiger : NetworkBehaviour
             other.transform.GetComponent<GhostMovement>().isHit(false);
             SetSucking(false);
 
-            target.Remove(other.gameObject);
+            RemoveTargets(other.gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -190,7 +201,7 @@ public class StofZuiger : NetworkBehaviour
         if (other.CompareTag(GhostTag))
         {
             print(other + " enter");
-            target.Add(other.gameObject);
+            SetTargets(other.gameObject);
         }
     }
 
