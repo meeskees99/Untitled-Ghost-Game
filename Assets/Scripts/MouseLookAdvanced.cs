@@ -75,9 +75,9 @@ public class MouseLookAdvanced : NetworkBehaviour
             print("SceneGame");
             if (!isLocked)
             {
-                print("lock glock on my cock");
+                print("lock glock on my cock"); 
                 isLocked = true;
-                gameManager.MouseLocked = true;
+                //gameManager.MouseLocked = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
