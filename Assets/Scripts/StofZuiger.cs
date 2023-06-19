@@ -110,7 +110,7 @@ public class StofZuiger : NetworkBehaviour
             }
         }
     }
-
+    [ServerRpc(RequireOwnership = true)]
     public void Suck()
     {
         for (int i = 0; i < target.Count; i++)
