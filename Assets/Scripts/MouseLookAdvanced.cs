@@ -60,46 +60,9 @@ public class MouseLookAdvanced : NetworkBehaviour
         {
             sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
         }
-
-
-        Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
-
-        print(currentScene.name);
-
-        if (currentScene.name == "Game" || currentScene.name == "FallbackActiveScene")
-        {
-            print("SceneGame");
-            if (!startLock)
-            {
-                startLock = true;
-                print("lock glock on my cock");
-                isLocked = true;
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (!isLocked)
-                {
-                    print("Toggle Cursor To Lock");
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                    isLocked = true;
-                }
-                else
-                {
-                    print("Toggle Cursor To Confined");
-                    Cursor.lockState = CursorLockMode.Confined;
-                    Cursor.visible = true;
-                    isLocked = false;
-                }
-            }
-        }
-        if (!isLocked)
-        {
+        if(GameManager.MouseLocked){
             return;
         }
-
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sens;
 

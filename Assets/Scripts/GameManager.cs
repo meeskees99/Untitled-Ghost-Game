@@ -10,7 +10,7 @@ public class GameManager : NetworkBehaviour
 
     [SerializeField] Transform[] spawn1;
     [SerializeField] Transform[] spawn2;
-    public bool MouseLocked;
+    public static bool MouseLocked;
     [SyncVar] int team1Index;
     [SyncVar] int team2Index;
 
@@ -40,11 +40,16 @@ public class GameManager : NetworkBehaviour
         {
             settingsUI.SetActive(!settingsUI.activeSelf);
         }
-        if(settingsUI.activeSelf){
+
+        if (settingsUI.activeSelf)
+        {
             Cursor.lockState = CursorLockMode.Confined;
+            MouseLocked = false;
         }
-        else{
+        else
+        {
             Cursor.lockState = CursorLockMode.Locked;
+            MouseLocked = true;
         }
 
         int id = InstanceFinder.ClientManager.Connection.ClientId;
@@ -138,11 +143,13 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void SetLockstate(bool b){
+    public void SetLockstate(bool b)
+    {
         MouseLocked = b;
     }
 
-    public void MainMenu(){
+    public void MainMenu()
+    {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu Test");
     }
 }
