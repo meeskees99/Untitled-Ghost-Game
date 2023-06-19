@@ -33,7 +33,7 @@ public class GhostMovement : NetworkBehaviour
     public StofZuiger[] stofzuigers;
     [SyncVar] public bool isDead;
     public bool hitness;
-    public bool[] hits;
+    public bool[] hits = new bool[6];
     // Start is called before the first frame update
     void Start()
     {
@@ -68,19 +68,25 @@ public class GhostMovement : NetworkBehaviour
             return;
 
         PatrolToNextPoint();
-        for (int x = 0; x < hits.Length; x++)
+
+        for (int i = 0; i < stofzuigers.Length; i++)
         {
-            if (hits[x])
+            hits[i] = stofzuigers[i].sucking;
+            for (int x = 0; x < hits.Length; x++)
             {
-                SetSpeed(0);
-                someoneSucks = true;
-            }
-            if (x == hits.Length && !someoneSucks)
-            {
-                SetSpeed(ghostData.speed);
-                someoneSucks = false;
+                if (hits[x])
+                {
+                    SetSpeed(0);
+                    someoneSucks = true;
+                }
+                if (x == hits.Length && !someoneSucks)
+                {
+                    SetSpeed(ghostData.speed);
+                    someoneSucks = false;
+                }
             }
         }
+
 
         if (hitness)
         {
