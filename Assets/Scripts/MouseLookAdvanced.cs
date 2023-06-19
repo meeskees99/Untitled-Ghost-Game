@@ -73,9 +73,47 @@ public class MouseLookAdvanced : NetworkBehaviour
         if (currentScene.name == "Game" || currentScene.name == "FallbackActiveScene")
         {
             print("SceneGame");
-            MouseLockObserver();
+            if (!isLocked)
+            {
+                isLocked = true;
+                gameManager.MouseLocked = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (!gameManager.MouseLocked)
+                {
+                    print("Toggle Cursor To Lock");
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    gameManager.MouseLocked = true;
+                }
+                else
+                {
+                    print("Toggle Cursor To Confined");
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    gameManager.MouseLocked = false;
+                }
+            }
+            if (gameManager.MouseLocked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                gameManager.MouseLocked = false;
+            }
+            if (gameManager.settingsUI.activeSelf)
+            {
+                return;
+            }
         }
-
+       
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sens;
 
@@ -86,49 +124,5 @@ public class MouseLookAdvanced : NetworkBehaviour
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-    }
-    
-    [ObserversRpc]
-    public void MouseLockObserver()
-    {
-        if (!isLocked)
-        {
-            isLocked = true;
-            gameManager.MouseLocked = true;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!gameManager.MouseLocked)
-            {
-                print("Toggle Cursor To Lock");
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                gameManager.MouseLocked = true;
-            }
-            else
-            {
-                print("Toggle Cursor To Confined");
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                gameManager.MouseLocked = false;
-            }
-        }
-        if (gameManager.MouseLocked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            gameManager.MouseLocked = false;
-        }
-        if (gameManager.settingsUI.activeSelf)
-        {
-            return;
-        }
     }
 }
