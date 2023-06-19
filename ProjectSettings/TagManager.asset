@@ -8,6 +8,7 @@ TagManager:
   - Playerbody
   - Ghost
   - Canister
+  - SuckBox
   layers:
   - Default
   - TransparentFX

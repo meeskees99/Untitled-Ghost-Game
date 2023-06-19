@@ -279,7 +279,6 @@ MonoBehaviour:
   sens: 0
   orientation: {fileID: 1718954057773777527}
   cam: {fileID: 0}
-  gameManager: {fileID: 0}
   stofZuiger: {fileID: 3418064442683254627}
   use: 101
   useRange: 5
@@ -479,7 +478,11 @@ MonoBehaviour:
   speedTxt: {fileID: 0}
   isStunned: 0
   stunTime: 5
+  raycastLenght: 0.3
+  wallWalk: 0
   state: 0
+  shootPos: {fileID: 1718954057773777526}
+  maxAngle: 30
 --- !u!114 &1718954057773777580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,7 +764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8687520578082111570, guid: b14988e9db4cc944a859dcef99aaebf0, type: 3}
       propertyPath: m_VersionIndex
-      value: 1716
+      value: 1719
       objectReference: {fileID: 0}
     - target: {fileID: 8687520578082111570, guid: b14988e9db4cc944a859dcef99aaebf0, type: 3}
       propertyPath: m_Faces.Array.size
@@ -2375,6 +2378,10 @@ PrefabInstance:
       propertyPath: managedReferences[1694715923657654279].m_NumberOfSides
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8687520578082111580, guid: b14988e9db4cc944a859dcef99aaebf0, type: 3}
+      propertyPath: m_TagString
+      value: SuckBox
+      objectReference: {fileID: 0}
     - target: {fileID: 8687520578082111582, guid: b14988e9db4cc944a859dcef99aaebf0, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2482,12 +2489,12 @@ MonoBehaviour:
   ghostToShoot: {fileID: 0}
   playerBullet: {fileID: 5971678057664422469, guid: fd91be2ed7d136b49aa8820e25c40c3c, type: 3}
   animator: {fileID: 4409519993864656286}
-  stofZuigers: []
   maxGhostPoints: 3
   ghostPoints: 0
   fireRate: 2
   fireTime: 0
   target: []
+  sucking: 0
 --- !u!1001 &8012778320400712785
 PrefabInstance:
   m_ObjectHideFlags: 0

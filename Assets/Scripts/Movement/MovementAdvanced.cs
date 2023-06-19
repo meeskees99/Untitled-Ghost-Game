@@ -50,6 +50,9 @@ public class MovementAdvanced : NetworkBehaviour
     [SyncVar][SerializeField] bool isStunned;
     [SerializeField] float stunTime = 5f;
 
+    [SerializeField] float raycastLenght = 0.5f;
+
+    [SerializeField] bool wallWalk;
 
     public MovementState state;
     public enum MovementState
@@ -168,11 +171,35 @@ public class MovementAdvanced : NetworkBehaviour
             state = MovementState.air;
         }
     }
+    [SerializeField] Transform shootPos;
+    float walkAngle;
+    [SerializeField] float maxAngle;
     void MovePlayer()
     {
         // Calculalte move direction
         moveDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        RaycastHit hit;
+        Debug.DrawRay(shootPos.position, moveDir);
+        if (Physics.Raycast(shootPos.position, moveDir, out hit, raycastLenght) && hit.transform.tag != "SuckBox")
+        {
+            walkAngle = Vector3.Angle(moveDir, hit.normal);
+            print(walkAngle);
+            if (walkAngle < maxAngle)
+            {
+                wallWalk = true;
+            }
+            else
+            {
+                wallWalk = false;
+            }
 
+        }
+        else
+        {
+            wallWalk = false;
+        }
+        if (wallWalk)
+            return;
         // On slope
         if (OnSlope())
         {
