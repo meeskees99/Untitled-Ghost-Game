@@ -110,7 +110,7 @@ public class StofZuiger : NetworkBehaviour
             }
         }
     }
-    [ServerRpc(RequireOwnership = true)]
+
     public void Suck()
     {
         for (int i = 0; i < target.Count; i++)
@@ -134,7 +134,7 @@ public class StofZuiger : NetworkBehaviour
                         else if (hit.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
                         {
                             hit.transform.GetComponent<GhostMovement>().isHit(true);
-                            sucking = true;
+                            SetSucking(true);
                         }
                     }
                 }
@@ -146,6 +146,11 @@ public class StofZuiger : NetworkBehaviour
         }
     }
     [ServerRpc(RequireOwnership = true)]
+    public void SetSucking(bool state)
+    {
+        sucking = state;
+    }
+    [ServerRpc(RequireOwnership = true)]
     public void StopSuck()
     {
         SuckAnimation(false);
@@ -153,7 +158,7 @@ public class StofZuiger : NetworkBehaviour
         for (int i = 0; i < target.Count; i++)
         {
             target[i].transform.GetComponent<GhostMovement>().isHit(false);
-            sucking = false;
+            SetSucking(false);
         }
     }
 
@@ -163,7 +168,7 @@ public class StofZuiger : NetworkBehaviour
         {
             print(other + " exit");
             other.transform.GetComponent<GhostMovement>().isHit(false);
-            sucking = false;
+            SetSucking(false);
             RemoveTarget(other.gameObject);
         }
     }
