@@ -33,7 +33,7 @@ public class GhostMovement : NetworkBehaviour
     public StofZuiger[] stofzuigers;
     [SyncVar] public bool isDead;
     public bool hitness;
-    public bool[] hits = new bool[6];
+    public bool[] hits;
     // Start is called before the first frame update
     void Start()
     {
@@ -162,7 +162,6 @@ public class GhostMovement : NetworkBehaviour
     void GetSucked()
     {
         print("Getting Head");
-        suckieTimer = new();
         suckieTimer -= Time.deltaTime;
     }
     [ServerRpc(RequireOwnership = false)]
