@@ -44,6 +44,7 @@ public class MouseLookAdvanced : NetworkBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
     bool isLocked = false;
+    bool startLock;
     // Update is called once per frame
     void Update()
     {
@@ -73,11 +74,10 @@ public class MouseLookAdvanced : NetworkBehaviour
         if (currentScene.name == "Game" || currentScene.name == "FallbackActiveScene")
         {
             print("SceneGame");
-            if (!isLocked)
+            if (!startLock)
             {
-                print("lock glock on my cock"); 
+                startLock = true;
                 isLocked = true;
-                //gameManager.MouseLocked = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
