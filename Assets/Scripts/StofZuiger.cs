@@ -111,7 +111,6 @@ public class StofZuiger : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = true)]
     public void Suck()
     {
         for (int i = 0; i < target.Count; i++)
@@ -129,7 +128,6 @@ public class StofZuiger : NetworkBehaviour
                         {
                             ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
 
-                            // error when removing for other players
                             hit.transform.GetComponent<GhostMovement>().Die();
                             target.Remove(target[i]);
                         }
