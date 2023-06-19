@@ -30,8 +30,10 @@ public class GhostMovement : NetworkBehaviour
     float timer;
     GhostManager ghostManager;
 
+    public StofZuiger[] stofzuigers;
     [SyncVar] public bool isDead;
-
+    public bool hitness;
+    public bool[] hits;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,12 @@ public class GhostMovement : NetworkBehaviour
         suckieTimer = timeToSuck;
         PatrolToNextPoint();
     }
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        stofzuigers = FindObjectsOfType<StofZuiger>();
+    }
+    bool someoneSucks;
     // Update is called once per frame
     void Update()
     {
@@ -60,11 +68,23 @@ public class GhostMovement : NetworkBehaviour
             return;
 
         PatrolToNextPoint();
+        for (int x = 0; x < hits.Length; x++)
+        {
+            if (hits[x])
+            {
+                SetSpeed(0);
+                someoneSucks = true;
+            }
+            if (x == hits.Length && !someoneSucks)
+            {
+                SetSpeed(ghostData.speed);
+                someoneSucks = false;
+            }
+        }
 
         if (hitness)
         {
             GetSucked();
-            SetSpeed(0);
             BoolAnim("IsSucked", true);
         }
         else
@@ -123,8 +143,6 @@ public class GhostMovement : NetworkBehaviour
         return suckieTimer;
     }
 
-    public bool hitness;
-
     public void isHit(bool hit)
     {
         hitness = hit;
@@ -151,11 +169,6 @@ public class GhostMovement : NetworkBehaviour
         print("Ghost Dead");
         this.NetworkObject.Despawn();
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void KillGhost()
-    {
-
-    }
     void ResetSuckie()
     {
         if (!hitness && suckieTimer < timeToSuck)
@@ -168,7 +181,6 @@ public class GhostMovement : NetworkBehaviour
             suckieTimer = timeToSuck;
         }
     }
-
     public int GetGhostValue()
     {
         return points;

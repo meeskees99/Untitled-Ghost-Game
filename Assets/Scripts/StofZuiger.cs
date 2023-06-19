@@ -35,6 +35,9 @@ public class StofZuiger : NetworkBehaviour
 
     [SerializeField] List<GameObject> target = new();
     string GhostTag = "Ghost";
+
+    [SyncVar] public bool sucking;
+    
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -90,12 +93,7 @@ public class StofZuiger : NetworkBehaviour
         }
         else if (!Input.GetKey(suck))
         {
-            SuckAnimation(false);
-
-            for (int i = 0; i < target.Count; i++)
-            {
-                target[i].transform.GetComponent<GhostMovement>().isHit(false);
-            }
+            StopSuck();
         }
         if (fireTime > 0)
         {
@@ -112,24 +110,8 @@ public class StofZuiger : NetworkBehaviour
             }
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(GhostTag))
-        {
-            print(other + " exit");
-            other.transform.GetComponent<GhostMovement>().isHit(false);
-            target.Remove(other.gameObject);
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(GhostTag))
-        {
-            print(other + " enter");
-            target.Add(other.gameObject);
-        }
-    }
-    
+
+    [ServerRpc(RequireOwnership = true)]
     public void Suck()
     {
         for (int i = 0; i < target.Count; i++)
@@ -152,7 +134,10 @@ public class StofZuiger : NetworkBehaviour
                             target.Remove(target[i]);
                         }
                         else if (hit.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
+                        {
                             hit.transform.GetComponent<GhostMovement>().isHit(true);
+                            sucking = true;
+                        }
                     }
                 }
             }
@@ -162,6 +147,37 @@ public class StofZuiger : NetworkBehaviour
             }
         }
     }
+    [ServerRpc(RequireOwnership = true)]
+    public void StopSuck()
+    {
+        SuckAnimation(false);
+
+        for (int i = 0; i < target.Count; i++)
+        {
+            target[i].transform.GetComponent<GhostMovement>().isHit(false);
+            sucking = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(GhostTag))
+        {
+            print(other + " exit");
+            other.transform.GetComponent<GhostMovement>().isHit(false);
+            sucking = false;
+            target.Remove(other.gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(GhostTag))
+        {
+            print(other + " enter");
+            target.Add(other.gameObject);
+        }
+    }
+    
     [ServerRpc(RequireOwnership = true)]
     public void Shoot(bool isBullet)
     {
@@ -180,13 +196,14 @@ public class StofZuiger : NetworkBehaviour
         Spawn(spawnGhost);
     }
 
-
-
     public void StorePoints()
     {
         gameManager.AddPoints(pData.teamID, ghostPoints);
         ghostPoints = 0;
     }
+
+    #region Animations
+
     [ServerRpc(RequireOwnership = true)]
     public void ShootAnimation()
     {
@@ -213,4 +230,5 @@ public class StofZuiger : NetworkBehaviour
             return;
         animator.SetBool("IsSucking", suckstate);
     }
+    #endregion
 }
