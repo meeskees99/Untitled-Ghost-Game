@@ -132,6 +132,7 @@ public class StofZuiger : NetworkBehaviour
                         }
                         else if (hit.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
                         {
+                            print("Kanker hard aan t zuigen");
                             hit.transform.GetComponent<GhostMovement>().isHit(true);
                             SetSucking(true);
                         }
