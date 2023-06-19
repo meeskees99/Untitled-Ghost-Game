@@ -33,7 +33,7 @@ public class StofZuiger : NetworkBehaviour
     [SerializeField] float fireRate;
     [SerializeField] float fireTime;
 
-    [SyncVar][SerializeField] List<GameObject> target = new();
+    [SerializeField] List<GameObject> target = new();
     string GhostTag = "Ghost";
 
     [SyncVar] public bool sucking;
@@ -158,6 +158,7 @@ public class StofZuiger : NetworkBehaviour
         for (int i = 0; i < target.Count; i++)
         {
             target[i].transform.GetComponent<GhostMovement>().isHit(false);
+
             SetSucking(false);
         }
     }
@@ -169,7 +170,9 @@ public class StofZuiger : NetworkBehaviour
             print(other + " exit");
             other.transform.GetComponent<GhostMovement>().isHit(false);
             SetSucking(false);
-            RemoveTarget(other.gameObject);
+
+            target.Remove(other.gameObject);
+            //RemoveTarget(other.gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -177,7 +180,8 @@ public class StofZuiger : NetworkBehaviour
         if (other.CompareTag(GhostTag))
         {
             print(other + " enter");
-            AddTarget(other.gameObject);
+            target.Add(other.gameObject);
+            //AddTarget(other.gameObject);
         }
     }
 
