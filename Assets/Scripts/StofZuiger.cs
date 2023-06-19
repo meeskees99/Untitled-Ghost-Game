@@ -95,7 +95,7 @@ public class StofZuiger : NetworkBehaviour
         {
             fireTime -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(shoot))
+        if (Input.GetKeyDown(shoot) && ghostPoints > 0)
         {
             if (fireTime <= 0)
             {
