@@ -69,8 +69,8 @@ public class MouseLookAdvanced : NetworkBehaviour
         Scene currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
 
         print(currentScene.name);
-        
-        if (currentScene.name == "Game")
+
+        if (currentScene.name == "Game" || currentScene.name == "FallbackActiveScene")
         {
             if (!isLocked)
             {
