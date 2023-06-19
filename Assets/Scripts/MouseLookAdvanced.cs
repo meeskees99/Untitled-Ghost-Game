@@ -72,6 +72,7 @@ public class MouseLookAdvanced : NetworkBehaviour
 
         if (currentScene.name == "Game" || currentScene.name == "FallbackActiveScene")
         {
+            print("SceneGame");
             if (!isLocked)
             {
                 isLocked = true;
