@@ -71,11 +71,8 @@ public class MouseLookAdvanced : NetworkBehaviour
             print("SceneGame");
             if (!startLock)
             {
-<<<<<<< Updated upstream
                 startLock = true;
-=======
                 print("lock glock on my cock");
->>>>>>> Stashed changes
                 isLocked = true;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
