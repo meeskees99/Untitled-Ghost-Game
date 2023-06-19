@@ -33,11 +33,11 @@ public class StofZuiger : NetworkBehaviour
     [SerializeField] float fireRate;
     [SerializeField] float fireTime;
 
-    [SerializeField] List<GameObject> target = new();
+    [SyncVar][SerializeField] List<GameObject> target = new();
     string GhostTag = "Ghost";
 
     [SyncVar] public bool sucking;
-    
+
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -166,7 +166,7 @@ public class StofZuiger : NetworkBehaviour
             print(other + " exit");
             other.transform.GetComponent<GhostMovement>().isHit(false);
             sucking = false;
-            target.Remove(other.gameObject);
+            RemoveTarget(other.gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -174,10 +174,21 @@ public class StofZuiger : NetworkBehaviour
         if (other.CompareTag(GhostTag))
         {
             print(other + " enter");
-            target.Add(other.gameObject);
+            AddTarget(other.gameObject);
         }
     }
-    
+
+    [ServerRpc(RequireOwnership = true)]
+    public void AddTarget(GameObject newTarget)
+    {
+        target.Add(newTarget);
+    }
+    [ServerRpc(RequireOwnership = true)]
+    public void RemoveTarget(GameObject oldTarget)
+    {
+        target.Remove(oldTarget);
+    }
+
     [ServerRpc(RequireOwnership = true)]
     public void Shoot(bool isBullet)
     {
