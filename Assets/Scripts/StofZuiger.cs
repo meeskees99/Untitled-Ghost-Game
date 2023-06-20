@@ -148,12 +148,10 @@ public class StofZuiger : NetworkBehaviour
     public void StopSuck()
     {
         SuckAnimation(false);
-
+        SetSucking(false);
         for (int i = 0; i < target.Count; i++)
         {
             target[i].transform.GetComponent<GhostMovement>().isHit(false);
-
-            SetSucking(false);
         }
     }
 
