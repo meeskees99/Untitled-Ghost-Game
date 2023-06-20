@@ -89,7 +89,7 @@ public class StofZuiger : NetworkBehaviour
             Suck();
             SuckAnimation(true);
         }
-        else if (!Input.GetKey(suck))
+        else
         {
             StopSuck();
         }
@@ -164,7 +164,7 @@ public class StofZuiger : NetworkBehaviour
             other.transform.GetComponent<GhostMovement>().isHit(false);
             SetSucking(false);
             print("SetSucking = Fasle");
-            
+
             print(other + " removed");
             target.Remove(other.gameObject);
         }
