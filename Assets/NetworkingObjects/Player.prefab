@@ -2482,7 +2482,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 200
   pData: {fileID: 2548425321851108391}
-  shootPos: {fileID: 7793885864186223221}
+  shootPos: {fileID: 1718954057773777523}
   suckRange: 5.5
   fireSpeed: 20
   ghostToShoot: {fileID: 0}
