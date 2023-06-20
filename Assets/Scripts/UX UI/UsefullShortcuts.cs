@@ -6,7 +6,7 @@ using UnityEngine;
 static class UsefullShortcuts
 {
     // Alt + C
-    [Shortcut("Clear Console", KeyCode.C, ShortcutModifiers.Alt)]
+    [Shortcut("Clear Console", KeyCode.C, ShortcutModifiers.Shift)]
     public static void ClearConsole()
     {
         var assembly = Assembly.GetAssembly(typeof(SceneView));

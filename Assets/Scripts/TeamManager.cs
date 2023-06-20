@@ -168,7 +168,6 @@ public class TeamManager : NetworkBehaviour
     }
     [ObserversRpc] public void ParentPlayerUIObserver(int team)
     {
-        print("setparentobserver");
         for (int i = 0; i < players.Count; i++)
         {
             players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
