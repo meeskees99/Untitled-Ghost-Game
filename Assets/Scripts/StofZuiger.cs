@@ -53,7 +53,7 @@ public class StofZuiger : NetworkBehaviour
         {
             if (target[z].transform.GetComponent<GhostMovement>().isDead)
             {
-                //target.Remove(target[z]);
+                target.Remove(target[z]);
             }
         }
 
