@@ -133,6 +133,13 @@ public class StofZuiger : NetworkBehaviour
                             print("SetSucking = True");
                         }
                     }
+                    else if (!hit.transform.GetComponent<GhostMovement>().isDead)
+                    {
+                        for (int x = 0; x < target.Count; x++)
+                        {
+                            target[x].transform.GetComponent<GhostMovement>().isHit(false);
+                        }
+                    }
                 }
             }
         }
@@ -148,7 +155,7 @@ public class StofZuiger : NetworkBehaviour
     {
         SuckAnimation(false);
         SetSucking(false);
-        
+
         for (int i = 0; i < target.Count; i++)
         {
             target[i].transform.GetComponent<GhostMovement>().isHit(false);
