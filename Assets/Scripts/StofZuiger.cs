@@ -62,11 +62,9 @@ public class StofZuiger : NetworkBehaviour
             if (!maxGhost)
             {
                 int g = (ghostPoints - maxGhostPoints);
-                print(g + " g");
                 for (int x = 0; x < g; x++)
                 {
                     // Shoot excess ghost with shoot function
-                    print(x + " x");
                     Shoot(false);
                 }
                 if (ghostPoints == maxGhostPoints)
@@ -79,7 +77,7 @@ public class StofZuiger : NetworkBehaviour
         {
             maxGhost = true;
         }
-        else if(ghostPoints < maxGhostPoints)
+        else if (ghostPoints < maxGhostPoints)
         {
             maxGhost = false;
         }
@@ -120,30 +118,23 @@ public class StofZuiger : NetworkBehaviour
                 Debug.DrawRay(shootPos.position, target[i].transform.position - shootPos.transform.position);
                 if (Physics.Raycast(shootPos.position, target[i].transform.position - shootPos.position, out hit, suckRange, mask))
                 {
-                    print("Nu shiet ik de raycast");
                     if (hit.transform.tag == GhostTag && !hit.transform.GetComponent<GhostMovement>().isDead)
                     {
-                        print("Heeft ghosttag en is niet dood");
-                        if (hit.transform.GetComponent<GhostMovement>().timeLeft() <= 0)
+                        if (target[i].transform.GetComponent<GhostMovement>().timeLeft() <= 0)
                         {
                             ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
                             print(target[i].transform.GetComponent<GhostMovement>().Points());
 
-                            hit.transform.GetComponent<GhostMovement>().Die();
+                            target[i].transform.GetComponent<GhostMovement>().Die();
                             target.Remove(target[i]);
                         }
-                        else if (hit.transform.GetComponent<GhostMovement>().timeLeft() >= 0)
+                        else if (target[i].transform.GetComponent<GhostMovement>().timeLeft() > 0)
                         {
-                            print("Kanker hard aan t zuigen");
-                            hit.transform.GetComponent<GhostMovement>().isHit(true);
+                            target[i].transform.GetComponent<GhostMovement>().isHit(true);
                             SetSucking(true);
                         }
                     }
                 }
-            }
-            else
-            {
-                print("No Targets In Range!");
             }
         }
     }
@@ -170,10 +161,10 @@ public class StofZuiger : NetworkBehaviour
     {
         if (other.CompareTag(GhostTag))
         {
-            print(other + " exit");
             other.transform.GetComponent<GhostMovement>().isHit(false);
             SetSucking(false);
 
+            print(other + " removed");
             target.Remove(other.gameObject);
         }
     }
@@ -181,15 +172,21 @@ public class StofZuiger : NetworkBehaviour
     {
         if (other.CompareTag(GhostTag))
         {
-            print(other + " enter");
+            for (int i = 0; i < target.Count - 1; i++)
+            {
+                if (target[i] == other.gameObject)
+                {
+                    print("already in list");
+                    return;
+                }
+            }
+            print(other + " Added");
             target.Add(other.gameObject);
         }
     }
 
     public void Shoot(bool isBullet)
     {
-        print("shoot");
-
         ReleaseGhost(isBullet);
         ghostPoints -= 1;
     }

@@ -106,9 +106,13 @@ public class GhostMovement : NetworkBehaviour
     {
         speed = speeds;
     }
+
+    [SerializeField] bool stop;
     [ServerRpc(RequireOwnership = false)]
     void PatrolToNextPoint()
     {
+        if (stop)
+            return;
         agent.speed = speed;
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
@@ -117,7 +121,7 @@ public class GhostMovement : NetworkBehaviour
             if (timer <= 0)
             {
                 BoolAnim("IsMoving", true);
-                print("Going to next point");
+                //print("Going to next point");
                 timer = waitTime;
 
                 Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
@@ -148,7 +152,7 @@ public class GhostMovement : NetworkBehaviour
     {
         return suckieTimer;
     }
-    
+
     public void isHit(bool hit)
     {
         hitness = hit;
@@ -161,7 +165,7 @@ public class GhostMovement : NetworkBehaviour
 
     void GetSucked()
     {
-        print("Getting Head");
+        //print("Getting Head");
         suckieTimer -= Time.deltaTime;
     }
     [ServerRpc(RequireOwnership = false)]
@@ -171,7 +175,7 @@ public class GhostMovement : NetworkBehaviour
         ghostManager.globalGhostPoints -= points;
         ghostManager.ChangeGhostAlive(-1);
         //InvokeRepeating("KillGhost", 0.1f, 0.1f;
-        print("Ghost Dead");
+        //print("Ghost Dead");
         this.NetworkObject.Despawn();
     }
     void ResetSuckie()
