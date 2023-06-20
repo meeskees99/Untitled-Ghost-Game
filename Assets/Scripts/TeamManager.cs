@@ -52,9 +52,6 @@ public class TeamManager : NetworkBehaviour
                 }
                 else
                 {
-                    //print(y + " team");
-                    //print(i + " player");
-                    //print(teams[y].tData[i].playerId);
                     if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
                     {
                         //print("teams == null" + y + " y");
@@ -64,10 +61,6 @@ public class TeamManager : NetworkBehaviour
                         if (teams[teamInt].tData.Count <= i)
                         {
                             // set this in ui manager
-
-                            //print(teamInt);
-                            //print(y);
-                            //print(i);
                             teams[teamInt].tData.Add(teams[y].tData[i]);
                             SetTeam(teams[y].tData[i].gameObject, teamInt);
                             teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
@@ -155,7 +148,6 @@ public class TeamManager : NetworkBehaviour
     {
         for (int x = 0; x < players.Count; x++)
         {
-            print(players[x].GetComponent<PlayerData>().UI + " team id || " + x + " uiPlayers X");
             players[x].transform.GetComponent<PlayerData>().UI.transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
@@ -164,13 +156,10 @@ public class TeamManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)] public void AddTeam(PlayerData player, int Team)
     {
         teams[Team].tData.Add(player);
-        print(teams[Team].tData + " " + Team);
-        printer(Team);
     }
 
     [ServerRpc(RequireOwnership = false)] public void ParentPlayerUIServer(int team)
     {
-        print("setparentserver");
         for (int i = 0; i < players.Count; i++)
         {
             players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
@@ -191,22 +180,17 @@ public class TeamManager : NetworkBehaviour
         print(LocalConnection.ClientId);
         for (int i = 0; i < players.Count; i++)
         {
-            print("For I loop");
             print(players[i].GetComponent<PlayerData>().playerId);
             if (LocalConnection.ClientId == players[i].GetComponent<PlayerData>().playerId)
             {
-                print("If clientId == playerId");
                 for (int x = 0; x < switchTeamButtons.Length; x++)
                 {
-                    print("For x loop");
                     if (x == players[i].GetComponent<PlayerData>().teamID)
                     {
-                        print("false");
                         switchTeamButtons[x].SetActive(false);
                     }
                     else
                     {
-                        print("true");
                         switchTeamButtons[x].SetActive(true);
                     }
                 }
@@ -229,10 +213,6 @@ public class TeamManager : NetworkBehaviour
         {
             players[i].GetComponent<PlayerData>().UI.transform.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
         }
-    }
-    [ObserversRpc] public void printer(int team)
-    {
-        print(teams[team].tData + " " + team);
     }
 
     public void StartGameButton()
