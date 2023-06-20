@@ -172,13 +172,10 @@ public class StofZuiger : NetworkBehaviour
     {
         if (other.CompareTag(GhostTag))
         {
-            for (int i = 0; i < target.Count - 1; i++)
+            if (target.Contains(other.gameObject))
             {
-                if (target[i] == other.gameObject)
-                {
-                    print("already in list");
-                    return;
-                }
+                print("alredy inig lsit");
+                return;
             }
             print(other + " Added");
             target.Add(other.gameObject);
