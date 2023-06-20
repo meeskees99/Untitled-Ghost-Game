@@ -482,7 +482,6 @@ MonoBehaviour:
   wallWalk: 0
   state: 0
   shootPos: {fileID: 1718954057773777526}
-  maxAngle: 30
 --- !u!114 &1718954057773777580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2481,7 +2480,7 @@ MonoBehaviour:
   shoot: 324
   mask:
     serializedVersion: 2
-    m_Bits: 200
+    m_Bits: 192
   pData: {fileID: 2548425321851108391}
   shootPos: {fileID: 7793885864186223221}
   suckRange: 5.5
