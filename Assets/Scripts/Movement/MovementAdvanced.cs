@@ -186,8 +186,10 @@ public class MovementAdvanced : NetworkBehaviour
         {
             wallWalk = false;
         }
-        if (wallWalk)
+        if (wallWalk){
+            rb.AddForce(Vector3.down * 10f, ForceMode.Force);
             return;
+        }
         // On slope
         if (OnSlope())
         {

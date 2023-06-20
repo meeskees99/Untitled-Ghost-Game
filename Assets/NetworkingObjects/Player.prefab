@@ -478,7 +478,7 @@ MonoBehaviour:
   speedTxt: {fileID: 0}
   isStunned: 0
   stunTime: 5
-  raycastLenght: 0.3
+  raycastLenght: 0.5
   wallWalk: 0
   state: 0
   shootPos: {fileID: 1718954057773777526}
