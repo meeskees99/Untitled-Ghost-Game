@@ -49,6 +49,9 @@ public class StofZuiger : NetworkBehaviour
     }
     void Update()
     {
+        if(gameManager == null){
+            gameManager = FindObjectOfType<GameManager>();
+        }
         for (int z = 0; z < target.Count; z++)
         {
             if (target[z].transform.GetComponent<GhostMovement>().isDead)
@@ -141,6 +144,7 @@ public class StofZuiger : NetworkBehaviour
                             print("SetSucking = True");
                         }
                     }
+
                 }
             }
         }
@@ -202,6 +206,7 @@ public class StofZuiger : NetworkBehaviour
 
     public void StorePoints()
     {
+        pData.GainPoints(ghostPoints);
         gameManager.AddPoints(pData.teamID, ghostPoints);
         ghostPoints = 0;
     }

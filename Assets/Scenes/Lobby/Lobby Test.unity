@@ -731,7 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9dcce4f9919e14ea834a2d3a89a70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 1418297102}
   _networkObjectCache: {fileID: 1418297102}
 --- !u!1 &166245380
@@ -1526,7 +1526,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 355689131}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1418297104}
+        m_TargetAssemblyTypeName: RoomSettings, Assembly-CSharp
+        m_MethodName: ChangeTime
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &355689131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2694,7 +2706,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 634666427}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1418297104}
+        m_TargetAssemblyTypeName: RoomSettings, Assembly-CSharp
+        m_MethodName: ChangePoints
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &634666427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3669,7 +3693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9dcce4f9919e14ea834a2d3a89a70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 1418297102}
   _networkObjectCache: {fileID: 1418297102}
 --- !u!1 &827337366
@@ -4042,7 +4066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945357bf3dbf32944bdb7748905c1b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 1418297102}
   _networkObjectCache: {fileID: 1418297102}
   teams:
@@ -4056,6 +4080,7 @@ MonoBehaviour:
   switchTeamButtons:
   - {fileID: 1026604575}
   - {fileID: 635624584}
+  LobbyToLoad: 
   players: []
   sky: {fileID: 2100000, guid: b80e7d0ff5fb0b1469d50493cbfe6354, type: 2}
 --- !u!1 &909199585
@@ -5291,7 +5316,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1152141328}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1418297104}
+        m_TargetAssemblyTypeName: RoomSettings, Assembly-CSharp
+        m_MethodName: ChangeTime
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1152141328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5413,7 +5450,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1163475397}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1418297104}
+        m_TargetAssemblyTypeName: RoomSettings, Assembly-CSharp
+        m_MethodName: ChangePoints
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1163475397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6640,6 +6689,7 @@ GameObject:
   - component: {fileID: 1418297096}
   - component: {fileID: 1418297102}
   - component: {fileID: 1418297103}
+  - component: {fileID: 1418297104}
   m_Layer: 5
   m_Name: Lobby
   m_TagString: Untagged
@@ -6788,6 +6838,7 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
+  - {fileID: 1418297104}
   - {fileID: 890997582}
   - {fileID: 815112368}
   - {fileID: 158215988}
@@ -6817,6 +6868,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7781807d0e5b0f44f91cda9953c5676b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1418297104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418297095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375653cacd7140f4096ec3d580438056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 1418297102}
+  _networkObjectCache: {fileID: 1418297102}
+  MapChoice: {fileID: 1360581784}
+  timeOptions: 01000000020000000300000004000000
+  timeTxt: {fileID: 1450250175}
+  pointOptions: 04000000010000000500000008000000
+  pointText: {fileID: 1223929866}
+  tManager: {fileID: 890997582}
 --- !u!1 &1423326753
 GameObject:
   m_ObjectHideFlags: 0

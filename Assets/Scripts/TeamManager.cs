@@ -12,6 +12,8 @@ using FishNet.Connection;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using FishNet.Managing.Scened;
+using UnityEngine.UI;
+
 
 public class TeamManager : NetworkBehaviour
 {
@@ -27,16 +29,18 @@ public class TeamManager : NetworkBehaviour
 
     bool done;
 
+    public string LobbyToLoad;
+
     [SyncVar]
     public List<GameObject> players = new();
     public void JointTeamBtn(int teamInt)
     {
         int id = InstanceFinder.ClientManager.Connection.ClientId;
-        
+
         JoinTeam(teamInt, id);
     }
 
-    
+
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)
     {
@@ -127,7 +131,8 @@ public class TeamManager : NetworkBehaviour
     }
 
 
-    [ObserversRpc] public void SetTeam(GameObject data, int TeamInt)
+    [ObserversRpc]
+    public void SetTeam(GameObject data, int TeamInt)
     {
         teams[TeamInt].tData.Add(data.GetComponent<PlayerData>());
         teams[data.GetComponent<PlayerData>().teamID].tData.Remove(data.GetComponent<PlayerData>());
@@ -144,7 +149,8 @@ public class TeamManager : NetworkBehaviour
         yield return new WaitForSeconds(0.1f);
         SetTeamSwitchButtons();
     }
-    [ObserversRpc] public void SetParents()
+    [ObserversRpc]
+    public void SetParents()
     {
         for (int x = 0; x < players.Count; x++)
         {
@@ -153,12 +159,14 @@ public class TeamManager : NetworkBehaviour
     }
 
 
-    [ServerRpc(RequireOwnership = false)] public void AddTeam(PlayerData player, int Team)
+    [ServerRpc(RequireOwnership = false)]
+    public void AddTeam(PlayerData player, int Team)
     {
         teams[Team].tData.Add(player);
     }
 
-    [ServerRpc(RequireOwnership = false)] public void ParentPlayerUIServer(int team)
+    [ServerRpc(RequireOwnership = false)]
+    public void ParentPlayerUIServer(int team)
     {
         for (int i = 0; i < players.Count; i++)
         {
@@ -166,7 +174,8 @@ public class TeamManager : NetworkBehaviour
         }
         ParentPlayerUIObserver(team);
     }
-    [ObserversRpc] public void ParentPlayerUIObserver(int team)
+    [ObserversRpc]
+    public void ParentPlayerUIObserver(int team)
     {
         for (int i = 0; i < players.Count; i++)
         {
@@ -174,7 +183,8 @@ public class TeamManager : NetworkBehaviour
         }
     }
 
-    [ObserversRpc] public void SetTeamSwitchButtons()
+    [ObserversRpc]
+    public void SetTeamSwitchButtons()
     {
         for (int i = 0; i < players.Count; i++)
         {
@@ -193,10 +203,11 @@ public class TeamManager : NetworkBehaviour
                 }
             }
         }
-        
+
     }
 
-    [ServerRpc(RequireOwnership = false)] public void SetPlayerNameServer()
+    [ServerRpc(RequireOwnership = false)]
+    public void SetPlayerNameServer()
     {
         for (int i = 0; i < players.Count; i++)
         {
@@ -204,7 +215,8 @@ public class TeamManager : NetworkBehaviour
         }
         SetPlayerNameObserver();
     }
-    [ObserversRpc] public void SetPlayerNameObserver()
+    [ObserversRpc]
+    public void SetPlayerNameObserver()
     {
         for (int i = 0; i < players.Count; i++)
         {
@@ -218,13 +230,23 @@ public class TeamManager : NetworkBehaviour
     }
 
     public Material sky;
-
+    Slider kaas;
     [ServerRpc(RequireOwnership = false)]
     void StartGame()
     {
-        SceneLoadData sld = new SceneLoadData("Game");
+        SceneLoadData sld = new SceneLoadData(LobbyToLoad);
         SceneUnloadData lastScene = new SceneUnloadData("Lobby Test");
         base.SceneManager.LoadGlobalScenes(sld);
+        // SceneLoadPercentEventArgs percent = new SceneLoadPercentEventArgs();
+        // if (SceneManager.OnLoadPercentChange(percent) == 1f)
+        // {
+
+        // }
+
+
+        // kaas.value += base.SceneManager.OnLoadPercentChange(percent);
         base.SceneManager.UnloadGlobalScenes(lastScene);
     }
+
+
 }

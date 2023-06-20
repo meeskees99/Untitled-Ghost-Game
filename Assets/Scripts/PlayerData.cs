@@ -80,8 +80,6 @@ public class PlayerData : NetworkBehaviour
     {
         manager.ParentPlayerUIServer(teamID);
     }
-
-
     [ObserversRpc]
     public void GetUsernameObserver()
     {
@@ -121,10 +119,5 @@ public class PlayerData : NetworkBehaviour
         //        tank.SetFloat("_Float", 0.5f);
         //        break;
         //}
-    }
-
-    private void Update()
-    {
-        //print(playerId);
     }
 }

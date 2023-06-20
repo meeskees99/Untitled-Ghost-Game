@@ -3,17 +3,26 @@ using FishNet.Object.Synchronizing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using FishNet;
 public class GameManager : NetworkBehaviour
 {
+    [Header("Players")]
     [SyncVar][SerializeField] PlayerData[] players;
-
     [SerializeField] Transform[] spawn1;
     [SerializeField] Transform[] spawn2;
+
     public static bool MouseLocked;
+
+
+    [Header("Spawning")]
     [SyncVar] int team1Index;
     [SyncVar] int team2Index;
 
+    [SerializeField] int timeLimit;
+    [SerializeField] float timeLeft;
+
+    [SerializeField] int pointLimit;
     [SyncVar] int team1Points;
     [SyncVar] int team2Points;
 
@@ -22,20 +31,64 @@ public class GameManager : NetworkBehaviour
     [SerializeField] GameObject tabMenu;
     [SerializeField] GameObject scoreboard1;
     [SerializeField] GameObject scoreboard2;
+    [SerializeField] Slider team1Slider;
+    [SerializeField] Slider team2Slider;
 
+    [Header("Keybinds")]
     [SerializeField] KeyCode inGameSettingsButton;
     [SerializeField] KeyCode scoreboardButton;
+
+    [Header("Game Settings")]
+    [SerializeField] float defaultPointGoal = 50f;
     // Start is called before the first frame update
     void Start()
     {
         if (IsHost)
         {
             SetTeamPoints();
+            timeLimit = PlayerPrefs.GetInt("PlayTime");
+            timeLeft = timeLimit;
         }
         MouseLocked = false;
+        int id = InstanceFinder.ClientManager.Connection.ClientId;
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].GetComponent<PlayerData>().playerId == id)
+            {
+                if (players[i].GetComponent<PlayerData>().teamID == 0)
+                {
+                    team1Slider.gameObject.SetActive(true);
+                    team2Slider.gameObject.SetActive(false);
+                }
+                else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                {
+                    team1Slider.gameObject.SetActive(false);
+                    team2Slider.gameObject.SetActive(true);
+                }
+            }
+        }
+        if (PlayerPrefs.HasKey("PointGoal"))
+        {
+            team1Slider.maxValue = PlayerPrefs.GetInt("Pointgoal");
+            team2Slider.maxValue = PlayerPrefs.GetInt("Pointgoal");
+        }
+        else
+        {
+            team1Slider.maxValue = defaultPointGoal;
+            team2Slider.maxValue = defaultPointGoal;
+        }
     }
     void Update()
     {
+        if (timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
+        }
+        else
+        {
+            EndGame();
+        }
+
         if (Input.GetKeyDown(inGameSettingsButton))
         {
             settingsUI.SetActive(!settingsUI.activeSelf);
@@ -141,6 +194,8 @@ public class GameManager : NetworkBehaviour
         {
             team1Points += Points;
         }
+        team1Slider.value = team1Points;
+        team2Slider.value = team2Points;
     }
 
     public void SetLockstate(bool b)
@@ -151,5 +206,10 @@ public class GameManager : NetworkBehaviour
     public void MainMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu Test");
+    }
+
+    public void EndGame()
+    {
+        print("Game has ended. The time ran out");
     }
 }
