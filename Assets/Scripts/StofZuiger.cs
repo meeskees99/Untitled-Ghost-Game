@@ -75,7 +75,11 @@ public class StofZuiger : NetworkBehaviour
                 }
             }
         }
-        else
+        else if (ghostPoints == maxGhostPoints)
+        {
+            maxGhost = true;
+        }
+        else if(ghostPoints < maxGhostPoints)
         {
             maxGhost = false;
         }
