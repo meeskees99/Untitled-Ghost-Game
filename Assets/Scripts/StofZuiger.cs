@@ -89,10 +89,7 @@ public class StofZuiger : NetworkBehaviour
             Suck();
             SuckAnimation(true);
         }
-        else
-        {
-            StopSuck();
-        }
+        StopSuck();
         if (fireTime > 0)
         {
             fireTime -= Time.deltaTime;
