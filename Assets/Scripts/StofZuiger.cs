@@ -92,6 +92,10 @@ public class StofZuiger : NetworkBehaviour
         else
         {
             print("SetSucking = False");
+            for (int x = 0; x < target.Count - 1; x++)
+            {
+                target[x].transform.GetComponent<GhostMovement>().isHit(false);
+            }
             StopSuck();
         }
 
@@ -135,13 +139,6 @@ public class StofZuiger : NetworkBehaviour
                             target[i].transform.GetComponent<GhostMovement>().isHit(true);
                             SetSucking(true);
                             print("SetSucking = True");
-                        }
-                    }
-                    else if (!hit.transform.GetComponent<GhostMovement>().isDead)
-                    {
-                        for (int x = 0; x < target.Count; x++)
-                        {
-                            target[x].transform.GetComponent<GhostMovement>().isHit(false);
                         }
                     }
                 }
