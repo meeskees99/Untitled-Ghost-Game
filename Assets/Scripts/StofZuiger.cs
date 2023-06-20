@@ -137,7 +137,7 @@ public class StofZuiger : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void SetSucking(bool state)
     {
         sucking = state;
