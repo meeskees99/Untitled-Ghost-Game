@@ -89,6 +89,7 @@ public class StofZuiger : NetworkBehaviour
             Suck();
             SuckAnimation(true);
         }
+        print("SetSucking = False");
         StopSuck();
         if (fireTime > 0)
         {
@@ -147,7 +148,7 @@ public class StofZuiger : NetworkBehaviour
     {
         SuckAnimation(false);
         SetSucking(false);
-        print("SetSucking = False");
+        
         for (int i = 0; i < target.Count; i++)
         {
             target[i].transform.GetComponent<GhostMovement>().isHit(false);
