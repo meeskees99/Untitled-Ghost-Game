@@ -172,8 +172,6 @@ public class MovementAdvanced : NetworkBehaviour
         }
     }
     [SerializeField] Transform shootPos;
-    float walkAngle;
-    [SerializeField] float maxAngle;
     void MovePlayer()
     {
         // Calculalte move direction
@@ -182,17 +180,7 @@ public class MovementAdvanced : NetworkBehaviour
         Debug.DrawRay(shootPos.position, moveDir);
         if (Physics.Raycast(shootPos.position, moveDir, out hit, raycastLenght) && hit.transform.tag != "SuckBox")
         {
-            walkAngle = Vector3.Angle(moveDir, hit.normal);
-            print(walkAngle);
-            if (walkAngle < maxAngle)
-            {
-                wallWalk = true;
-            }
-            else
-            {
-                wallWalk = false;
-            }
-
+            wallWalk = true;
         }
         else
         {
