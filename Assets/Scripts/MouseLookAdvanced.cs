@@ -8,14 +8,14 @@ public class MouseLookAdvanced : NetworkBehaviour
 {
     [Header("Settings")]
     [SerializeField] float sens;
-
     [SerializeField] Transform orientation;
+
     float xRotation;
     float yRotation;
 
     [SerializeField] Camera cam;
     [SerializeField] StofZuiger stofZuiger;
-
+    [SerializeField] PlayerData pData;
     [SerializeField] KeyCode use;
 
     RaycastHit hit;
@@ -48,19 +48,34 @@ public class MouseLookAdvanced : NetworkBehaviour
     {
         if (Input.GetKey(use))
         {
-            if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
+            if (pData.teamID == 0)
             {
-                if (hit.transform.tag == "Canister")
+                if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
                 {
-                    stofZuiger.StorePoints();
+                    if (hit.transform.tag == "Canister")
+                    {
+                        stofZuiger.StorePoints();
+                    }
                 }
             }
+            else
+            {
+                if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
+                {
+                    if (hit.transform.tag == "Canister2")
+                    {
+                        stofZuiger.StorePoints();
+                    }
+                }
+            }
+
         }
         if (PlayerPrefs.HasKey("Mouse Sensitivity"))
         {
             sens = PlayerPrefs.GetFloat("Mouse Sensitivity");
         }
-        if(!GameManager.MouseLocked){
+        if (!GameManager.MouseLocked)
+        {
             return;
         }
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;
