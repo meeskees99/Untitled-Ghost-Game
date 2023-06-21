@@ -2495,8 +2495,8 @@ MonoBehaviour:
   fireTime: 0
   target: []
   sucking: 0
-  beamparticlePrefab: {fileID: 0}
-  beapStart: {fileID: 0}
+  beamparticlePrefab: {fileID: 5343744747826977597, guid: d3530c52c079b934a855c1b9ce00f44d, type: 3}
+  beamstart: {fileID: 7793885864186223221}
 --- !u!1001 &8012778320400712785
 PrefabInstance:
   m_ObjectHideFlags: 0

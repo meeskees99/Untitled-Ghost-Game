@@ -40,9 +40,12 @@ public class StofZuiger : NetworkBehaviour
 
     [SerializeField] GameObject beamparticlePrefab;
 
-    [SerializeField] Transform beapStart;
+    [SerializeField] Transform beamstart;
 
-    List<GameObject> beams = new();
+    [SerializeField] List<GameObject> beams = new();
+    [SerializeField] List<bool> beamSpawned = new();
+
+    int oldTargetCount;
 
     public override void OnStartClient()
     {
@@ -64,6 +67,15 @@ public class StofZuiger : NetworkBehaviour
             if (target[z].transform.GetComponent<GhostMovement>().isDead)
             {
                 target.Remove(target[z]);
+            }
+        }
+        if (oldTargetCount != target.Count)
+        {
+            oldTargetCount = target.Count;
+            beamSpawned.Clear();
+            for (int i = 0; i < target.Count; i++)
+            {
+                beamSpawned.Add(false);
             }
         }
 
@@ -101,12 +113,15 @@ public class StofZuiger : NetworkBehaviour
         }
         else
         {
-            print("SetSucking = False");
             for (int x = 0; x < target.Count; x++)
             {
                 target[x].transform.GetComponent<GhostMovement>().isHit(false);
             }
             StopSuck();
+            for (int i = 0; i < beams.Count - 1; i++)
+            {
+                BeamDespawn(i);
+            }
         }
 
         if (fireTime > 0)
@@ -143,22 +158,44 @@ public class StofZuiger : NetworkBehaviour
 
                             target[i].transform.GetComponent<GhostMovement>().Die();
                             target.Remove(target[i]);
+                            //BeamDespawn(i);
+                            //beamSpawned[i] = false;
                         }
                         else if (target[i].transform.GetComponent<GhostMovement>().timeLeft() > 0)
                         {
-
                             target[i].transform.GetComponent<GhostMovement>().isHit(true);
                             SetSucking(true);
-                            print("SetSucking = True");
+
+                            if (!beamSpawned[i])
+                            {
+                                Beamspawn(i);
+                                beamSpawned[i] = true;
+                            }
+                            else
+                            {
+                                print("All beams spawned");
+                            }
+
+                            if (beams.Count - 1 == i)
+                            {
+                                if (beams[i] != null)
+                                {
+                                    beams[i].transform.GetChild(1).transform.position = beamstart.position;
+                                    beams[i].transform.GetChild(2).transform.position = target[i].transform.position;
+                                }
+                            }
+
                         }
                     }
-
                 }
+            }
+            else
+            {
+                beamSpawned.Clear();
+                print("clear");
             }
         }
     }
-
-    int beamsint;
     [ServerRpc(RequireOwnership = true)]
     public void Beamspawn(int i)
     {
@@ -193,10 +230,18 @@ public class StofZuiger : NetworkBehaviour
         {
             other.transform.GetComponent<GhostMovement>().isHit(false);
             SetSucking(false);
-            print("SetSucking = Fasle");
+            //print("SetSucking = Fasle");
 
-            print(other + " removed");
+            //print(other + " removed");
+            for (int i = 0; i < target.Count - 1; i++)
+            {
+                if (target[i] == other.gameObject && beams.Count != 0)
+                {
+                    BeamDespawn(i);
+                }
+            }
             target.Remove(other.gameObject);
+
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -205,10 +250,10 @@ public class StofZuiger : NetworkBehaviour
         {
             if (target.Contains(other.gameObject))
             {
-                print("alredy inig lsit");
+                //print("alredy inig lsit");
                 return;
             }
-            print(other + " Added");
+            //print(other + " Added");
             target.Add(other.gameObject);
         }
     }
