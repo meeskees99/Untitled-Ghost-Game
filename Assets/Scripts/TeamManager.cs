@@ -31,6 +31,8 @@ public class TeamManager : NetworkBehaviour
 
     public string LobbyToLoad;
 
+    [SerializeField] Slider loadSlider;
+
     [SyncVar]
     public List<GameObject> players = new();
     public void JointTeamBtn(int teamInt)
@@ -231,22 +233,35 @@ public class TeamManager : NetworkBehaviour
 
     public Material sky;
     Slider kaas;
+    [SerializeField] bool isLoading;
+
     [ServerRpc(RequireOwnership = false)]
     void StartGame()
     {
         SceneLoadData sld = new SceneLoadData(LobbyToLoad);
-        SceneUnloadData lastScene = new SceneUnloadData("Lobby Test");
+        // isLoading = true;
         base.SceneManager.LoadGlobalScenes(sld);
-        // SceneLoadPercentEventArgs percent = new SceneLoadPercentEventArgs();
-        // if (SceneManager.OnLoadPercentChange(percent) == 1f)
-        // {
 
-        // }
-
-
-        // kaas.value += base.SceneManager.OnLoadPercentChange(percent);
+        SceneUnloadData lastScene = new SceneUnloadData("Lobby Test");
         base.SceneManager.UnloadGlobalScenes(lastScene);
     }
 
+    // void Update()
+    // {
+    //     print("Maykel houd van mannen en kleine kinderen");
+    //     if (isLoading)
+    //     {
+    //         SceneLoadPercentEventArgs Load = new SceneLoadPercentEventArgs();
+    //         print("Ik probeer t wel");
+    //         print("Load Percent: " + Load.Percent);
 
+    //         loadSlider.value = Load.Percent;
+
+
+    //         if (Load.Percent == 1)
+    //         {
+
+    //         }
+    //     }
+    // }
 }

@@ -38,6 +38,12 @@ public class StofZuiger : NetworkBehaviour
 
     [SyncVar] public bool sucking;
 
+    [SerializeField] GameObject beamparticlePrefab;
+
+    [SerializeField] Transform beapStart;
+
+    List<GameObject> beams = new();
+
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -49,7 +55,8 @@ public class StofZuiger : NetworkBehaviour
     }
     void Update()
     {
-        if(gameManager == null){
+        if (gameManager == null)
+        {
             gameManager = FindObjectOfType<GameManager>();
         }
         for (int z = 0; z < target.Count; z++)
@@ -139,6 +146,7 @@ public class StofZuiger : NetworkBehaviour
                         }
                         else if (target[i].transform.GetComponent<GhostMovement>().timeLeft() > 0)
                         {
+
                             target[i].transform.GetComponent<GhostMovement>().isHit(true);
                             SetSucking(true);
                             print("SetSucking = True");
@@ -149,6 +157,23 @@ public class StofZuiger : NetworkBehaviour
             }
         }
     }
+
+    int beamsint;
+    [ServerRpc(RequireOwnership = true)]
+    public void Beamspawn(int i)
+    {
+        beams.Add(Instantiate(beamparticlePrefab));
+        Spawn(beams[i]);
+
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void BeamDespawn(int i)
+    {
+        GameObject gabagool = beams[i];
+        beams.Remove(beams[i]);
+        Despawn(gabagool);
+    }
+
 
     [ServerRpc(RequireOwnership = false)]
     public void SetSucking(bool state)

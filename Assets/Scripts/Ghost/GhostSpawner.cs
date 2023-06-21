@@ -39,7 +39,7 @@ public class GhostSpawner : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void SpawnGhost(int index)
     {
-        print(this.gameObject.name);
+        //print(this.gameObject.name);
         currentGhost = Instantiate(ghosts[index], transform.position, transform.rotation);
         Settrans();
         currentGhost.transform.position = this.transform.position;

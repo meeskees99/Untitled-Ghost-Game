@@ -280,6 +280,7 @@ MonoBehaviour:
   orientation: {fileID: 1718954057773777527}
   cam: {fileID: 0}
   stofZuiger: {fileID: 3418064442683254627}
+  pData: {fileID: 2548425321851108391}
   use: 101
   useRange: 5
 --- !u!114 &3169769077060667233
@@ -2494,6 +2495,8 @@ MonoBehaviour:
   fireTime: 0
   target: []
   sucking: 0
+  beamparticlePrefab: {fileID: 0}
+  beapStart: {fileID: 0}
 --- !u!1001 &8012778320400712785
 PrefabInstance:
   m_ObjectHideFlags: 0

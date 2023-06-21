@@ -21,7 +21,6 @@ public class GameManager : NetworkBehaviour
     [SyncVar] int team2Index;
 
 
-    [SerializeField] int pointLimit;
     [SyncVar] int team1Points;
     [SyncVar] int team2Points;
 
@@ -42,9 +41,14 @@ public class GameManager : NetworkBehaviour
     [SerializeField] KeyCode scoreboardButton;
 
     [Header("Game Settings")]
+    [SerializeField] int pointLimit;
     [SerializeField] int timeLimit;
     [SyncVar][SerializeField] float timeLeft;
     [SerializeField] TMP_Text timeText;
+
+    [SerializeField] bool team1Halfway;
+    [SerializeField] bool team2Halfway;
+
 
     int id;
 
@@ -54,8 +58,9 @@ public class GameManager : NetworkBehaviour
         if (IsHost)
         {
             SetTeamPoints();
-            timeLimit = PlayerPrefs.GetInt("PlayTime");
+            timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
             timeLeft = timeLimit;
+            timeText.text = timeLeft.ToString("0:00");
         }
         id = InstanceFinder.ClientManager.Connection.ClientId;
         for (int i = 0; i < players.Length; i++)
@@ -76,28 +81,29 @@ public class GameManager : NetworkBehaviour
         }
         if (PlayerPrefs.HasKey("PointGoal"))
         {
-            team1Slider.maxValue = PlayerPrefs.GetInt("Pointgoal");
-            team2Slider.maxValue = PlayerPrefs.GetInt("Pointgoal");
-            pointLimit = PlayerPrefs.GetInt("Pointgoal");
+            team1Slider.maxValue = PlayerPrefs.GetInt("PointGoal");
+            team2Slider.maxValue = PlayerPrefs.GetInt("PointGoal");
+            pointLimit = PlayerPrefs.GetInt("PointGoal");
         }
         else
         {
-            Debug.LogError("No Time Limit Found");
+            Debug.LogError("No Point Goal Found");
         }
     }
     void Update()
     {
-        if (timeLeft > 0 || team1Points != pointLimit || team2Points != pointLimit)
+        if (timeLeft > 0 && team1Points < pointLimit && team2Points < pointLimit)
         {
             Timer();
+            timeText.text = timeLeft.ToString("0:00");
         }
+        else if (team1Points < pointLimit && team2Points < pointLimit)
+            EndGame(true, false);
         else
-        {
-            EndGame();
-        }
+            EndGame(false, true);
         team1Slider.value = team1Points;
         team2Slider.value = team2Points;
-        if (team1Points == pointLimit / 2)
+        if (team1Points >= pointLimit / 2 && !team1Halfway)
         {
             for (int i = 0; i < players.Length; i++)
             {
@@ -115,9 +121,10 @@ public class GameManager : NetworkBehaviour
                     }
                 }
             }
+            team1Halfway = true;
         }
 
-        if (team2Points == pointLimit / 2)
+        if (team2Points >= pointLimit / 2 && !team2Halfway)
         {
             for (int i = 0; i < players.Length; i++)
             {
@@ -135,6 +142,7 @@ public class GameManager : NetworkBehaviour
                     }
                 }
             }
+            team2Halfway = true;
         }
 
         if (Input.GetKeyDown(inGameSettingsButton))
@@ -155,6 +163,22 @@ public class GameManager : NetworkBehaviour
 
         int id = InstanceFinder.ClientManager.Connection.ClientId;
 
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].GetComponent<PlayerData>().playerId == id)
+            {
+                if (players[i].GetComponent<PlayerData>().teamID == 0)
+                {
+                    team1Slider.gameObject.SetActive(true);
+                    team2Slider.gameObject.SetActive(false);
+                }
+                else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                {
+                    team1Slider.gameObject.SetActive(false);
+                    team2Slider.gameObject.SetActive(true);
+                }
+            }
+        }
         if (Input.GetKey(scoreboardButton) && !settingsUI.activeSelf)
         {
             for (int i = 0; i < players.Length; i++)
@@ -166,16 +190,12 @@ public class GameManager : NetworkBehaviour
                         tabMenu.SetActive(true);
                         scoreboard1.SetActive(true);
                         scoreboard2.SetActive(false);
-                        team1Slider.gameObject.SetActive(true);
-                        team2Slider.gameObject.SetActive(false);
                     }
                     else if (players[i].GetComponent<PlayerData>().teamID == 1)
                     {
                         tabMenu.SetActive(true);
                         scoreboard1.SetActive(false);
                         scoreboard2.SetActive(true);
-                        team1Slider.gameObject.SetActive(false);
-                        team2Slider.gameObject.SetActive(true);
                     }
                 }
             }
@@ -257,18 +277,24 @@ public class GameManager : NetworkBehaviour
         team2Slider.value = team2Points;
     }
 
-    public void SetLockstate(bool b)
-    {
-        MouseLocked = b;
-    }
-
     public void MainMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu Test");
     }
 
-    public void EndGame()
+    public void EndGame(bool timeUp, bool pointReached)
     {
-        print("Game has ended. The time ran out");
+        if (timeUp)
+            print("Game has ended. The time ran out");
+        else
+        {
+            print("Game has ended. Point Limit Reached");
+        }
+    }
+
+    public void Halfway()
+    {
+        friendlyHalfwayUI.SetActive(false);
+        halfWayWarning.SetActive(false);
     }
 }
