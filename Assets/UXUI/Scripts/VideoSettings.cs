@@ -16,11 +16,20 @@ public class VideoSettings : MonoBehaviour
     [SerializeField] bool defaultVSync = true;
     [SerializeField] int defaultFOV = 60;
 
+
+    [Header("Settings To Store")]
+    [SerializeField] int storedRes = 0;
+    [SerializeField] int storedFullscreen = 0;
+    [SerializeField] float storedFpsLimit = 60;
+    [SerializeField] bool storedLimitFPS = false;
+    [SerializeField] bool storedVSync = true;
+    [SerializeField] int storedFOV = 60;
+
     [Header("Resolution")]
-    List<Resolution> resolutions = new();
     [SerializeField] TMP_Dropdown resDropDown;
     int currentRes;
     int lastRes;
+    List<Resolution> resolutions = new();
     [Header("Fullscreen")]
     [SerializeField] TMP_Dropdown fullScreenDrowdown;
     int currentFullscreen;
@@ -56,8 +65,9 @@ public class VideoSettings : MonoBehaviour
 
     [Header("Apply Settings")]
     [SerializeField] GameObject applySettingsUI;
+    [Tooltip("Time until it automatically reverts changes")]
     [SerializeField] float revertTime;
-    float timer;
+    [SerializeField] float timer;
     bool appliedSettings;
 
 
@@ -443,7 +453,10 @@ public class VideoSettings : MonoBehaviour
         currentRes = lastRes;
         currentFullscreen = lastFullscreen;
         currentFpsLimit = lastFpsLimit;
-
+        currentLimitFPS = lastLimitFPS;
+        currentFOV = lastFOV;
+        currentVSync = lastVSync;
+        ChangeSettings();
     }
 
     public void RestoreDefault()
