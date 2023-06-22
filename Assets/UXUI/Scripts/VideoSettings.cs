@@ -8,28 +8,33 @@ using UnityEngine.UI;
 
 public class VideoSettings : MonoBehaviour
 {
+    [Header("Defaults")]
+    [SerializeField] int defaultRes = 0;
+    [SerializeField] int defaultFullscreen = 0;
+    [SerializeField] float defaultFpsLimit = 60;
+    [SerializeField] bool defaultLimitFPS = false;
+    [SerializeField] bool defaultVSync = true;
+    [SerializeField] int defaultFOV = 60;
+
     [Header("Resolution")]
-    List <Resolution> resolutions = new();
+    List<Resolution> resolutions = new();
     [SerializeField] TMP_Dropdown resDropDown;
     int currentRes;
     int lastRes;
-    int defaultRes;
-
+    [Header("Fullscreen")]
     [SerializeField] TMP_Dropdown fullScreenDrowdown;
     int currentFullscreen;
     int lastFullscreen;
-    int defaultFullscreen = 0;
 
 
     [Header("FPS")]
     [SerializeField] Slider fpsSlider;
     [SerializeField] TMP_InputField fpsInput;
+    float currentFpsLimit;
     float lastFpsLimit;
-    float defaultFpsLimit;
+    bool currentLimitFPS;
     bool lastLimitFPS;
-    bool defaultLimitFPS = false;
-    
-    bool limitFPS;
+
     int FPSIndex;
     [SerializeField] GameObject limitFPSYes;
     [SerializeField] GameObject limitFPSNo;
@@ -37,22 +42,25 @@ public class VideoSettings : MonoBehaviour
     [Header("vSync")]
     [SerializeField] GameObject doVsyncYes;
     [SerializeField] GameObject doVsyncNo;
-    bool doVSync;
+    bool currentVSync;
     int vSyncIndex;
     bool lastVSync;
-    bool defaultVSync = true;
 
 
     [Header("FOV")]
     [SerializeField] Slider fovSlider;
     [SerializeField] TMP_InputField fovInput;
+    int currentFOV;
     int lastFOV;
-    int defaultFOV = 60;
 
+
+    [Header("Apply Settings")]
+    [SerializeField] GameObject applySettingsUI;
+    [SerializeField] float revertTime;
+    float timer;
     bool appliedSettings;
-    
 
-    // Start is called before the first frame update
+
     void Start()
     {
         #region Fullscreen, Vcync, Fov PlayerPrefs
@@ -95,18 +103,18 @@ public class VideoSettings : MonoBehaviour
         {
             PlayerPrefs.SetInt("vSync", vSyncIndex);
         }
-        if(PlayerPrefs.GetInt("vSync") == 0)
+        if (PlayerPrefs.GetInt("vSync") == 0)
         {
             doVsyncNo.SetActive(true);
             doVsyncYes.SetActive(false);
-            doVSync = false;
+            currentVSync = false;
             lastVSync = false;
         }
         else if (PlayerPrefs.GetInt("vSync") == 1)
         {
             doVsyncNo.SetActive(false);
             doVsyncYes.SetActive(true);
-            doVSync = true;
+            currentVSync = true;
             lastVSync = true;
         }
         if (PlayerPrefs.HasKey("fov"))
@@ -134,18 +142,18 @@ public class VideoSettings : MonoBehaviour
             PlayerPrefs.SetInt("LimitFps", 0);
             FPSIndex = 0;
         }
-        if(PlayerPrefs.GetInt("LimitFps") == 1)
+        if (PlayerPrefs.GetInt("LimitFps") == 1)
         {
             limitFPSYes.SetActive(true);
             limitFPSNo.SetActive(false);
-            limitFPS = true;
+            currentLimitFPS = true;
             lastLimitFPS = true;
         }
         else
         {
             limitFPSYes.SetActive(false);
             limitFPSNo.SetActive(true);
-            limitFPS = false;
+            currentLimitFPS = false;
             lastLimitFPS = false;
         }
         if (PlayerPrefs.HasKey("targetFPS"))
@@ -166,15 +174,27 @@ public class VideoSettings : MonoBehaviour
         //fpsSlider.GetComponent<Slider>().enabled = (limitFPS || !doVSync);
         fpsInput.text = PlayerPrefs.GetFloat("targetFPS").ToString("0");
         fpsSlider.value = PlayerPrefs.GetFloat("targetFPS");
-        if (!doVSync && !limitFPS)
+        if (!currentVSync && !currentLimitFPS)
             Application.targetFrameRate = 0;
         else
         {
             Application.targetFrameRate = (int)PlayerPrefs.GetFloat("targetFPS");
         }
         GetAndSetResolution();
-        
+
         #endregion
+    }
+    private void Update()
+    {
+        appliedSettings = (lastRes == currentRes || lastFullscreen == currentFullscreen || lastFpsLimit == currentFpsLimit || lastLimitFPS == currentLimitFPS || lastFOV == currentFOV || lastVSync == currentVSync);
+        if (timer > 0 && !appliedSettings)
+        {
+            timer -= Time.deltaTime;
+        }
+        else if (timer <= 0 && !appliedSettings)
+        {
+            RestoreDefault();
+        }
     }
     #region Resolution 
     void GetAndSetResolution()
@@ -190,12 +210,12 @@ public class VideoSettings : MonoBehaviour
             PlayerPrefs.SetInt("ResolutionIndex", currentRes);
         }
 
-        Resolution[] tempRes = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height}).Distinct().ToArray();
+        Resolution[] tempRes = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
 
-        for (int i = tempRes.Length -1; i > 0; i--)
+        for (int i = tempRes.Length - 1; i > 0; i--)
         {
             resolutions.Add(tempRes[i]);
-        }      
+        }
         resDropDown.ClearOptions();
 
         List<string> options = new();
@@ -209,10 +229,10 @@ public class VideoSettings : MonoBehaviour
         resDropDown.AddOptions(options);
         resDropDown.value = currentRes;
         resDropDown.RefreshShownValue();
-       
+
         Screen.SetResolution(resolutions[currentRes].width, resolutions[currentRes].height, true);
         fpsSlider.maxValue = Screen.resolutions[currentRes].refreshRate;
-        if (doVSync)
+        if (currentVSync)
         {
             Application.targetFrameRate = Screen.resolutions[currentRes].refreshRate;
             fpsSlider.value = fpsSlider.maxValue;
@@ -245,7 +265,7 @@ public class VideoSettings : MonoBehaviour
 
     #region FullScreen
     public void SetScreenOptions(int index)
-    { 
+    {
         PlayerPrefs.SetInt("FullscreenIndex", index);
         switch (index)
         {
@@ -254,12 +274,12 @@ public class VideoSettings : MonoBehaviour
                     FullScreen();
                 }
                 break;
-                case 1:
+            case 1:
                 {
                     Borderless();
                 }
                 break;
-                case 2:
+            case 2:
                 {
                     Windowed();
                 }
@@ -284,12 +304,12 @@ public class VideoSettings : MonoBehaviour
     #region LimitFPS
     public void LimitFPS(float fps)
     {
-        if (doVSync || !limitFPS)
+        if (currentVSync || !currentLimitFPS)
         {
             fpsSlider.GetComponent<Slider>().enabled = false;
             return;
         }
-        else if (!doVSync && limitFPS)
+        else if (!currentVSync && currentLimitFPS)
         {
             fpsSlider.GetComponent<Slider>().enabled = true;
             Application.targetFrameRate = (int)fps;
@@ -300,15 +320,15 @@ public class VideoSettings : MonoBehaviour
     public void InputFPS()
     {
         float f;
-        if (!doVSync && limitFPS)
+        if (!currentVSync && currentLimitFPS)
         {
             float.TryParse(fpsInput.text, out f);
-            if(f < fpsSlider.minValue)
+            if (f < fpsSlider.minValue)
             {
                 f = fpsSlider.minValue;
                 fpsSlider.value = f;
             }
-            else if(f > fpsSlider.maxValue)
+            else if (f > fpsSlider.maxValue)
             {
                 f = fpsSlider.maxValue;
                 fpsSlider.value = f;
@@ -320,8 +340,8 @@ public class VideoSettings : MonoBehaviour
 
     public void ToggleLimitFPS(bool toggle)
     {
-        limitFPS = toggle;
-        if(toggle && !doVSync)
+        currentLimitFPS = toggle;
+        if (toggle && !currentVSync)
         {
             fpsSlider.GetComponent<Slider>().enabled = true;
             PlayerPrefs.SetInt("LimitFps", 1);
@@ -332,7 +352,7 @@ public class VideoSettings : MonoBehaviour
         }
         else
         {
-            if(!doVSync)
+            if (!currentVSync)
                 Application.targetFrameRate = 0;
             fpsSlider.GetComponent<Slider>().enabled = false;
             PlayerPrefs.SetInt("LimitFps", 0);
@@ -351,7 +371,7 @@ public class VideoSettings : MonoBehaviour
             fpsSlider.value = fpsSlider.maxValue;
             fpsInput.text = fpsSlider.value.ToString("0");
             QualitySettings.vSyncCount = 1;
-            doVSync = true;
+            currentVSync = true;
             PlayerPrefs.SetInt("vSync", 1);
             print("PlayerPrefs vSync Set to 1");
             doVsyncYes.SetActive(true);
@@ -361,20 +381,19 @@ public class VideoSettings : MonoBehaviour
         }
         else if (!toggle)
         {
-            if(limitFPS)
+            if (currentLimitFPS)
                 fpsSlider.GetComponent<Slider>().enabled = true;
             QualitySettings.vSyncCount = 0;
-            doVSync = false;
+            currentVSync = false;
             PlayerPrefs.SetInt("vSync", 0);
             Application.targetFrameRate = 0;
             doVsyncYes.SetActive(false);
             doVsyncNo.SetActive(true);
         }
-        if (doVSync)
+        if (currentVSync)
             Application.targetFrameRate = Screen.resolutions[PlayerPrefs.GetInt("ResolutionIndex")].refreshRate;
-        //doVsyncNo.SetActive(!toggle);
-        //doVsyncYes.SetActive(toggle);
-        print("doVsync = " + doVSync);
+        lastVSync = currentVSync;
+        print("doVsync = " + currentVSync);
         print("vSync playerprefs = " + PlayerPrefs.GetInt("vSync"));
     }
     #endregion
@@ -389,7 +408,7 @@ public class VideoSettings : MonoBehaviour
     {
         int fov = fovInput.text.ConvertTo<int>();
         if (fov > fovSlider.maxValue)
-              fov = (int)fovSlider.maxValue;
+            fov = (int)fovSlider.maxValue;
         else if (fov < fovSlider.minValue)
             fov = (int)fovSlider.minValue;
         PlayerPrefs.SetInt("fov", fovInput.text.ConvertTo<int>());
@@ -399,24 +418,48 @@ public class VideoSettings : MonoBehaviour
     #endregion
     public void ApplySettings()
     {
-        if(lastRes == currentRes || lastFullscreen == currentFullscreen)
+        if (lastRes == currentRes || lastFullscreen == currentFullscreen || lastFpsLimit == currentFpsLimit || lastLimitFPS == currentLimitFPS || lastFOV == currentFOV || lastVSync == currentVSync)
         {
             return;
         }
         else
         {
-            //Enable ApplySettings Panel
+            applySettingsUI.SetActive(true);
+            timer = revertTime;
+            ChangeSettings();
         }
+    }
+    void ChangeSettings()
+    {
+        SetResolution(currentRes);
+        SetScreenOptions(currentFullscreen);
+        LimitFPS(currentFpsLimit);
+        ToggleLimitFPS(currentLimitFPS);
+        ChangeFov(currentFOV);
+        ToggleVSync(currentVSync);
+    }
+    public void RevertLastSettings()
+    {
+        currentRes = lastRes;
+        currentFullscreen = lastFullscreen;
+        currentFpsLimit = lastFpsLimit;
+
     }
 
     public void RestoreDefault()
     {
         lastRes = defaultRes;
+        currentRes = defaultRes;
         lastFullscreen = defaultFullscreen;
+        currentFullscreen = defaultFullscreen;
         lastFpsLimit = defaultFpsLimit;
+        currentFpsLimit = defaultFpsLimit;
         lastLimitFPS = defaultLimitFPS;
+        currentLimitFPS = defaultLimitFPS;
         lastFOV = defaultFOV;
+        currentFOV = defaultFOV;
         lastVSync = defaultVSync;
-        //Do the settings
+        currentVSync = defaultVSync;
+        ChangeSettings();
     }
 }
