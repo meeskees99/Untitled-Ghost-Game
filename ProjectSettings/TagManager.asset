@@ -10,6 +10,7 @@ TagManager:
   - Canister
   - SuckBox
   - Canister2
+  - Door
   layers:
   - Default
   - TransparentFX
