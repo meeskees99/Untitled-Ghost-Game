@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6520203280720738699}
   - component: {fileID: 9050156209560276289}
   - component: {fileID: 4287615474860738362}
+  - component: {fileID: 1401234598868057087}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -99,3 +100,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7768757500298153253, guid: 598d1c4f348e3e64e807210ad138b38d, type: 3}
+--- !u!95 &1401234598868057087
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392765918873218196}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0b33fd774457164da63c551338463d1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
