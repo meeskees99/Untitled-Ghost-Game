@@ -26,7 +26,14 @@ public class StofZuiger : NetworkBehaviour
     GameManager gameManager;
 
     [SerializeField] int maxGhostPoints = 3;
-    [SerializeField] int ghostPoints;
+    [SyncVar][SerializeField] int ghostPoints;
+    public int GhostPoints
+    {
+        get
+        {
+            return ghostPoints;
+        }
+    }
     bool maxGhost;
 
     [Tooltip("Set the fire rate to the amount of seconds you want to wait between shots")]
@@ -169,7 +176,7 @@ public class StofZuiger : NetworkBehaviour
                     {
                         if (target[i].transform.GetComponent<GhostMovement>().timeLeft() <= 0)
                         {
-                            ghostPoints += target[i].transform.GetComponent<GhostMovement>().Points();
+                            AddPoints(target[i].transform.GetComponent<GhostMovement>().Points());
                             print(target[i].transform.GetComponent<GhostMovement>().Points());
 
                             target[i].transform.GetComponent<GhostMovement>().Die();
@@ -243,6 +250,11 @@ public class StofZuiger : NetworkBehaviour
     //     BeamDespawn(beam, canHandle[i]);
     // }
 
+    [ServerRpc(RequireOwnership = true)]
+    void AddPoints(int points)
+    {
+        ghostPoints += points;
+    }
     [ServerRpc(RequireOwnership = false)]
     public void SetSucking(bool state)
     {
@@ -253,6 +265,28 @@ public class StofZuiger : NetworkBehaviour
     {
         SuckAnimation(false);
         SetSucking(false);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void StealPoints(int points, StofZuiger enemy)
+    {
+        int newPoints = (ghostPoints + points);
+        int pointsToGain;
+        if (newPoints > maxGhostPoints)
+        {
+            pointsToGain = newPoints - maxGhostPoints;
+        }
+        else
+        {
+            pointsToGain = points;
+        }
+        ghostPoints += pointsToGain;
+        enemy.LosePoints(pointsToGain);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void LosePoints(int points)
+    {
+        ghostPoints -= points;
     }
 
     private void OnTriggerExit(Collider other)
@@ -275,7 +309,7 @@ public class StofZuiger : NetworkBehaviour
             target.Add(other.gameObject);
         }
     }
-
+    [ServerRpc(RequireOwnership = true)]
     public void Shoot(bool isBullet)
     {
         ReleaseGhost(isBullet, this.NetworkObject, fireSpeed);

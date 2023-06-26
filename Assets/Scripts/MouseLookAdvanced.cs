@@ -56,6 +56,13 @@ public class MouseLookAdvanced : NetworkBehaviour
                     {
                         stofZuiger.StorePoints();
                     }
+                    else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 1)
+                    {
+                        if (hit.transform.GetComponent<MovementAdvanced>().IsStunned)
+                        {
+                            stofZuiger.StealPoints(hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
+                        }
+                    }
                 }
             }
             else
@@ -65,6 +72,13 @@ public class MouseLookAdvanced : NetworkBehaviour
                     if (hit.transform.tag == "Canister2")
                     {
                         stofZuiger.StorePoints();
+                    }
+                    else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 0)
+                    {
+                        if (hit.transform.GetComponent<MovementAdvanced>().IsStunned)
+                        {
+                            stofZuiger.StealPoints(hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
+                        }
                     }
                 }
             }

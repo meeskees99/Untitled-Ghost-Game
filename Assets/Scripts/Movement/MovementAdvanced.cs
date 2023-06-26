@@ -48,6 +48,13 @@ public class MovementAdvanced : NetworkBehaviour
     Rigidbody rb;
 
     [SyncVar][SerializeField] bool isStunned;
+    public bool IsStunned
+    {
+        get
+        {
+            return isStunned;
+        }
+    }
     [SerializeField] float stunTime = 5f;
 
     [SerializeField] float raycastLenght = 0.5f;
@@ -186,7 +193,8 @@ public class MovementAdvanced : NetworkBehaviour
         {
             wallWalk = false;
         }
-        if (wallWalk){
+        if (wallWalk)
+        {
             rb.AddForce(Vector3.down * 10f, ForceMode.Force);
             return;
         }
