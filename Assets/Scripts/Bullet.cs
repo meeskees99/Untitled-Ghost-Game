@@ -9,10 +9,12 @@ public class Bullet : NetworkBehaviour
 
     public bool isBullet;
 
+    public NetworkObject ownerofObject;
     private void OnTriggerEnter(Collider other)
     {
-        Check(other.gameObject, this.NetworkObject);
+        Check(other.gameObject, ownerofObject);
         print(NetworkObject.OwnerId + " Collision");
+        print(ownerofObject.OwnerId + " shooter");
     }
 
     [ServerRpc(RequireOwnership = false)]
