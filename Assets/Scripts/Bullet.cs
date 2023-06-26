@@ -40,7 +40,7 @@ public class Bullet : NetworkBehaviour
         {
             if (other.transform.tag == "Player" && !other.transform.GetComponent<NetworkObject>().IsOwner)
             {
-                print(other.transform.GetComponent<PlayerData>().username);
+                //print(other.transform.GetComponent<PlayerData>().username);
                 DoStun(other.gameObject);
             }
             else

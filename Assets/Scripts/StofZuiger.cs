@@ -286,7 +286,8 @@ public class StofZuiger : NetworkBehaviour
     public void ReleaseGhost(bool isBullet)
     {
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
-        Spawn(spawnedBullet, this.Owner);
+        print(this.NetworkObject.Owner);
+        Spawn(spawnedBullet, this.NetworkObject.Owner);
 
         spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
         spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
