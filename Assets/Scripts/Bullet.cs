@@ -9,7 +9,7 @@ public class Bullet : NetworkBehaviour
 
     public bool isBullet;
 
-    public NetworkObject ownerofObject;
+    [SyncVar] public NetworkObject ownerofObject;
     private void OnTriggerEnter(Collider other)
     {
         Check(other.gameObject, ownerofObject);
