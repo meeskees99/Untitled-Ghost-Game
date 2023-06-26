@@ -42,8 +42,8 @@ public class StofZuiger : NetworkBehaviour
 
     [SerializeField] Transform beamstart;
 
-    [SerializeField] List<GameObject> beams = new();
-    [SerializeField] List<bool> beamSpawned = new();
+    // [SerializeField] List<GameObject> beams = new();
+    // [SerializeField] List<bool> beamSpawned = new();
 
     int oldTargetCount;
 
@@ -69,15 +69,15 @@ public class StofZuiger : NetworkBehaviour
                 target.Remove(target[z]);
             }
         }
-        if (oldTargetCount != target.Count)
-        {
-            oldTargetCount = target.Count;
-            beamSpawned.Clear();
-            for (int i = 0; i < target.Count; i++)
-            {
-                beamSpawned.Add(false);
-            }
-        }
+        // if (oldTargetCount != target.Count)
+        // {
+        //     oldTargetCount = target.Count;
+        //     beamSpawned.Clear();
+        //     for (int i = 0; i < target.Count; i++)
+        //     {
+        //         beamSpawned.Add(false);
+        //     }
+        // }
 
         if (ghostPoints > maxGhostPoints)
         {
@@ -103,14 +103,15 @@ public class StofZuiger : NetworkBehaviour
         {
             maxGhost = false;
         }
-        if (target.Count == 0)
-        {
-            for (int i = 0; i < beams.Count; i++)
-            {
-                BeamDespawn(beams[i]);
-                beams.Remove(beams[i]);
-            }
-        }
+        // if (target.Count == 0)
+        // {
+        //     for (int i = 0; i < beams.Count; i++)
+        //     {
+        //         canHandle[i] = false;
+        //         StartCoroutine(WaitForDeSpawn(beams[i], i));
+        //         beams.Remove(beams[i]);
+        //     }
+        // }
         if (Input.GetKey(suck))
         {
             if (maxGhost || target == null)
@@ -125,17 +126,18 @@ public class StofZuiger : NetworkBehaviour
                 target[x].transform.GetComponent<GhostMovement>().isHit(false);
             }
             StopSuck();
-            if (beams.Count > 0)
-            {
-                BeamDespawn(beams[0]);
-                if (beamSpawned.Count > 0)
-                {
-                    for (int i = 0; i < beamSpawned.Count; i++)
-                    {
-                        beamSpawned[i] = false;
-                    }
-                }
-            }
+            // if (beams.Count > 0)
+            // {
+            //     canHandle[0] = false;
+            //     StartCoroutine(WaitForDeSpawn(beams[0], 0));
+            //     if (beamSpawned.Count > 0)
+            //     {
+            //         for (int i = 0; i < beamSpawned.Count; i++)
+            //         {
+            //             beamSpawned[i] = false;
+            //         }
+            //     }
+            // }
         }
 
         if (fireTime > 0)
@@ -172,67 +174,74 @@ public class StofZuiger : NetworkBehaviour
 
                             target[i].transform.GetComponent<GhostMovement>().Die();
                             target.Remove(target[i]);
-                            BeamDespawn(beams[i]);
-                            beamSpawned[i] = false;
+                            //canHandle[i] = false;
+                            //StartCoroutine(WaitForDeSpawn(beams[i], i));
+                            //beamSpawned[i] = false;
                         }
                         else if (target[i].transform.GetComponent<GhostMovement>().timeLeft() > 0)
                         {
                             target[i].transform.GetComponent<GhostMovement>().isHit(true);
                             SetSucking(true);
+                            // if (!beamSpawned[i] && beams.Count < target.Count)
+                            // {
+                            //     Beamspawn(i);
+                            //     beamSpawned[i] = true;
+                            //     canHandle.Add(true);
+                            // }
+                            // else
+                            // {
+                            //     print("All beams spawned");
+                            // }
 
-                            print(i);
-                            if (!beamSpawned[i] && beams.Count < target.Count)
-                            {
-                                Beamspawn(i);
-                                beamSpawned[i] = true;
-                            }
-                            else
-                            {
-                                print("All beams spawned");
-                            }
-
-                            if (beams.Count - 1 <= i)
-                            {
-                                print("pos");
-                                print(i);
-                                HandleBeamPos(i, target[i]);
-                            }
+                            // if (beams.Count - 1 <= i)
+                            // {
+                            //     print("pos");
+                            //     print(i);
+                            //     HandleBeamPos(i, target[i]);
+                            // }
                         }
                     }
                 }
             }
-            else
-            {
-                beamSpawned.Clear();
-            }
+            // else
+            // {
+            //     beamSpawned.Clear();
+            // }
         }
     }
-    [ServerRpc(RequireOwnership = true)]
-    public void HandleBeamPos(int i, GameObject targets)
-    {
-        if (beams.Count - 1 <= i)
-        {
-            beams[i].transform.GetChild(1).transform.position = beamstart.position;
+    // [ServerRpc(RequireOwnership = true)]
+    // public void HandleBeamPos(int i, GameObject targets)
+    // {
+    //     if (beams.Count - 1 <= i && canHandle[i])
+    //     {
+    //         beams[i].transform.GetChild(1).transform.position = beamstart.position;
 
-            beams[i].transform.GetChild(2).transform.position = targets.transform.position;
-        }
-    }
+    //         beams[i].transform.GetChild(2).transform.position = targets.transform.position;
+    //     }
+    // }
+    // [SerializeField] List<bool> canHandle = new();
+    // [ServerRpc(RequireOwnership = true)]
+    // public void Beamspawn(int i)
+    // {
+    //     beams.Add(Instantiate(beamparticlePrefab));
+    //     Spawn(beams[i]);
 
-    [ServerRpc(RequireOwnership = true)]
-    public void Beamspawn(int i)
-    {
-        beams.Add(Instantiate(beamparticlePrefab));
-        Spawn(beams[i]);
+    // }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void BeamDespawn(GameObject beam, bool i)
+    // {
+    //     GameObject gabagool = beam;
+    //     beams.Remove(beam);
+    //     Despawn(gabagool);
+    //     canHandle.Remove(i);
+    // }
 
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void BeamDespawn(GameObject beam)
-    {
-        GameObject gabagool = beam;
-        beams.Remove(beam);
-        Despawn(gabagool);
-    }
-
+    // public IEnumerator WaitForDeSpawn(GameObject beam, int i)
+    // {
+    //     yield return new WaitForSeconds(0.1f);
+    //     print("despawnWait");
+    //     BeamDespawn(beam, canHandle[i]);
+    // }
 
     [ServerRpc(RequireOwnership = false)]
     public void SetSucking(bool state)
@@ -253,7 +262,6 @@ public class StofZuiger : NetworkBehaviour
             other.transform.GetComponent<GhostMovement>().isHit(false);
             SetSucking(false);
             target.Remove(other.gameObject);
-
         }
     }
     private void OnTriggerEnter(Collider other)
