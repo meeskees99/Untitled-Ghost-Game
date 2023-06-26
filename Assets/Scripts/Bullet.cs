@@ -31,7 +31,7 @@ public class Bullet : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void Check(GameObject other, NetworkObject netObj)
     {
-        if (other.GetComponent<NetworkObject>() != null)
+        if (other.GetComponent<NetworkObject>())
         {
             if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
             {
