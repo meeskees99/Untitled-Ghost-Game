@@ -292,7 +292,16 @@ public class StofZuiger : NetworkBehaviour
 
         spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * speed;
         spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
+
+        UpdatePos(spawnedBullet, isBullet, speed);
     }
+
+    void UpdatePos(GameObject spawnedBullet, bool isBullet, float speed)
+    {
+        spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * speed;
+        spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
+    }
+
 
     public void StorePoints()
     {
