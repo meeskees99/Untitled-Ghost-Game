@@ -181,7 +181,7 @@ public class StofZuiger : NetworkBehaviour
                             SetSucking(true);
 
                             print(i);
-                            if (!beamSpawned[i])
+                            if (!beamSpawned[i] && beams.Count < target.Count)
                             {
                                 Beamspawn(i);
                                 beamSpawned[i] = true;
@@ -210,8 +210,12 @@ public class StofZuiger : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void HandleBeamPos(int i, GameObject targets)
     {
-        beams[i].transform.GetChild(1).transform.position = beamstart.position;
-        beams[i].transform.GetChild(2).transform.position = targets.transform.position;
+        if (beams.Count - 1 <= i)
+        {
+            beams[i].transform.GetChild(1).transform.position = beamstart.position;
+
+            beams[i].transform.GetChild(2).transform.position = targets.transform.position;
+        }
     }
 
     [ServerRpc(RequireOwnership = true)]
@@ -241,50 +245,15 @@ public class StofZuiger : NetworkBehaviour
         SuckAnimation(false);
         SetSucking(false);
     }
-    List<GameObject> tempTargets = new();
+
     private void OnTriggerExit(Collider other)
     {
-        for (int t = 0; t < target.Count; t++)
-        {
-            if (tempTargets.Count < target.Count && !tempTargets.Contains(target[t]))
-            {
-                tempTargets.Add(target[t]);
-            }
-        }
         if (other.CompareTag(GhostTag))
         {
             other.transform.GetComponent<GhostMovement>().isHit(false);
             SetSucking(false);
-            //print("SetSucking = Fasle");
-
-            //print(other + " removed");
-            for (int i = 0; i <= tempTargets.Count - 1; i++)
-            {
-                print(tempTargets[i].name);
-                for (int z = 0; z <= beams.Count - 1; z++)
-                {
-                    if (tempTargets[i] == other.gameObject)
-                    {
-                        if (beams.Count == 1)
-                        {
-                            BeamDespawn(beams[0]);
-                        }
-                        else
-                        {
-                            print("despawn " + z + "z, i" + i);
-                            BeamDespawn(beams[z]);
-                        }
-
-                        //beamSpawned[i] = false;
-                    }
-                }
-            }
             target.Remove(other.gameObject);
 
-        }
-        if (target.Count == 0)
-        {
-            tempTargets.Clear();
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -293,10 +262,8 @@ public class StofZuiger : NetworkBehaviour
         {
             if (target.Contains(other.gameObject))
             {
-                //print("alredy inig lsit");
                 return;
             }
-            //print(other + " Added");
             target.Add(other.gameObject);
         }
     }
