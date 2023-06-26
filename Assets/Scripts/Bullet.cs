@@ -12,7 +12,6 @@ public class Bullet : NetworkBehaviour
     [SyncVar] public NetworkObject ownerofObject;
     private void OnTriggerEnter(Collider other)
     {
-        print(NetworkObject.OwnerId + " Collision");
         print(ownerofObject.OwnerId + " shooter");
         Check(other.gameObject, ownerofObject);
     }
@@ -41,7 +40,7 @@ public class Bullet : NetworkBehaviour
         }
         if (isBullet)
         {
-            if (other.transform.tag == "Player" && !other.transform.GetComponent<NetworkObject>().IsOwner)
+            if (other.transform.tag == "Player")
             {
                 print(other.transform.GetComponent<PlayerData>().username);
                 //DoStun(other.gameObject);
