@@ -31,7 +31,7 @@ public class Bullet : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void Check(GameObject other, NetworkObject netObj)
     {
-        if (other.GetComponent<NetworkObject>())
+        if (other.transform.tag == "Player")
         {
             if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
             {
@@ -40,21 +40,18 @@ public class Bullet : NetworkBehaviour
             }
             if (isBullet)
             {
-                if (other.transform.tag == "Player")
-                {
-                    print(other.transform.GetComponent<PlayerData>().username);
-                    DoStun(other.gameObject);
-                }
-                else
-                {
-                    DoDespawn();
-                }
+                print(other.transform.GetComponent<PlayerData>().username);
+                DoStun(other.gameObject);
             }
             else
             {
                 GameObject CGhost = Instantiate(ghost);
                 Spawn(CGhost);
             }
+        }
+        else if (other.transform.tag != "SuckBox")
+        {
+            DoDespawn();
         }
     }
 }
