@@ -45,13 +45,13 @@ public class Bullet : NetworkBehaviour
                     print("Owner");
                     return;
                 }
-                else if (other.transform.tag != "SuckBox")
-                {
-                    DoDespawn();
-                }
+                print(other.transform.GetComponent<PlayerData>().username);
+                DoStun(other);
             }
-            print(other.transform.GetComponent<PlayerData>().username);
-            DoStun(other);
+            else if (other.transform.tag != "SuckBox")
+            {
+                DoDespawn();
+            }
         }
         else if (other.transform.tag != "Player" || other.transform.tag != "SuckBox")
         {
