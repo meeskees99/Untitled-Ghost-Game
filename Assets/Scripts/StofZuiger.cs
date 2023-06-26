@@ -290,8 +290,8 @@ public class StofZuiger : NetworkBehaviour
         Spawn(spawnedBullet, netObj.Owner);
         spawnedBullet.GetComponent<Bullet>().ownerofObject = this.NetworkObject;
 
-        spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
-        spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
+        //spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * fireSpeed;
+        //spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
     }
 
     public void StorePoints()
