@@ -31,8 +31,7 @@ public class Bullet : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void Check(GameObject other, NetworkObject netObj)
     {
-        print(netObj.OwnerId + " owner of bullet");
-        print(other.GetComponent<NetworkObject>().OwnerId + " hit player");
+
         if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
         {
             print("Owner");
@@ -43,11 +42,11 @@ public class Bullet : NetworkBehaviour
             if (other.transform.tag == "Player")
             {
                 print(other.transform.GetComponent<PlayerData>().username);
-                //DoStun(other.gameObject);
+                DoStun(other.gameObject);
             }
             else
             {
-                //DoDespawn();
+                DoDespawn();
             }
         }
         else
