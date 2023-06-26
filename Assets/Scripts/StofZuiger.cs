@@ -282,7 +282,7 @@ public class StofZuiger : NetworkBehaviour
         ghostPoints -= 1;
     }
 
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void ReleaseGhost(bool isBullet, NetworkObject netObj, float speed)
     {
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
