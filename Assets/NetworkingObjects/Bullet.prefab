@@ -118,6 +118,7 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 111050457290606899}
   ghost: {fileID: 0}
   isBullet: 1
+  ownerofObject: {fileID: 0}
 --- !u!114 &111050457290606899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +183,7 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 111050457290606899}
   _synchronizeParent: 0
   _packing:
-    Position: 1
+    Position: 0
     Rotation: 1
     Scale: 0
   _interpolation: 2
