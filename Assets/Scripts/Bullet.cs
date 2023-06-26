@@ -9,7 +9,7 @@ public class Bullet : NetworkBehaviour
 
     public bool isBullet;
 
-    private void OnTriggerEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         Check(other.gameObject, this.NetworkObject);
         print(NetworkObject.OwnerId + " Collision");
