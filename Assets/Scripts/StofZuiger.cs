@@ -295,7 +295,7 @@ public class StofZuiger : NetworkBehaviour
 
         UpdatePos(spawnedBullet, isBullet, speed);
     }
-
+    [ObserversRpc]
     void UpdatePos(GameObject spawnedBullet, bool isBullet, float speed)
     {
         spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * speed;
