@@ -116,7 +116,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 111050457290606899}
   _networkObjectCache: {fileID: 111050457290606899}
-  ghost: {fileID: 0}
+  ghost: {fileID: 9087618149018236688, guid: 3f5dd7f50aa5a9147a0187d1e3f0d759, type: 3}
   isBullet: 1
   ownerofObject: {fileID: 0}
 --- !u!114 &111050457290606899

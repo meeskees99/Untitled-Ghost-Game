@@ -36,27 +36,34 @@ public class Bullet : NetworkBehaviour
             return;
         }
         print(other.gameObject.name);
-        if (other.transform.tag == "Player")
+        if (isBullet)
         {
-            if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
+            if (other.transform.tag == "Player")
             {
-                print("Owner");
-                return;
+                if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
+                {
+                    print("Owner");
+                    return;
+                }
+                else if (other.transform.tag != "SuckBox")
+                {
+                    DoDespawn();
+                }
             }
-            if (isBullet)
-            {
-                print(other.transform.GetComponent<PlayerData>().username);
-                DoStun(other.gameObject);
-            }
-            else
-            {
-                GameObject CGhost = Instantiate(ghost);
-                Spawn(CGhost);
-            }
+            print(other.transform.GetComponent<PlayerData>().username);
+            DoStun(other);
         }
-        else if (other.transform.tag != "SuckBox")
+        else if (other.transform.tag != "Player" || other.transform.tag != "SuckBox")
         {
-            DoDespawn();
+            GameObject CGhost = Instantiate(ghost);
+            Spawn(CGhost);
         }
+        else if (other.transform.tag == "Player")
+        {
+            DoStun(other);
+        }
+
+
+
     }
 }
