@@ -12,9 +12,9 @@ public class Bullet : NetworkBehaviour
     [SyncVar] public NetworkObject ownerofObject;
     private void OnTriggerEnter(Collider other)
     {
-        Check(other.gameObject, ownerofObject);
         print(NetworkObject.OwnerId + " Collision");
         print(ownerofObject.OwnerId + " shooter");
+        Check(other.gameObject, ownerofObject);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -32,7 +32,6 @@ public class Bullet : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void Check(GameObject other, NetworkObject netObj)
     {
-        print(other.transform.GetComponent<PlayerData>().username);
         print(netObj.OwnerId + " owner of bullet");
         print(other.GetComponent<NetworkObject>().OwnerId + " hit player");
         if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
@@ -44,7 +43,7 @@ public class Bullet : NetworkBehaviour
         {
             if (other.transform.tag == "Player" && !other.transform.GetComponent<NetworkObject>().IsOwner)
             {
-                //print(other.transform.GetComponent<PlayerData>().username);
+                print(other.transform.GetComponent<PlayerData>().username);
                 //DoStun(other.gameObject);
             }
             else
