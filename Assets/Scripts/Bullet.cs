@@ -31,7 +31,7 @@ public class Bullet : NetworkBehaviour
     public void Check(GameObject other, NetworkObject netObj)
     {
         print(other.transform.GetComponent<PlayerData>().username);
-        print(other.transform.GetComponent<NetworkObject>().IsOwner);
+        print(netObj.IsOwner);
         if (netObj.IsOwner)
         {
             print("Owner");
