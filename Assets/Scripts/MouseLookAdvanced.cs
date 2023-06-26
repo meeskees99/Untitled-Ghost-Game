@@ -58,6 +58,7 @@ public class MouseLookAdvanced : NetworkBehaviour
                     }
                     else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 1)
                     {
+                        print("hitPlayer");
                         if (hit.transform.GetComponent<MovementAdvanced>().IsStunned)
                         {
                             stofZuiger.StealPoints(hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
@@ -75,6 +76,7 @@ public class MouseLookAdvanced : NetworkBehaviour
                     }
                     else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 0)
                     {
+                        print("hitPlayer");
                         if (hit.transform.GetComponent<MovementAdvanced>().IsStunned)
                         {
                             stofZuiger.StealPoints(hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
