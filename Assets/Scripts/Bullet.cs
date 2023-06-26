@@ -31,28 +31,30 @@ public class Bullet : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void Check(GameObject other, NetworkObject netObj)
     {
-
-        if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
+        if (other.GetComponent<NetworkObject>() != null)
         {
-            print("Owner");
-            return;
-        }
-        if (isBullet)
-        {
-            if (other.transform.tag == "Player")
+            if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
             {
-                print(other.transform.GetComponent<PlayerData>().username);
-                DoStun(other.gameObject);
+                print("Owner");
+                return;
+            }
+            if (isBullet)
+            {
+                if (other.transform.tag == "Player")
+                {
+                    print(other.transform.GetComponent<PlayerData>().username);
+                    DoStun(other.gameObject);
+                }
+                else
+                {
+                    DoDespawn();
+                }
             }
             else
             {
-                DoDespawn();
+                GameObject CGhost = Instantiate(ghost);
+                Spawn(CGhost);
             }
-        }
-        else
-        {
-            GameObject CGhost = Instantiate(ghost);
-            Spawn(CGhost);
         }
     }
 }
