@@ -100,19 +100,21 @@ public class MovementAdvanced : NetworkBehaviour
         characterIndex = charint;
         charSet = true;
         CharIntObserver(charint);
-
+        print(charSet + " int set server");
     }
     [SyncVar][SerializeField] bool charSet;
     [ServerRpc(RequireOwnership = false)]
     void CharSet(bool value)
     {
         charSet = value;
+        print(charSet + " character set server");
     }
     [ObserversRpc]
     void CharIntObserver(int charint)
     {
         characterIndex = charint;
         charSet = true;
+        print(charSet + " character set observer");
     }
     // [ServerRpc(RequireOwnership = false)]
     // void DoTHing()
@@ -123,7 +125,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     private void Update()
     {
-        print(charSet + " character set");
+        print(charSet + " character set update");
         if (charSet)
         {
             // DoTHing();
