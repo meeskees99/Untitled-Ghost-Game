@@ -90,7 +90,7 @@ public class MovementAdvanced : NetworkBehaviour
         {
             this.enabled = false;
         }
-        CharInt(PlayerPrefs.GetInt("Character"));
+        //CharInt(PlayerPrefs.GetInt("Character"));
 
     }
     [ServerRpc(RequireOwnership = false)]
