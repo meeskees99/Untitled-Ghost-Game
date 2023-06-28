@@ -103,10 +103,26 @@ public class MovementAdvanced : NetworkBehaviour
 
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    void SetChar(int index)
+    {
+        character[index].SetActive(true);
+        animator = character[index].GetComponent<Animator>();
+        SetCharObserver(index);
+    }
+    [ObserversRpc]
+    void SetCharObserver(int index)
+    {
+        character[index].SetActive(true);
+        animator = character[index].GetComponent<Animator>();
+    }
+
+
     private void Update()
     {
-        character[characterIndex].SetActive(true);
-        animator = character[characterIndex].GetComponent<Animator>();
+        SetChar(characterIndex);
+        // character[characterIndex].SetActive(true);
+        // animator = character[characterIndex].GetComponent<Animator>();
 
         if (animator == null)
         {
