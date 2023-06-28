@@ -105,8 +105,13 @@ public class MovementAdvanced : NetworkBehaviour
     void CharSet(bool value)
     {
         charSet = value;
+        CharSetObserver(value);
     }
-
+    [ObserversRpc]
+    void CharSetObserver(bool value)
+    {
+        charSet = value;
+    }
     // [ServerRpc(RequireOwnership = false)]
     // void DoTHing()
     // {
