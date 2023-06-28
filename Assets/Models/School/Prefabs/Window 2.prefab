@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 49262907442415041}
   - component: {fileID: 3231134999849092135}
   - component: {fileID: 2229420653598520175}
+  - component: {fileID: 6097577043851546158}
   m_Layer: 0
   m_Name: Window 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &49262907442415041
 Transform:
@@ -84,3 +85,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6097577043851546158
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205712405995164997}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2390957, y: 1.4994102, z: 0.6407792}
+  m_Center: {x: -0.00000011920929, y: 1.6936646, z: -0.014665157}

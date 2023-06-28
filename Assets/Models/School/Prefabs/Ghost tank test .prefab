@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 8244429733673002630}
   - component: {fileID: 5027638672631032099}
   - component: {fileID: 7070992220075105769}
+  - component: {fileID: 1675339845142317314}
   m_Layer: 0
   m_Name: Tank_Low
   m_TagString: Untagged
@@ -199,3 +200,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1675339845142317314
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8728479129807043644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.76487964, y: 0.8333117, z: 0.47812653}
+  m_Center: {x: 0.0000015944241, y: -0.40681025, z: -0.000007717919}
