@@ -98,21 +98,7 @@ public class MovementAdvanced : NetworkBehaviour
     void CharInt(int charint)
     {
         characterIndex = charint;
-        charSet = true;
-        CharIntObserver(charint);
 
-    }
-    [SyncVar][SerializeField] bool charSet;
-    [ServerRpc(RequireOwnership = false)]
-    void CharSet(bool value)
-    {
-        charSet = value;
-    }
-    [ObserversRpc]
-    void CharIntObserver(int charint)
-    {
-        characterIndex = charint;
-        charSet = true;
     }
     // [ServerRpc(RequireOwnership = false)]
     // void DoTHing()
@@ -123,16 +109,10 @@ public class MovementAdvanced : NetworkBehaviour
 
     private void Update()
     {
-        print(charSet + " character set");
-        if (charSet)
-        {
-            // DoTHing();
-            character[characterIndex].SetActive(true);
-            animator = character[characterIndex].GetComponent<Animator>();
-            CharSet(false);
-        }
         if (animator == null)
         {
+            character[characterIndex].SetActive(true);
+            animator = character[characterIndex].GetComponent<Animator>();
             return;
         }
         if (isStunned)
