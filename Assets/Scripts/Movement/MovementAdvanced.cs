@@ -118,6 +118,7 @@ public class MovementAdvanced : NetworkBehaviour
             }
         }
         animator = character[index].GetComponent<Animator>();
+        SetCharObserver(index);
     }
     [ObserversRpc]
     void SetCharObserver(int index)
@@ -134,13 +135,12 @@ public class MovementAdvanced : NetworkBehaviour
             }
         }
         animator = character[index].GetComponent<Animator>();
-        SetChar(index);
     }
 
 
     private void Update()
     {
-        SetCharObserver(characterIndex);
+        SetChar(characterIndex);
 
         if (animator == null)
         {
