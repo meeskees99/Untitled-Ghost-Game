@@ -101,11 +101,6 @@ public class MovementAdvanced : NetworkBehaviour
         charSet = true;
     }
     [SyncVar] public bool charSet;
-    [ServerRpc(RequireOwnership = false)]
-    void CharSet(bool value)
-    {
-        charSet = value;
-    }
     private void Update()
     {
         if (charSet)
@@ -113,7 +108,7 @@ public class MovementAdvanced : NetworkBehaviour
             character[characterIndex].SetActive(true);
             animator = character[characterIndex].GetComponent<Animator>();
             stofZuiger.animator = character[characterIndex].GetComponent<Animator>();
-            CharSet(false);
+            charSet = false;
         }
         if (animator == null)
         {

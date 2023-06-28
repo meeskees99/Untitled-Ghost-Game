@@ -5,11 +5,14 @@ using FishNet.Object;
 using FishNet.Object.Synchronizing;
 public class StofZuiger : NetworkBehaviour
 {
+    //[SerializeField] GameObject zuigBox;
+    //[SerializeField] float suckRange;
     [Header("Setup")]
     [SerializeField] KeyCode suck;
     [SerializeField] KeyCode shoot;
     [SerializeField] LayerMask mask;
     [SerializeField] PlayerData pData;
+    [SerializeField] MovementAdvanced movement;
     [Header("Shooting")]
     [SerializeField] Transform shootPos;
     [SerializeField] float suckRange;
