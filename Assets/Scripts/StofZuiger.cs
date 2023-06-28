@@ -64,6 +64,10 @@ public class StofZuiger : NetworkBehaviour
     }
     void Update()
     {
+        if (animator == null)
+        {
+            return;
+        }
         if (gameManager == null)
         {
             gameManager = FindObjectOfType<GameManager>();
