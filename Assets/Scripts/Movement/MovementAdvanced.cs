@@ -99,18 +99,20 @@ public class MovementAdvanced : NetworkBehaviour
     {
         characterIndex = charint;
         charSet = true;
+        CharIntObserver(charint);
+
     }
     [SyncVar][SerializeField] bool charSet;
     [ServerRpc(RequireOwnership = false)]
     void CharSet(bool value)
     {
         charSet = value;
-        CharSetObserver(value);
     }
     [ObserversRpc]
-    void CharSetObserver(bool value)
+    void CharIntObserver(int charint)
     {
-        charSet = value;
+        characterIndex = charint;
+        charSet = true;
     }
     // [ServerRpc(RequireOwnership = false)]
     // void DoTHing()
