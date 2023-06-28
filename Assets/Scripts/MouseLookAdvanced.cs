@@ -63,7 +63,7 @@ public class MouseLookAdvanced : NetworkBehaviour
                         {
                             print("isStunned");
                             print(hit.transform.GetChild(1).GetChild(0));
-                            stofZuiger.StealPoints(hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
+                            stofZuiger.StealPoints(hit.transform.GetChild(1).GetChild(0).GetComponentInChildren<StofZuiger>().GhostPoints, hit.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
                         }
                     }
                 }
