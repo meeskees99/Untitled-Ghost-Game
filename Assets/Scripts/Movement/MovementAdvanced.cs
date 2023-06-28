@@ -91,7 +91,10 @@ public class MovementAdvanced : NetworkBehaviour
         {
             this.enabled = false;
         }
-        CharInt(PlayerPrefs.GetInt("Character"));
+        else if (IsOwner)
+        {
+            CharInt(PlayerPrefs.GetInt("Character"));
+        }
 
     }
     [ServerRpc(RequireOwnership = false)]
@@ -113,7 +116,7 @@ public class MovementAdvanced : NetworkBehaviour
             character[characterIndex].SetActive(true);
             animator = character[characterIndex].GetComponent<Animator>();
             stofZuiger.animator = character[characterIndex].GetComponent<Animator>();
-            charSet = false;
+            CharSet(false);
         }
         if (animator == null)
         {
