@@ -464,6 +464,7 @@ MonoBehaviour:
   walkSpeed: 5
   sprintSpeed: 9
   groundDrag: 5
+  stofZuiger: {fileID: 3418064442683254627}
   animator: {fileID: 0}
   jumpForce: 5
   jumpCooldown: 0.25
@@ -487,6 +488,7 @@ MonoBehaviour:
   raycastLenght: 0.5
   wallWalk: 0
   state: 0
+  charSet: 0
   shootPos: {fileID: 1718954057773777526}
 --- !u!114 &1718954057773777580
 MonoBehaviour:

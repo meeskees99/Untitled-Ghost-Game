@@ -13,6 +13,7 @@ public class MovementAdvanced : NetworkBehaviour
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;
     [SerializeField] float groundDrag;
+    [SerializeField] StofZuiger stofZuiger;
     [SerializeField] Animator animator;
 
     [Header("Jumping")]
@@ -39,7 +40,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     [Header("Character")]
     public GameObject[] character;
-    public int characterIndex;
+    [SyncVar] public int characterIndex;
 
 
     [SerializeField] Transform orientation;
@@ -90,22 +91,40 @@ public class MovementAdvanced : NetworkBehaviour
         {
             this.enabled = false;
         }
-        characterIndex = PlayerPrefs.GetInt("Character");
-        character[characterIndex].SetActive(true);
-        animator = character[characterIndex].GetComponent<Animator>();
+        CharInt(PlayerPrefs.GetInt("Character"));
+
     }
+    [ServerRpc(RequireOwnership = false)]
+    void CharInt(int charInt)
+    {
+        characterIndex = charInt;
+        charSet = true;
+    }
+    [SyncVar] public bool charSet;
     private void Update()
     {
+        if (charSet)
+        {
+            character[characterIndex].SetActive(true);
+            animator = character[characterIndex].GetComponent<Animator>();
+            stofZuiger.animator = character[characterIndex].GetComponent<Animator>();
+            charSet = false;
+        }
+        if (animator == null)
+        {
+            return;
+        }
         if (isStunned)
             return;
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
-        // Ground Check
+
         grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
 
         MyInput();
         SpeedControl();
         StateHandler();
         SetBoolAnim("OnGround", grounded);
+
         // Handle drag
         if (grounded)
         {

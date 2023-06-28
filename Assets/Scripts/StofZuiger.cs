@@ -22,7 +22,7 @@ public class StofZuiger : NetworkBehaviour
     RaycastHit hit;
     float time;
 
-    [SerializeField] Animator animator;
+    public Animator animator;
     GameManager gameManager;
 
     [SerializeField] int maxGhostPoints = 3;
@@ -59,11 +59,13 @@ public class StofZuiger : NetworkBehaviour
             GetComponent<MeshCollider>().enabled = false;
             this.enabled = false;
         }
-
-        animator = movement.character[movement.characterIndex].GetComponent<Animator>();
     }
     void Update()
     {
+        if (animator == null)
+        {
+            return;
+        }
         if (gameManager == null)
         {
             gameManager = FindObjectOfType<GameManager>();
