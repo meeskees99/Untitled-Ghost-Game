@@ -109,10 +109,11 @@ public class MovementAdvanced : NetworkBehaviour
 
     private void Update()
     {
+        character[characterIndex].SetActive(true);
+        animator = character[characterIndex].GetComponent<Animator>();
+
         if (animator == null)
         {
-            character[characterIndex].SetActive(true);
-            animator = character[characterIndex].GetComponent<Animator>();
             return;
         }
         if (isStunned)
