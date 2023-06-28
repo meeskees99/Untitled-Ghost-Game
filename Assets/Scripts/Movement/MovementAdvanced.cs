@@ -99,14 +99,19 @@ public class MovementAdvanced : NetworkBehaviour
         characterIndex = charint;
         charSet = true;
     }
-    bool charSet;
+    [SyncVar][SerializeField] bool charSet;
+    [ServerRpc(RequireOwnership = false)]
+    void CharSet(bool value)
+    {
+        charSet = value;
+    }
     private void Update()
     {
         if (charSet)
         {
             character[characterIndex].SetActive(true);
             animator = character[characterIndex].GetComponent<Animator>();
-            charSet = false;
+            CharSet(false);
         }
         if (animator == null)
         {
