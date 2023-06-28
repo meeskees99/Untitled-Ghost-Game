@@ -22,7 +22,7 @@ public class StofZuiger : NetworkBehaviour
     RaycastHit hit;
     float time;
 
-    [SerializeField] Animator animator;
+    public Animator animator;
     GameManager gameManager;
 
     [SerializeField] int maxGhostPoints = 3;

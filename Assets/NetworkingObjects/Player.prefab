@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596ef839cead4f845982d1517bca8e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 1718954057773777580}
   _networkObjectCache: {fileID: 1718954057773777580}
   playerId: 0
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff7d77240159b540975cd6a43905834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 0
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 1718954057773777580}
   _networkObjectCache: {fileID: 1718954057773777580}
   walkSpeed: 5
@@ -509,8 +509,8 @@ MonoBehaviour:
   stunTime: 5
   raycastLenght: 0.5
   wallWalk: 0
+  stofZuiger: {fileID: 3418064442683254627}
   state: 0
-  charSet: 0
   shootPos: {fileID: 1718954057773777526}
 --- !u!114 &1718954057773777580
 MonoBehaviour:
@@ -528,9 +528,9 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
+  - {fileID: 2548425321851108391}
   - {fileID: 1718954057773777569}
   - {fileID: 5384800910241278102}
-  - {fileID: 2548425321851108391}
   - {fileID: 4853220401340673276}
   - {fileID: 3169769077060667233}
   - {fileID: 3418064442683254627}
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 1718954057773777580}
   _networkObjectCache: {fileID: 1718954057773777580}
   _synchronizeParent: 0

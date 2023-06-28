@@ -66,6 +66,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     [SerializeField] bool wallWalk;
 
+    [SerializeField] StofZuiger stofZuiger;
 
     public MovementState state;
     public enum MovementState
@@ -118,6 +119,8 @@ public class MovementAdvanced : NetworkBehaviour
             }
         }
         animator = character[index].GetComponent<Animator>();
+        stofZuiger.animator = character[index].GetComponent<Animator>();
+
         SetCharObserver(index);
     }
     [ObserversRpc]
@@ -135,6 +138,7 @@ public class MovementAdvanced : NetworkBehaviour
             }
         }
         animator = character[index].GetComponent<Animator>();
+        stofZuiger.animator = character[index].GetComponent<Animator>();
     }
 
 
