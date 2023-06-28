@@ -39,7 +39,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     [Header("Character")]
     public GameObject[] character;
-    public int characterIndex;
+    [SyncVar] public int characterIndex;
 
 
     [SerializeField] Transform orientation;
