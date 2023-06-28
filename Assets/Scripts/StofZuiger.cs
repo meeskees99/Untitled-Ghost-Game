@@ -59,8 +59,6 @@ public class StofZuiger : NetworkBehaviour
             GetComponent<MeshCollider>().enabled = false;
             this.enabled = false;
         }
-
-        animator = movement.character[movement.characterIndex].GetComponent<Animator>();
     }
     void Update()
     {
