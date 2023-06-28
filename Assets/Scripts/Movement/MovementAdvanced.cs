@@ -91,10 +91,7 @@ public class MovementAdvanced : NetworkBehaviour
         {
             this.enabled = false;
         }
-        else if (IsOwner)
-        {
-            CharInt(PlayerPrefs.GetInt("Character"));
-        }
+        CharInt(PlayerPrefs.GetInt("Character"));
 
     }
     [ServerRpc(RequireOwnership = false)]
