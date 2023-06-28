@@ -77,6 +77,9 @@ public class MovementAdvanced : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
         readyToJump = true;
+
+        int babaoooo = PlayerPrefs.GetInt("Character");
+        CharInt(babaoooo);
     }
 
     public override void OnStartClient()
@@ -90,9 +93,6 @@ public class MovementAdvanced : NetworkBehaviour
         {
             this.enabled = false;
         }
-        int babaoooo = PlayerPrefs.GetInt("Character");
-        CharInt(babaoooo);
-
     }
     [ServerRpc(RequireOwnership = false)]
     void CharInt(int charint)
