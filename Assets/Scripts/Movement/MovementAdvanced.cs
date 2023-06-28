@@ -106,10 +106,19 @@ public class MovementAdvanced : NetworkBehaviour
     {
         charSet = value;
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    void DoTHing()
+    {
+        character[characterIndex].SetActive(true);
+        animator = character[characterIndex].GetComponent<Animator>();
+    }
+
     private void Update()
     {
         if (charSet)
         {
+            DoTHing();
             character[characterIndex].SetActive(true);
             animator = character[characterIndex].GetComponent<Animator>();
             CharSet(false);
