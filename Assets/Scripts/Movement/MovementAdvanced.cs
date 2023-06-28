@@ -90,12 +90,28 @@ public class MovementAdvanced : NetworkBehaviour
         {
             this.enabled = false;
         }
-        characterIndex = PlayerPrefs.GetInt("Character");
-        character[characterIndex].SetActive(true);
-        animator = character[characterIndex].GetComponent<Animator>();
+        CharInt(PlayerPrefs.GetInt("Character"));
+
     }
+    [ServerRpc(RequireOwnership = false)]
+    void CharInt(int charint)
+    {
+        characterIndex = charint;
+        charSet = true;
+    }
+    bool charSet;
     private void Update()
     {
+        if (charSet)
+        {
+            character[characterIndex].SetActive(true);
+            animator = character[characterIndex].GetComponent<Animator>();
+            charSet = false;
+        }
+        if (animator == null)
+        {
+            return;
+        }
         if (isStunned)
             return;
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
