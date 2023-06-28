@@ -105,7 +105,9 @@ public class StofZuiger : NetworkBehaviour
         if (Input.GetKey(suck))
         {
             if (maxGhost || target == null)
+            {
                 return;
+            }
             Suck();
             SuckAnimation(true);
         }
@@ -177,6 +179,15 @@ public class StofZuiger : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void StopSuck()
     {
+        SuckAnimation(false);
+        SetSucking(false);
+        StopSuckObserver();
+    }
+    [ObserversRpc]
+    public void StopSuckObserver()
+    {
+        if (IsHost)
+            return;
         SuckAnimation(false);
         SetSucking(false);
     }
