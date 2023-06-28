@@ -100,12 +100,6 @@ public class MovementAdvanced : NetworkBehaviour
         characterIndex = charint;
 
     }
-    // [ServerRpc(RequireOwnership = false)]
-    // void DoTHing()
-    // {
-    //     character[characterIndex].SetActive(true);
-    //     animator = character[characterIndex].GetComponent<Animator>();
-    // }
 
     private void Update()
     {
@@ -302,6 +296,10 @@ public class MovementAdvanced : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void DoAnimation(string Name)
     {
+        if (animator == null)
+        {
+            return;
+        }
         animator.SetTrigger(Name);
         print("Ik doe nu trigger " + Name);
         ObserverAnim(Name);
@@ -309,6 +307,10 @@ public class MovementAdvanced : NetworkBehaviour
     [ObserversRpc]
     public void ObserverAnim(string Name)
     {
+        if (animator == null)
+        {
+            return;
+        }
         if (IsHost)
             return;
         animator.SetTrigger(Name);
@@ -318,23 +320,39 @@ public class MovementAdvanced : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void DoBlendTree(float hor, float ver)
     {
+        if (animator == null)
+        {
+            return;
+        }
         ObserverTree(hor, ver);
     }
     [ObserversRpc]
     public void ObserverTree(float hor, float ver)
     {
+        if (animator == null)
+        {
+            return;
+        }
         animator.SetFloat("X", hor);
         animator.SetFloat("Y", ver);
     }
     [ServerRpc(RequireOwnership = true)]
     public void SetBoolAnim(string s, bool b)
     {
+        if (animator == null)
+        {
+            return;
+        }
         animator.SetBool(s, b);
         SetBoolObserver(s, b);
     }
     [ObserversRpc]
     public void SetBoolObserver(string s, bool b)
     {
+        if (animator == null)
+        {
+            return;
+        }
         if (IsHost)
             return;
 
