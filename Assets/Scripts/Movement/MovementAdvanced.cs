@@ -37,6 +37,11 @@ public class MovementAdvanced : NetworkBehaviour
     [SerializeField] float maxSlopeAngle;
     RaycastHit slopeHit;
 
+    [Header("Character")]
+    public GameObject[] character;
+    public int characterIndex;
+
+
     [SerializeField] Transform orientation;
     [SerializeField] TMP_Text speedTxt;
 
@@ -61,6 +66,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     [SerializeField] bool wallWalk;
 
+
     public MovementState state;
     public enum MovementState
     {
@@ -84,6 +90,9 @@ public class MovementAdvanced : NetworkBehaviour
         {
             this.enabled = false;
         }
+        characterIndex = PlayerPrefs.GetInt("Character");
+        character[characterIndex].SetActive(true);
+        animator = character[characterIndex].GetComponent<Animator>();
     }
     private void Update()
     {
