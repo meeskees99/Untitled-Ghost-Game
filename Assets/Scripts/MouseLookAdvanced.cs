@@ -41,11 +41,10 @@ public class MouseLookAdvanced : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
-    bool isLocked = false;
-    bool startLock;
     // Update is called once per frame
     void Update()
     {
+        cam.fieldOfView = PlayerPrefs.GetInt("fov");
         if (Input.GetKey(use))
         {
             if (pData.teamID == 0)
