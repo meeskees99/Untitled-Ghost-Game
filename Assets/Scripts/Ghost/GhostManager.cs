@@ -14,7 +14,7 @@ public class GhostManager : NetworkBehaviour
     List<GhostSpawner> availableSpawners = new();
 
 
-    [SyncVar] [SerializeField] bool isStarted;
+    [SyncVar][SerializeField] bool isStarted;
 
     public void Start()
     {
@@ -29,6 +29,7 @@ public class GhostManager : NetworkBehaviour
         availableSpawners.Clear();
         for (int i = 0; i < ghostSpawners.Length; i++)
         {
+            print("current Ghost is " + ghostSpawners[i].GetCurrentGhost() + " at spawner " + ghostSpawners[i].transform.name);
             if (ghostSpawners[i].GetCurrentGhost() == null)
             {
                 availableSpawners.Add(ghostSpawners[i]);

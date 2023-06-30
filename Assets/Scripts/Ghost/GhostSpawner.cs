@@ -62,6 +62,7 @@ public class GhostSpawner : NetworkBehaviour
     {
         if (currentGhost == null)
             return null;
-        return currentGhost;
+        else
+            return currentGhost;
     }
 }
