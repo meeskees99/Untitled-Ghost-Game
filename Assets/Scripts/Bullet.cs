@@ -20,6 +20,7 @@ public class Bullet : NetworkBehaviour
     public void DoStun(GameObject other)
     {
         other.transform.GetComponent<MovementAdvanced>().Stun();
+        other.transform.GetComponent<MovementAdvanced>().SetCanSteal(true);
         DoDespawn();
     }
     [ServerRpc(RequireOwnership = false)]

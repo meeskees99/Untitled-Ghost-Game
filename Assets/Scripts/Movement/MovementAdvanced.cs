@@ -41,6 +41,7 @@ public class MovementAdvanced : NetworkBehaviour
     public GameObject[] character;
     [SyncVar] public int characterIndex;
 
+    [SyncVar] bool canSteal;
 
     [SerializeField] Transform orientation;
     [SerializeField] TMP_Text speedTxt;
@@ -59,7 +60,22 @@ public class MovementAdvanced : NetworkBehaviour
         {
             return isStunned;
         }
+        set
+        {
+            isStunned = value;
+        }
     }
+    [ServerRpc(RequireOwnership = false)]
+    public void SetCanSteal(bool value)
+    {
+        canSteal = value;
+    }
+    public bool GetCanSteal()
+    {
+        return canSteal;
+    }
+
+
     [SerializeField] float stunTime = 5f;
 
     [SerializeField] float raycastLenght = 0.5f;
@@ -190,6 +206,7 @@ public class MovementAdvanced : NetworkBehaviour
     {
         yield return new WaitForSeconds(stunTime);
         isStunned = false;
+        SetCanSteal(false);
     }
     private void MyInput()
     {

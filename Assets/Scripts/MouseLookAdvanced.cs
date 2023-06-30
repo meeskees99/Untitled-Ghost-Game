@@ -58,8 +58,9 @@ public class MouseLookAdvanced : NetworkBehaviour
                     else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 1)
                     {
                         print("hitPlayer");
-                        if (hit.transform.GetComponent<MovementAdvanced>().IsStunned)
+                        if (hit.transform.GetComponent<MovementAdvanced>().IsStunned && hit.transform.GetComponent<MovementAdvanced>().GetCanSteal())
                         {
+                            hit.transform.GetComponent<MovementAdvanced>().SetCanSteal(false);
                             print("isStunned");
                             print(hit.transform.GetChild(1).GetChild(0));
                             stofZuiger.StealPoints(hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
@@ -78,8 +79,9 @@ public class MouseLookAdvanced : NetworkBehaviour
                     else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 0)
                     {
                         print("hitPlayer");
-                        if (hit.transform.GetComponent<MovementAdvanced>().IsStunned)
+                        if (hit.transform.GetComponent<MovementAdvanced>().IsStunned && hit.transform.GetComponent<MovementAdvanced>().GetCanSteal())
                         {
+                            hit.transform.GetComponent<MovementAdvanced>().SetCanSteal(false);
                             print("isStunned");
                             print(hit.transform.GetChild(1).GetChild(0));
                             stofZuiger.StealPoints(hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
