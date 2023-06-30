@@ -201,10 +201,6 @@ public class VideoSettings : MonoBehaviour
         {
             appliedSettings = false;
         }
-        else
-        {
-            appliedSettings = true;
-        }
         if (timer > 0 && !appliedSettings)
         {
             timer -= Time.deltaTime;
