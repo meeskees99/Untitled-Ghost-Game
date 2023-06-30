@@ -37,6 +37,14 @@ public class GhostManager : NetworkBehaviour
         }
         PickSpawner();
     }
+
+    private void Update()
+    {
+        for (int i = 0; i < ghostSpawners.Length; i++)
+        {
+            print("current Ghost is " + ghostSpawners[i].currentGhost + " at spawner " + ghostSpawners[i].transform.name);
+        }
+    }
     [ServerRpc(RequireOwnership = false)]
     void StartSpawners()
     {
