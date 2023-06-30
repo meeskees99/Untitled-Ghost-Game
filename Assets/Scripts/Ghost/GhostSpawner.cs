@@ -58,6 +58,7 @@ public class GhostSpawner : NetworkBehaviour
     {
         return Random.Range(1, 100);
     }
+    [ServerRpc(RequireOwnership = false)]
     public GameObject GetCurrentGhost()
     {
         //     if (currentGhost == null)
