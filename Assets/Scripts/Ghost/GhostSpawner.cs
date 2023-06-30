@@ -47,8 +47,8 @@ public class GhostSpawner : NetworkBehaviour
             print("SpawnGhost on Spawner " + transform.name);
             currentGhost.transform.position = this.transform.position;
             Spawn(currentGhost);
-            ghostManager.globalGhostPoints += ghosts[index].GetComponent<GhostMovement>().GetGhostValue();
             ghostManager.ChangeGhostAlive(1);
+            ghostManager.ChangeGhostPoint(currentGhost.GetComponent<GhostMovement>().ghostData.points);
         }
     }
     [ObserversRpc]

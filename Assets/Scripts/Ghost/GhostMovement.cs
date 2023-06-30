@@ -11,7 +11,7 @@ public class GhostMovement : NetworkBehaviour
     NavMeshAgent agent;
 
     [SerializeField] Animator animator;
-    [SerializeField] GhostData ghostData;
+    public GhostData ghostData;
     [Header("Walk Options")]
     [Tooltip("The layer the agent can walk on")]
     [SerializeField] LayerMask walkableLayer;
@@ -172,7 +172,7 @@ public class GhostMovement : NetworkBehaviour
     public void Die()
     {
         isDead = true;
-        ghostManager.globalGhostPoints -= points;
+        ghostManager.ChangeGhostPoint(-points);
         ghostManager.ChangeGhostAlive(-1);
         //InvokeRepeating("KillGhost", 0.1f, 0.1f;
         //print("Ghost Dead");

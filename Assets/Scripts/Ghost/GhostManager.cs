@@ -9,13 +9,13 @@ public class GhostManager : NetworkBehaviour
     [SerializeField] GhostSpawner[] ghostSpawners;
     [SerializeField] int ghostsAlive;
     [SerializeField] int maxGhosts;
-    public int globalGhostPoints;
+    [SerializeField] int globalGhostPoints;
 
     [SerializeField] List<GhostSpawner> availableSpawners = new();
 
     [SerializeField] float spawnDelay = 1f;
     [SyncVar][SerializeField] bool isStarted;
-
+    bool isSpawning;
     public void Start()
     {
         if (IsHost && !isStarted)
@@ -28,14 +28,7 @@ public class GhostManager : NetworkBehaviour
     {
         if (ghostsAlive >= maxGhosts)
         {
-            print("Max ghosts reached");
-            for (int i = 0; i < ghostSpawners.Length; i++)
-            {
-                if (ghostSpawners[i].currentGhost != null)
-                {
-                    //print("Ghost spawned on spawner" + ghostSpawners[i].transform.name);
-                }
-            }
+            print("Max ghosts reached in CheckAvailable");
             return;
         }
         else
@@ -49,8 +42,9 @@ public class GhostManager : NetworkBehaviour
                 }
             }
         }
-
+        isSpawning = true;
         StartCoroutine(BigTimer());
+
     }
     [ServerRpc(RequireOwnership = false)]
     void StartSpawners()
@@ -63,25 +57,49 @@ public class GhostManager : NetworkBehaviour
     {
         if (ghostsAlive >= maxGhosts)
         {
-            print("Max ghosts reached");
+            print("Max ghosts reached in Pickspawner");
             return;
         }
+
         int i = Random.Range(0, spawnerCount);
-        //print(spawnerCount + " availeble spawners. Spawner picked: " + i);
         availableSpawners[i].PickGhost();
         availableSpawners.Remove(availableSpawners[i]);
         CheckAvailable();
     }
     private void Update()
     {
-        for (int i = 0; i < availableSpawners.Count - 1; i++)
+        CheckSpawners();
+        if (ghostsAlive == maxGhosts)
         {
-            if (ghostSpawners[i].currentGhost != null)
+            isSpawning = false;
+        }
+
+        // finish later 
+        if (!isSpawning && ghostsAlive < maxGhosts)
+        {
+            StartCoroutine(CheckTime());
+            isSpawning = true;
+        }
+    }
+
+    IEnumerator CheckTime()
+    {
+        yield return new WaitForSeconds(spawnDelay);
+        CheckAvailable();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void CheckSpawners()
+    {
+        for (int i = 0; i < availableSpawners.Count; i++)
+        {
+            if (availableSpawners[i].currentGhost != null)
             {
-                availableSpawners.Remove(ghostSpawners[i]);
+                print("removed spawner + " + i);
+                availableSpawners.Remove(availableSpawners[i]);
             }
         }
     }
+
     IEnumerator BigTimer()
     {
         yield return new WaitForSeconds(spawnDelay);
@@ -91,4 +109,8 @@ public class GhostManager : NetworkBehaviour
     {
         ghostsAlive += amount;
     }
-} // niggers
+    public void ChangeGhostPoint(int amount)
+    {
+        globalGhostPoints += amount;
+    }
+}
