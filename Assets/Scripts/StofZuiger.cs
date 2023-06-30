@@ -195,21 +195,35 @@ public class StofZuiger : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void StealPoints(int points, StofZuiger enemy)
     {
-        int newPoints = (ghostPoints + points);
-        print("New points: " + newPoints);
-        int pointsToGain;
-        if (newPoints > maxGhostPoints)
+        int pointCanGain = maxGhostPoints - ghostPoints;
+        for (int i = 0; i < pointCanGain; i++)
         {
-            pointsToGain = newPoints % maxGhostPoints;
-            print(pointsToGain + " points to gain");
+            if (points > 0)
+            {
+                ghostPoints++;
+                enemy.LosePoints(1);
+            }
+            else
+            {
+                print("Enemy Has No Points!!!!");
+            }
         }
-        else
-        {
-            pointsToGain = points;
-        }
-        print("points to gain: " + pointsToGain);
-        ghostPoints += pointsToGain;
-        enemy.LosePoints(pointsToGain);
+        // int newPoints = (ghostPoints + points);
+        // print("New points: " + newPoints);
+        // int pointsToGain;
+        // if (newPoints > maxGhostPoints)
+        // {
+        //     pointsToGain = maxGhostPoints;
+        //     int toomuchpoints = newPoints - maxGhostPoints;
+        //     print(pointsToGain + " points to gain");
+        // }
+        // else
+        // {
+        //     pointsToGain = points;
+        // }
+        // print("points to gain: " + pointsToGain);
+        // ghostPoints += pointsToGain;
+        // enemy.LosePoints(pointsToGain);
     }
     [ServerRpc(RequireOwnership = false)]
     public void LosePoints(int points)
