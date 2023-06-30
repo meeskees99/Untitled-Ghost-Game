@@ -45,7 +45,7 @@ public class MouseLookAdvanced : NetworkBehaviour
     void Update()
     {
         cam.fieldOfView = PlayerPrefs.GetInt("fov");
-        if (Input.GetKey(use))
+        if (Input.GetKeyDown(use))
         {
             if (pData.teamID == 0)
             {
