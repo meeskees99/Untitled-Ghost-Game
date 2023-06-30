@@ -11,7 +11,7 @@ public class GhostSpawner : NetworkBehaviour
     [SerializeField] float[] typeGhostChance;
     [SerializeField] int[] ghostFavor;
 
-    [SyncVar][SerializeField] GameObject currentGhost;
+    [SyncVar] public GameObject currentGhost;
 
     [ServerRpc(RequireOwnership = false)]
     public void PickGhost()
@@ -57,13 +57,5 @@ public class GhostSpawner : NetworkBehaviour
     float CalculateSpawnChance()
     {
         return Random.Range(1, 100);
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public GameObject GetCurrentGhost()
-    {
-        //     if (currentGhost == null)
-        //         return null;
-        //     else
-        return currentGhost;
     }
 }
