@@ -200,7 +200,8 @@ public class StofZuiger : NetworkBehaviour
         int pointsToGain;
         if (newPoints > maxGhostPoints)
         {
-            pointsToGain = newPoints - maxGhostPoints;
+            pointsToGain = newPoints % maxGhostPoints;
+            print(pointsToGain + " points to gain");
         }
         else
         {
