@@ -60,9 +60,9 @@ public class GhostSpawner : NetworkBehaviour
     }
     public GameObject GetCurrentGhost()
     {
-        if (currentGhost == null)
-            return null;
-        else
-            return currentGhost;
+        //     if (currentGhost == null)
+        //         return null;
+        //     else
+        return currentGhost;
     }
 }
