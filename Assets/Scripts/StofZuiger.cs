@@ -196,6 +196,7 @@ public class StofZuiger : NetworkBehaviour
     public void StealPoints(int points, StofZuiger enemy)
     {
         int newPoints = (ghostPoints + points);
+        print("New points: " + newPoints);
         int pointsToGain;
         if (newPoints > maxGhostPoints)
         {
@@ -205,6 +206,7 @@ public class StofZuiger : NetworkBehaviour
         {
             pointsToGain = points;
         }
+        print("points to gain: " + pointsToGain);
         ghostPoints += pointsToGain;
         enemy.LosePoints(pointsToGain);
     }
