@@ -19,7 +19,7 @@ public class RoomSettings : NetworkBehaviour
     int pointIndex;
     [Header("Settings")]
     [SerializeField] TeamManager tManager;
-    
+
     bool notHost;
     public override void OnStartClient()
     {
@@ -53,8 +53,8 @@ public class RoomSettings : NetworkBehaviour
             pointText.text = pointOptions[defaultPointIndex].ToString();
             PlayerPrefs.SetInt("PointGoal", pointOptions[defaultPointIndex]);
         }
-         tManager.LobbyToLoad = MapChoice.options[MapChoice.value].ToString();
-         ChangeMap();
+        tManager.LobbyToLoad = MapChoice.options[MapChoice.value].ToString();
+        ChangeMap();
     }
     public void ChangeMap()
     {

@@ -79,13 +79,11 @@ public class GameManager : NetworkBehaviour
                 }
             }
         }
-        if (PlayerPrefs.HasKey("PointGoal"))
+        if (PlayerPrefs.HasKey("PointGoal") && IsHost)
         {
-            team1Slider.maxValue = PlayerPrefs.GetInt("PointGoal");
-            team2Slider.maxValue = PlayerPrefs.GetInt("PointGoal");
-            pointLimit = PlayerPrefs.GetInt("PointGoal");
+            SetPointGoal(PlayerPrefs.GetInt("PointGoal"));
         }
-        else
+        else if (IsHost)
         {
             Debug.LogError("No Point Goal Found");
         }
@@ -219,7 +217,21 @@ public class GameManager : NetworkBehaviour
             }
         }
     }
-
+    [ServerRpc(RequireOwnership = false)]
+    void SetPointGoal(int pointgoal)
+    {
+        team1Slider.maxValue = pointgoal;
+        team2Slider.maxValue = pointgoal;
+        pointLimit = pointgoal;
+        ObserverPointgoal(pointgoal);
+    }
+    [ObserversRpc]
+    void ObserverPointgoal(int pointgoal)
+    {
+        team1Slider.maxValue = pointgoal;
+        team2Slider.maxValue = pointgoal;
+        pointLimit = pointgoal;
+    }
     [ServerRpc(RequireOwnership = false)]
     void Timer()
     {
