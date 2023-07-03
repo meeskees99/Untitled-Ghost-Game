@@ -41,7 +41,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] KeyCode scoreboardButton;
 
     [Header("Game Settings")]
-    [SerializeField] int pointLimit;
+    [SyncVar][SerializeField] int pointLimit;
     [SerializeField] int timeLimit;
     [SyncVar][SerializeField] float timeLeft;
     [SerializeField] TMP_Text timeText;
