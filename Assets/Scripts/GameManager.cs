@@ -95,7 +95,6 @@ public class GameManager : NetworkBehaviour
         if (timeLeft > 0 && team1Points < pointLimit && team2Points < pointLimit)
         {
             Timer();
-            timeText.text = timeLeft.ToString("0:00");
         }
         else if (team1Points < pointLimit && team2Points < pointLimit)
             EndGame(true, false);
@@ -225,6 +224,19 @@ public class GameManager : NetworkBehaviour
     void Timer()
     {
         timeLeft -= Time.deltaTime;
+        ObserverTimer(timeLeft);
+    }
+    bool started;
+    [ObserversRpc]
+    void ObserverTimer(float tijd)
+    {
+        if (!started)
+        {
+            started = true;
+            tijd = timeLimit;
+        }
+        tijd -= Time.deltaTime;
+        timeText.text = tijd.ToString("0:00");
     }
 
     [ServerRpc(RequireOwnership = false)]
