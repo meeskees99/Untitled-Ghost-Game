@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 7978216442600784593}
   - component: {fileID: 6419751529874034036}
   - component: {fileID: 9147793021251189182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cargofix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1039,12 +1039,16 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1232e1f39ed992d4e83f801d70643f74, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0303566
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1232e1f39ed992d4e83f801d70643f74, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.69
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1232e1f39ed992d4e83f801d70643f74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.628
+      value: 0.6813
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1232e1f39ed992d4e83f801d70643f74, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1080,11 +1084,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1232e1f39ed992d4e83f801d70643f74, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1232e1f39ed992d4e83f801d70643f74, type: 3}
       propertyPath: m_Name
       value: cargo collider
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1232e1f39ed992d4e83f801d70643f74, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1232e1f39ed992d4e83f801d70643f74, type: 3}

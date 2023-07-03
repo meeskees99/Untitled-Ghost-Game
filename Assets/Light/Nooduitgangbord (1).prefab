@@ -45,7 +45,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0, g: 0.8396226, b: 0.029818255, a: 1}
-  m_Intensity: 1.24
+  m_Intensity: 0.5
   m_Range: 1.19
   m_SpotAngle: 112.40064
   m_InnerSpotAngle: 21.80208
@@ -90,7 +90,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.7373535e+20, y: 9.1709424e-33, z: 1.3563156e-19, w: 1.3563116e-19}
+  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
