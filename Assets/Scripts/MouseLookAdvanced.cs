@@ -42,9 +42,14 @@ public class MouseLookAdvanced : NetworkBehaviour
         Cursor.visible = true;
     }
     // Update is called once per frame
+    bool hasFov;
     void Update()
     {
-        cam.fieldOfView = PlayerPrefs.GetInt("fov");
+        if (cam != null && !hasFov)
+        {
+            hasFov = true;
+            cam.fieldOfView = PlayerPrefs.GetInt("fov");
+        }
         if (Input.GetKeyDown(use))
         {
             if (pData.teamID == 0)
