@@ -249,7 +249,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-83432
+  m_Name: pb_Mesh-1904
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1629,8 +1629,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1718954057773777580, guid: 3c17daa0990b23c4aaf4c6ff959a7b08, type: 3}
+      propertyPath: _scenePathHash
+      value: 4278723783
+      objectReference: {fileID: 0}
+    - target: {fileID: 1718954057773777580, guid: 3c17daa0990b23c4aaf4c6ff959a7b08, type: 3}
       propertyPath: <SceneId>k__BackingField
-      value: 18376978720860916105
+      value: 18376978718431859362
       objectReference: {fileID: 0}
     - target: {fileID: 7793885864304808208, guid: 3c17daa0990b23c4aaf4c6ff959a7b08, type: 3}
       propertyPath: m_Mesh
@@ -1642,7 +1646,7 @@ PrefabInstance:
       objectReference: {fileID: 1252053531}
     - target: {fileID: 7793885864304808211, guid: 3c17daa0990b23c4aaf4c6ff959a7b08, type: 3}
       propertyPath: m_VersionIndex
-      value: 1722
+      value: 1725
       objectReference: {fileID: 0}
     - target: {fileID: 7793885864304808223, guid: 3c17daa0990b23c4aaf4c6ff959a7b08, type: 3}
       propertyPath: m_Mesh
