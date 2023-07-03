@@ -90,6 +90,16 @@ public class GameManager : NetworkBehaviour
     }
     void Update()
     {
+        print(team1Points + " team1points");
+        print(team2Points + " team2points");
+
+        print(pointLimit + " pointlimit");
+        print(team1Halfway + "tea, ah");
+        print(team1Points >= pointLimit / 2 && !team1Halfway);
+        print(team2Points >= pointLimit / 2 && !team2Halfway);
+
+        if (pointLimit == 0)
+            return;
         if (timeLeft > 0 && team1Points < pointLimit && team2Points < pointLimit)
         {
             Timer();
@@ -102,6 +112,7 @@ public class GameManager : NetworkBehaviour
         team2Slider.value = team2Points;
         if (team1Points >= pointLimit / 2 && !team1Halfway)
         {
+            print("Your team is halfway!!");
             for (int i = 0; i < players.Length; i++)
             {
                 if (players[i].GetComponent<PlayerData>().playerId == this.id)
@@ -248,7 +259,10 @@ public class GameManager : NetworkBehaviour
             tijd = timeLimit;
         }
         tijd -= Time.deltaTime;
-        timeText.text = tijd.ToString("0:00");
+
+        float minutes = (tijd / 60);
+        float seconds = (tijd % 60);
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     [ServerRpc(RequireOwnership = false)]
