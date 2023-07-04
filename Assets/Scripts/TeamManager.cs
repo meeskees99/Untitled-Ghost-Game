@@ -13,6 +13,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using FishNet.Managing.Scened;
 using UnityEngine.UI;
+using System;
 
 
 public class TeamManager : NetworkBehaviour
@@ -31,7 +32,7 @@ public class TeamManager : NetworkBehaviour
 
     public string LobbyToLoad;
 
-    [SerializeField] Slider loadSlider;
+    [SerializeField] LoadManager loader;
 
     [SyncVar]
     public List<GameObject> players = new();
@@ -41,8 +42,11 @@ public class TeamManager : NetworkBehaviour
 
         JoinTeam(teamInt, id);
     }
-
-
+    private void Update()
+    {
+        if (loader == null)
+            loader = FindObjectOfType<LoadManager>();
+    }
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)
     {
@@ -228,29 +232,33 @@ public class TeamManager : NetworkBehaviour
 
     public void StartGameButton()
     {
+        bool allTrue = true;
         for (int i = 0; i < players.Count - 1; i++)
         {
             if (!players[i].GetComponent<PlayerData>().isReady)
             {
-                return;
+                allTrue = false;
+                break;
             }
         }
+        if (allTrue == false)
+            return;
         StartGame();
     }
 
     public Material sky;
     Slider kaas;
-    [SerializeField] bool isLoading;
 
     [ServerRpc(RequireOwnership = false)]
     void StartGame()
     {
         SceneLoadData sld = new SceneLoadData(LobbyToLoad);
-        // isLoading = true;
+        loader.IsLoading = true;
+        loader.SceneToUnload = "Lobby Test";
+        print("loading = true");
         base.SceneManager.LoadGlobalScenes(sld);
 
-        SceneUnloadData lastScene = new SceneUnloadData("Lobby Test");
-        base.SceneManager.UnloadGlobalScenes(lastScene);
+
     }
     bool ready = false;
     public void SetReady()
@@ -278,19 +286,3 @@ public class TeamManager : NetworkBehaviour
         }
     }
 }
-// public event Action<SceneLoadPercentEventArgs> OnLoadPercentChange
-// void Update()
-// {
-//     if (isLoading)
-//     {
-//         print("Is loading at " + Load.Percent + " percent");
-
-//         loadSlider.value = Load.Percent;
-
-
-//         if (Load.Percent == 1)
-//         {
-
-//         }
-//     }
-// }

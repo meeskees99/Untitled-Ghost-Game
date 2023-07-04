@@ -90,13 +90,13 @@ public class GameManager : NetworkBehaviour
     }
     void Update()
     {
-        print(team1Points + " team1points");
-        print(team2Points + " team2points");
+        // print(team1Points + " team1points");
+        // print(team2Points + " team2points");
 
-        print(pointLimit + " pointlimit");
-        print(team1Halfway + "tea, ah");
-        print(team1Points >= pointLimit / 2 && !team1Halfway);
-        print(team2Points >= pointLimit / 2 && !team2Halfway);
+        // print(pointLimit + " pointlimit");
+        // print(team1Halfway + "tea, ah");
+        // print(team1Points >= pointLimit / 2 && !team1Halfway);
+        // print(team2Points >= pointLimit / 2 && !team2Halfway);
 
         if (pointLimit == 0)
             return;
@@ -105,14 +105,14 @@ public class GameManager : NetworkBehaviour
             Timer();
         }
         else if (team1Points < pointLimit && team2Points < pointLimit)
-            EndGame(true, false);
+            EndGame(true);
         else
-            EndGame(false, true);
+            EndGame(false);
         team1Slider.value = team1Points;
         team2Slider.value = team2Points;
         if (team1Points >= pointLimit / 2 && !team1Halfway)
         {
-            print("Your team is halfway!!");
+            print("Team 1 is halfway!!");
             for (int i = 0; i < players.Length; i++)
             {
                 if (players[i].GetComponent<PlayerData>().playerId == this.id)
@@ -320,7 +320,7 @@ public class GameManager : NetworkBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu Test");
     }
 
-    public void EndGame(bool timeUp, bool pointReached)
+    public void EndGame(bool timeUp)
     {
         if (timeUp)
             print("Game has ended. The time ran out");

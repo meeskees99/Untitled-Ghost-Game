@@ -44,7 +44,7 @@ public class GhostSpawner : NetworkBehaviour
         {
             currentGhost = Instantiate(ghosts[index], transform.position, transform.rotation);
             Settrans();
-            print("SpawnGhost on Spawner " + transform.name);
+            // print("SpawnGhost on Spawner " + transform.name);
             currentGhost.transform.position = this.transform.position;
             Spawn(currentGhost);
             ghostManager.ChangeGhostAlive(1);

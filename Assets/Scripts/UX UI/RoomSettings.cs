@@ -61,7 +61,7 @@ public class RoomSettings : NetworkBehaviour
         if (notHost)
             return;
         tManager.LobbyToLoad = MapChoice.options[MapChoice.value].text;
-        print(MapChoice.options[MapChoice.value].text);
+        // print(MapChoice.options[MapChoice.value].text);
     }
 
     public void ChangeTime(int value)
