@@ -268,7 +268,7 @@ public class TeamManager : NetworkBehaviour
         for (int i = 0; i < teams.Count - 1; i++)
         {
             print("hai2");
-            for (int y = 0; y < players.Count; y++)
+            for (int y = 0; y < players.Count - 1; y++)
             {
                 print("hai3");
                 print(i + "team");
