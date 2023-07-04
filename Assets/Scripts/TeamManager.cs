@@ -228,6 +228,13 @@ public class TeamManager : NetworkBehaviour
 
     public void StartGameButton()
     {
+        for (int i = 0; i < players.Count - 1; i++)
+        {
+            if (!players[i].GetComponent<PlayerData>().isReady)
+            {
+                return;
+            }
+        }
         StartGame();
     }
 
@@ -245,23 +252,48 @@ public class TeamManager : NetworkBehaviour
         SceneUnloadData lastScene = new SceneUnloadData("Lobby Test");
         base.SceneManager.UnloadGlobalScenes(lastScene);
     }
+    bool ready = false;
+    public void SetReady()
+    {
+        ready = !ready;
+        int id = InstanceFinder.ClientManager.Connection.ClientId;
+        print("setready");
+        ChangeReadyServer(ready, id);
+    }
 
-    // void Update()
-    // {
-    //     print("Maykel houd van mannen en kleine kinderen");
-    //     if (isLoading)
-    //     {
-    //         SceneLoadPercentEventArgs Load = new SceneLoadPercentEventArgs();
-    //         print("Ik probeer t wel");
-    //         print("Load Percent: " + Load.Percent);
+    [ServerRpc(RequireOwnership = false)]
+    void ChangeReadyServer(bool value, int Id)
+    {
+        print("hai");
+        for (int i = 0; i < teams.Count - 1; i++)
+        {
+            print("hai2");
+            for (int y = 0; y < players.Count; y++)
+            {
+                print("hai3");
+                if (teams[i].tData[y].playerId == Id)
+                {
+                    print("hai4");
+                    teams[i].tData[y].isReady = value;
+                }
+            }
+        }
+    }
+    void Update()
+    {
+        if (isLoading)
+        {
 
-    //         loadSlider.value = Load.Percent;
+            SceneLoadPercentEventArgs Load = new SceneLoadPercentEventArgs();
+            print("Is loading at " + Load.Percent + " percent");
+
+            loadSlider.value = Load.Percent;
 
 
-    //         if (Load.Percent == 1)
-    //         {
+            if (Load.Percent == 1)
+            {
 
-    //         }
-    //     }
-    // }
+            }
+        }
+    }
 }

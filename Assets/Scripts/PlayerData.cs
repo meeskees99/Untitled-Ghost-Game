@@ -26,6 +26,8 @@ public class PlayerData : NetworkBehaviour
 
     [SerializeField] Material tank;
 
+    [SyncVar] public bool isReady;
+
     private void Start()
     {
         manager = FindObjectOfType<TeamManager>();
