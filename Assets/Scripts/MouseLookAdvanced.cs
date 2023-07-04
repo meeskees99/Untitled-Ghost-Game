@@ -71,6 +71,10 @@ public class MouseLookAdvanced : NetworkBehaviour
                             stofZuiger.StealPoints(hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
                         }
                     }
+                    else if (hit.transform.tag == "Door")
+                    {
+                        hit.transform.GetComponent<Animator>().SetTrigger("Open");
+                    }
                 }
             }
             else

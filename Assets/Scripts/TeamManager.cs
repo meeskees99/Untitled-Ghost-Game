@@ -265,36 +265,30 @@ public class TeamManager : NetworkBehaviour
     void ChangeReadyServer(bool value, int Id)
     {
         print("hai");
-        for (int i = 0; i < teams.Count - 1; i++)
+        for (int y = 0; y < players.Count - 1; y++)
         {
-            print("hai2");
-            for (int y = 0; y < players.Count - 1; y++)
+            print("hai3");
+            if (players[y].GetComponent<PlayerData>().playerId == Id)
             {
-                print("hai3");
-                print(i + "team");
-                print(y + "player");
-                if (teams[i].tData[y].playerId == Id)
-                {
-                    print("hai4");
-                    teams[i].tData[y].isReady = value;
-                }
+                print("hai4");
+                players[y].GetComponent<PlayerData>().isReady = value;
             }
         }
     }
-    // public event Action<SceneLoadPercentEventArgs> OnLoadPercentChange
-    // void Update()
-    // {
-    //     if (isLoading)
-    //     {
-    //         print("Is loading at " + Load.Percent + " percent");
-
-    //         loadSlider.value = Load.Percent;
-
-
-    //         if (Load.Percent == 1)
-    //         {
-
-    //         }
-    //     }
-    // }
 }
+// public event Action<SceneLoadPercentEventArgs> OnLoadPercentChange
+// void Update()
+// {
+//     if (isLoading)
+//     {
+//         print("Is loading at " + Load.Percent + " percent");
+
+//         loadSlider.value = Load.Percent;
+
+
+//         if (Load.Percent == 1)
+//         {
+
+//         }
+//     }
+// }
