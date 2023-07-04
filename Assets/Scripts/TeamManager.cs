@@ -281,21 +281,20 @@ public class TeamManager : NetworkBehaviour
             }
         }
     }
-    void Update()
-    {
-        if (isLoading)
-        {
+    // public event Action<SceneLoadPercentEventArgs> OnLoadPercentChange
+    // void Update()
+    // {
+    //     if (isLoading)
+    //     {
+    //         print("Is loading at " + Load.Percent + " percent");
 
-            SceneLoadPercentEventArgs Load = new SceneLoadPercentEventArgs();
-            print("Is loading at " + Load.Percent + " percent");
-
-            loadSlider.value = Load.Percent;
+    //         loadSlider.value = Load.Percent;
 
 
-            if (Load.Percent == 1)
-            {
+    //         if (Load.Percent == 1)
+    //         {
 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 }
