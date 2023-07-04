@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1845291220420629293}
   - component: {fileID: 8229067621303638443}
   - component: {fileID: 849909073054936577}
+  - component: {fileID: 1220456652558399903}
   m_Layer: 0
   m_Name: NurbsPath 1
   m_TagString: Untagged
@@ -84,6 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1220456652558399903
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884898984883776160}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.634283, y: 4.053814, z: 2.4763758}
+  m_Center: {x: 1.3776885, y: -0.83188343, z: -0.0000009536744}
 --- !u!1 &1590488320812677777
 GameObject:
   m_ObjectHideFlags: 0
