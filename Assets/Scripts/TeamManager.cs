@@ -265,12 +265,13 @@ public class TeamManager : NetworkBehaviour
     void ChangeReadyServer(bool value, int Id)
     {
         print("hai");
+        print(Id + " ID");
         for (int y = 0; y < players.Count - 1; y++)
         {
-            print("hai3");
+            print("hai2");
             if (players[y].GetComponent<PlayerData>().playerId == Id)
             {
-                print("hai4");
+                print("hai3");
                 players[y].GetComponent<PlayerData>().isReady = value;
             }
         }
