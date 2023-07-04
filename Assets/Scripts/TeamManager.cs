@@ -269,6 +269,7 @@ public class TeamManager : NetworkBehaviour
         for (int y = 0; y < players.Count - 1; y++)
         {
             print("hai2");
+            print(y + " y");
             if (players[y].GetComponent<PlayerData>().playerId == Id)
             {
                 print("hai3");
