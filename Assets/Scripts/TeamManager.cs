@@ -271,6 +271,8 @@ public class TeamManager : NetworkBehaviour
             for (int y = 0; y < players.Count; y++)
             {
                 print("hai3");
+                print(i + "team");
+                print(y + "player");
                 if (teams[i].tData[y].playerId == Id)
                 {
                     print("hai4");
