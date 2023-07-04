@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9099223943668786626
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 5
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,11 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostPlasmaMat2
-  m_Shader: {fileID: -6465566751694194690, guid: b0b124e49b51ea942a2aa98ed99fc654, type: 3}
+  m_Name: BlobMat
+  m_Shader: {fileID: -6465566751694194690, guid: 62d23a5eebee39449bc4a2f67f61e57b, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -33,10 +20,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Normal:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -51,12 +34,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MinTransparent: 0.1
+    - _FresnelEffect: 5.1
+    - _NoiseScale: 100
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Transparent: 0.14
     m_Colors:
-    - _Color01: {r: 0.50787646, g: 0.93485606, b: 0.9528302, a: 0}
-    - _Color02: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
-    - _Emission: {r: 3, g: 3, b: 3, a: 2.83}
+    - _Clamp: {r: -0.002, g: 0.002, b: 0, a: 0}
+    - _Color1: {r: 0.116073415, g: 0.3755316, b: 0.19117974, a: 0.5372549}
+    - _Color2: {r: 6.8831816, g: 6.8831816, b: 6.8831816, a: 0.5372549}
+    - _Glowing: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &1208492600836991990
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
