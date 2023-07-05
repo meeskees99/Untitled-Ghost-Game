@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using FishNet;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class GameManager : NetworkBehaviour
 {
     [Header("Players")]
@@ -49,6 +50,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] bool team1Halfway;
     [SerializeField] bool team2Halfway;
 
+    LoadManager loader;
 
     int id;
 
@@ -90,6 +92,10 @@ public class GameManager : NetworkBehaviour
     }
     void Update()
     {
+        if (loader == null)
+        {
+            loader = FindObjectOfType<LoadManager>();
+        }
         // print(team1Points + " team1points");
         // print(team2Points + " team2points");
 
@@ -323,7 +329,12 @@ public class GameManager : NetworkBehaviour
     public void EndGame(bool timeUp)
     {
         if (timeUp)
+        {
             print("Game has ended. The time ran out");
+            string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            loader.SceneToUnload = scene;
+
+        }
         else
         {
             print("Game has ended. Point Limit Reached");
