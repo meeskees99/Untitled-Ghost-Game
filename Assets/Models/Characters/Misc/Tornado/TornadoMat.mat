@@ -47,9 +47,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DISPLACEGradient: 0.99
+    - _Gradient: 0.09
+    - _GradientStrength: 2.35
+    - _NoiseStrength: 33.72
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Strengt: 11.62
+    - _Strength: 8.6
+    - _speed: 2.8
     m_Colors:
+    - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Color1: {r: 0, g: 0, b: 0, a: 0}
-    - _Color2: {r: 0, g: 0, b: 0, a: 0}
+    - _Color2: {r: 4.165564, g: 4.165564, b: 4.165564, a: 0.49803922}
   m_BuildTextureStacks: []
