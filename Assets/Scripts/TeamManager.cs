@@ -252,12 +252,10 @@ public class TeamManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void StartGame()
     {
-        SceneLoadData sld = new SceneLoadData(LobbyToLoad);
-        loader.IsLoading = true;
-        loader.SceneToUnload = "Lobby Test";
+        loader.StartLoading = true;
+        loader.SceneToLoad = LobbyToLoad;
+        loader.SceneToUnload = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         print("loading = true");
-        base.SceneManager.LoadGlobalScenes(sld);
-
 
     }
     bool ready = false;

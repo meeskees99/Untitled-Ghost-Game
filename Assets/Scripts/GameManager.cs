@@ -96,13 +96,6 @@ public class GameManager : NetworkBehaviour
         {
             loader = FindObjectOfType<LoadManager>();
         }
-        // print(team1Points + " team1points");
-        // print(team2Points + " team2points");
-
-        // print(pointLimit + " pointlimit");
-        // print(team1Halfway + "tea, ah");
-        // print(team1Points >= pointLimit / 2 && !team1Halfway);
-        // print(team2Points >= pointLimit / 2 && !team2Halfway);
 
         if (pointLimit == 0)
             return;
@@ -328,17 +321,18 @@ public class GameManager : NetworkBehaviour
 
     public void EndGame(bool timeUp)
     {
+        string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        loader.SceneToUnload = scene;
+        loader.StartLoading = true;
         if (timeUp)
         {
             print("Game has ended. The time ran out");
-            string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-            loader.SceneToUnload = scene;
-
         }
         else
         {
             print("Game has ended. Point Limit Reached");
         }
+
     }
 
     public void Halfway()

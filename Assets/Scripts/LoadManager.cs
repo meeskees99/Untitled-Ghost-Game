@@ -10,30 +10,44 @@ public class LoadManager : NetworkBehaviour
     [Header("Ui elements")]
     [SerializeField] GameObject _loadUI;
     [SerializeField] TMP_Text _loadingTxt;
+    [SerializeField] GameObject _canvas;
 
-    [SerializeField] string _lobbyToUnload;
+    [SerializeField] string _sceneToLoad;
+    public string SceneToLoad
+    {
+        get
+        {
+            return _sceneToLoad;
+        }
+        set
+        {
+            _sceneToLoad = value;
+        }
+    }
+
+    [SerializeField] string _sceneToUnload;
     public string SceneToUnload
     {
         get
         {
-            return _lobbyToUnload;
+            return _sceneToUnload;
         }
         set
         {
-            _lobbyToUnload = value;
+            _sceneToUnload = value;
         }
     }
 
-    [SerializeField] bool _isLoading;
-    public bool IsLoading
+    [SerializeField] bool _startLoading;
+    public bool StartLoading
     {
         get
         {
-            return _isLoading;
+            return _startLoading;
         }
         set
         {
-            _isLoading = value;
+            _startLoading = value;
         }
     }
 
@@ -60,26 +74,37 @@ public class LoadManager : NetworkBehaviour
     void Load(FishNet.Managing.Scened.SceneLoadPercentEventArgs obj)
     {
         print("OnloadChange");
-        if (_isLoading)
+        if (_startLoading)
         {
             print("Is loading at " + obj.Percent * 100 + " %");
 
             if (obj.Percent != 1)
             {
                 _loadUI.SetActive(true);
+                _canvas.SetActive(false);
             }
             else if (obj.Percent == 1)
             {
-                //_loadUI.SetActive(false);
-                SceneUnloadData lastScene = new SceneUnloadData(_lobbyToUnload);
+                SceneUnloadData lastScene = new SceneUnloadData(_sceneToUnload);
                 base.SceneManager.UnloadGlobalScenes(lastScene);
             }
         }
     }
+
+    void StartLoad()
+    {
+        SceneLoadData sld = new SceneLoadData(_sceneToLoad);
+        base.SceneManager.LoadGlobalScenes(sld);
+    }
+
     bool _startedLoad;
     private void Update()
     {
-        if (_isLoading && !_startedLoad)
+        if (_startLoading)
+        {
+            StartLoad();
+        }
+        if (_startLoading && !_startedLoad)
         {
             _startedLoad = true;
             StartCoroutine(Loading());
