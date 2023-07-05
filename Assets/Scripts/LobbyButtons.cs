@@ -15,6 +15,11 @@ public class LobbyButtons : MonoBehaviour
         Cursor.visible = true;
     }
 
+    void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void ClickClient()
     {
         if (InstanceFinder.ClientManager.Connection.ClientId == 0)
@@ -33,7 +38,8 @@ public class LobbyButtons : MonoBehaviour
         networkHudCanvases.OnClick_Client();
     }
 
-    public void Quit(){
+    public void Quit()
+    {
         Application.Quit();
     }
 }

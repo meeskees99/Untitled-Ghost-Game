@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4409,6 +4409,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7df4eeb1b0ccf2e47a75d42675b8af7e, type: 3}
+--- !u!114 &886626827 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3904540022229355260, guid: 7df4eeb1b0ccf2e47a75d42675b8af7e, type: 3}
+  m_PrefabInstance: {fileID: 886626826}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &889000484
 GameObject:
   m_ObjectHideFlags: 0
@@ -4581,6 +4592,8 @@ MonoBehaviour:
   switchTeamButtons:
   - {fileID: 1026604575}
   - {fileID: 635624584}
+  UIprefab: {fileID: 1028100556996646672, guid: 659e2521d9aef0c4bbe5558827a76718, type: 3}
+  ui: []
   LobbyToLoad: 
   loader: {fileID: 0}
   players: []
@@ -7371,6 +7384,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 6981486928573301904
   <AssetPathHash>k__BackingField: 0
   _sceneNetworkObjects:
+  - {fileID: 886626827}
   - {fileID: 1418297102}
 --- !u!114 &1418297103
 MonoBehaviour:

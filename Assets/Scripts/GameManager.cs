@@ -60,7 +60,8 @@ public class GameManager : NetworkBehaviour
         if (IsHost)
         {
             SetTeamPoints();
-            timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
+            // doe * 60 na testen
+            timeLimit = PlayerPrefs.GetInt("PlayTime");
             timeLeft = timeLimit;
             timeText.text = timeLeft.ToString("0:00");
         }
@@ -321,8 +322,8 @@ public class GameManager : NetworkBehaviour
 
     public void EndGame(bool timeUp)
     {
-        string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        loader.SceneToUnload = scene;
+        loader.SceneToUnload = "Game";
+        loader.SceneToLoad = "Lobby Test";
         loader.StartLoading = true;
         if (timeUp)
         {
