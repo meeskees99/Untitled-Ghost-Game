@@ -13,6 +13,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using FishNet.Managing.Scened;
 using UnityEngine.UI;
+using System;
 
 
 public class TeamManager : NetworkBehaviour
@@ -31,7 +32,7 @@ public class TeamManager : NetworkBehaviour
 
     public string LobbyToLoad;
 
-    [SerializeField] Slider loadSlider;
+    [SerializeField] LoadManager loader;
 
     [SyncVar]
     public List<GameObject> players = new();
@@ -41,8 +42,11 @@ public class TeamManager : NetworkBehaviour
 
         JoinTeam(teamInt, id);
     }
-
-
+    private void Update()
+    {
+        if (loader == null)
+            loader = FindObjectOfType<LoadManager>();
+    }
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)
     {
@@ -228,40 +232,55 @@ public class TeamManager : NetworkBehaviour
 
     public void StartGameButton()
     {
+        bool allTrue = true;
+        for (int i = 0; i < players.Count - 1; i++)
+        {
+            if (!players[i].GetComponent<PlayerData>().isReady)
+            {
+                allTrue = false;
+                break;
+            }
+        }
+        if (allTrue == false)
+            return;
         StartGame();
     }
 
     public Material sky;
     Slider kaas;
-    [SerializeField] bool isLoading;
 
     [ServerRpc(RequireOwnership = false)]
     void StartGame()
     {
-        SceneLoadData sld = new SceneLoadData(LobbyToLoad);
-        // isLoading = true;
-        base.SceneManager.LoadGlobalScenes(sld);
+        loader.StartLoading = true;
+        loader.SceneToLoad = LobbyToLoad;
+        loader.SceneToUnload = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        print("loading = true");
 
-        SceneUnloadData lastScene = new SceneUnloadData("Lobby Test");
-        base.SceneManager.UnloadGlobalScenes(lastScene);
+    }
+    bool ready = false;
+    public void SetReady()
+    {
+        ready = !ready;
+        int id = InstanceFinder.ClientManager.Connection.ClientId;
+        print("setready");
+        ChangeReadyServer(ready, id);
     }
 
-    // void Update()
-    // {
-    //     print("Maykel houd van mannen en kleine kinderen");
-    //     if (isLoading)
-    //     {
-    //         SceneLoadPercentEventArgs Load = new SceneLoadPercentEventArgs();
-    //         print("Ik probeer t wel");
-    //         print("Load Percent: " + Load.Percent);
-
-    //         loadSlider.value = Load.Percent;
-
-
-    //         if (Load.Percent == 1)
-    //         {
-
-    //         }
-    //     }
-    // }
+    [ServerRpc(RequireOwnership = false)]
+    void ChangeReadyServer(bool value, int Id)
+    {
+        print("hai");
+        print(Id + " ID");
+        for (int y = 0; y < players.Count; y++)
+        {
+            print("hai2");
+            print(y + " y");
+            if (players[y].GetComponent<PlayerData>().playerId == Id)
+            {
+                print("hai3");
+                players[y].GetComponent<PlayerData>().isReady = value;
+            }
+        }
+    }
 }

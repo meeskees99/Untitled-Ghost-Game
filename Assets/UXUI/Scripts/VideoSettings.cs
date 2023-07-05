@@ -179,7 +179,6 @@ public class VideoSettings : MonoBehaviour
         #region StartFunctions
         QualitySettings.vSyncCount = PlayerPrefs.GetInt("vSync");
         Application.targetFrameRate = (int)PlayerPrefs.GetFloat("targetFPS");
-        //fpsSlider.GetComponent<Slider>().enabled = (limitFPS || !doVSync);
         fpsInput.text = PlayerPrefs.GetFloat("targetFPS").ToString("0");
         fpsSlider.value = PlayerPrefs.GetFloat("targetFPS");
         if (!currentVSync && !currentLimitFPS)
@@ -194,11 +193,6 @@ public class VideoSettings : MonoBehaviour
     }
     private void Update()
     {
-        if (timer == 0)
-        {
-
-        }
-
         if (_restoreTimer && timer > 0)
         {
             timer -= Time.deltaTime;
@@ -210,26 +204,6 @@ public class VideoSettings : MonoBehaviour
             timer = 5;
             _restoreTimer = false;
         }
-        ///////////////////////////Dit werkt NIET
-        // if (!SettingsChanged())
-        // {
-        //     appliedSettings = false;
-        // }
-        // if (timer > 0 && !appliedSettings)
-        // {
-        //     timer -= Time.deltaTime;
-        //     timerTxt.text = "Restoring in: " + timer.ToString("0");
-        // }
-        // else if (timer <= 0 && !appliedSettings)
-        // {
-        //     print("Reverted Settings");
-        //     applySettingsUI.SetActive(false);
-        //     RevertLastSettings();
-        // }
-        // else if (appliedSettings)
-        // {
-        //     print("Settings Are Up To Date");
-        // }
     }
     #region Resolution 
     void GetAndSetResolution()
@@ -316,7 +290,6 @@ public class VideoSettings : MonoBehaviour
     }
     void SetScreenOptions(int index)
     {
-        print(index);
         PlayerPrefs.SetInt("FullscreenIndex", index);
         switch (index)
         {
@@ -362,20 +335,20 @@ public class VideoSettings : MonoBehaviour
     #region LimitFPS
     void LimitFPS(float fps)
     {
-        print(fps);
-
+        if (currentVSync || !currentLimitFPS)
+        {
+            return;
+        }
         Application.targetFrameRate = (int)fps;
         fpsInput.text = fps.ToString("0");
         fpsSlider.value = fps;
         PlayerPrefs.SetFloat("targetFPS", fps);
 
-        // fpsSlider.value = fps;
         currentFpsLimit = fps;
     }
 
     void StartLimitFps(float fps)
     {
-        print(fps);
         Application.targetFrameRate = (int)fps;
         fpsInput.text = fps.ToString("0");
         fpsSlider.value = fps;
@@ -410,6 +383,7 @@ public class VideoSettings : MonoBehaviour
     {
         if (toggle)
         {
+            //LimitFPS(PlayerPrefs.GetFloat("TargetFPS"));
             PlayerPrefs.SetInt("LimitFps", 1);
             FPSIndex = 1;
             limitFPSYes.SetActive(true);

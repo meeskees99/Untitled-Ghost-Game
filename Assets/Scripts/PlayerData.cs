@@ -26,6 +26,8 @@ public class PlayerData : NetworkBehaviour
 
     [SerializeField] Material tank;
 
+    [SyncVar] public bool isReady;
+
     private void Start()
     {
         manager = FindObjectOfType<TeamManager>();
@@ -86,7 +88,7 @@ public class PlayerData : NetworkBehaviour
         if (PlayerPrefs.HasKey("username"))
         {
             GetUsernameServer(PlayerPrefs.GetString("username").ToString());
-            print("Player: " + LocalConnection.ClientId);
+            // print("Player: " + LocalConnection.ClientId);
         }
         else
         {

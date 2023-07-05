@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using FishNet;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class GameManager : NetworkBehaviour
 {
     [Header("Players")]
@@ -49,6 +50,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] bool team1Halfway;
     [SerializeField] bool team2Halfway;
 
+    LoadManager loader;
 
     int id;
 
@@ -90,13 +92,10 @@ public class GameManager : NetworkBehaviour
     }
     void Update()
     {
-        print(team1Points + " team1points");
-        print(team2Points + " team2points");
-
-        print(pointLimit + " pointlimit");
-        print(team1Halfway + "tea, ah");
-        print(team1Points >= pointLimit / 2 && !team1Halfway);
-        print(team2Points >= pointLimit / 2 && !team2Halfway);
+        if (loader == null)
+        {
+            loader = FindObjectOfType<LoadManager>();
+        }
 
         if (pointLimit == 0)
             return;
@@ -105,14 +104,14 @@ public class GameManager : NetworkBehaviour
             Timer();
         }
         else if (team1Points < pointLimit && team2Points < pointLimit)
-            EndGame(true, false);
+            EndGame(true);
         else
-            EndGame(false, true);
+            EndGame(false);
         team1Slider.value = team1Points;
         team2Slider.value = team2Points;
         if (team1Points >= pointLimit / 2 && !team1Halfway)
         {
-            print("Your team is halfway!!");
+            print("Team 1 is halfway!!");
             for (int i = 0; i < players.Length; i++)
             {
                 if (players[i].GetComponent<PlayerData>().playerId == this.id)
@@ -320,14 +319,20 @@ public class GameManager : NetworkBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu Test");
     }
 
-    public void EndGame(bool timeUp, bool pointReached)
+    public void EndGame(bool timeUp)
     {
+        string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        loader.SceneToUnload = scene;
+        loader.StartLoading = true;
         if (timeUp)
+        {
             print("Game has ended. The time ran out");
+        }
         else
         {
             print("Game has ended. Point Limit Reached");
         }
+
     }
 
     public void Halfway()

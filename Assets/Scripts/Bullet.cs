@@ -9,6 +9,8 @@ public class Bullet : NetworkBehaviour
 
     public bool isBullet;
 
+    [SerializeField] float bulletLifeTime = 3f;
+
     [SyncVar] public NetworkObject ownerofObject;
     private void OnTriggerEnter(Collider other)
     {
@@ -28,7 +30,17 @@ public class Bullet : NetworkBehaviour
     {
         Despawn(gameObject);
     }
-
+    private void Update()
+    {
+        if (bulletLifeTime <= 0)
+        {
+            DoDespawn();
+        }
+        if (bulletLifeTime > 0)
+        {
+            bulletLifeTime -= Time.deltaTime;
+        }
+    }
     [ServerRpc(RequireOwnership = false)]
     public void Check(GameObject other, NetworkObject netObj)
     {

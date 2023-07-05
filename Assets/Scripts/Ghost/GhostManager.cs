@@ -94,7 +94,7 @@ public class GhostManager : NetworkBehaviour
         {
             if (availableSpawners[i].currentGhost != null)
             {
-                print("removed spawner + " + i);
+                // print("removed spawner + " + i);
                 availableSpawners.Remove(availableSpawners[i]);
             }
         }
