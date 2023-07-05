@@ -7,8 +7,6 @@ public class Bullet : NetworkBehaviour
 {
     [SerializeField] GameObject ghost;
 
-    public bool isBullet;
-
     [SerializeField] float bulletLifeTime = 3f;
 
     [SyncVar] public NetworkObject ownerofObject;
@@ -49,34 +47,21 @@ public class Bullet : NetworkBehaviour
             return;
         }
         print(other.gameObject.name);
-        if (isBullet)
+
+        if (other.transform.tag == "Player")
         {
-            if (other.transform.tag == "Player")
+            if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
             {
-                if (netObj.OwnerId == other.GetComponent<NetworkObject>().OwnerId)
-                {
-                    print("Owner");
-                    return;
-                }
-                print(other.transform.GetComponent<PlayerData>().username);
-                DoStun(other);
+                print("Owner");
+                return;
             }
-            else if (other.transform.tag != "SuckBox")
-            {
-                DoDespawn();
-            }
-        }
-        else if (other.transform.tag != "Player" || other.transform.tag != "SuckBox")
-        {
-            GameObject CGhost = Instantiate(ghost);
-            Spawn(CGhost);
-        }
-        else if (other.transform.tag == "Player")
-        {
+            print(other.transform.GetComponent<PlayerData>().username);
             DoStun(other);
         }
-
-
+        else if (other.transform.tag != "SuckBox")
+        {
+            DoDespawn();
+        }
 
     }
 }

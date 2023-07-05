@@ -18436,7 +18436,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 501.85056, y: -30.471378}
+  m_AnchoredPosition: {x: 501.8506, y: -30.471436}
   m_SizeDelta: {x: 903.7011, y: 60.942757}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1344693527
@@ -27275,7 +27275,7 @@ MonoBehaviour:
   _ipv6BindAddress: 
   _port: 7770
   _maximumClients: 6
-  _clientAddress: 192.168.0.126
+  _clientAddress: 82.170.101.24
   _timeout: 15
 --- !u!1 &1979003485
 GameObject:

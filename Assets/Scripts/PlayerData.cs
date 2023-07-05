@@ -38,14 +38,19 @@ public class PlayerData : NetworkBehaviour
     //     GameObject spawnedUI = Instantiate(UI);
     //     Spawn(spawnedUI);
     // }
-
+    bool idk;
     void Update()
     {
         if (manager == null)
         {
             manager = FindObjectOfType<TeamManager>();
+
+        }
+        else if (!idk)
+        {
             manager.players.Add(this.gameObject);
             manager.currentClients++;
+            idk = true;
         }
     }
 

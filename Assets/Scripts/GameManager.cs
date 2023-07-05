@@ -61,7 +61,7 @@ public class GameManager : NetworkBehaviour
         {
             SetTeamPoints();
             // doe * 60 na testen
-            timeLimit = PlayerPrefs.GetInt("PlayTime");
+            timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
             timeLeft = timeLimit;
             timeText.text = timeLeft.ToString("0:00");
         }

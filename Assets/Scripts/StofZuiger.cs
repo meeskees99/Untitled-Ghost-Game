@@ -80,14 +80,9 @@ public class StofZuiger : NetworkBehaviour
 
         if (ghostPoints > maxGhostPoints)
         {
+            SetGhostPoints(maxGhostPoints);
             if (!maxGhost)
             {
-                int g = (ghostPoints - maxGhostPoints);
-                for (int x = 0; x < g; x++)
-                {
-                    // Shoot excess ghost with shoot function
-                    Shoot(false);
-                }
                 if (ghostPoints == maxGhostPoints)
                 {
                     maxGhost = true;
@@ -130,11 +125,13 @@ public class StofZuiger : NetworkBehaviour
             {
                 fireTime = fireRate;
                 ShootAnimation();
-                Shoot(true);
+                Shoot();
 
             }
         }
     }
+
+
 
     public void Suck()
     {
@@ -170,6 +167,11 @@ public class StofZuiger : NetworkBehaviour
     void AddPoints(int points)
     {
         ghostPoints += points;
+    }
+    [ServerRpc(RequireOwnership = true)]
+    void SetGhostPoints(int amount)
+    {
+        ghostPoints = amount;
     }
     [ServerRpc(RequireOwnership = false)]
     public void SetSucking(bool state)
@@ -208,22 +210,6 @@ public class StofZuiger : NetworkBehaviour
                 print("Enemy Has No Points!!!!");
             }
         }
-        // int newPoints = (ghostPoints + points);
-        // print("New points: " + newPoints);
-        // int pointsToGain;
-        // if (newPoints > maxGhostPoints)
-        // {
-        //     pointsToGain = maxGhostPoints;
-        //     int toomuchpoints = newPoints - maxGhostPoints;
-        //     print(pointsToGain + " points to gain");
-        // }
-        // else
-        // {
-        //     pointsToGain = points;
-        // }
-        // print("points to gain: " + pointsToGain);
-        // ghostPoints += pointsToGain;
-        // enemy.LosePoints(pointsToGain);
     }
     [ServerRpc(RequireOwnership = false)]
     public void LosePoints(int points)
@@ -252,14 +238,14 @@ public class StofZuiger : NetworkBehaviour
         }
     }
     [ServerRpc(RequireOwnership = true)]
-    public void Shoot(bool isBullet)
+    public void Shoot()
     {
-        ReleaseGhost(isBullet, this.NetworkObject, fireSpeed);
+        ReleaseGhost(this.NetworkObject, fireSpeed);
         ghostPoints -= 1;
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void ReleaseGhost(bool isBullet, NetworkObject netObj, float speed)
+    public void ReleaseGhost(NetworkObject netObj, float speed)
     {
         GameObject spawnedBullet = Instantiate(playerBullet, shootPos.position, shootPos.rotation);
         print(netObj.OwnerId);
@@ -267,15 +253,13 @@ public class StofZuiger : NetworkBehaviour
         spawnedBullet.GetComponent<Bullet>().ownerofObject = this.NetworkObject;
 
         spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * speed;
-        spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
 
-        UpdatePos(spawnedBullet, isBullet, speed);
+        UpdatePos(spawnedBullet, speed);
     }
     [ObserversRpc]
-    void UpdatePos(GameObject spawnedBullet, bool isBullet, float speed)
+    void UpdatePos(GameObject spawnedBullet, float speed)
     {
         spawnedBullet.GetComponent<Rigidbody>().velocity = shootPos.forward * speed;
-        spawnedBullet.GetComponent<Bullet>().isBullet = isBullet;
     }
 
 
