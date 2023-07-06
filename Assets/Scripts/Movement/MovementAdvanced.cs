@@ -209,7 +209,8 @@ public class MovementAdvanced : NetworkBehaviour
             rb.drag = 0f;
         }
 
-        SetTankValue(stofZuiger.GhostPoints);
+        //SetTankValue(stofZuiger.GhostPoints);
+        print(stofZuiger.GhostPoints + "deze value zou ik gebruiken als ik niet op mannen viel");
     }
 
     private void FixedUpdate()
@@ -440,19 +441,19 @@ public class MovementAdvanced : NetworkBehaviour
 
         animator.SetBool(s, b);
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void SetTankValue(int value)
-    {
-        for (int i = 0; i < value; i++)
-        {
-            gunLights[i].SetActive(true);
-            tankLights[i].SetActive(true);
-        }
-        for (int y = 2; y > value - 1; y--)
-        {
-            gunLights[y].SetActive(false);
-            tankLights[y].SetActive(false);
-        }
-    }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void SetTankValue(int value)
+    // {
+    //     for (int i = 0; i < value; i++)
+    //     {
+    //         gunLights[i].SetActive(true);
+    //         tankLights[i].SetActive(true);
+    //     }
+    //     for (int y = 2; y > value - 1; y--)
+    //     {
+    //         gunLights[y].SetActive(false);
+    //         tankLights[y].SetActive(false);
+    //     }
+    // }
 
 }
