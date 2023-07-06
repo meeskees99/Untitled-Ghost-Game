@@ -21,17 +21,17 @@ public class TeamUiManger : NetworkBehaviour
             GameObject[] temp = GameObject.FindGameObjectsWithTag("Player");
             for (int i = 0; i < temp.Length; i++)
             {
-                if (temp[i].GetComponent<PlayerData>().teamID == 0)
-                {
-                    team1Players.Add(temp[i]);
-                }
-                else if (temp[i].GetComponent<PlayerData>().teamID == 1)
-                {
-                    team2Players.Add(temp[i]);
-                }
+                // if (temp[i].GetComponent<PlayerData>().teamID == 0)
+                // {
+                //     team1Players.Add(temp[i]);
+                // }
+                // else if (temp[i].GetComponent<PlayerData>().teamID == 1)
+                // {
+                //     team2Players.Add(temp[i]);
+                // }
             }
         }
-        
+
         SetPlayerNames();
 
     }
@@ -41,13 +41,13 @@ public class TeamUiManger : NetworkBehaviour
         print("SETPLAYERNAMES");
         for (int i = 0; i <= team1Players.Count - 1; i++)
         {
-            playerTxtTeam1[i].text = team1Players[i].GetComponent<PlayerData>().username;
-            SetPlayerNamesObserver(team1Players[i].GetComponent<PlayerData>().username, i, 0);
+            // playerTxtTeam1[i].text = team1Players[i].GetComponent<PlayerData>().username;
+            // SetPlayerNamesObserver(team1Players[i].GetComponent<PlayerData>().username, i, 0);
         }
         for (int i = 0; i <= team2Players.Count - 1; i++)
         {
-            playerTxtTeam2[i].text = team2Players[i].GetComponent<PlayerData>().username;
-            SetPlayerNamesObserver(team2Players[i].GetComponent<PlayerData>().username, i, 1);
+            // playerTxtTeam2[i].text = team2Players[i].GetComponent<PlayerData>().username;
+            // SetPlayerNamesObserver(team2Players[i].GetComponent<PlayerData>().username, i, 1);
         }
     }
     [ObserversRpc]
@@ -74,13 +74,13 @@ public class TeamUiManger : NetworkBehaviour
     {
         for (int i = 0; i <= team1Players.Count - 1; i++)
         {
-            pointsTxtTeam1[i].text = team1Players[i].GetComponent<PlayerData>().pointsGathered.ToString();
-            SetPointsObserver(team1Players[i].GetComponent<PlayerData>().pointsGathered.ToString(), i, 0);
+            // pointsTxtTeam1[i].text = team1Players[i].GetComponent<PlayerData>().pointsGathered.ToString();
+            // SetPointsObserver(team1Players[i].GetComponent<PlayerData>().pointsGathered.ToString(), i, 0);
         }
         for (int i = 0; i <= team2Players.Count - 1; i++)
         {
-            pointsTxtTeam2[i].text = team2Players[i].GetComponent<PlayerData>().pointsGathered.ToString();
-            SetPointsObserver(team2Players[i].GetComponent<PlayerData>().pointsGathered.ToString(), i, 1);
+            // pointsTxtTeam2[i].text = team2Players[i].GetComponent<PlayerData>().pointsGathered.ToString();
+            // SetPointsObserver(team2Players[i].GetComponent<PlayerData>().pointsGathered.ToString(), i, 1);
         }
     }
     [ObserversRpc]

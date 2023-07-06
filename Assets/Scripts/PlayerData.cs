@@ -11,21 +11,21 @@ using FishNet.Connection;
 public class PlayerData : NetworkBehaviour
 {
     public int playerId = -2;
-    [SyncVar] public int teamID;
-    [SyncVar] public string username;
+    //[SyncVar] public int teamID;
+    //[SyncVar] public string username;
 
-    public TeamManager manager;
+    //public TeamManager manager;
 
 
-    public GameObject UI;
+    //public GameObject UI;
 
-    [SyncVar] public int pointsGathered;
+    //[SyncVar] public int pointsGathered;
 
-    [SerializeField] GameObject cam;
+    //[SerializeField] GameObject cam;
 
-    [SyncVar] public bool isReady;
+    //[SyncVar] public bool isReady;
 
-    bool idk;
+    //bool idk;
 
     void Start()
     {
@@ -42,30 +42,30 @@ public class PlayerData : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        if (IsHost && playerId != 0)
-        {
-            return;
-        }
-        else if (!IsOwner)
-        {
-            return;
-        }
+        // if (IsHost && playerId != 0)
+        // {
+        //     return;
+        // }
+        // else if (!IsOwner)
+        // {
+        //     return;
+        // }
         print(InstanceFinder.ClientManager.Connection.ClientId + " client id ");
         SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
     }
 
-    private void Update()
-    {
-        if (manager == null)
-        {
-            manager = FindObjectOfType<TeamManager>();
-        }
-    }
-    [ServerRpc(RequireOwnership = true)]
-    void SetUsername(string name)
-    {
-        username = name;
-    }
+    // private void Update()
+    // {
+    //     if (manager == null)
+    //     {
+    //         manager = FindObjectOfType<TeamManager>();
+    //     }
+    // }
+    // [ServerRpc(RequireOwnership = true)]
+    // void SetUsername(string name)
+    // {
+    //     username = name;
+    // }
 
     [ServerRpc(RequireOwnership = false)]
     void SetPlayerID(int Id)
@@ -280,9 +280,9 @@ public class PlayerData : NetworkBehaviour
     //     username = name;
     // }
 
-    [ServerRpc(RequireOwnership = true)]
-    public void GainPoints(int pointAmount)
-    {
-        pointsGathered += pointAmount;
-    }
+    // [ServerRpc(RequireOwnership = true)]
+    // public void GainPoints(int pointAmount)
+    // {
+    //     pointsGathered += pointAmount;
+    // }
 }

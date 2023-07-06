@@ -55,7 +55,7 @@ public class Bullet : NetworkBehaviour
                 print("Owner");
                 return;
             }
-            print(other.transform.GetComponent<PlayerData>().username);
+            //print(other.transform.GetComponent<PlayerData>().username);
             DoStun(other);
         }
         else if (other.transform.tag != "SuckBox")

@@ -265,9 +265,9 @@ public class StofZuiger : NetworkBehaviour
 
     public void StorePoints()
     {
-        pData.GainPoints(ghostPoints);
-        gameManager.AddPoints(pData.teamID, ghostPoints);
-        ghostPoints = 0;
+        //pData.GainPoints(ghostPoints);
+        //gameManager.AddPoints(pData.teamID, ghostPoints);
+        //ghostPoints = 0;
     }
 
     #region Animations

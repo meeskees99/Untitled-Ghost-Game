@@ -72,16 +72,16 @@ public class GameManager : NetworkBehaviour
         {
             if (players[i].GetComponent<PlayerData>().playerId == id)
             {
-                if (players[i].GetComponent<PlayerData>().teamID == 0)
-                {
-                    team1Slider.gameObject.SetActive(true);
-                    team2Slider.gameObject.SetActive(false);
-                }
-                else if (players[i].GetComponent<PlayerData>().teamID == 1)
-                {
-                    team1Slider.gameObject.SetActive(false);
-                    team2Slider.gameObject.SetActive(true);
-                }
+                // if (players[i].GetComponent<PlayerData>().teamID == 0)
+                // {
+                //     team1Slider.gameObject.SetActive(true);
+                //     team2Slider.gameObject.SetActive(false);
+                // }
+                // else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                // {
+                //     team1Slider.gameObject.SetActive(false);
+                //     team2Slider.gameObject.SetActive(true);
+                // }
             }
         }
         if (PlayerPrefs.HasKey("PointGoal") && IsHost)
@@ -119,16 +119,16 @@ public class GameManager : NetworkBehaviour
             {
                 if (players[i].GetComponent<PlayerData>().playerId == this.id)
                 {
-                    if (players[i].GetComponent<PlayerData>().teamID == 0)
-                    {
-                        halfWayFriendlySound.Play();
-                        friendlyHalfwayUI.SetActive(true);
-                    }
-                    else if (players[i].GetComponent<PlayerData>().teamID == 1)
-                    {
-                        halfWayEnemySound.Play();
-                        halfWayWarning.SetActive(true);
-                    }
+                    // if (players[i].GetComponent<PlayerData>().teamID == 0)
+                    // {
+                    //     halfWayFriendlySound.Play();
+                    //     friendlyHalfwayUI.SetActive(true);
+                    // }
+                    // else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                    // {
+                    //     halfWayEnemySound.Play();
+                    //     halfWayWarning.SetActive(true);
+                    // }
                 }
             }
             team1Halfway = true;
@@ -140,16 +140,16 @@ public class GameManager : NetworkBehaviour
             {
                 if (players[i].GetComponent<PlayerData>().playerId == this.id)
                 {
-                    if (players[i].GetComponent<PlayerData>().teamID == 0)
-                    {
-                        halfWayEnemySound.Play();
-                        halfWayWarning.SetActive(true);
-                    }
-                    else if (players[i].GetComponent<PlayerData>().teamID == 1)
-                    {
-                        halfWayFriendlySound.Play();
-                        friendlyHalfwayUI.SetActive(true);
-                    }
+                    // if (players[i].GetComponent<PlayerData>().teamID == 0)
+                    // {
+                    //     halfWayEnemySound.Play();
+                    //     halfWayWarning.SetActive(true);
+                    // }
+                    // else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                    // {
+                    //     halfWayFriendlySound.Play();
+                    //     friendlyHalfwayUI.SetActive(true);
+                    // }
                 }
             }
             team2Halfway = true;
@@ -177,16 +177,16 @@ public class GameManager : NetworkBehaviour
         {
             if (players[i].GetComponent<PlayerData>().playerId == id)
             {
-                if (players[i].GetComponent<PlayerData>().teamID == 0)
-                {
-                    team1Slider.gameObject.SetActive(true);
-                    team2Slider.gameObject.SetActive(false);
-                }
-                else if (players[i].GetComponent<PlayerData>().teamID == 1)
-                {
-                    team1Slider.gameObject.SetActive(false);
-                    team2Slider.gameObject.SetActive(true);
-                }
+                // if (players[i].GetComponent<PlayerData>().teamID == 0)
+                // {
+                //     team1Slider.gameObject.SetActive(true);
+                //     team2Slider.gameObject.SetActive(false);
+                // }
+                // else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                // {
+                //     team1Slider.gameObject.SetActive(false);
+                //     team2Slider.gameObject.SetActive(true);
+                // }
             }
         }
         if (Input.GetKey(scoreboardButton) && !settingsUI.activeSelf)
@@ -195,18 +195,18 @@ public class GameManager : NetworkBehaviour
             {
                 if (players[i].GetComponent<PlayerData>().playerId == id)
                 {
-                    if (players[i].GetComponent<PlayerData>().teamID == 0)
-                    {
-                        tabMenu.SetActive(true);
-                        scoreboard1.SetActive(true);
-                        scoreboard2.SetActive(false);
-                    }
-                    else if (players[i].GetComponent<PlayerData>().teamID == 1)
-                    {
-                        tabMenu.SetActive(true);
-                        scoreboard1.SetActive(false);
-                        scoreboard2.SetActive(true);
-                    }
+                    // if (players[i].GetComponent<PlayerData>().teamID == 0)
+                    // {
+                    //     tabMenu.SetActive(true);
+                    //     scoreboard1.SetActive(true);
+                    //     scoreboard2.SetActive(false);
+                    // }
+                    // else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                    // {
+                    //     tabMenu.SetActive(true);
+                    //     scoreboard1.SetActive(false);
+                    //     scoreboard2.SetActive(true);
+                    // }
                 }
             }
         }
@@ -216,16 +216,16 @@ public class GameManager : NetworkBehaviour
             {
                 if (players[i].GetComponent<PlayerData>().playerId == id)
                 {
-                    if (players[i].GetComponent<PlayerData>().teamID == 0)
-                    {
-                        tabMenu.SetActive(false);
-                        scoreboard1.SetActive(false);
-                    }
-                    else if (players[i].GetComponent<PlayerData>().teamID == 1)
-                    {
-                        tabMenu.SetActive(false);
-                        scoreboard2.SetActive(false);
-                    }
+                    // if (players[i].GetComponent<PlayerData>().teamID == 0)
+                    // {
+                    //     tabMenu.SetActive(false);
+                    //     scoreboard1.SetActive(false);
+                    // }
+                    // else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                    // {
+                    //     tabMenu.SetActive(false);
+                    //     scoreboard2.SetActive(false);
+                    // }
                 }
             }
         }
@@ -273,16 +273,16 @@ public class GameManager : NetworkBehaviour
         players = FindObjectsOfType<PlayerData>();
         for (int i = 0; i < players.Length; i++)
         {
-            if (players[i].teamID == 0)
-            {
-                players[i].transform.position = spawn1[team1Index].transform.position;
-                team1Index++;
-            }
-            else if (players[i].teamID == 1)
-            {
-                players[i].transform.position = spawn1[team2Index].transform.position;
-                team2Index++;
-            }
+            // if (players[i].teamID == 0)
+            // {
+            //     players[i].transform.position = spawn1[team1Index].transform.position;
+            //     team1Index++;
+            // }
+            // else if (players[i].teamID == 1)
+            // {
+            //     players[i].transform.position = spawn1[team2Index].transform.position;
+            //     team2Index++;
+            // }
         }
         SetTeamPointsObserver();
     }
@@ -290,17 +290,17 @@ public class GameManager : NetworkBehaviour
     void SetTeamPointsObserver()
     {
         //print("a");
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (players[i].teamID == 0)
-            {
-                players[i].transform.position = spawn1[team1Index].transform.position;
-            }
-            else if (players[i].teamID == 1)
-            {
-                players[i].transform.position = spawn2[team2Index].transform.position;
-            }
-        }
+        // for (int i = 0; i < players.Length; i++)
+        // {
+        //     if (players[i].teamID == 0)
+        //     {
+        //         players[i].transform.position = spawn1[team1Index].transform.position;
+        //     }
+        //     else if (players[i].teamID == 1)
+        //     {
+        //         players[i].transform.position = spawn2[team2Index].transform.position;
+        //     }
+        // }
     }
     [ServerRpc(RequireOwnership = false)]
     public void AddPoints(int teamInt, int Points)
