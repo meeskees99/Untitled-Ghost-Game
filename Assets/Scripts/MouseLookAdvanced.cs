@@ -52,52 +52,52 @@ public class MouseLookAdvanced : NetworkBehaviour
         }
         if (Input.GetKeyDown(use))
         {
-            // if (pData.teamID == 0)
-            // {
-            //     if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
-            //     {
-            //         if (hit.transform.tag == "Canister")
-            //         {
-            //             stofZuiger.StorePoints();
-            //         }
-            //         else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 1)
-            //         {
-            //             print("hitPlayer");
-            //             if (hit.transform.GetComponent<MovementAdvanced>().IsStunned && hit.transform.GetComponent<MovementAdvanced>().GetCanSteal())
-            //             {
-            //                 hit.transform.GetComponent<MovementAdvanced>().SetCanSteal(false);
-            //                 print("isStunned");
-            //                 print(hit.transform.GetChild(1).GetChild(0));
-            //                 stofZuiger.StealPoints(hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
-            //             }
-            //         }
-            //         else if (hit.transform.tag == "Door")
-            //         {
-            //             hit.transform.GetComponent<Animator>().SetTrigger("Open");
-            //         }
-            //     }
-            // }
-            // else
-            // {
-            //     if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
-            //     {
-            //         if (hit.transform.tag == "Canister2")
-            //         {
-            //             stofZuiger.StorePoints();
-            //         }
-            //         else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 0)
-            //         {
-            //             print("hitPlayer");
-            //             if (hit.transform.GetComponent<MovementAdvanced>().IsStunned && hit.transform.GetComponent<MovementAdvanced>().GetCanSteal())
-            //             {
-            //                 hit.transform.GetComponent<MovementAdvanced>().SetCanSteal(false);
-            //                 print("isStunned");
-            //                 print(hit.transform.GetChild(1).GetChild(0));
-            //                 stofZuiger.StealPoints(hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
-            //             }
-            //         }
-            //     }
-            // }
+            if (pData.teamID == 0)
+            {
+                if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
+                {
+                    if (hit.transform.tag == "Canister")
+                    {
+                        stofZuiger.StorePoints();
+                    }
+                    else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 1)
+                    {
+                        print("hitPlayer");
+                        if (hit.transform.GetComponent<MovementAdvanced>().IsStunned && hit.transform.GetComponent<MovementAdvanced>().GetCanSteal())
+                        {
+                            hit.transform.GetComponent<MovementAdvanced>().SetCanSteal(false);
+                            print("isStunned");
+                            print(hit.transform.GetChild(1).GetChild(0));
+                            stofZuiger.StealPoints(hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
+                        }
+                    }
+                    else if (hit.transform.tag == "Door")
+                    {
+                        hit.transform.GetComponent<Animator>().SetTrigger("Open");
+                    }
+                }
+            }
+            else
+            {
+                if (Physics.Raycast(transform.position, transform.forward, out hit, useRange))
+                {
+                    if (hit.transform.tag == "Canister2")
+                    {
+                        stofZuiger.StorePoints();
+                    }
+                    else if (hit.transform.tag == "Player" && hit.transform.GetComponent<PlayerData>().teamID == 0)
+                    {
+                        print("hitPlayer");
+                        if (hit.transform.GetComponent<MovementAdvanced>().IsStunned && hit.transform.GetComponent<MovementAdvanced>().GetCanSteal())
+                        {
+                            hit.transform.GetComponent<MovementAdvanced>().SetCanSteal(false);
+                            print("isStunned");
+                            print(hit.transform.GetChild(1).GetChild(0));
+                            stofZuiger.StealPoints(hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>().GhostPoints, hit.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<StofZuiger>());
+                        }
+                    }
+                }
+            }
 
         }
         if (PlayerPrefs.HasKey("Mouse Sensitivity"))

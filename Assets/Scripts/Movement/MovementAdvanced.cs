@@ -151,7 +151,7 @@ public class MovementAdvanced : NetworkBehaviour
         tankLights.Add(character[index].transform.GetChild(7).gameObject);
         SetCharObserver(index);
     }
-    [ObserversRpc]
+    [ObserversRpc(BufferLast = true)]
     void SetCharObserver(int index)
     {
         for (int i = 0; i < character.Length; i++)
