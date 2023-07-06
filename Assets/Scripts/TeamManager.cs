@@ -27,22 +27,15 @@ public class TeamManager : NetworkBehaviour
     public GameObject[] rects;
 
     [SerializeField] GameObject[] switchTeamButtons;
-    [SerializeField] GameObject UIprefab;
 
     bool done;
-    [SerializeField] List<GameObject> ui = new();
+
     public string LobbyToLoad;
 
     [SerializeField] LoadManager loader;
 
     [SyncVar]
     public List<GameObject> players = new();
-
-    void Start()
-    {
-
-    }
-
     public void JointTeamBtn(int teamInt)
     {
         int id = InstanceFinder.ClientManager.Connection.ClientId;
@@ -53,24 +46,6 @@ public class TeamManager : NetworkBehaviour
     {
         if (loader == null)
             loader = FindObjectOfType<LoadManager>();
-    }
-
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-        SpawnUI();
-        for (int i = 0; i < players.Count; i++)
-        {
-            players[i].GetComponent<PlayerData>().SetPlayerTeam();
-        }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    void SpawnUI()
-    {
-        GameObject uiSpawn = Instantiate(UIprefab);
-        ui.Add(uiSpawn);
-        Spawn(uiSpawn);
     }
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)
@@ -185,8 +160,7 @@ public class TeamManager : NetworkBehaviour
     {
         for (int x = 0; x < players.Count; x++)
         {
-
-            ui[x].transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
+            players[x].transform.GetComponent<PlayerData>().UI.transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
 
@@ -202,7 +176,7 @@ public class TeamManager : NetworkBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
-            ui[i].transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
+            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
         }
         ParentPlayerUIObserver(team);
     }
@@ -211,7 +185,7 @@ public class TeamManager : NetworkBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
-            ui[i].transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
+            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
         }
     }
 
@@ -280,7 +254,7 @@ public class TeamManager : NetworkBehaviour
     {
         loader.StartLoading = true;
         loader.SceneToLoad = LobbyToLoad;
-        loader.SceneToUnload = "Lobby Test";
+        loader.SceneToUnload = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         print("loading = true");
 
     }

@@ -28,25 +28,12 @@ public class PlayerData : NetworkBehaviour
 
     [SyncVar] public bool isReady;
 
-    // private void Start()
-    // {
-    //     SpawnUIServer();
-    // }
-    // [ServerRpc(RequireOwnership = false)]
-    // void SpawnUIServer()
-    // {
-    //     GameObject spawnedUI = Instantiate(UI);
-    //     Spawn(spawnedUI);
-    // }
-
-    void Update()
+    private void Start()
     {
-        if (manager == null)
-        {
-            manager = FindObjectOfType<TeamManager>();
-            manager.players.Add(this.gameObject);
-            manager.currentClients++;
-        }
+        manager = FindObjectOfType<TeamManager>();
+
+        manager.players.Add(this.gameObject);
+        manager.currentClients++;
     }
 
     [ObserversRpc]

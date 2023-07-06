@@ -25,19 +25,6 @@ public class LoadManager : NetworkBehaviour
         }
     }
 
-    [SerializeField] bool _isloading;
-    public bool Isloading
-    {
-        get
-        {
-            return _isloading;
-        }
-        set
-        {
-            _isloading = value;
-        }
-    }
-
     [SerializeField] string _sceneToUnload;
     public string SceneToUnload
     {
@@ -87,37 +74,27 @@ public class LoadManager : NetworkBehaviour
     void Load(FishNet.Managing.Scened.SceneLoadPercentEventArgs obj)
     {
         print("OnloadChange");
-        if (_isloading)
+        if (_startLoading)
         {
             print("Is loading at " + obj.Percent * 100 + " %");
 
             if (obj.Percent != 1)
             {
-                if (_loadUI != null)
-                    _loadUI.SetActive(true);
-                if (_canvas != null)
-                    _canvas.SetActive(false);
+                _loadUI.SetActive(true);
+                _canvas.SetActive(false);
             }
             else if (obj.Percent == 1)
             {
-                StartLoading = false;
-                Isloading = false;
-
-                if (_loadUI != null)
-                    _loadUI.SetActive(false);
-                if (_canvas != null)
-                    _canvas.SetActive(true);
-
                 SceneUnloadData lastScene = new SceneUnloadData(_sceneToUnload);
                 base.SceneManager.UnloadGlobalScenes(lastScene);
             }
         }
     }
+
     void StartLoad()
     {
         SceneLoadData sld = new SceneLoadData(_sceneToLoad);
         base.SceneManager.LoadGlobalScenes(sld);
-        Isloading = true;
     }
 
     bool _startedLoad;

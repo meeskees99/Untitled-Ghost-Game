@@ -32,8 +32,6 @@ public class RoomSettings : NetworkBehaviour
     }
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
         if (notHost)
             return;
         if (PlayerPrefs.HasKey("PlayTime"))
