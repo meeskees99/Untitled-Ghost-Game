@@ -142,6 +142,13 @@ public class MovementAdvanced : NetworkBehaviour
         animator = character[index].GetComponent<Animator>();
         stofZuiger.animator = character[index].GetComponent<Animator>();
 
+        gunLights.Add(character[index].transform.GetChild(1).gameObject);
+        gunLights.Add(character[index].transform.GetChild(2).gameObject);
+        gunLights.Add(character[index].transform.GetChild(3).gameObject);
+
+        tankLights.Add(character[index].transform.GetChild(5).gameObject);
+        tankLights.Add(character[index].transform.GetChild(6).gameObject);
+        tankLights.Add(character[index].transform.GetChild(7).gameObject);
         SetCharObserver(index);
     }
     [ObserversRpc]
@@ -160,7 +167,8 @@ public class MovementAdvanced : NetworkBehaviour
         }
         animator = character[index].GetComponent<Animator>();
         stofZuiger.animator = character[index].GetComponent<Animator>();
-
+        if (IsHost)
+            return;
         gunLights.Add(character[index].transform.GetChild(1).gameObject);
         gunLights.Add(character[index].transform.GetChild(2).gameObject);
         gunLights.Add(character[index].transform.GetChild(3).gameObject);
