@@ -29,6 +29,7 @@ public class PlayerData : NetworkBehaviour
     bool idk;
     void Update()
     {
+        print(OwnerId + "owner di");
         if (manager == null)
         {
             manager = FindObjectOfType<TeamManager>();
