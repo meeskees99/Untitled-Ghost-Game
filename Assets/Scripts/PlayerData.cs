@@ -42,6 +42,14 @@ public class PlayerData : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+        if (IsHost && playerId != 0)
+        {
+            return;
+        }
+        else if (!IsOwner)
+        {
+            return;
+        }
         print(InstanceFinder.ClientManager.Connection.ClientId + " client id ");
         SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
     }
