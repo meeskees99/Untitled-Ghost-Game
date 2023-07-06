@@ -10,7 +10,7 @@ using FishNet.Connection;
 
 public class PlayerData : NetworkBehaviour
 {
-    [SyncVar] public int playerId = -2;
+    public int playerId = -2;
     [SyncVar] public int teamID;
     [SyncVar] public string username;
 
@@ -72,10 +72,14 @@ public class PlayerData : NetworkBehaviour
     {
         print(Id + " id server");
         playerId = Id;
+        SetIDObserver(Id);
         print(playerId + " player id");
     }
 
-
+    void SetIDObserver(int id)
+    {
+        playerId = id;
+    }
 
 
 
