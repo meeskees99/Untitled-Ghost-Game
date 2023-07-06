@@ -70,8 +70,9 @@ public class PlayerData : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     void SetPlayerID(int Id)
     {
+        print(Id + " id server");
         playerId = Id;
-        print(playerId);
+        print(playerId + " player id");
     }
 
 
