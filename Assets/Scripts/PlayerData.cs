@@ -24,20 +24,8 @@ public class PlayerData : NetworkBehaviour
 
     [SerializeField] GameObject cam;
 
-    [SerializeField] Material tank;
-
     [SyncVar] public bool isReady;
 
-    // private void Start()
-    // {
-    //     SpawnUIServer();
-    // }
-    // [ServerRpc(RequireOwnership = false)]
-    // void SpawnUIServer()
-    // {
-    //     GameObject spawnedUI = Instantiate(UI);
-    //     Spawn(spawnedUI);
-    // }
     bool idk;
     void Update()
     {
@@ -116,6 +104,7 @@ public class PlayerData : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void GetUsernameServer(string name)
     {
+        print("Server name = " + name);
         username = name;
         manager.SetPlayerNameServer();
     }
@@ -124,20 +113,5 @@ public class PlayerData : NetworkBehaviour
     public void GainPoints(int pointAmount)
     {
         pointsGathered += pointAmount;
-        //switch (pointsGathered)
-        //{
-        //    case 0:
-        //        tank.SetFloat("_Float", -0.5f);
-        //        break;
-        //    case 1:
-        //        tank.SetFloat("_Float", -0.1f);
-        //        break;
-        //    case 2:
-        //        tank.SetFloat("_Float", 0.1f);
-        //        break;
-        //    case 3:
-        //        tank.SetFloat("_Float", 0.5f);
-        //        break;
-        //}
     }
 }
