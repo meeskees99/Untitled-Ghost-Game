@@ -61,7 +61,7 @@ public class TeamManager : NetworkBehaviour
         //SpawnUI();
         for (int i = 0; i < players.Count; i++)
         {
-            players[i].GetComponent<PlayerData>().SetPlayerTeam();
+            //players[i].GetComponent<PlayerData>().SetPlayerTeam();
         }
     }
 

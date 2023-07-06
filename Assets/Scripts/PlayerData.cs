@@ -11,12 +11,11 @@ using FishNet.Connection;
 public class PlayerData : NetworkBehaviour
 {
     [SyncVar] public int playerId = -2;
-
     [SyncVar] public int teamID;
+    [SyncVar] public string username;
 
     public TeamManager manager;
 
-    public string username;
 
     public GameObject UI;
 
@@ -27,20 +26,16 @@ public class PlayerData : NetworkBehaviour
     [SyncVar] public bool isReady;
 
     bool idk;
-    void Update()
+
+    void Start()
     {
-        print(OwnerId + "owner di");
-        if (manager == null)
+        if (IsHost && playerId == 0)
         {
-            manager = FindObjectOfType<TeamManager>();
 
         }
-        else if (!idk)
+        else if (IsOwner)
         {
-            manager.SpawnUI(this.NetworkObject);
-            manager.players.Add(this.gameObject);
-            manager.currentClients++;
-            idk = true;
+
         }
     }
 
@@ -48,74 +43,225 @@ public class PlayerData : NetworkBehaviour
     {
         base.OnStartClient();
         SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
-        SetPlayerTeam();
     }
-    private void OnDestroy()
+
+    private void Update()
     {
         if (manager == null)
-            return;
-        manager.teams[teamID].tData.Remove(this);
-        manager.players.Remove(this.gameObject);
-        Destroy(UI);
-        manager.currentClients--;
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void SetPlayerID(int id)
-    {
-        playerId = id;
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void SetPlayerTeam()
-    {
-        if (manager.teams[0].tData.Count - 1 <= manager.teams[1].tData.Count - 1)
         {
-            teamID = 0;
-            manager.AddTeam(this, teamID);
-            SetParentTeam();
-            GetUsernameObserver();
-        }
-        else
-        {
-            teamID = 1;
-            manager.AddTeam(this, teamID);
-            SetParentTeam();
-            GetUsernameObserver();
-        }
-        StartCoroutine(manager.WaitSomeMoreDickHead());
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void SetParentTeam()
-    {
-        manager.ParentPlayerUIServer(teamID);
-    }
-    [ObserversRpc]
-    public void GetUsernameObserver()
-    {
-        if (PlayerPrefs.HasKey("username"))
-        {
-            GetUsernameServer(PlayerPrefs.GetString("username").ToString());
-            print("Player: " + PlayerPrefs.GetString("username"));
-        }
-        else
-        {
-            GetUsernameServer("Player: " + LocalConnection.ClientId);
+            manager = FindObjectOfType<TeamManager>();
         }
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void GetUsernameServer(string name)
+    [ServerRpc(RequireOwnership = true)]
+    void SetUsername(string name)
     {
-        print("Server name = " + name);
-        username = name;
-        UsernameObserver(name);
-        manager.SetPlayerNameServer();
-    }
-
-    public void UsernameObserver(string name)
-    {
-        print("Obserer naem = " + name);
         username = name;
     }
+
+    [ServerRpc(RequireOwnership = true)]
+    void SetPlayerID(int Id)
+    {
+        playerId = Id;
+    }
+
+
+
+
+
+
+
+
+
+
+    // void Update()
+    // {
+    //     if (manager == null)
+    //     {
+    //         manager = FindObjectOfType<TeamManager>();
+
+    //     }
+    //     else if (!idk)
+    //     {
+    //         manager.SpawnUI(this.NetworkObject);
+    //         manager.players.Add(this.gameObject);
+    //         manager.currentClients++;
+    //         idk = true;
+    //     }
+    // }
+
+    // public override void OnStartClient()
+    // {
+    //     base.OnStartClient();
+    //     SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
+    //     SetPlayerTeam();
+    // }
+    // private void OnDestroy()
+    // {
+    //     if (manager == null)
+    //         return;
+    //     manager.teams[teamID].tData.Remove(this);
+    //     manager.players.Remove(this.gameObject);
+    //     Destroy(UI);
+    //     manager.currentClients--;
+    // }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void SetPlayerID(int id)
+    // {
+    //     playerId = id;
+    // }
+
+    // [ServerRpc(RequireOwnership = false)]
+    // public void SetPlayerTeam()
+    // {
+    //     if (manager.teams[0].tData.Count - 1 <= manager.teams[1].tData.Count - 1)
+    //     {
+    //         teamID = 0;
+    //         manager.AddTeam(this, teamID);
+    //         SetParentTeam();
+    //         GetUsernameObserver();
+    //     }
+    //     else
+    //     {
+    //         teamID = 1;
+    //         manager.AddTeam(this, teamID);
+    //         SetParentTeam();
+    //         GetUsernameObserver();
+    //     }
+    //     StartCoroutine(manager.WaitSomeMoreDickHead());
+    // }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void SetParentTeam()
+    // {
+    //     manager.ParentPlayerUIServer(teamID);
+    // }
+    // [ObserversRpc]
+    // public void GetUsernameObserver()
+    // {
+    //     if (PlayerPrefs.HasKey("username"))
+    //     {
+    //         GetUsernameServer(PlayerPrefs.GetString("username").ToString());
+    //         print("Player: " + PlayerPrefs.GetString("username"));
+    //     }
+    //     else
+    //     {
+    //         GetUsernameServer("Player: " + LocalConnection.ClientId);
+    //     }
+    // }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void GetUsernameServer(string name)
+    // {
+    //     print("Server name = " + name);
+    //     username = name;
+    //     UsernameObserver(name);
+    //     manager.SetPlayerNameServer();
+    // }
+
+    // public void UsernameObserver(string name)
+    // {
+    //     print("Obserer naem = " + name);
+    //     username = name;
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // void Update()
+    // {
+    //     if (manager == null)
+    //     {
+    //         manager = FindObjectOfType<TeamManager>();
+
+    //     }
+    //     else if (!idk)
+    //     {
+    //         manager.SpawnUI(this.NetworkObject);
+    //         manager.players.Add(this.gameObject);
+    //         manager.currentClients++;
+    //         idk = true;
+    //     }
+    // }
+
+    // public override void OnStartClient()
+    // {
+    //     base.OnStartClient();
+    //     SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
+    //     SetPlayerTeam();
+    // }
+    // private void OnDestroy()
+    // {
+    //     if (manager == null)
+    //         return;
+    //     manager.teams[teamID].tData.Remove(this);
+    //     manager.players.Remove(this.gameObject);
+    //     Destroy(UI);
+    //     manager.currentClients--;
+    // }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void SetPlayerID(int id)
+    // {
+    //     playerId = id;
+    // }
+
+    // [ServerRpc(RequireOwnership = false)]
+    // public void SetPlayerTeam()
+    // {
+    //     if (manager.teams[0].tData.Count - 1 <= manager.teams[1].tData.Count - 1)
+    //     {
+    //         teamID = 0;
+    //         manager.AddTeam(this, teamID);
+    //         SetParentTeam();
+    //         GetUsernameObserver();
+    //     }
+    //     else
+    //     {
+    //         teamID = 1;
+    //         manager.AddTeam(this, teamID);
+    //         SetParentTeam();
+    //         GetUsernameObserver();
+    //     }
+    //     StartCoroutine(manager.WaitSomeMoreDickHead());
+    // }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void SetParentTeam()
+    // {
+    //     manager.ParentPlayerUIServer(teamID);
+    // }
+    // [ObserversRpc]
+    // public void GetUsernameObserver()
+    // {
+    //     if (PlayerPrefs.HasKey("username"))
+    //     {
+    //         GetUsernameServer(PlayerPrefs.GetString("username").ToString());
+    //         print("Player: " + PlayerPrefs.GetString("username"));
+    //     }
+    //     else
+    //     {
+    //         GetUsernameServer("Player: " + LocalConnection.ClientId);
+    //     }
+    // }
+    // [ServerRpc(RequireOwnership = false)]
+    // public void GetUsernameServer(string name)
+    // {
+    //     print("Server name = " + name);
+    //     username = name;
+    //     UsernameObserver(name);
+    //     manager.SetPlayerNameServer();
+    // }
+
+    // public void UsernameObserver(string name)
+    // {
+    //     print("Obserer naem = " + name);
+    //     username = name;
+    // }
 
     [ServerRpc(RequireOwnership = true)]
     public void GainPoints(int pointAmount)
