@@ -42,6 +42,7 @@ public class PlayerData : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+        print(InstanceFinder.ClientManager.Connection.ClientId + " client id ");
         SetPlayerID(InstanceFinder.ClientManager.Connection.ClientId);
     }
 
