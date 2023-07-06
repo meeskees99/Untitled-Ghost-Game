@@ -101,7 +101,7 @@ public class PlayerData : NetworkBehaviour
             GetUsernameServer("Player: " + LocalConnection.ClientId);
         }
     }
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void GetUsernameServer(string name)
     {
         print("Server name = " + name);
