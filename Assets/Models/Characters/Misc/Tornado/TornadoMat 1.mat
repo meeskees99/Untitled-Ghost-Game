@@ -47,14 +47,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DISPLACEGradient: 0.15
-    - _Gradient: -0.18
+    - _DISPLACEGradient: 0.36
+    - _Gradient: -0.08
     - _GradientStrength: 1.45
     - _NoiseStrength: 58.24
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Strengt: 11.62
-    - _Strength: 8.6
+    - _Strength: 8.83
     - _speed: 2.4
     m_Colors:
     - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
