@@ -30,7 +30,7 @@ public class TeamManager : NetworkBehaviour
     [SerializeField] GameObject UIprefab;
 
     bool done;
-    [SerializeField] List<GameObject> ui = new();
+    // [SerializeField] List<GameObject> ui = new();
     public string LobbyToLoad;
 
     [SerializeField] LoadManager loader;
@@ -38,10 +38,6 @@ public class TeamManager : NetworkBehaviour
     [SyncVar]
     public List<GameObject> players = new();
 
-    void Start()
-    {
-
-    }
 
     public void JointTeamBtn(int teamInt)
     {
@@ -58,19 +54,10 @@ public class TeamManager : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        //SpawnUI();
         for (int i = 0; i < players.Count; i++)
         {
-            //players[i].GetComponent<PlayerData>().SetPlayerTeam();
+            players[i].GetComponent<PlayerData>().SetPlayerTeam();
         }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void SpawnUI(NetworkObject NetObj)
-    {
-        GameObject uiSpawn = Instantiate(UIprefab);
-        ui.Add(uiSpawn);
-        Spawn(uiSpawn, NetObj.Owner);
     }
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)
@@ -89,34 +76,34 @@ public class TeamManager : NetworkBehaviour
                 {
                     if (teams[y].tData.Count == 0 && !teams[y].tData.Any())
                     {
-                        //print("teams == null" + y + " y");
+                        print("teams == null" + y + " y");
                     }
                     else if (teams[y].tData[i].playerId == localPlayerId)
                     {
                         if (teams[teamInt].tData.Count <= i)
                         {
-                            // // set this in ui manager
-                            // teams[teamInt].tData.Add(teams[y].tData[i]);
-                            // SetTeam(teams[y].tData[i].gameObject, teamInt);
-                            // teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
+                            // set this in ui manager
+                            teams[teamInt].tData.Add(teams[y].tData[i]);
+                            SetTeam(teams[y].tData[i].gameObject, teamInt);
+                            teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
 
-                            // for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
-                            // {
-                            //     if (teams[teamInt].tData[yi].playerId == localPlayerId)
-                            //     {
-                            //         teams[teamInt].tData[yi].teamID = teamInt;
-                            //     }
-                            // }
+                            for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
+                            {
+                                if (teams[teamInt].tData[yi].playerId == localPlayerId)
+                                {
+                                    teams[teamInt].tData[yi].teamID = teamInt;
+                                }
+                            }
 
-                            // for (int ji = 0; ji < players.Count; ji++)
-                            // {
-                            //     if (players[ji].GetComponent<PlayerData>().playerId == localPlayerId)
-                            //     {
-                            //         players[ji].GetComponent<PlayerData>().UI.transform.SetParent(rects[teamInt].transform);
-                            //         StartCoroutine(WaitYouDipshit());
-                            //     }
-                            // }
+                            for (int ji = 0; ji < players.Count; ji++)
+                            {
+                                if (players[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                                {
+                                    players[ji].GetComponent<PlayerData>().UI.transform.SetParent(rects[teamInt].transform);
+                                    StartCoroutine(WaitYouDipshit());
+                                }
+                            }
 
                             return;
                         }
@@ -133,27 +120,27 @@ public class TeamManager : NetworkBehaviour
                                 }
                             }
 
-                            // teams[teamInt].tData.Add(teams[y].tData[i]);
-                            // SetTeam(teams[y].tData[i].gameObject, teamInt);
-                            // teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
+                            teams[teamInt].tData.Add(teams[y].tData[i]);
+                            SetTeam(teams[y].tData[i].gameObject, teamInt);
+                            teams[teams[y].tData[i].teamID].tData.Remove(teams[y].tData[i]);
 
-                            // for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
-                            // {
+                            for (int yi = 0; yi < teams[teamInt].tData.Count; yi++)
+                            {
 
-                            //     if (teams[teamInt].tData[yi].playerId == localPlayerId)
-                            //     {
-                            //         teams[teamInt].tData[yi].teamID = teamInt;
-                            //     }
-                            // }
+                                if (teams[teamInt].tData[yi].playerId == localPlayerId)
+                                {
+                                    teams[teamInt].tData[yi].teamID = teamInt;
+                                }
+                            }
 
-                            // for (int ji = 0; ji < players.Count; ji++)
-                            // {
-                            //     if (players[ji].GetComponent<PlayerData>().playerId == localPlayerId)
-                            //     {
-                            //         players[ji].GetComponent<PlayerData>().UI.transform.SetParent(rects[teamInt].transform);
-                            //         StartCoroutine(WaitYouDipshit());
-                            //     }
-                            // }
+                            for (int ji = 0; ji < players.Count; ji++)
+                            {
+                                if (players[ji].GetComponent<PlayerData>().playerId == localPlayerId)
+                                {
+                                    players[ji].GetComponent<PlayerData>().UI.transform.SetParent(rects[teamInt].transform);
+                                    StartCoroutine(WaitYouDipshit());
+                                }
+                            }
                         }
                     }
                 }
@@ -165,8 +152,8 @@ public class TeamManager : NetworkBehaviour
     [ObserversRpc]
     public void SetTeam(GameObject data, int TeamInt)
     {
-        // teams[TeamInt].tData.Add(data.GetComponent<PlayerData>());
-        // teams[data.GetComponent<PlayerData>().teamID].tData.Remove(data.GetComponent<PlayerData>());
+        teams[TeamInt].tData.Add(data.GetComponent<PlayerData>());
+        teams[data.GetComponent<PlayerData>().teamID].tData.Remove(data.GetComponent<PlayerData>());
 
     }
     public IEnumerator WaitYouDipshit()
@@ -185,7 +172,7 @@ public class TeamManager : NetworkBehaviour
     {
         for (int x = 0; x < players.Count; x++)
         {
-
+            players[x].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
             // ui[x].transform.SetParent(rects[players[x].GetComponent<PlayerData>().teamID].transform);
         }
     }
@@ -202,6 +189,7 @@ public class TeamManager : NetworkBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
+            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
             // ui[i].transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
         }
         ParentPlayerUIObserver(team);
@@ -211,6 +199,7 @@ public class TeamManager : NetworkBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
+            players[i].GetComponent<PlayerData>().UI.transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
             // ui[i].transform.SetParent(rects[players[i].GetComponent<PlayerData>().teamID].transform);
         }
     }
@@ -224,14 +213,14 @@ public class TeamManager : NetworkBehaviour
             {
                 for (int x = 0; x < switchTeamButtons.Length; x++)
                 {
-                    // if (x == players[i].GetComponent<PlayerData>().teamID)
-                    // {
-                    //     switchTeamButtons[x].SetActive(false);
-                    // }
-                    // else
-                    // {
-                    //     switchTeamButtons[x].SetActive(true);
-                    // }
+                    if (x == players[i].GetComponent<PlayerData>().teamID)
+                    {
+                        switchTeamButtons[x].SetActive(false);
+                    }
+                    else
+                    {
+                        switchTeamButtons[x].SetActive(true);
+                    }
                 }
             }
         }
@@ -241,19 +230,19 @@ public class TeamManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerNameServer()
     {
-        // for (int i = 0; i < players.Count; i++)
-        // {
-        //     players[i].GetComponent<PlayerData>().UI.transform.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
-        // }
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].GetComponent<PlayerData>().UI.transform.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
+        }
         SetPlayerNameObserver();
     }
     [ObserversRpc]
     public void SetPlayerNameObserver()
     {
-        // for (int i = 0; i < players.Count; i++)
-        // {
-        //     players[i].GetComponent<PlayerData>().UI.transform.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
-        // }
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].GetComponent<PlayerData>().UI.transform.GetComponentInChildren<TMP_Text>().text = players[i].GetComponent<PlayerData>().username;
+        }
     }
 
     public void StartGameButton()
@@ -261,11 +250,11 @@ public class TeamManager : NetworkBehaviour
         bool allTrue = true;
         for (int i = 0; i < players.Count - 1; i++)
         {
-            // if (!players[i].GetComponent<PlayerData>().isReady)
-            // {
-            //     allTrue = false;
-            //     break;
-            // }
+            if (!players[i].GetComponent<PlayerData>().isReady)
+            {
+                allTrue = false;
+                break;
+            }
         }
         if (allTrue == false)
             return;
@@ -305,7 +294,7 @@ public class TeamManager : NetworkBehaviour
             if (players[y].GetComponent<PlayerData>().playerId == Id)
             {
                 print("hai3");
-                //players[y].GetComponent<PlayerData>().isReady = value;
+                players[y].GetComponent<PlayerData>().isReady = value;
             }
         }
     }
