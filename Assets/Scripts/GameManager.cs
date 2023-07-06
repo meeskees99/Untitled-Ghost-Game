@@ -50,6 +50,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] bool team1Halfway;
     [SerializeField] bool team2Halfway;
 
+    NetworkHudCanvases networkHudCanvases;
     LoadManager loader;
 
     int id;
@@ -57,11 +58,12 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        networkHudCanvases = FindObjectOfType<NetworkHudCanvases>();
         if (IsHost)
         {
             SetTeamPoints();
             // doe * 60 na testen
-            timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
+            timeLimit = PlayerPrefs.GetInt("PlayTime");
             timeLeft = timeLimit;
             timeText.text = timeLeft.ToString("0:00");
         }
@@ -322,8 +324,9 @@ public class GameManager : NetworkBehaviour
 
     public void EndGame(bool timeUp)
     {
-        loader.SceneToUnload = "Game";
-        loader.SceneToLoad = "Lobby Test";
+        ClickClient();
+        // loader.SceneToUnload = "Game";
+        // loader.SceneToLoad = "Main Menu Test";
         loader.StartLoading = true;
         if (timeUp)
         {
@@ -340,5 +343,22 @@ public class GameManager : NetworkBehaviour
     {
         friendlyHalfwayUI.SetActive(false);
         halfWayWarning.SetActive(false);
+    }
+    public void ClickClient()
+    {
+        if (InstanceFinder.ClientManager.Connection.ClientId == 0)
+        {
+            ClickHost();
+        }
+        else
+        {
+            networkHudCanvases.OnClick_Client();
+        }
+    }
+
+    public void ClickHost()
+    {
+        networkHudCanvases.OnClick_Server();
+        networkHudCanvases.OnClick_Client();
     }
 }
