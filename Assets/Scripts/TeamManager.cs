@@ -58,7 +58,7 @@ public class TeamManager : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        SpawnUI();
+        //SpawnUI();
         for (int i = 0; i < players.Count; i++)
         {
             players[i].GetComponent<PlayerData>().SetPlayerTeam();
@@ -66,11 +66,11 @@ public class TeamManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void SpawnUI()
+    public void SpawnUI(NetworkObject NetObj)
     {
         GameObject uiSpawn = Instantiate(UIprefab);
         ui.Add(uiSpawn);
-        Spawn(uiSpawn);
+        Spawn(uiSpawn, NetObj.Owner);
     }
     [ServerRpc(RequireOwnership = false)]
     public void JoinTeam(int teamInt, int localPlayerId)

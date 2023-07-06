@@ -48,6 +48,7 @@ public class PlayerData : NetworkBehaviour
         }
         else if (!idk)
         {
+            manager.SpawnUI(this.NetworkObject);
             manager.players.Add(this.gameObject);
             manager.currentClients++;
             idk = true;
