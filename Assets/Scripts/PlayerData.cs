@@ -106,7 +106,7 @@ public class PlayerData : NetworkBehaviour
         if (PlayerPrefs.HasKey("username"))
         {
             GetUsernameServer(PlayerPrefs.GetString("username").ToString());
-            // print("Player: " + LocalConnection.ClientId);
+            print("Player: " + PlayerPrefs.GetString("username"));
         }
         else
         {
