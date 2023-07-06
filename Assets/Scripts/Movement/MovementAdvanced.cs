@@ -113,13 +113,15 @@ public class MovementAdvanced : NetworkBehaviour
         }
 
         int babaoooo = PlayerPrefs.GetInt("Character");
+        print(babaoooo + " char int onclient");
         CharInt(babaoooo);
     }
+    bool charIntSet;
     [ServerRpc(RequireOwnership = false)]
     void CharInt(int charint)
     {
         characterIndex = charint;
-
+        charIntSet = true;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -165,13 +167,16 @@ public class MovementAdvanced : NetworkBehaviour
         tankLights.Add(character[index].transform.GetChild(5).gameObject);
         tankLights.Add(character[index].transform.GetChild(6).gameObject);
         tankLights.Add(character[index].transform.GetChild(7).gameObject);
-        SetCharObserver(index);
     }
 
-
+    bool charset;
     private void Update()
     {
-        SetChar(characterIndex);
+        if (charIntSet && !charset)
+        {
+            charset = true;
+            SetChar(characterIndex);
+        }
 
         if (animator == null)
         {
@@ -196,8 +201,8 @@ public class MovementAdvanced : NetworkBehaviour
         {
             rb.drag = 0f;
         }
-
-        SetLightValue(stofZuiger.GhostPoints);
+        if (charset)
+            SetLightValue(stofZuiger.GhostPoints);
     }
 
     private void FixedUpdate()
@@ -439,6 +444,8 @@ public class MovementAdvanced : NetworkBehaviour
         }
         for (int y = 2; y > value - 1; y--)
         {
+            print(y + "y");
+            print(value + "value");
             gunLights[y].SetActive(false);
             tankLights[y].SetActive(false);
         }

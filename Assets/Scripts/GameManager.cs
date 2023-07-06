@@ -321,8 +321,10 @@ public class GameManager : NetworkBehaviour
 
     public void EndGame(bool timeUp)
     {
-        string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        loader.SceneToUnload = scene;
+        loader.SceneToUnload = "Game";
+        NetworkHudCanvases networkHudCanvases = FindObjectOfType<NetworkHudCanvases>();
+        networkHudCanvases.OnClick_Client();
+        networkHudCanvases.OnClick_Server();
         loader.StartLoading = true;
         if (timeUp)
         {
