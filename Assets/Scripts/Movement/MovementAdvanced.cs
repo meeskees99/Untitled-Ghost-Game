@@ -41,6 +41,9 @@ public class MovementAdvanced : NetworkBehaviour
     public GameObject[] character;
     [SyncVar] public int characterIndex;
 
+    public List<GameObject> gunLights = new();
+    public List<GameObject> tankLights = new();
+
     [SyncVar] bool canSteal;
 
     [SerializeField] Transform orientation;
@@ -113,11 +116,12 @@ public class MovementAdvanced : NetworkBehaviour
         int babaoooo = PlayerPrefs.GetInt("Character");
         CharInt(babaoooo);
     }
+    bool charIntSet;
     [ServerRpc(RequireOwnership = false)]
     void CharInt(int charint)
     {
         characterIndex = charint;
-
+        charIntSet = true;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -134,10 +138,21 @@ public class MovementAdvanced : NetworkBehaviour
                 character[i].SetActive(false);
             }
         }
+
+
         animator = character[index].GetComponent<Animator>();
         stofZuiger.animator = character[index].GetComponent<Animator>();
 
+        gunLights.Add(character[index].transform.GetChild(1).gameObject);
+        gunLights.Add(character[index].transform.GetChild(2).gameObject);
+        gunLights.Add(character[index].transform.GetChild(3).gameObject);
+
+        tankLights.Add(character[index].transform.GetChild(5).gameObject);
+        tankLights.Add(character[index].transform.GetChild(6).gameObject);
+        tankLights.Add(character[index].transform.GetChild(7).gameObject);
         SetCharObserver(index);
+
+
     }
     [ObserversRpc]
     void SetCharObserver(int index)
@@ -157,11 +172,14 @@ public class MovementAdvanced : NetworkBehaviour
         stofZuiger.animator = character[index].GetComponent<Animator>();
     }
 
-
+    bool charSet;
     private void Update()
     {
-        SetChar(characterIndex);
-
+        if (!charSet && charIntSet)
+        {
+            charSet = true;
+            SetChar(characterIndex);
+        }
         if (animator == null)
         {
             return;
@@ -185,6 +203,8 @@ public class MovementAdvanced : NetworkBehaviour
         {
             rb.drag = 0f;
         }
+
+        SetTankValue(stofZuiger.GhostPoints);
     }
 
     private void FixedUpdate()
@@ -414,6 +434,20 @@ public class MovementAdvanced : NetworkBehaviour
             return;
 
         animator.SetBool(s, b);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void SetTankValue(int value)
+    {
+        for (int i = 0; i < value; i++)
+        {
+            gunLights[i].SetActive(true);
+            tankLights[i].SetActive(true);
+        }
+        for (int y = 2; y > value - 1; y--)
+        {
+            gunLights[y].SetActive(false);
+            tankLights[y].SetActive(false);
+        }
     }
 
 }

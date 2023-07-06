@@ -63,7 +63,7 @@ public class GameManager : NetworkBehaviour
         {
             SetTeamPoints();
             // doe * 60 na testen
-            timeLimit = PlayerPrefs.GetInt("PlayTime");
+            timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
             timeLeft = timeLimit;
             timeText.text = timeLeft.ToString("0:00");
         }
@@ -262,8 +262,8 @@ public class GameManager : NetworkBehaviour
         }
         tijd -= Time.deltaTime;
 
-        float minutes = (tijd / 60);
-        float seconds = (tijd % 60);
+        float minutes = Mathf.FloorToInt(tijd / 60);
+        float seconds = Mathf.FloorToInt(tijd % 60);
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
