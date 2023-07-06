@@ -75,9 +75,10 @@ public class PlayerData : NetworkBehaviour
         SetIDObserver(Id);
         print(playerId + " player id");
     }
-
+    [ObserversRpc]
     void SetIDObserver(int id)
     {
+        print(id + "observerID");
         playerId = id;
     }
 
