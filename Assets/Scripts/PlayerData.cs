@@ -16,7 +16,7 @@ public class PlayerData : NetworkBehaviour
 
     public TeamManager manager;
 
-    [SyncVar] public string username;
+    public string username;
 
     public GameObject UI;
 
@@ -106,7 +106,14 @@ public class PlayerData : NetworkBehaviour
     {
         print("Server name = " + name);
         username = name;
+        UsernameObserver(name);
         manager.SetPlayerNameServer();
+    }
+
+    public void UsernameObserver(string name)
+    {
+        print("Obserer naem = " + name);
+        username = name;
     }
 
     [ServerRpc(RequireOwnership = true)]
