@@ -58,13 +58,13 @@ public class PlayerData : NetworkBehaviour
         Destroy(UI);
         manager.currentClients--;
     }
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void SetPlayerID(int id)
     {
         playerId = id;
     }
 
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void SetPlayerTeam()
     {
         if (manager.teams[0].tData.Count - 1 <= manager.teams[1].tData.Count - 1)
@@ -83,7 +83,7 @@ public class PlayerData : NetworkBehaviour
         }
         StartCoroutine(manager.WaitSomeMoreDickHead());
     }
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     public void SetParentTeam()
     {
         manager.ParentPlayerUIServer(teamID);
