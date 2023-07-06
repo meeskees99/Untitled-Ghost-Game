@@ -67,13 +67,14 @@ public class PlayerData : NetworkBehaviour
         username = name;
     }
 
-    [ServerRpc(RequireOwnership = true)]
+    [ServerRpc(RequireOwnership = false)]
     void SetPlayerID(int Id)
     {
         print(Id + " id server");
         playerId = Id;
         print(playerId + " player id");
     }
+
 
 
 
