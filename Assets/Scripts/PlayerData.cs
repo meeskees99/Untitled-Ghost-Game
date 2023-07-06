@@ -29,14 +29,14 @@ public class PlayerData : NetworkBehaviour
 
     void Start()
     {
-        if (IsHost && playerId == 0)
-        {
+        // if (IsHost && playerId == 0)
+        // {
 
-        }
-        else if (IsOwner)
-        {
+        // }
+        // else if (IsOwner)
+        // {
 
-        }
+        // }
     }
 
     public override void OnStartClient()
