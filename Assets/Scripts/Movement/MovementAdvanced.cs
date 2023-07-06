@@ -142,13 +142,13 @@ public class MovementAdvanced : NetworkBehaviour
         animator = character[index].GetComponent<Animator>();
         stofZuiger.animator = character[index].GetComponent<Animator>();
 
-        // gunLights.Add(character[index].transform.GetChild(1).gameObject);
-        // gunLights.Add(character[index].transform.GetChild(2).gameObject);
-        // gunLights.Add(character[index].transform.GetChild(3).gameObject);
+        gunLights.Add(character[index].transform.GetChild(1).gameObject);
+        gunLights.Add(character[index].transform.GetChild(2).gameObject);
+        gunLights.Add(character[index].transform.GetChild(3).gameObject);
 
-        // tankLights.Add(character[index].transform.GetChild(5).gameObject);
-        // tankLights.Add(character[index].transform.GetChild(6).gameObject);
-        // tankLights.Add(character[index].transform.GetChild(7).gameObject);
+        tankLights.Add(character[index].transform.GetChild(5).gameObject);
+        tankLights.Add(character[index].transform.GetChild(6).gameObject);
+        tankLights.Add(character[index].transform.GetChild(7).gameObject);
         SetCharObserver(index);
     }
     [ObserversRpc]
@@ -168,13 +168,13 @@ public class MovementAdvanced : NetworkBehaviour
         animator = character[index].GetComponent<Animator>();
         stofZuiger.animator = character[index].GetComponent<Animator>();
 
-        // gunLights.Add(character[index].transform.GetChild(1).gameObject);
-        // gunLights.Add(character[index].transform.GetChild(2).gameObject);
-        // gunLights.Add(character[index].transform.GetChild(3).gameObject);
+        gunLights.Add(character[index].transform.GetChild(1).gameObject);
+        gunLights.Add(character[index].transform.GetChild(2).gameObject);
+        gunLights.Add(character[index].transform.GetChild(3).gameObject);
 
-        // tankLights.Add(character[index].transform.GetChild(5).gameObject);
-        // tankLights.Add(character[index].transform.GetChild(6).gameObject);
-        // tankLights.Add(character[index].transform.GetChild(7).gameObject);
+        tankLights.Add(character[index].transform.GetChild(5).gameObject);
+        tankLights.Add(character[index].transform.GetChild(6).gameObject);
+        tankLights.Add(character[index].transform.GetChild(7).gameObject);
     }
 
     bool charSet;
@@ -441,19 +441,19 @@ public class MovementAdvanced : NetworkBehaviour
 
         animator.SetBool(s, b);
     }
-    // [ServerRpc(RequireOwnership = false)]
-    // public void SetTankValue(int value)
-    // {
-    //     for (int i = 0; i < value; i++)
-    //     {
-    //         gunLights[i].SetActive(true);
-    //         tankLights[i].SetActive(true);
-    //     }
-    //     for (int y = 2; y > value - 1; y--)
-    //     {
-    //         gunLights[y].SetActive(false);
-    //         tankLights[y].SetActive(false);
-    //     }
-    // }
+    [ServerRpc(RequireOwnership = false)]
+    public void SetTankValue(int value)
+    {
+        for (int i = 0; i < value; i++)
+        {
+            gunLights[i].SetActive(true);
+            tankLights[i].SetActive(true);
+        }
+        for (int y = 2; y > value - 1; y--)
+        {
+            gunLights[y].SetActive(false);
+            tankLights[y].SetActive(false);
+        }
+    }
 
 }
