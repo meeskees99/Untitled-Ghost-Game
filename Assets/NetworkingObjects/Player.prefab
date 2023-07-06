@@ -251,7 +251,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718954057773777429}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ff7d77240159b540975cd6a43905834, type: 3}
   m_Name: 
@@ -289,6 +289,7 @@ MonoBehaviour:
   wallWalk: 0
   stofZuiger: {fileID: 3418064442683254627}
   state: 0
+  charIntSet: 0
   shootPos: {fileID: 1718954057773777526}
 --- !u!114 &1718954057773777580
 MonoBehaviour:

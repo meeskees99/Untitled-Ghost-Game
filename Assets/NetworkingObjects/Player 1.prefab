@@ -1159,7 +1159,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648156101711116289}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ff7d77240159b540975cd6a43905834, type: 3}
   m_Name: 
@@ -1198,6 +1198,7 @@ MonoBehaviour:
   wallWalk: 0
   stofZuiger: {fileID: 3479913146631314807}
   state: 0
+  charIntSet: 0
   shootPos: {fileID: 648156101711116386}
 --- !u!114 &648156101711116472
 MonoBehaviour:
@@ -15490,7 +15491,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1725
+  m_VersionIndex: 1728
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
