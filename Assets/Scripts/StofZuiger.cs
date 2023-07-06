@@ -296,7 +296,8 @@ public class StofZuiger : NetworkBehaviour
     {
         if (IsHost)
             return;
-        animator.SetBool("IsSucking", suckstate);
+        if (animator != null)
+            animator.SetBool("IsSucking", suckstate);
     }
     #endregion
 }
