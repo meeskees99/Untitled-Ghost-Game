@@ -71,6 +71,7 @@ public class PlayerData : NetworkBehaviour
     void SetPlayerID(int Id)
     {
         playerId = Id;
+        print(playerId);
     }
 
 
