@@ -54,7 +54,6 @@ public class PlayerData : NetworkBehaviour
         }
     }
 
-    [ObserversRpc]
     public override void OnStartClient()
     {
         base.OnStartClient();
