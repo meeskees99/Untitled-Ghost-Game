@@ -56,7 +56,7 @@ Material:
     - _Speed: 28.2
     - _noiseScale: 56.1
     m_Colors:
-    - _Color1: {r: 0.09973043, g: 1, b: 0.93714494, a: 1}
+    - _Color1: {r: 0.55764216, g: 1, b: 0.3915094, a: 1}
     - _Color2: {r: 0.18214412, g: 0.27268952, b: 0.2735849, a: 1}
     - _GlassColor: {r: 0, g: 0, b: 0, a: 0.87058824}
   m_BuildTextureStacks: []
