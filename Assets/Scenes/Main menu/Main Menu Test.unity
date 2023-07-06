@@ -3132,7 +3132,7 @@ PrefabInstance:
     - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _playerPrefab
       value: 
-      objectReference: {fileID: 1718954057773777580, guid: 3c17daa0990b23c4aaf4c6ff959a7b08, type: 3}
+      objectReference: {fileID: 648156101711116472, guid: d6c92be2e46d2064f9e2fca2bd5906c7, type: 3}
     - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: Spawns.Array.size
       value: 1
@@ -27271,11 +27271,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unreliableMTU: 1023
-  _ipv4BindAddress: 10.151.5.79
+  _ipv4BindAddress: 192.168.0.126
   _ipv6BindAddress: 
   _port: 7770
   _maximumClients: 6
-  _clientAddress: 10.151.5.79
+  _clientAddress: 82.170.101.24
   _timeout: 15
 --- !u!1 &1979003485
 GameObject:

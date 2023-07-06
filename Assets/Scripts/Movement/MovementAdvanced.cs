@@ -113,10 +113,9 @@ public class MovementAdvanced : NetworkBehaviour
         }
 
         int babaoooo = PlayerPrefs.GetInt("Character");
-        print(babaoooo + " char int onclient");
         CharInt(babaoooo);
     }
-    bool charIntSet;
+    [SyncVar] bool charIntSet;
     [ServerRpc(RequireOwnership = false)]
     void CharInt(int charint)
     {
@@ -138,9 +137,18 @@ public class MovementAdvanced : NetworkBehaviour
                 character[i].SetActive(false);
             }
         }
+
+
         animator = character[index].GetComponent<Animator>();
         stofZuiger.animator = character[index].GetComponent<Animator>();
 
+        gunLights.Add(character[index].transform.GetChild(1).gameObject);
+        gunLights.Add(character[index].transform.GetChild(2).gameObject);
+        gunLights.Add(character[index].transform.GetChild(3).gameObject);
+
+        tankLights.Add(character[index].transform.GetChild(5).gameObject);
+        tankLights.Add(character[index].transform.GetChild(6).gameObject);
+        tankLights.Add(character[index].transform.GetChild(7).gameObject);
         SetCharObserver(index);
     }
     [ObserversRpc]
@@ -169,15 +177,14 @@ public class MovementAdvanced : NetworkBehaviour
         tankLights.Add(character[index].transform.GetChild(7).gameObject);
     }
 
-    bool charset;
+    bool charSet;
     private void Update()
     {
-        if (charIntSet && !charset)
+        if (!charSet && charIntSet)
         {
-            charset = true;
+            charSet = true;
             SetChar(characterIndex);
         }
-
         if (animator == null)
         {
             return;
@@ -201,8 +208,8 @@ public class MovementAdvanced : NetworkBehaviour
         {
             rb.drag = 0f;
         }
-        if (charset)
-            SetLightValue(stofZuiger.GhostPoints);
+
+        SetTankValue(stofZuiger.GhostPoints);
     }
 
     private void FixedUpdate()
@@ -433,9 +440,8 @@ public class MovementAdvanced : NetworkBehaviour
 
         animator.SetBool(s, b);
     }
-
     [ServerRpc(RequireOwnership = false)]
-    public void SetLightValue(int value)
+    public void SetTankValue(int value)
     {
         for (int i = 0; i < value; i++)
         {
@@ -444,10 +450,9 @@ public class MovementAdvanced : NetworkBehaviour
         }
         for (int y = 2; y > value - 1; y--)
         {
-            print(y + "y");
-            print(value + "value");
             gunLights[y].SetActive(false);
             tankLights[y].SetActive(false);
         }
     }
+
 }
