@@ -40,7 +40,6 @@ public class MovementAdvanced : NetworkBehaviour
     [Header("Character")]
     public GameObject[] character;
     [SyncVar] public int characterIndex;
-
     public List<GameObject> gunLights = new();
     public List<GameObject> tankLights = new();
 
@@ -116,7 +115,7 @@ public class MovementAdvanced : NetworkBehaviour
         int babaoooo = PlayerPrefs.GetInt("Character");
         CharInt(babaoooo);
     }
-    bool charIntSet;
+    [SyncVar] bool charIntSet;
     [ServerRpc(RequireOwnership = false)]
     void CharInt(int charint)
     {

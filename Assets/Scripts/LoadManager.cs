@@ -64,7 +64,7 @@ public class LoadManager : NetworkBehaviour
         }
     }
 
-    public event Action<SceneLoadPercentEventArgs> OnLoadPercentChange;
+    //public event Action<SceneLoadPercentEventArgs> OnLoadPercentChange;
     private void OnEnable()
     {
         if (SceneManager != null)
