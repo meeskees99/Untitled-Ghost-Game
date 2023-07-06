@@ -254,12 +254,12 @@ public class GameManager : NetworkBehaviour
     [ObserversRpc]
     void ObserverTimer(float tijd)
     {
-        if (!started)
-        {
-            started = true;
-            tijd = timeLimit;
-        }
-        tijd -= Time.deltaTime;
+        // if (!started)
+        // {
+        //     started = true;
+        //     tijd = timeLimit;
+        // }
+        // tijd -= Time.deltaTime;
 
         float minutes = Mathf.FloorToInt(tijd / 60);
         float seconds = Mathf.FloorToInt(tijd % 60);
