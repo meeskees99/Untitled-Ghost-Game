@@ -19,6 +19,11 @@ public class TeamUiManger : NetworkBehaviour
         if (IsHost)
         {
             GameObject[] temp = GameObject.FindGameObjectsWithTag("Player");
+            if (temp.Length == 0)
+            {
+                team1Players.Add(temp[0]);
+            }
+
             for (int i = 0; i < temp.Length; i++)
             {
                 if (temp[i].GetComponent<PlayerData>().teamID == 0)
@@ -31,7 +36,7 @@ public class TeamUiManger : NetworkBehaviour
                 }
             }
         }
-        
+
         SetPlayerNames();
 
     }
