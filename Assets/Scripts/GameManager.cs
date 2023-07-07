@@ -85,13 +85,14 @@ public class GameManager : NetworkBehaviour
     }
 
     bool timerset;
+    bool setPlayers;
     void Update()
     {
         if (networkHudCanvases == null)
         {
             networkHudCanvases = FindObjectOfType<NetworkHudCanvases>();
         }
-        if (players == null)
+        if (!setPlayers)
         {
             if (IsHost && !timerset)
             {
@@ -311,6 +312,7 @@ public class GameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     void SetTeamPoints()
     {
+        setPlayers = true;
         players = FindObjectsOfType<PlayerData>();
         print(players + " players");
         for (int i = 0; i < players.Length; i++)
