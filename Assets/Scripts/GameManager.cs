@@ -100,12 +100,12 @@ public class GameManager : NetworkBehaviour
                 print("ishost");
                 print("setteampoints");
                 // doe * 60 na testen
+                SetTeamPoints();
                 timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
                 timeLeft = timeLimit;
                 timeText.text = timeLeft.ToString("0:00");
             }
 
-            SetTeamPoints();
 
             for (int p = 0; p < players.Length; p++)
             {
