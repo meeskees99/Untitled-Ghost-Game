@@ -98,7 +98,7 @@ public class MouseLookAdvanced : NetworkBehaviour
                     }
                     else if (hit.transform.tag == "Door")
                     {
-                        SetBoolAnim(hit.transform.GetComponent<Animator>());
+                        SetBoolAnim(hit.transform);
                     }
                 }
             }
@@ -124,31 +124,18 @@ public class MouseLookAdvanced : NetworkBehaviour
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
-    [ObserversRpc]
-    void Doors()
-    {
-
-    }
     [ServerRpc(RequireOwnership = true)]
-    public void SetBoolAnim(Animator animator)
+    public void SetBoolAnim(Transform hit)
     {
-        if (animator == null)
-        {
-            return;
-        }
-        animator.SetTrigger("Toggle");
-        SetBoolObserver(hit.transform.GetComponent<Animator>());
+        hit.GetComponent<Animator>().SetTrigger("Toggle");
+        SetBoolObserver(hit);
     }
     [ObserversRpc]
-    public void SetBoolObserver(Animator animator)
+    public void SetBoolObserver(Transform hit)
     {
-        if (animator == null)
-        {
-            return;
-        }
         if (IsHost)
             return;
 
-        animator.SetTrigger("Toggle");
+        hit.GetComponent<Animator>().SetTrigger("Toggle");
     }
 }
