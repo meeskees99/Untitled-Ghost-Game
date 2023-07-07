@@ -7143,7 +7143,7 @@ MonoBehaviour:
     m_Options:
     - m_Text: School
       m_Image: {fileID: 0}
-    - m_Text: Blockout
+    - m_Text: ArtScene
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
