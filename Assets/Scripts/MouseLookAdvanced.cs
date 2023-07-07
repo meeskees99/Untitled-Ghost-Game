@@ -73,7 +73,7 @@ public class MouseLookAdvanced : NetworkBehaviour
                     }
                     else if (hit.transform.tag == "Door")
                     {
-                        hit.transform.GetComponent<Animator>().SetTrigger("Open");
+                        hit.transform.GetComponent<Animator>().SetTrigger("Toggle");
                     }
                 }
             }
