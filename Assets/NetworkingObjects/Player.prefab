@@ -16505,6 +16505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tornado (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8024193072864788984, guid: c178347497218d94abd6c584c3a71a0a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c178347497218d94abd6c584c3a71a0a, type: 3}
 --- !u!4 &7943836320543696320 stripped
@@ -18266,6 +18270,7 @@ MonoBehaviour:
   fireSpeed: 20
   ghostToShoot: {fileID: 0}
   playerBullet: {fileID: 5971678057664422469, guid: fd91be2ed7d136b49aa8820e25c40c3c, type: 3}
+  tornado: {fileID: 0}
   animator: {fileID: 0}
   maxGhostPoints: 3
   ghostPoints: 0
@@ -18392,6 +18397,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tornado
       objectReference: {fileID: 0}
+    - target: {fileID: 8024193072864788984, guid: c178347497218d94abd6c584c3a71a0a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c178347497218d94abd6c584c3a71a0a, type: 3}
 --- !u!4 &5391465792119227073 stripped
@@ -18453,6 +18462,10 @@ PrefabInstance:
     - target: {fileID: 8024193072864788984, guid: c178347497218d94abd6c584c3a71a0a, type: 3}
       propertyPath: m_Name
       value: Tornado (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8024193072864788984, guid: c178347497218d94abd6c584c3a71a0a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c178347497218d94abd6c584c3a71a0a, type: 3}
