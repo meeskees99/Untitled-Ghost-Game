@@ -373,7 +373,7 @@ public class GameManager : NetworkBehaviour
     public void EndGame(bool timeUp)
     {
         ClickClient();
-        loader.SceneToUnload = "Game";
+        loader.SceneToUnload = "School";
         loader.SceneToLoad = "Main Menu Test";
         loader.StartLoading = true;
         if (timeUp)
