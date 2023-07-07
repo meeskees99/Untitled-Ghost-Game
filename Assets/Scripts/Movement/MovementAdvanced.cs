@@ -150,6 +150,9 @@ public class MovementAdvanced : NetworkBehaviour
         tankLights.Add(character[index].transform.GetChild(5).gameObject);
         tankLights.Add(character[index].transform.GetChild(6).gameObject);
         tankLights.Add(character[index].transform.GetChild(7).gameObject);
+
+        stofZuiger.tornado = character[index].transform.GetChild(4).GetChild(1).GetChild(0).GetChild(0).gameObject;
+
         SetCharObserver(index);
     }
     [ObserversRpc(BufferLast = true)]
