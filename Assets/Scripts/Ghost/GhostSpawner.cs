@@ -54,7 +54,8 @@ public class GhostSpawner : NetworkBehaviour
     [ObserversRpc]
     public void Settrans()
     {
-        currentGhost.transform.position = this.transform.position;
+        if (currentGhost != null)
+            currentGhost.transform.position = this.transform.position;
     }
 
     float CalculateSpawnChance()
