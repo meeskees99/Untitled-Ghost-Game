@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Alientank
-  m_Shader: {fileID: -6465566751694194690, guid: 0151f1c888d17f64e998cd469c98594c, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 783c57fb00a6a2c4a9219330d75a78c9, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -48,7 +48,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _EmissionStrength: 1.5
-    - _Float: 0.5
+    - _Float: -0.43
     - _GlassPower: 0.58
     - _Multiply: 1
     - _QueueControl: 0
@@ -56,7 +56,7 @@ Material:
     - _Speed: 28.2
     - _noiseScale: 56.1
     m_Colors:
-    - _Color1: {r: 0.09973043, g: 1, b: 0.93714494, a: 1}
+    - _Color1: {r: 0.55764216, g: 1, b: 0.3915094, a: 1}
     - _Color2: {r: 0.18214412, g: 0.27268952, b: 0.2735849, a: 1}
     - _GlassColor: {r: 0, g: 0, b: 0, a: 0.87058824}
   m_BuildTextureStacks: []
