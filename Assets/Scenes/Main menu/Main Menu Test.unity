@@ -27271,11 +27271,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unreliableMTU: 1023
-  _ipv4BindAddress: 192.168.0.126
+  _ipv4BindAddress: 10.151.12.108
   _ipv6BindAddress: 
   _port: 7770
   _maximumClients: 6
-  _clientAddress: 82.170.101.24
+  _clientAddress: 10.151.12.108
   _timeout: 15
 --- !u!1 &1979003485
 GameObject:

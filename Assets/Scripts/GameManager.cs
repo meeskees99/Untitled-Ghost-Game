@@ -63,6 +63,17 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
+        if (IsHost)
+        {
+            print("ishost");
+            print("setteampoints");
+            // doe * 60 na testen
+            timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
+            timeLeft = timeLimit;
+            timeText.text = timeLeft.ToString("0:00");
+        }
         for (int p = 0; p < players.Length; p++)
         {
             if (players[p].teamID == 0)
@@ -83,14 +94,6 @@ public class GameManager : NetworkBehaviour
             team2Characters[i].sprite = characterSprites[team2Players[i].transform.GetComponent<MovementAdvanced>().characterIndex];
         }
         networkHudCanvases = FindObjectOfType<NetworkHudCanvases>();
-        if (IsHost)
-        {
-            SetTeamPoints();
-            // doe * 60 na testen
-            timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
-            timeLeft = timeLimit;
-            timeText.text = timeLeft.ToString("0:00");
-        }
         id = InstanceFinder.ClientManager.Connection.ClientId;
         for (int i = 0; i < players.Length; i++)
         {
@@ -119,6 +122,10 @@ public class GameManager : NetworkBehaviour
     }
     void Update()
     {
+        if (players != null)
+        {
+            SetTeamPoints();
+        }
         if (loader == null)
         {
             loader = FindObjectOfType<LoadManager>();
@@ -294,6 +301,7 @@ public class GameManager : NetworkBehaviour
     void SetTeamPoints()
     {
         players = FindObjectsOfType<PlayerData>();
+        print(players + " players");
         for (int i = 0; i < players.Length; i++)
         {
             if (players[i].teamID == 0)
