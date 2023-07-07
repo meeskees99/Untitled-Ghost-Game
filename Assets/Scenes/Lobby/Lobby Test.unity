@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4593,7 +4593,6 @@ MonoBehaviour:
   - {fileID: 1026604575}
   - {fileID: 635624584}
   UIprefab: {fileID: 1028100556996646672, guid: 659e2521d9aef0c4bbe5558827a76718, type: 3}
-  ui: []
   LobbyToLoad: 
   loader: {fileID: 0}
   players: []
@@ -6974,7 +6973,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game
+  m_text: School
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 006f7b082705aa0479712f3dd8138bd5, type: 2}
   m_sharedMaterial: {fileID: 5445618783570395016, guid: 006f7b082705aa0479712f3dd8138bd5, type: 2}
@@ -7142,7 +7141,7 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Game
+    - m_Text: School
       m_Image: {fileID: 0}
     - m_Text: Blockout
       m_Image: {fileID: 0}
