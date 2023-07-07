@@ -2326,6 +2326,20 @@ MonoBehaviour:
   - {fileID: 2026405232}
   - {fileID: 100830210}
   - {fileID: 1734347899}
+  team1Players: []
+  team2Players: []
+  characterSprites:
+  - {fileID: 21300000, guid: f0c1872b9dd48db4884be8a79c26f534, type: 3}
+  - {fileID: 21300000, guid: d118964be270d164dbb1501be15c494d, type: 3}
+  - {fileID: 21300000, guid: 193b8a6fcc14f2548ab9724702aca596, type: 3}
+  team1Characters:
+  - {fileID: 16715404}
+  - {fileID: 1056880334}
+  - {fileID: 587882624}
+  team2Characters:
+  - {fileID: 160599343}
+  - {fileID: 1590724330}
+  - {fileID: 2058378689}
   team1Index: 0
   team2Index: 0
   team1Points: 0

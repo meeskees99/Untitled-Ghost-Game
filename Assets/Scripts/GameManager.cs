@@ -13,6 +13,11 @@ public class GameManager : NetworkBehaviour
     [SyncVar][SerializeField] PlayerData[] players;
     [SerializeField] Transform[] spawn1;
     [SerializeField] Transform[] spawn2;
+    [SerializeField] List<PlayerData> team1Players = new();
+    [SerializeField] List<PlayerData> team2Players = new();
+    [SerializeField] Sprite[] characterSprites;
+    [SerializeField] Image[] team1Characters;
+    [SerializeField] Image[] team2Characters;
 
     public static bool MouseLocked;
 
@@ -58,6 +63,25 @@ public class GameManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int p = 0; p < players.Length; p++)
+        {
+            if (players[p].teamID == 0)
+            {
+                team1Players.Add(players[p]);
+            }
+            else
+            {
+                team2Players.Add(players[p]);
+            }
+        }
+        for (int i = 0; i < team1Players.Count; i++)
+        {
+            team1Characters[i].sprite = characterSprites[team1Players[i].transform.GetComponent<MovementAdvanced>().characterIndex];
+        }
+        for (int i = 0; i < team2Players.Count; i++)
+        {
+            team2Characters[i].sprite = characterSprites[team2Players[i].transform.GetComponent<MovementAdvanced>().characterIndex];
+        }
         networkHudCanvases = FindObjectOfType<NetworkHudCanvases>();
         if (IsHost)
         {
