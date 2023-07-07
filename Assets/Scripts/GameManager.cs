@@ -58,33 +58,11 @@ public class GameManager : NetworkBehaviour
     NetworkHudCanvases networkHudCanvases;
     LoadManager loader;
 
-    int id;
-
+    int Id;
     // Start is called before the first frame update
     void Start()
     {
 
-
-        if (IsHost)
-        {
-            print("ishost");
-            print("setteampoints");
-            // doe * 60 na testen
-            timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
-            timeLeft = timeLimit;
-            timeText.text = timeLeft.ToString("0:00");
-        }
-        for (int p = 0; p < players.Length; p++)
-        {
-            if (players[p].teamID == 0)
-            {
-                team1Players.Add(players[p]);
-            }
-            else
-            {
-                team2Players.Add(players[p]);
-            }
-        }
         for (int i = 0; i < team1Players.Count; i++)
         {
             team1Characters[i].sprite = characterSprites[team1Players[i].transform.GetComponent<MovementAdvanced>().characterIndex];
@@ -93,24 +71,9 @@ public class GameManager : NetworkBehaviour
         {
             team2Characters[i].sprite = characterSprites[team2Players[i].transform.GetComponent<MovementAdvanced>().characterIndex];
         }
-        networkHudCanvases = FindObjectOfType<NetworkHudCanvases>();
-        id = InstanceFinder.ClientManager.Connection.ClientId;
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (players[i].GetComponent<PlayerData>().playerId == id)
-            {
-                if (players[i].GetComponent<PlayerData>().teamID == 0)
-                {
-                    team1Slider.gameObject.SetActive(true);
-                    team2Slider.gameObject.SetActive(false);
-                }
-                else if (players[i].GetComponent<PlayerData>().teamID == 1)
-                {
-                    team1Slider.gameObject.SetActive(false);
-                    team2Slider.gameObject.SetActive(true);
-                }
-            }
-        }
+
+
+
         if (PlayerPrefs.HasKey("PointGoal") && IsHost)
         {
             SetPointGoal(PlayerPrefs.GetInt("PointGoal"));
@@ -120,11 +83,59 @@ public class GameManager : NetworkBehaviour
             Debug.LogError("No Point Goal Found");
         }
     }
+
+    bool timerset;
     void Update()
     {
-        if (players != null)
+        if (networkHudCanvases == null)
         {
+            networkHudCanvases = FindObjectOfType<NetworkHudCanvases>();
+        }
+        if (players == null)
+        {
+            if (IsHost && !timerset)
+            {
+                timerset = true;
+                print("ishost");
+                print("setteampoints");
+                // doe * 60 na testen
+                timeLimit = PlayerPrefs.GetInt("PlayTime") * 60;
+                timeLeft = timeLimit;
+                timeText.text = timeLeft.ToString("0:00");
+            }
+
             SetTeamPoints();
+
+            for (int p = 0; p < players.Length; p++)
+            {
+                if (players[p].teamID == 0)
+                {
+                    team1Players.Add(players[p]);
+                }
+                else
+                {
+                    team2Players.Add(players[p]);
+                }
+            }
+
+            Id = InstanceFinder.ClientManager.Connection.ClientId;
+
+            for (int i = 0; i < players.Length; i++)
+            {
+                if (players[i].GetComponent<PlayerData>().playerId == Id)
+                {
+                    if (players[i].GetComponent<PlayerData>().teamID == 0)
+                    {
+                        team1Slider.gameObject.SetActive(true);
+                        team2Slider.gameObject.SetActive(false);
+                    }
+                    else if (players[i].GetComponent<PlayerData>().teamID == 1)
+                    {
+                        team1Slider.gameObject.SetActive(false);
+                        team2Slider.gameObject.SetActive(true);
+                    }
+                }
+            }
         }
         if (loader == null)
         {
@@ -147,7 +158,7 @@ public class GameManager : NetworkBehaviour
         {
             for (int i = 0; i < players.Length; i++)
             {
-                if (players[i].GetComponent<PlayerData>().playerId == this.id)
+                if (players[i].GetComponent<PlayerData>().playerId == Id)
                 {
                     if (players[i].GetComponent<PlayerData>().teamID == 0)
                     {
@@ -168,7 +179,7 @@ public class GameManager : NetworkBehaviour
         {
             for (int i = 0; i < players.Length; i++)
             {
-                if (players[i].GetComponent<PlayerData>().playerId == this.id)
+                if (players[i].GetComponent<PlayerData>().playerId == Id)
                 {
                     if (players[i].GetComponent<PlayerData>().teamID == 0)
                     {
