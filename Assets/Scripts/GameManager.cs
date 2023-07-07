@@ -73,21 +73,23 @@ public class GameManager : NetworkBehaviour
         }
 
 
-
-        if (PlayerPrefs.HasKey("PointGoal") && IsHost)
-        {
-            SetPointGoal(PlayerPrefs.GetInt("PointGoal"));
-        }
-        else if (IsHost)
-        {
-            Debug.LogError("No Point Goal Found");
-        }
     }
 
     bool timerset;
     bool setPlayers;
+    bool setpoint;
     void Update()
     {
+        if (PlayerPrefs.HasKey("PointGoal") && IsHost && !setpoint)
+        {
+            setpoint = true;
+            SetPointGoal(PlayerPrefs.GetInt("PointGoal"));
+        }
+        else if (IsHost && !setpoint)
+        {
+            Debug.LogError("No Point Goal Found");
+        }
+
         if (networkHudCanvases == null)
         {
             networkHudCanvases = FindObjectOfType<NetworkHudCanvases>();
@@ -144,7 +146,10 @@ public class GameManager : NetworkBehaviour
         }
 
         if (pointLimit == 0)
+        {
+            print("pointlimit 0");
             return;
+        }
         if (timeLeft > 0 && team1Points < pointLimit && team2Points < pointLimit)
         {
             Timer();

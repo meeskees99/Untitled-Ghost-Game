@@ -35,6 +35,7 @@ public class MovementAdvanced : NetworkBehaviour
 
     [Header("Slope Check")]
     [SerializeField] float maxSlopeAngle;
+    [SerializeField] float minSlopeAngle;
     RaycastHit slopeHit;
 
     [Header("Character")]
@@ -190,11 +191,13 @@ public class MovementAdvanced : NetworkBehaviour
         {
             return;
         }
-        if (isStunned){
+        if (isStunned)
+        {
             SetBoolAnim("IsHit", true);
             return;
         }
-        else{
+        else
+        {
             SetBoolAnim("IsHit", false);
         }
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
@@ -370,7 +373,7 @@ public class MovementAdvanced : NetworkBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0;
+            return angle < maxSlopeAngle && angle != 0 && angle > minSlopeAngle;
         }
 
         return false;

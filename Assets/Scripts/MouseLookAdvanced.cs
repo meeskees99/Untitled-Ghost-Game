@@ -106,6 +106,7 @@ public class MouseLookAdvanced : NetworkBehaviour
         }
         if (!GameManager.MouseLocked)
         {
+            print("AAAAAAAAAAAAAAAAAAAAAA");
             return;
         }
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sens;

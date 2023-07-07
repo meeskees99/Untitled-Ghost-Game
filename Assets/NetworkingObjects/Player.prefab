@@ -2891,6 +2891,7 @@ MonoBehaviour:
     m_Bits: 64
   grounded: 0
   maxSlopeAngle: 45
+  minSlopeAngle: 15
   character:
   - {fileID: 5638685984892378803}
   - {fileID: 2919965171900034626}
