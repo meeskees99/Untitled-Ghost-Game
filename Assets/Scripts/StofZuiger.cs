@@ -22,6 +22,8 @@ public class StofZuiger : NetworkBehaviour
     RaycastHit hit;
     float time;
 
+    public GameObject tornado;
+
     public Animator animator;
     GameManager gameManager;
 
@@ -105,6 +107,7 @@ public class StofZuiger : NetworkBehaviour
             }
             Suck();
             SuckAnimation(true);
+            SetTornadoObserver(true);
         }
         else
         {
@@ -113,6 +116,7 @@ public class StofZuiger : NetworkBehaviour
                 target[x].transform.GetComponent<GhostMovement>().isHit(false);
             }
             StopSuck();
+            SetTornadoObserver(false);
         }
 
         if (fireTime > 0)
@@ -130,8 +134,11 @@ public class StofZuiger : NetworkBehaviour
             }
         }
     }
-
-
+    [ObserversRpc]
+    void SetTornadoObserver(bool value)
+    {
+        tornado.SetActive(value);
+    }
 
     public void Suck()
     {
