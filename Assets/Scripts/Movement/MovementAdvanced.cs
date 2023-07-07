@@ -207,7 +207,7 @@ public class MovementAdvanced : NetworkBehaviour
         }
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
         // Ground Check
-        grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, whatIsGround);
 
         MyInput();
         SpeedControl();
