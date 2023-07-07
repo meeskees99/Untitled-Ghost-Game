@@ -190,8 +190,13 @@ public class MovementAdvanced : NetworkBehaviour
         {
             return;
         }
-        if (isStunned)
+        if (isStunned){
+            SetBoolAnim("IsHit", true);
             return;
+        }
+        else{
+            SetBoolAnim("IsHit", false);
+        }
         //speedTxt.text = "Speed: " + rb.velocity.magnitude.ToString("0.##");
         // Ground Check
         grounded = Physics.Raycast(transform.position, Vector3.down, 0.01f, whatIsGround);
