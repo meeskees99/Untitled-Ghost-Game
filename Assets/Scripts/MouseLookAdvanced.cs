@@ -127,6 +127,7 @@ public class MouseLookAdvanced : NetworkBehaviour
     [ServerRpc(RequireOwnership = true)]
     public void SetBoolAnim(Transform hit)
     {
+        print("server door");
         hit.GetComponent<Animator>().SetTrigger("Toggle");
         SetBoolObserver(hit);
     }
@@ -135,6 +136,7 @@ public class MouseLookAdvanced : NetworkBehaviour
     {
         if (IsHost)
             return;
+        print("observer door");
 
         hit.GetComponent<Animator>().SetTrigger("Toggle");
     }
