@@ -7413,7 +7413,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 1418297102}
   _networkObjectCache: {fileID: 1418297102}
   MapChoice: {fileID: 1360581784}
-  timeOptions: 01000000040000000500000006000000
+  timeOptions: 010000000400000005000000060000000c000000
   timeTxt: {fileID: 1450250175}
   defaultTimeIndex: 0
   pointOptions: 0a0000000f000000140000001e000000
